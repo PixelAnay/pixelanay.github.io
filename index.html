@@ -1,0 +1,550 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Portfolio</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;700;900&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --background-color: #000000;
+            --text-color: #FFFFFF;
+            --accent-color: #00ADB5;
+            --container-bg: #1a1a1a;
+            --border-color: var(--text-color);
+            --shadow-color: var(--accent-color);
+            --h2-bg-color: var(--accent-color);
+            --h2-text-color: var(--background-color);
+            --link-hover-bg: var(--accent-color);
+            --link-hover-text: var(--background-color);
+            --menu-bg-color-dark: rgba(30, 30, 30, 0.85);
+            --menu-text-color: var(--text-color);
+            --menu-link-hover-bg: rgba(0, 173, 181, 0.2);
+
+            --border-thickness: 2px;
+            --shadow-offset: 5px;
+            --top-controls-height: 60px;
+        }
+
+        body.light-mode {
+            --background-color: #FAFAFA;
+            --text-color: #111111;
+            --accent-color: #0077FF;
+            --container-bg: #FFFFFF;
+            --border-color: var(--text-color);
+            --shadow-color: var(--accent-color);
+            --h2-bg-color: var(--accent-color);
+            --h2-text-color: #FFFFFF;
+            --link-hover-bg: var(--accent-color);
+            --link-hover-text: #FFFFFF;
+            --menu-bg-color-light: rgba(240, 240, 240, 0.85);
+            --menu-text-color: var(--text-color);
+            --menu-link-hover-bg: rgba(0, 119, 255, 0.15);
+        }
+
+        *, *::before, *::after {
+            box-sizing: border-box;
+            transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease, transform 0.3s ease, opacity 0.3s ease;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            margin: 0;
+            padding-top: var(--top-controls-height);
+            padding-left: 20px;
+            padding-right: 20px;
+            padding-bottom: 20px;
+            background-color: var(--background-color);
+            color: var(--text-color);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        .top-controls {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            background-color: var(--background-color);
+            z-index: 1001;
+            display: flex;
+            align-items: center;
+            justify-content: flex-end;
+            padding: 10px 20px;
+            height: var(--top-controls-height);
+        }
+
+        #hamburger-button {
+            background: none;
+            border: none;
+            padding: 10px;
+            cursor: pointer;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-around;
+            width: 40px;
+            height: 40px;
+            margin-right: 0px;
+            z-index: 1004;
+        }
+
+        #hamburger-button span {
+            display: block;
+            width: 100%;
+            height: 5px;
+            background-color: var(--text-color);
+           
+
+        }
+
+        body.menu-open #hamburger-button span:nth-child(1) {
+
+        }
+
+        body.menu-open #hamburger-button span:nth-child(2) {
+            opacity: 0;
+
+        }
+
+        body.menu-open #hamburger-button span:nth-child(3) {
+
+        }
+
+        .theme-switch-wrapper {
+            display: flex;
+            align-items: center;
+        }
+        .theme-switch {
+            display: inline-block;
+            height: 26px;
+            position: relative;
+            width: 50px;
+            margin-left: 10px;
+        }
+        .theme-switch input {
+            display: none;
+        }
+        .slider {
+            background-color: #555;
+            border: var(--border-thickness) solid var(--border-color);
+            bottom: 0;
+            cursor: pointer;
+            left: 0;
+            position: absolute;
+            right: 0;
+            top: 0;
+            transition: .4s;
+        }
+        .slider:before {
+            background-color: var(--background-color);
+            border: var(--border-thickness) solid var(--border-color);
+            bottom: 2px;
+            content: "";
+            height: 18px;
+            left: 3px;
+            position: absolute;
+            transition: .4s;
+            width: 18px;
+        }
+        input:checked + .slider {
+            background-color: var(--accent-color);
+        }
+        input:checked + .slider:before {
+            transform: translateX(23px);
+            background-color: var(--container-bg);
+        }
+        .theme-switch-wrapper span#theme-label {
+            font-weight: 700;
+            font-size: 0.9rem;
+        }
+
+        #side-menu {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 280px;
+            height: 100vh;
+            background-color: var(--menu-bg-color-dark);
+            backdrop-filter: blur(10px) saturate(120%);
+            -webkit-backdrop-filter: blur(10px) saturate(120%);
+            padding: calc(var(--top-controls-height) + 20px) 20px 20px 30px;
+            transform: translateX(-100%);
+            transition: transform 0.4s cubic-bezier(0.23, 1, 0.32, 1), background-color 0.3s ease;
+            z-index: 1002;
+            overflow-y: auto;
+        }
+
+        body.light-mode #side-menu {
+            background-color: var(--menu-bg-color-light);
+        }
+
+        body.menu-open #side-menu {
+            transform: translateX(0);
+        }
+
+        #side-menu h3 {
+            color: var(--accent-color);
+            font-weight: 700;
+            font-size: 1.4rem;
+            margin-top: 0;
+            margin-bottom: 25px;
+            padding-bottom: 10px;
+            border-bottom: var(--border-thickness) solid var(--accent-color);
+        }
+
+        #side-menu ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        #side-menu li {
+            margin-bottom: 5px;
+        }
+
+        #side-menu a {
+            display: block;
+            padding: 10px 15px;
+            color: var(--menu-text-color);
+            text-decoration: none;
+            font-weight: 400;
+            border-radius: 4px;
+            transition: background-color 0.2s ease, color 0.2s ease;
+            border-left: 3px solid transparent;
+        }
+
+        #side-menu a:hover,
+        #side-menu a:focus {
+            background-color: var(--menu-link-hover-bg);
+            color: var(--accent-color);
+            border-left-color: var(--accent-color);
+            outline: none;
+        }
+
+        header {
+            text-align: center;
+            padding: 40px 20px 40px 20px;
+            border: var(--border-thickness) solid var(--border-color);
+            background-color: var(--container-bg);
+            box-shadow: var(--shadow-offset) var(--shadow-offset) 0px var(--shadow-color);
+            margin-top: 40px;
+        }
+
+        header h1 {
+            margin: 0 0 10px 0;
+            font-size: 2.8rem;
+            font-weight: 900;
+            color: var(--text-color);
+            background: none;
+            -webkit-background-clip: initial;
+            -webkit-text-fill-color: initial;
+            letter-spacing: 1px;
+        }
+
+        header p {
+            font-size: 1rem;
+            color: var(--text-color);
+            font-weight: 400;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        section {
+            margin: 40px auto;
+            padding: 30px;
+            background-color: var(--container-bg);
+            border: var(--border-thickness) solid var(--border-color);
+            box-shadow: var(--shadow-offset) var(--shadow-offset) 0px var(--shadow-color);
+            border-radius: 0;
+            transition: transform 0.3s ease, opacity 0.3s ease;
+        }
+
+        h2 {
+            font-size: 1.8rem;
+            font-weight: 700;
+            border-bottom: none;
+            display: inline-block;
+            padding: 5px 10px;
+            margin-bottom: 25px;
+            background-color: var(--h2-bg-color);
+            color: var(--h2-text-color);
+        }
+
+        .skills ul,
+        .projects ul,
+        .contact ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .skills li,
+        .projects li {
+            margin: 15px 0;
+            padding: 15px;
+            border: var(--border-thickness) solid var(--accent-color);
+            background-color: var(--background-color);
+            font-weight: 400;
+            color: var(--text-color);
+        }
+
+        .projects li strong {
+            font-weight: 400;
+            display: block;
+            margin-bottom: 5px;
+        }
+
+        .contact ul {
+            margin-top: 20px;
+        }
+
+        .contact li {
+            margin: 10px 0;
+            padding: 0;
+            border: none;
+            background-color: transparent;
+        }
+
+        .contact a {
+            color: var(--accent-color);
+            text-decoration: none;
+            font-weight: 700;
+            border-bottom: var(--border-thickness) solid transparent;
+            transition: border-color 0.2s ease, background-color 0.2s ease, color 0.2s ease;
+            padding: 2px 0;
+        }
+
+        .contact a:hover,
+        .contact a:focus {
+            text-decoration: none;
+            border-bottom: var(--border-thickness) solid var(--accent-color);
+          
+
+            outline: none;
+        }
+
+        .footer {
+            margin-top: 60px;
+            font-size: 0.9rem;
+            color: var(--text-color);
+            text-align: center;
+            padding: 20px;
+            border-top: var(--border-thickness) solid var(--border-color);
+            transition: transform 0.3s ease, opacity 0.3s ease;
+        }
+
+        .footer p {
+            margin: 0 0 15px 0;
+        }
+
+        body.light-mode {
+            --icon-filter: invert(1) hue-rotate(180deg);
+        }
+
+        @media (max-width: 600px) {
+            body {
+                padding-left: 15px;
+                padding-right: 15px;
+                padding-bottom: 15px;
+            }
+            .top-controls {
+                padding: 8px 15px;
+            }
+            header {
+                padding: 30px 15px 30px 15px;
+            }
+            header h1 {
+                font-size: 2.2rem;
+            }
+            header p {
+                font-size: 0.9rem;
+            }
+            section {
+                padding: 20px;
+                margin: 30px auto;
+            }
+            h2 {
+                font-size: 1.5rem;
+            }
+            .skills li,
+            .projects li {
+                padding: 12px;
+            }
+            #side-menu {
+                width: 250px;
+                padding-top: calc(var(--top-controls-height) + 15px);
+            }
+            :root {
+                --shadow-offset: 4px;
+                --top-controls-height: 56px;
+            }
+            body.light-mode {
+                --shadow-offset: 4px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="top-controls">
+
+        <div class="theme-switch-wrapper">
+            <span id="theme-label">Dark Mode</span>
+            <label class="theme-switch" for="checkbox">
+                <input type="checkbox" id="checkbox" aria-labelledby="theme-label"/>
+                <div class="slider"></div>
+            </label>
+        </div>
+         <button id="hamburger-button" aria-label="Toggle Menu" aria-expanded="false" aria-controls="side-menu">
+            <span></span>
+            <span></span>
+            <span></span>
+        </button>
+    </div>
+
+    <nav id="side-menu" aria-hidden="true">
+        <h3>Pinned Projects</h3>
+        <ul>
+            <li><a href="https://github.com/cheekychiku/OfflineReddit">OfflineReddit</a></li>
+            <li><a href="https://cheekychiku.github.io/os">Retro BrowserOS</a></li>
+            <li><a href="https://cheekychiku.github.io/crush">Crushy</a></li>
+            <li><a href="https://cheekychiku.github.io/marathinum">Marathinum</a></li>
+            <li><a href="https://cheekychiku.github.io/CodeWithAnay">Old website</a></li>
+            <li><a href="https://bio.link/anayg">bio.link</a></li>
+        </ul>
+    </nav>
+
+    <header>
+        <h1>Anay's Portfolio</h1>
+        <p>19 y/o | Aspiring Software Engineer | Fitness Enthusiast | Sketcher</p>
+    </header>
+
+    <main>
+        <section>
+            <h2>About Me</h2>
+            <p>
+                I am an 19-year-old aspiring engineer who loves blending logic with creativity. Currently studying engineering,
+                while balancing challenges and personal growth. Passionate about coding, design, fitness, and personal development.
+            </p>
+        </section>
+
+        <section class="skills">
+            <h2>Skills</h2>
+            <ul>
+                <li>HTML, CSS, JavaScript</li>
+                <li>Python, Java</li>
+                <li>Data Structures and Algorithms</li>
+                <li>Version Control (Git, GitHub)</li>
+                <li>UI/UX Design Principles</li>
+            </ul>
+        </section>
+
+        <section class="projects">
+            <h2>Projects</h2>
+            <ul>
+                <li id="project1">
+                    <strong>Personal Portfolio Website</strong>A fully responsive personal portfolio (like this one!) showcasing skills and projects. Built with HTML & CSS.
+                </li>
+                <li id="project2">
+                    <strong>Weather App Concept</strong>Designed and prototyped a weather application focusing on clear UI and fetching real-time data via APIs.
+                </li>
+                <li id="project3">
+                    <strong>Task Manager</strong>A simple web-based task manager concept to explore front-end logic for tracking daily goals.
+                </li>
+                 <li id="project4">
+                    <strong>Gamma Framework</strong>Gamma Framework project.
+                </li>
+                 <li id="project5">
+                    <strong>Delta Design System</strong>Delta Design System project.
+                </li>
+                 <li>
+                    <strong>Epsilon Experiment</strong>Epsilon Experiment project.
+                </li>
+            </ul>
+        </section>
+
+        <section class="contact">
+            <h2>Contact</h2>
+            <p>Feel free to reach out!</p>
+            <ul>
+                <li>Email: <a href="mailto:cheekychiku@proton.me">cheekychiku@proton.me</a></li>
+                <li>GitHub: <a href="https://github.com/cheekychiku" target="_blank" rel="noopener noreferrer">github.com/cheekychiku</a></li>
+                <li>LinkedIn: <a href="https://linkedin.com/in/anay2310" target="_blank" rel="noopener noreferrer">linkedin.com/in/anay2310</a></li>
+                <li>Bio: <a href="https://bio.link/anayg" target="_blank" rel="noopener noreferrer">bio.link/anayg</a></li>
+<a href="https://www.buymeacoffee.com/cheekychiku" target="_blank"><img src="https://cdn.buymeacoffee.com/buttons/v2/default-yellow.png" alt="Buy Me A Coffee" style="height: 60px !important;width: 180px !important;" ></a>
+            </ul>
+        </section>
+    </main>
+
+    <footer class="footer">
+
+            <p>© 2025 Anay Gawate. Built with passion, code, and black coffee.</p>
+    </footer>
+
+    <script>
+        const toggleSwitch = document.getElementById('checkbox');
+        const themeLabel = document.getElementById('theme-label');
+        const currentTheme = localStorage.getItem('theme');
+        const prefersDarkScheme = window.matchMedia('(prefers-color-scheme: dark)');
+        const hamburgerButton = document.getElementById('hamburger-button');
+        const sideMenu = document.getElementById('side-menu');
+
+        function setTheme(theme) {
+            if (theme === 'light') {
+                document.body.classList.add('light-mode');
+                toggleSwitch.checked = true;
+                themeLabel.textContent = 'Light';
+                localStorage.setItem('theme', 'light');
+            } else {
+                document.body.classList.remove('light-mode');
+                toggleSwitch.checked = false;
+                themeLabel.textContent = 'Dark';
+                localStorage.setItem('theme', 'dark');
+            }
+        }
+
+        function toggleMenu() {
+            const isMenuOpen = document.body.classList.toggle('menu-open');
+            hamburgerButton.setAttribute('aria-expanded', isMenuOpen);
+            sideMenu.setAttribute('aria-hidden', !isMenuOpen);
+        }
+
+        if (currentTheme) {
+            setTheme(currentTheme);
+        } else {
+            setTheme(prefersDarkScheme.matches ? 'light' : 'dark');
+        }
+
+        toggleSwitch.addEventListener('change', function(event) {
+            setTheme(event.target.checked ? 'light' : 'dark');
+        });
+
+        hamburgerButton.addEventListener('click', toggleMenu);
+
+        document.addEventListener('click', function(event) {
+            if (document.body.classList.contains('menu-open')) {
+                if (!sideMenu.contains(event.target) && !hamburgerButton.contains(event.target)) {
+                    toggleMenu();
+                }
+            }
+        });
+
+        sideMenu.querySelectorAll('a').forEach(link => {
+            link.addEventListener('click', () => {
+                if (document.body.classList.contains('menu-open')) {
+                    toggleMenu();
+                }
+            });
+        });
+
+        prefersDarkScheme.addEventListener('change', (event) => {
+            if (!localStorage.getItem('theme')) {
+                setTheme(event.matches ? 'light' : 'dark');
+            }
+        });
+
+
+    </script>
+
+</body>
+</html>
