@@ -1,0 +1,1120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Anay Gawate - Portfolio</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        /* Global Styles & Variables */
+        :root {
+            --primary-button-bg: #cbe5ff; /* Light Pastel Blue */
+            --blacky: #000000; /* for all buttons after hover and click */
+            --primary-button-hover-bg: #9BC4D2; /* Slightly darker Pastel Blue */
+            --text-color: #000000; /* Black */
+            --background-color: #FFFFFF; /* White */
+            --secondary-text-color: #333333; /* Darker Gray for less emphasis if needed */
+            --border-color: #E0E0E0; /* Light Gray for subtle borders */
+            --accent-color-for-lines: #ADD8E6; /* Pastel Blue for underlines/accents */
+
+            --font-family-main: 'Manrope', sans-serif;
+
+            --border-radius-sm: 0.2rem;
+            --border-radius-md: 0.375rem;
+            --border-radius-lg: 0.5rem;
+            --box-shadow: 0 0.25rem 0.75rem rgba(0, 0, 0, 0.05);
+            --box-shadow-lg: 0 0.5rem 1.5rem rgba(0, 0, 0, 0.07);
+        }
+
+        *,
+        *::before,
+        *::after {
+            box-sizing: border-box;
+        }
+
+#iconz{margin: 1rem;}
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            margin: 0;
+            font-family: var(--font-family-main);
+            font-size: 1rem;
+            font-weight: 400;
+            line-height: 1.7; /* Increased for better readability */
+            color: var(--text-color);
+            background-color: var(--background-color);
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+
+        .container {
+            width: 95%;
+            max-width: 1140px;
+            margin-right: auto;
+            margin-left: auto;
+            padding-right: 10px;
+            padding-left: 10px;
+        }
+
+
+        #container-nav {
+            width: 90%;
+        
+            margin-right: auto;
+            margin-left: auto;
+            padding-right: 15px;
+            padding-left: 15px;
+        }
+
+        h1, h2, h3, h4, h5, h6 {
+            margin-top: 0;
+            margin-bottom: 1rem; /* Consistent margin */
+            font-weight: 700; /* Bolder headings with Manrope */
+            line-height: 1.3;
+            color: var(--text-color);
+        }
+
+        h1 { font-size: 2.8rem; }
+        h2 { font-size: 2.2rem; }
+        h3 { font-size: 1.5rem; }
+        h4 { font-size: 1.2rem; }
+
+        p {
+            margin-top: 0;
+            margin-bottom: 1.25rem; /* Slightly more space */
+            color: var(--text-color); /* All text black */
+        }
+
+        a {
+            color: var(--primary-button-bg); /* Links can use the pastel blue */
+            text-decoration: none;
+            transition: color 0.15s ease-in-out;
+        }
+        a:hover {
+            color: var(--primary-button-hover-bg);
+            text-decoration: underline;
+        }
+
+        img {
+            vertical-align: middle;
+            border-style: none;
+            max-width: 100%;
+            height: auto;
+        }
+
+        /* Buttons */
+        .btn {
+            display: inline-block;
+            font-weight: 600; /* Manrope bold */
+            color: var(--text-color); /* Black text on pastel blue button */
+            text-align: center;
+            vertical-align: middle;
+            font-family: var(--font-family-main);
+            cursor: pointer;
+            user-select: none;
+            background-color: var(--primary-button-bg);
+            border: 1px solid var(--primary-button-bg);
+            padding: 0.75rem 1.5rem; /* Slightly larger padding */
+            font-size: 1rem;
+            line-height: 1.5;
+            border-radius: var(--border-radius-md);
+            transition: all .15s ease-in-out;
+        }
+        .btn:hover {
+            background-color: #000000;
+            color: #ffffff;
+            border-color: var(--primary-button-hover-bg);
+            text-decoration: none;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+        .btn:focus {
+            outline: 0;
+            box-shadow: 0 0 0 0.2rem rgba(173, 216, 230, .5); /* Focus ring with pastel blue */
+        }
+
+        .btn-secondary { /* Outline Black Button */
+            color: var(--text-color);
+            background-color: transparent;
+            border: 2px solid var(--text-color);
+        }
+        .btn-secondary:hover {
+            background-color: var(--text-color);
+            color: var(--background-color);
+            border-color: var(--text-color);
+        }
+        .btn-outline-primary { /* Outline Pastel Blue Button */
+                color:#000000;
+    background-color: #ffffff;
+    border-color: #000000;
+        }
+        .btn-outline-primary:hover {
+            color: #ffffff;/* Black text on hover for better contrast */
+            background-color: #000000;
+            border-color: var(--primary-button-bg);
+        }
+        .btn-lg {
+            padding: 0.9rem 1.85rem;
+            font-size: 1.1rem;
+        }
+
+        /* Header */
+        .main-header {
+            background-color: var(--background-color);
+            padding: 1rem 0;
+            border-bottom: 1px solid var(--border-color);
+            position: sticky;
+            top: 0;
+            z-index: 1020;
+        }
+        .main-header .container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .logo {
+            font-size: 1.6rem; /* Manrope allows slightly larger */
+            font-weight: 800;
+            display: flex;
+            align-items: center;
+            color: var(--text-color);
+        }
+        .logo svg {
+            width: 22px;
+            height: 22px;
+            margin-right: 10px;
+            fill: var(--text-color); /* Black logo icon */
+        }
+        .logo:hover { text-decoration: none; color: var(--text-color); }
+
+        .main-nav {
+            display: block; /* Hidden on mobile by media query */
+        }
+        .main-nav ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            display: flex;
+        }
+        .main-nav li {
+            margin-left: 1.8rem; /* Slightly reduced for more links */
+        }
+        .main-nav a {
+            color: var(--text-color);
+            font-weight: 500;
+            font-size: 0.95rem; /* Slightly reduced for more links */
+            padding: 0.3rem 0;
+            position: relative;
+        }
+        .main-nav a:hover, .main-nav a.active {
+            color: var(--accent-color-for-lines); /* Pastel blue for hover/active text */
+            text-decoration: none;
+        }
+        .main-nav a::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            display: block;
+            margin-top: 3px;
+            right: 0;
+            background: var(--accent-color-for-lines);
+            transition: width 0.2s ease;
+        }
+        .main-nav a:hover::after, .main-nav a.active::after {
+            width: 100%;
+            left: 0;
+        }
+        .profile-pic-nav {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 2px solid var(--border-color);
+            margin-left: 15px; /* Space from nav items */
+        }
+
+        /* Hamburger Menu */
+        .hamburger-menu {
+            display: none;
+            cursor: pointer;
+            background: none;
+            border: none;
+            padding: 0; /* Remove padding to align bars better */
+            z-index: 1051; /* Above mobile nav panel */
+        }
+        .hamburger-menu .bar {
+            display: block;
+            width: 28px; /* Slightly wider */
+            height: 3px;
+            margin: 6px auto; /* More space between bars */
+            background-color: var(--text-color);
+            transition: all 0.3s ease-in-out;
+            border-radius: 1px;
+        }
+        .hamburger-menu.is-active .bar:nth-child(1) {
+            transform: translateY(9px) rotate(45deg);
+        }
+        .hamburger-menu.is-active .bar:nth-child(2) {
+            opacity: 0;
+        }
+        .hamburger-menu.is-active .bar:nth-child(3) {
+            transform: translateY(-9px) rotate(-45deg);
+        }
+
+        .mobile-nav-panel {
+            position: fixed;
+            top: 0;
+            right: -100%;
+            width: 80%;
+            max-width: 320px;
+            height: 100vh;
+            background-color: var(--background-color);
+            box-shadow: -3px 0 10px rgba(0,0,0,0.1);
+            z-index: 1050;
+            transition: right 0.35s cubic-bezier(0.23, 1, 0.32, 1); /* Smoother transition */
+            padding: 80px 0 20px 0; /* Top padding for content */
+            overflow-y: auto;
+            display: flex;
+            flex-direction: column;
+        }
+        .mobile-nav-panel.open {
+            right: 0;
+        }
+        .mobile-nav-panel ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+        .mobile-nav-panel li a {
+            display: block;
+            padding: 18px 30px; /* Generous tap targets */
+            color: var(--text-color);
+            text-decoration: none;
+            font-size: 1.1rem;
+            font-weight: 500;
+            border-bottom: 1px solid var(--border-color);
+            transition: background-color 0.2s, color 0.2s;
+        }
+        .mobile-nav-panel li:first-child a {
+             border-top: 1px solid var(--border-color);
+        }
+        .mobile-nav-panel li a:hover, .mobile-nav-panel li a.active {
+            background-color: #f0f8ff; /* Lighter pastel blue or very light gray */
+            color: var(--accent-color-for-lines);
+        }
+
+
+        /* Hero Section */
+        .hero {
+            background-color: var(--background-color);
+            color: var(--text-color);
+            padding: 100px 0;
+            text-align: center;
+            min-height: auto; /* Adjusted from 80vh */
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+        .hero h1 {
+            font-size: 3.2rem;
+            margin-bottom: 1rem;
+            font-weight: 800;
+            color: var(--text-color);
+        }
+        .hero p {
+            font-size: 1.2rem;
+            margin-bottom: 2.5rem;
+            font-weight: 400;
+
+            color: var(--text-color); /* Black text */
+            line-height: 1.8;
+        }
+        /* Hero button uses standard .btn styling (pastel blue) */
+
+        /* Section Styling */
+        section {
+            padding: 80px 0;
+            background-color: var(--background-color); /* All sections white */
+        }
+        .section-title {
+            text-align: center;
+            margin-bottom: 60px; /* More space */
+            font-size: 2.4rem; /* Manrope bold */
+            font-weight: 700;
+            color: var(--text-color);
+            position: relative;
+        }
+        .section-title::after {
+            content: '';
+            display: block;
+            width: 80px; /* Wider underline */
+            height: 4px; /* Thicker underline */
+            background: var(--accent-color-for-lines); /* Pastel blue underline */
+            margin: 15px auto 0;
+            border-radius: 2px;
+        }
+
+        /* About Me */
+        #about .container {
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            gap: 50px;
+        }
+        .about-content { flex: 1; min-width: 300px; }
+        .about-image-container { flex-basis: 300px; flex-shrink: 0; text-align: center; }
+        .about-profile-pic {
+            width: 280px; /* Slightly larger */
+            height: 280px;
+            border-radius: 50%;
+            object-fit: cover;
+            box-shadow: var(--box-shadow-lg);
+            border: 6px solid var(--background-color); /* White border */
+        }
+        #about .section-title { text-align: left; margin-left:0; }
+        #about .section-title::after { margin: 15px 0 0 0; }
+        #about p { font-size: 1.05rem; line-height: 1.8; color: var(--text-color); }
+
+        /* Projects */
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 35px; /* More gap */
+            margin-bottom: 40px;
+        }
+        .project-card {
+            background-color: var(--background-color);
+            border-radius: var(--border-radius-lg);
+            overflow: hidden;
+            box-shadow: var(--box-shadow);
+            transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+            display: flex;
+            flex-direction: column;
+            border: 1px solid var(--border-color); /* Subtle border */
+        }
+        .project-card:hover {
+            transform: translateY(-6px);
+            box-shadow: var(--box-shadow-lg);
+        }
+        .project-image { width: 100%; height: 230px; object-fit: cover; }
+        .project-card-content { padding: 25px; flex-grow: 1; display: flex; flex-direction: column; }
+        .project-card h3 { font-size: 1.4rem; margin-bottom: 0.75rem; font-weight: 700; color: var(--text-color); }
+        .project-card p { font-size: 0.95rem; color: var(--text-color); margin-bottom: 1.5rem; flex-grow: 1; }
+        .project-card-actions { margin-top: auto; }
+        .project-card .btn { font-size: 0.9rem; padding: 0.6rem 1.1rem; }
+        .see-all-container { text-align: center; margin-top: 50px; }
+
+        /* Skills */
+        .skills-list {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 15px; /* More gap */
+            list-style: none;
+            padding: 0;
+            justify-content: center;
+        }
+        .skills-list li {
+            background-color: var(--background-color);
+            color: var(--text-color);
+            padding: 10px 20px; /* Larger tags */
+            border-radius: var(--border-radius-md); /* Less pill, more rectangular */
+            font-size: 0.95rem;
+            font-weight: 500;
+            border: 1px solid var(--text-color); /* Black border */
+            transition: background-color 0.2s, color 0.2s, border-color 0.2s;
+        }
+        .skills-list li:hover {
+            background-color: var(--text-color); /* Black background on hover */
+            color: var(--background-color); /* White text on hover */
+            border-color: var(--text-color);
+        }
+
+        /* Experience & Education Timeline */
+        .timeline { position: relative; max-width: 800px; margin: 0 auto; }
+        .timeline::before {
+            content: '';
+            position: absolute;
+            left: 20px;
+            top: 0;
+            bottom: 0;
+            width: 1px; /* MODIFIED: Thinner line */
+            background-color: #c8c8c8; /* MODIFIED: Medium Gray color */
+            
+        }
+        .timeline-item { padding-left: 60px; position: relative; margin-bottom: 40px; }
+        .timeline-item:last-child { margin-bottom: 0; }
+        .timeline-icon {
+            position: absolute;
+            left: 0;
+            top: 0;
+            width: 42px;
+            height: 42px;
+            background-color: var(--primary-button-bg); /* Pastel Blue background */
+            color: var(--text-color); /* Black icon */
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border: 3px solid var(--background-color); /* White border */
+            z-index: 1;
+        }
+        .timeline-icon svg { width: 20px; height: 20px; fill: currentColor; }
+        .timeline-item h3 { font-size: 1.3rem; margin-bottom: 0.25rem; font-weight: 700; color: var(--text-color); }
+        .timeline-item .company-school { font-weight: 600; color: #444444; display: block; margin-bottom: 0.25rem; }
+        .timeline-item .date { font-size: 0.9rem; color: var(--secondary-text-color); margin-bottom: 0.5rem; display: block; }
+        .timeline-item p { font-size: 0.95rem; color: var(--text-color); margin-bottom: 0; }
+
+        /* Resume & Blog Summary */
+        .centered-action .btn { font-size: 1.05rem; padding: 0.8rem 1.6rem; }
+        #blog .blog-post-summary {
+            background-color: var(--background-color);
+            padding: 30px;
+            border-radius: var(--border-radius-lg);
+            border: 1px solid var(--border-color);
+            box-shadow: var(--box-shadow);
+            max-width: 700px;
+            margin: 0 auto 30px auto;
+            text-align: left;
+        }
+        #blog .blog-post-summary h3 { font-size: 1.5rem; color: #515151; font-weight: 700; }
+        #blog .blog-post-summary p { color: var(--text-color); margin-bottom: 1.5rem; }
+
+        /* Contact Form */
+        .contact-form {
+            max-width: 700px;
+            margin: 0 auto;
+            background: var(--background-color);
+            padding: 35px; /* More padding */
+            border-radius: var(--border-radius-lg);
+            border: 1px solid var(--border-color);
+            box-shadow: var(--box-shadow);
+        }
+        .form-group { margin-bottom: 1.75rem; }
+        .contact-form label { display: block; margin-bottom: 0.6rem; font-weight: 600; color: var(--text-color); }
+        .contact-form input[type="text"],
+        .contact-form input[type="email"],
+        .contact-form textarea {
+            width: 100%;
+            padding: 0.85rem; /* More padding */
+            border: 1px solid var(--text-color); /* Black border */
+            border-radius: var(--border-radius-md);
+            font-size: 1rem;
+            font-family: var(--font-family-main);
+            line-height: 1.5;
+            background-color: var(--background-color);
+            color: var(--text-color);
+            transition: border-color .15s ease-in-out,box-shadow .15s ease-in-out;
+        }
+        .contact-form input[type="text"]:focus,
+        .contact-form input[type="email"]:focus,
+        .contact-form textarea:focus {
+            border-color: var(--primary-button-bg); /* Pastel blue focus */
+            outline: 0;
+            box-shadow: 0 0 0 0.2rem rgba(173, 216, 230, .5);
+        }
+        .contact-form textarea { min-height: 130px; resize: vertical; }
+        .contact-form .btn { width: 100%; padding: 0.85rem 1.25rem; font-size: 1.1rem; }
+
+        /* Footer */
+        .main-footer {
+            background-color: var(--background-color);
+            color: var(--text-color);
+            text-align: center;
+            padding: 50px 0;
+            font-size: 0.9rem;
+            border-top: 1px solid var(--border-color);
+        }
+        .social-icons { margin-bottom: 1.25rem; }
+        .social-icons a {
+            margin: 0 12px;
+            color: var(--text-color); /* Black icons */
+            font-size: 1.6rem;
+            transition: color 0.2s;
+        }
+        .social-icons a:hover { color: var(--primary-button-bg); text-decoration: none; }
+        .social-icons svg { width: 26px; height: 26px; fill: currentColor; }
+        .main-footer p { margin-bottom: 0.5rem; color: var(--text-color); }
+        .main-footer a.footer-link { color: var(--primary-button-bg); font-weight: 500; }
+        .main-footer a.footer-link:hover { color: var(--primary-button-hover-bg); }
+
+
+                /* Footer Email Copy Button */
+        .email-copy-container {
+            display: flex;
+            align-items: center;
+            justify-content: center; /* Aligns with other centered footer content */
+            gap: 0.4rem; /* Space between email, button, and feedback */
+            margin-top: 0.5rem; /* Space from the copyright line */
+            margin-bottom: 0.5rem; /* Consistent with other p elements in footer */
+            color: var(--text-color); /* Inherit default text color for the email link */
+        }
+
+        #emailToCopy.footer-link { /* Ensure it uses the footer-link styles */
+            color: var(--primary-button-bg);
+            font-weight: 500;
+        }
+        #emailToCopy.footer-link:hover {
+            color: var(--primary-button-hover-bg);
+            text-decoration: underline;
+        }
+
+        .copy-button {
+            background: none;
+            border: none;
+            padding: 2px 4px; /* Minimal padding */
+            cursor: pointer;
+            line-height: 1; /* Helps align SVG */
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--text-color); /* Initial icon color (will be overridden by SVG stroke) */
+            border-radius: var(--border-radius-sm); /* Subtle rounding */
+        }
+
+        .copy-button .copy-icon-svg {
+            width: 14px; /* Adjust size as needed */
+            height: 14px;
+            stroke: var(--secondary-text-color); /* SVG stroke color for the icon lines */
+            transition: stroke 0.2s ease-in-out;
+        }
+
+        .copy-button:hover .copy-icon-svg {
+            stroke: var(--primary-button-bg); /* Icon color on hover */
+        }
+        .copy-button:focus {
+            outline: 1px dotted var(--primary-button-bg);
+            outline-offset: 2px;
+        }
+        .copy-button:focus-visible { /* More modern focus styling for keyboard users */
+             outline: 2px solid var(--primary-button-bg);
+             outline-offset: 1px;
+        }
+
+
+        .copy-feedback {
+            font-size: 0.8rem;
+            color: var(--accent-color-for-lines); /* Pastel blue for feedback */
+            font-weight: 500;
+            margin-left: 0.25rem; /* Slight space from the button */
+            display: none; /* Hidden by default */
+            animation: fadeInOut 2s ease-in-out;
+        }
+
+        .copy-feedback.show {
+            display: inline;
+        }
+
+        @keyframes fadeInOut {
+            0%, 100% { opacity: 0; }
+            10%, 90% { opacity: 1; }
+        }
+
+
+        /* Responsive Adjustments */
+        @media (max-width: 991.98px) { /* Tablets and below */
+            .main-nav { display: none; } /* Hide desktop nav */
+            .hamburger-menu { display: block; } /* Show hamburger */
+            .profile-pic-nav { display: none; } /* Hide profile pic on tablet header as well for consistency with mobile */
+
+            .hero h1 { font-size: 2.6rem; }
+            .hero p { font-size: 1.1rem; }
+            .section-title { font-size: 2rem; }
+            #about .container { flex-direction: column; text-align: center;}
+            #about .section-title { text-align: center; }
+            #about .section-title::after { margin: 15px auto 0 auto; }
+            .about-image-container { margin-bottom: 30px; }
+        }
+
+        @media (max-width: 767.98px) { /* Mobile phones */
+            /* .main-nav, .profile-pic-nav already hidden by 991.98px query */
+            /* .hamburger-menu already displayed by 991.98px query */
+
+            .main-header .container {
+                /* flex-direction: row; default */
+                align-items: center;
+            }
+            .logo { margin-bottom: 0; } /* Ensure no bottom margin if any was added elsewhere */
+
+            .hero { padding: 70px 0; }
+            .hero h1 { font-size: 2rem; }
+            .hero p { font-size: 1rem; }
+            
+            section { padding: 60px 0; }
+            .section-title { font-size: 1.8rem; margin-bottom: 40px;}
+            .projects-grid { grid-template-columns: 1fr; }
+
+            .timeline::before { left: 15px; }
+            .timeline-item { padding-left: 50px; }
+            .timeline-icon { width: 36px; height: 36px; left: -2px; } /* Adjust for better alignment */
+            .timeline-icon svg { width: 18px; height: 18px;}
+
+            .contact-form { padding: 25px; }
+        }
+
+    </style>
+</head>
+<body>
+
+    <header class="main-header">
+        <div class="container">
+            <a href="#" class="logo">
+                <svg viewBox="0 0 20 20" fill="currentColor"><path d="M10 0L0 10L10 20L20 10L10 0Z"/></svg>
+                Anay Gawate
+            </a>
+            <nav class="main-nav" >
+                <ul>
+                    <li><a href="#about" class="active">About</a></li>
+                    <li><a href="#projects">Projects</a></li>
+                    <li><a href="#skills">Skills</a></li>
+                    <li><a href="#experience">Experience</a></li>
+                    <li><a href="#education">Education</a></li>
+                    <li><a href="#resume">Resume</a></li>
+                    <li><a href="#contact">Contact</a></li>
+                    <li><a href="#blog">Blog</a></li>
+                  
+                </ul>
+            </nav>
+            
+            <button class="hamburger-menu" aria-label="Toggle menu" aria-expanded="false">
+                <span class="bar"></span>
+                <span class="bar"></span>
+                <span class="bar"></span>
+            </button>
+        </div>
+    </header>
+
+    <div class="mobile-nav-panel">
+        <ul>
+            <li><a href="#about">About</a></li>
+            <li><a href="#projects">Projects</a></li>
+            <li><a href="#skills">Skills</a></li>
+            <li><a href="#experience">Experience</a></li>
+            <li><a href="#education">Education</a></li>
+            <li><a href="#resume">Resume</a></li>
+            <li><a href="#contact">Contact</a></li>
+            <li><a href="#blog">Blog</a></li>
+            
+        </ul>
+    </div>
+
+
+    <main>
+        <section class="hero">
+            <div class="container">
+                <h1>Hello, I'm Anay</h1>
+                <p>A passionate Computer Science student and aspiring Software Engineer, dedicated to crafting innovative solutions and continuously learning in the ever-evolving tech landscape.</p>
+                <a href="#projects" class="btn btn-lg">View My Work</a>
+                <div class="social-icons" id="iconz">
+                <a href="https://linkedin.com/in/anay2310" aria-label="LinkedIn" title="LinkedIn" target="_blank">
+                    <svg viewBox="0 0 24 24"><path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/></svg>
+                </a>
+                <a href="https://github.com/cheekychiku" aria-label="GitHub" title="GitHub" target="_blank">
+                     <svg viewBox="0 0 24 24"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg>
+                </a>
+                <a href="https://x.com/cheekychiku7" aria-label="Twitter" title="Twitter" target="_blank">
+                    <svg viewBox="0 0 24 24"><path d="M24 4.557c-.883.392-1.832.656-2.828.775 1.017-.609 1.798-1.574 2.165-2.724-.951.564-2.005.974-3.127 1.195-.897-.957-2.178-1.555-3.594-1.555-3.179 0-5.515 2.966-4.797 6.045-4.091-.205-7.719-2.165-10.148-5.144-.424.728-.666 1.581-.666 2.477 0 1.61.823 3.027 2.068 3.855-.76-.025-1.474-.234-2.101-.583v.06c0 2.247 1.592 4.123 3.7 4.557-.538.146-1.127.179-1.732.064.579 1.909 2.307 3.183 4.341 3.221-1.709 1.343-3.877 2.063-6.233 2.063-.399 0-.793-.023-1.175-.068 2.209 1.427 4.833 2.256 7.646 2.256 9.18 0 14.207-7.843 13.898-14.646.995-.718 1.852-1.616 2.538-2.634z"/></svg>
+                </a>
+            </div>
+            </div>
+        </section>
+
+        <section id="about">
+            <div class="container">
+                <div class="about-image-container">
+                    <img src="https://raw.githubusercontent.com/cheekychiku/cheekychiku.github.io/refs/heads/main/assets/profilephoto.jpg" alt="Anay - Profile Picture" class="about-profile-pic">
+                </div>
+                <div class="about-content">
+                    <h2 class="section-title">About Me</h2>
+                    <p>I am currently pursuing a Bachelor of Science in Computer Science at State University, with an expected graduation in May 2024. My journey into technology began with a fascination for how software can solve real-world problems and enhance people's lives.</p>
+                    <p>I thrive in collaborative environments and enjoy tackling complex challenges, whether it's developing a full-stack web application, designing an intuitive mobile app, or analyzing data to uncover meaningful insights. My coursework and personal projects have equipped me with a solid foundation in various programming languages, frameworks, and software development methodologies. I am eager to apply my skills and enthusiasm to contribute to impactful projects in the tech industry.</p>
+                    
+                </div>
+            </div>
+        </section>
+
+        <section id="projects">
+            <div class="container">
+                <h2 class="section-title">Featured Projects</h2>
+                <div class="projects-grid">
+                    <div class="project-card">
+                        <img loading="lazy" src="https://picsum.photos/seed/ecom1/600/400" alt="E-commerce Website Thumbnail" class="project-image">
+                        <div class="project-card-content">
+                            <h3>Offline Reddit</h3>
+                            <p>A full-featured reddit content downloader built with modern technologies, featuring themes, user authentication, files, and secure integration. Focused on a clean UI and robust backend.</p>
+                            <div class="project-card-actions">
+                                <a href="https://github.com/cheekychiku/OfflineReddit" class="btn">View Demo</a>
+                                <a href="https://github.com/cheekychiku/OfflineReddit" class="btn btn-secondary" style="margin-left: 10px;">Source Code</a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="project-card">
+                        <img loading="lazy" src="https://picsum.photos/seed/fitnessapp2/600/400" alt="Fitness Tracking App Thumbnail" class="project-image">
+                        <div class="project-card-content">
+                            <h3>Mobile Fitness Tracker</h3>
+                            <p>A cross-platform mobile application for tracking fitness activities, setting personalized goals, and visualizing progress with interactive charts. Includes features like GPS tracking and workout logging for a comprehensive experience.</p>
+                             <div class="project-card-actions">
+                                <a href="#" class="btn">App Link</a>
+                                <a href="#" class="btn btn-secondary" style="margin-left: 10px;">GitHub</a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="project-card">
+                         <img loading="lazy" src="https://picsum.photos/seed/dashboard3/600/400" alt="Data Analysis Dashboard Thumbnail" class="project-image">
+                        <div class="project-card-content">
+                            <h3>Retro BrowserOS</h3>
+                            <p>An interactive web dashboard designed for as a interface to mimic operating system. Users can upload data, generate various charts, apply filters, and derive actionable insights through an intuitive interface.</p>
+                             <div class="project-card-actions">
+                                <a href="https://cheekychiku.github.io/os" class="btn">Live Site</a>
+                                <a href="https://cheekychiku.github.io/os" class="btn btn-secondary" style="margin-left: 10px;">View Repo</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="see-all-container">
+                    <a href="https://cheekychiku.github.io/projects" class="btn btn-lg btn-secondary">See All Projects</a>
+                </div>
+            </div>
+        </section>
+
+        <section id="skills">
+            <div class="container">
+                <h2 class="section-title">Technical Skills</h2>
+                <ul class="skills-list">
+                    <li>Java</li> <li>Python</li> <li>JavaScript (ES6+)</li>
+                    <li>React.js</li> <li>Node.js</li> <li>Express.js</li>
+                    <li>HTML5</li> <li>CSS3 & SASS</li> <li>SQL</li>
+                    <li>MongoDB</li> <li>Git & GitHub</li> <li>RESTful APIs</li>
+                    <li>Agile Methodologies</li> <li>Problem Solving</li>
+                    <li>Data Structures</li> <li>Algorithms</li> <li>Docker</li>
+                </ul>
+                <div class="see-all-container">
+                    <a href="https://cheekychiku.github.io/skills" class="btn btn-lg btn-secondary">View All Skills</a>
+                </div>
+            </div>
+        </section>
+
+        <section id="experience">
+            <div class="container">
+                <h2 class="section-title">Professional Experience</h2>
+                <div class="timeline">
+                    <div class="timeline-item">
+                        <div class="timeline-icon">
+                            <svg viewBox="0 0 24 24"><path d="M20 6h-4V4c0-1.11-.89-2-2-2h-4c-1.11 0-2 .89-2 2v2H4c-1.11 0-1.99.89-1.99 2L2 19c0 1.11.89 2 2 2h16c1.11 0 2-.89 2-2V8c0-1.11-.89-2-2-2zm-6 0h-4V4h4v2z"></path></svg>
+                        </div>
+                        <h3>Software Engineering Intern</h3>
+                        <span class="company-school">Innovatech Solutions Ltd.</span>
+                        <span class="date">Summer 2023 (June - August)</span>
+                        <p>Contributed to the development of a new client portal using Angular and Spring Boot. Participated in daily scrums, code reviews, and collaborated with a team of 5 engineers to deliver key features ahead of schedule. Gained experience in REST API design and unit testing with JUnit & Mockito.</p>
+                    </div>
+                    <div class="timeline-item">
+                        <div class="timeline-icon">
+                             <svg viewBox="0 0 24 24"><path d="M12 1L3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V5l-9-4zm0 10.99h7c-.53 4.12-3.28 7.79-7 8.94V12H5V6.3l7-3.11v8.8z"></path></svg>
+                        </div>
+                        <h3>Teaching Assistant - Intro to Programming</h3>
+                        <span class="company-school">State University, CS Department</span>
+                        <span class="date">Fall 2022 - Spring 2023</span>
+                        <p>Assisted professors in teaching foundational programming concepts in Python to over 100 students. Conducted weekly lab sessions, graded assignments, and provided one-on-one tutoring to help students grasp complex topics. Developed supplementary coding examples and documentation.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="education">
+            <div class="container">
+                <h2 class="section-title">Education</h2>
+                <div class="timeline">
+                    <div class="timeline-item">
+                         <div class="timeline-icon">
+                            <svg viewBox="0 0 24 24"><path d="M5 13.18v4L12 21l7-3.82v-4L12 17l-7-3.82zM12 3L1 9l11 6 9-4.91V17h2V9L12 3z"></path></svg>
+                        </div>
+                        <h3>Bachelor of Science in Computer Science</h3>
+                        <span class="company-school">State University</span>
+                        <span class="date">Expected Graduation: May 2024</span>
+                        <p>Relevant Coursework: Data Structures & Algorithms, Web Development (Full Stack), Database Management Systems, Software Engineering Principles, Operating Systems, Artificial Intelligence. <br> Dean's List: Fall 2022, Spring 2023. <br> Active Member of the University Coding Club & AI Society.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="resume" class="centered-action">
+            <div class="container" style="text-align: center;">
+                <h2 class="section-title">My Resume</h2>
+                <p style="max-width: 600px; margin-left: auto; margin-right: auto; margin-bottom: 30px;">Interested in learning more about my qualifications? Download my full resume for a detailed overview of my skills, experience, and achievements.</p>
+                <a href="https://cheekychiku.github.io/assets/functionalsample.pdf" class="btn btn-lg" download="functionalsample.pdf">Download Resume (PDF)</a>
+            </div>
+        </section>
+
+        
+
+        <section id="contact">
+            <div class="container">
+                <h2 class="section-title">Get In Touch</h2>
+                <p style="text-align: center; max-width: 600px; margin-left: auto; margin-right: auto; margin-bottom: 40px;">
+                    I'm always excited to connect with new people and discuss potential projects or opportunities. Whether you have a question or just want to say hi, feel free to reach out!
+                </p>
+                <form class="contact-form" id="contactForm" action="https://formspree.io/f/mgvkgypw" method="POST">
+                    <div class="form-group">
+                        <label for="name">Full Name</label>
+                        <input type="text" id="name" name="name" placeholder="e.g., Jane Doe" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="email">Email Address</label>
+                        <input type="email" id="email" name="email" placeholder="your.email@example.com" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="subject">Subject</label>
+                        <input type="text" id="subject" name="subject" placeholder="e.g., Project Inquiry" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="message">Message</label>
+                        <textarea id="message" name="message" placeholder="Your message here..." required></textarea>
+                    </div>
+                    <button type="submit" class="btn">Send Message</button>
+                </form>
+            </div>
+        </section>
+
+        <section id="blog">
+            <div class="container">
+                <h2 class="section-title">Latest Blog Posts</h2>
+                <div class="blog-post-summary">
+                    <h3>My Journey into Web3 and Decentralized Applications</h3>
+                    <p>Exploring the fascinating world of blockchain technology, smart contracts, and the potential of Web3. A reflection on my initial learnings, challenges, and the exciting future of decentralized systems. This post covers key concepts and resources for beginners.</p>
+                    <a href="#" class="btn btn-outline-primary">Read More</a>
+                </div>
+                <div class="blog-post-summary">
+                    <h3>Top 5 VS Code Extensions for JavaScript Developers in 2024</h3>
+                    <p>Discover essential Visual Studio Code extensions that can significantly boost your productivity and streamline your JavaScript development workflow. From advanced linters to powerful debuggers and snippet tools, these are game-changers for any JS dev.</p>
+                    <a href="#" class="btn btn-outline-primary">Read More</a>
+                </div>
+                <div class="see-all-container">
+                    <a href="https://cheekychiku.github.io/blogs" class="btn btn-lg btn-secondary">View All Blog Posts</a>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="main-footer">
+        <div class="container">
+            <div class="social-icons">
+                <a href="https://linkedin.com/in/anay2310" aria-label="LinkedIn" title="LinkedIn" target="_blank">
+                    <svg viewBox="0 0 24 24"><path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/></svg>
+                </a>
+                <a href="https://github.com/cheekychiku" aria-label="GitHub" title="GitHub" target="_blank">
+                     <svg viewBox="0 0 24 24"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg>
+                </a>
+                <a href="https://x.com/cheekychiku7" aria-label="Twitter" title="Twitter" target="_blank">
+                    <svg viewBox="0 0 24 24"><path d="M24 4.557c-.883.392-1.832.656-2.828.775 1.017-.609 1.798-1.574 2.165-2.724-.951.564-2.005.974-3.127 1.195-.897-.957-2.178-1.555-3.594-1.555-3.179 0-5.515 2.966-4.797 6.045-4.091-.205-7.719-2.165-10.148-5.144-.424.728-.666 1.581-.666 2.477 0 1.61.823 3.027 2.068 3.855-.76-.025-1.474-.234-2.101-.583v.06c0 2.247 1.592 4.123 3.7 4.557-.538.146-1.127.179-1.732.064.579 1.909 2.307 3.183 4.341 3.221-1.709 1.343-3.877 2.063-6.233 2.063-.399 0-.793-.023-1.175-.068 2.209 1.427 4.833 2.256 7.646 2.256 9.18 0 14.207-7.843 13.898-14.646.995-.718 1.852-1.616 2.538-2.634z"/></svg>
+                </a>
+            </div>
+            <p>© <span id="currentYear"></span> Anay Gawate. All rights reserved.</p> 
+            
+                        <div class="email-copy-container">
+                <a href="mailto:pixel.anay@gmail.com" id="emailToCopy" class="footer-link"><p>pixel.anay@gmail.com</p></a>
+                <button id="copyEmailButton" class="copy-button" aria-label="Copy email address" title="Copy email">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="copy-icon-svg">
+                        <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
+                        <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
+                    </svg>
+                </button>
+                <span id="copyFeedback" class="copy-feedback"><p>Copied!</p></span>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const navLinks = document.querySelectorAll('.main-nav a[href^="#"]');
+            const mobileNavLinks = document.querySelectorAll('.mobile-nav-panel a[href^="#"]');
+            const heroLink = document.querySelector('.hero a[href^="#"]');
+            const sections = document.querySelectorAll('section[id]');
+            const header = document.querySelector('.main-header');
+            const headerOffset = header ? header.offsetHeight : 70;
+
+                        // --- Start of new code for email copy button ---
+            const copyButton = document.getElementById('copyEmailButton');
+            const emailLink = document.getElementById('emailToCopy'); // The <a> tag containing the email
+            const copyFeedback = document.getElementById('copyFeedback');
+
+            if (copyButton && emailLink && copyFeedback) {
+                copyButton.addEventListener('click', function() {
+                    const emailText = emailLink.textContent.trim(); // Get the text content of the <a> tag
+
+                    if (navigator.clipboard && navigator.clipboard.writeText) {
+                        navigator.clipboard.writeText(emailText).then(function() {
+                            // Success
+                            copyFeedback.classList.add('show');
+                            // The animation will handle hiding it.
+                            // If not using animation, you'd use setTimeout to remove 'show'
+                            setTimeout(function() {
+                                copyFeedback.classList.remove('show');
+                            }, 2000); // Ensure it's hidden after animation duration
+                        }).catch(function(err) {
+                            console.error('Failed to copy email: ', err);
+                            // You could provide a fallback or alert the user
+                            alert('Could not copy email. Please copy it manually.');
+                        });
+                    } else {
+                        // Fallback for older browsers or insecure contexts (e.g., file://)
+                        console.warn('Clipboard API not available. Attempting fallback.');
+                        try {
+                            const textArea = document.createElement("textarea");
+                            textArea.value = emailText;
+                            textArea.style.position = "fixed"; // Prevent scrolling to bottom
+                            textArea.style.top = "0";
+                            textArea.style.left = "0";
+                            textArea.style.opacity = "0"; // Make it invisible
+                            document.body.appendChild(textArea);
+                            textArea.focus();
+                            textArea.select();
+                            document.execCommand('copy');
+                            document.body.removeChild(textArea);
+
+                            copyFeedback.classList.add('show');
+                            setTimeout(function() {
+                                copyFeedback.classList.remove('show');
+                            }, 2000);
+                        } catch (err) {
+                            console.error('Fallback copy failed: ', err);
+                            alert('Could not copy email. Please copy it manually.');
+                        }
+                    }
+                });
+            }
+            // --- End of new code for email copy button ---
+
+
+            // Hamburger Menu Toggle
+            const hamburger = document.querySelector('.hamburger-menu');
+            const mobileNavPanel = document.querySelector('.mobile-nav-panel');
+
+            if (hamburger && mobileNavPanel) {
+                hamburger.addEventListener('click', () => {
+                    const isOpen = mobileNavPanel.classList.toggle('open');
+                    hamburger.classList.toggle('is-active', isOpen);
+                    hamburger.setAttribute('aria-expanded', isOpen);
+                    // Optional: Prevent body scroll when mobile menu is open
+                    // document.body.style.overflow = isOpen ? 'hidden' : '';
+                });
+
+                // Close mobile menu if clicked outside of it
+                document.addEventListener('click', function(event) {
+                    const isClickInsideNav = mobileNavPanel.contains(event.target);
+                    const isClickOnHamburger = hamburger.contains(event.target);
+
+                    if (mobileNavPanel.classList.contains('open') && !isClickInsideNav && !isClickOnHamburger) {
+                        mobileNavPanel.classList.remove('open');
+                        hamburger.classList.remove('is-active');
+                        hamburger.setAttribute('aria-expanded', 'false');
+                        // document.body.style.overflow = ''; // Restore scroll
+                    }
+                });
+            }
+
+            function closeMobileMenu() {
+                if (mobileNavPanel && mobileNavPanel.classList.contains('open')) {
+                    mobileNavPanel.classList.remove('open');
+                    if(hamburger) hamburger.classList.remove('is-active');
+                    if(hamburger) hamburger.setAttribute('aria-expanded', 'false');
+                    // document.body.style.overflow = ''; // Restore scroll
+                }
+            }
+
+            function smoothScrollAndCloseMenu(targetId) {
+                closeMobileMenu(); // Close mobile menu first
+
+                const targetElement = document.querySelector(targetId);
+                if (targetElement) {
+                    const elementPosition = targetElement.getBoundingClientRect().top + window.pageYOffset;
+                    const offsetPosition = elementPosition - headerOffset;
+                    window.scrollTo({ top: offsetPosition, behavior: 'smooth' });
+                }
+            }
+            
+            navLinks.forEach(anchor => {
+                anchor.addEventListener('click', function (e) {
+                    e.preventDefault();
+                    smoothScrollAndCloseMenu(this.getAttribute('href'));
+                });
+            });
+            mobileNavLinks.forEach(anchor => {
+                anchor.addEventListener('click', function (e) {
+                    e.preventDefault();
+                    smoothScrollAndCloseMenu(this.getAttribute('href'));
+                });
+            });
+
+
+            if (heroLink) {
+                heroLink.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    smoothScrollAndCloseMenu(this.getAttribute('href'));
+                });
+            }
+            
+            // Active link highlighting on scroll
+            function highlightNav() {
+                let currentSectionId = '';
+                const currentScroll = window.pageYOffset;
+
+                sections.forEach(section => {
+                    const sectionTop = section.offsetTop - headerOffset - 50; // Adjusted offset
+                    if (currentScroll >= sectionTop) {
+                        currentSectionId = section.getAttribute('id');
+                    }
+                });
+                
+                if (!currentSectionId && sections.length > 0 && currentScroll < sections[0].offsetTop - headerOffset - 50) {
+                     currentSectionId = 'about'; // Default to 'about' if at the very top or above the first section
+                } else if (!currentSectionId && sections.length > 0) {
+                     // If scrolled past all sections but still on page (e.g. footer visible), keep last section active or clear all
+                     // For simplicity, let's try to keep the last one active if currentSectionId is empty after loop
+                     // Or, if no section is truly "in view" by this logic, no link is active
+                }
+
+
+                [...navLinks, ...mobileNavLinks].forEach(link => {
+                    link.classList.remove('active');
+                    if (link.getAttribute('href').substring(1) === currentSectionId) {
+                        link.classList.add('active');
+                    }
+                });
+            }
+            window.addEventListener('scroll', highlightNav);
+            highlightNav(); // Initial call
+
+
+            // Contact Form submission
+            // const contactForm = document.getElementById('contactForm');
+            // if (contactForm) {
+                // contactForm.addEventListener('submit', function(e) {
+                    // e.preventDefault();
+                    // const name = document.getElementById('name').value;
+                    // const email = document.getElementById('email').value;
+                    // const subject = document.getElementById('subject').value;
+                    // const message = document.getElementById('message').value;
+
+                    // if (name && email && subject && message && email.includes('@')) {
+                    //     alert(`Thank you, ${name}! Your message about "${subject}" has been "sent". We'll contact you at ${email} if needed.`);
+                    //     this.reset();
+                    // } else {
+                        // alert('Please fill out all fields correctly, including a valid email address.');
+                   //  }
+                // });
+            // }
+
+            const yearSpan = document.getElementById('currentYear');
+            if (yearSpan) {
+                yearSpan.textContent = new Date().getFullYear();
+            }
+        });
+    </script>
+
+</body>
+</html>

@@ -1,0 +1,527 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Anay Gawate - Technical Skills</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        /* Global Styles & Variables (Copied from index.html) */
+        :root {
+            --primary-button-bg: #cbe5ff; /* Light Pastel Blue */
+            --blacky: #000000; /* for all buttons after hover and click */
+            --primary-button-hover-bg: #9BC4D2; /* Slightly darker Pastel Blue */
+            --text-color: #000000; /* Black */
+            --background-color: #FFFFFF; /* White */
+            --secondary-text-color: #333333; /* Darker Gray for less emphasis if needed */
+            --border-color: #E0E0E0; /* Light Gray for subtle borders */
+            --accent-color-for-lines: #ADD8E6; /* Pastel Blue for underlines/accents */
+            --skill-tag-bg: #f0f3f7; /* Light gray for skill tags, similar to example */
+            --skill-tag-text: #0d141c; /* Dark text for skill tags */
+            --skill-tag-hover-bg: #000000;
+            --skill-tag-hover-text: #FFFFFF;
+
+
+            --font-family-main: 'Manrope', sans-serif;
+
+            --border-radius-sm: 0.2rem;
+            --border-radius-md: 0.375rem;
+            --border-radius-lg: 0.5rem;
+            --box-shadow: 0 0.25rem 0.75rem rgba(0, 0, 0, 0.05);
+            --box-shadow-lg: 0 0.5rem 1.5rem rgba(0, 0, 0, 0.07);
+        }
+
+        *,
+        *::before,
+        *::after {
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            margin: 0;
+            font-family: var(--font-family-main);
+            font-size: 1rem;
+            font-weight: 400;
+            line-height: 1.7;
+            color: var(--text-color);
+            background-color: var(--background-color);
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+
+        .container {
+            width: 90%;
+            max-width: 1140px;
+            margin-right: auto;
+            margin-left: auto;
+            padding-right: 15px;
+            padding-left: 15px;
+        }
+
+        h1, h2, h3, h4, h5, h6 {
+            margin-top: 0;
+            margin-bottom: 1rem;
+            font-weight: 700;
+            line-height: 1.3;
+            color: var(--text-color);
+        }
+
+        h1 { font-size: 2.8rem; } /* Page title / Hero title */
+        h2 { font-size: 2.2rem; } /* Section title from index.html */
+        h3 { font-size: 1.5rem; } /* Category titles on this page */
+        h4 { font-size: 1.2rem; }
+
+        p {
+            margin-top: 0;
+            margin-bottom: 1.25rem;
+            color: var(--text-color);
+        }
+
+        a {
+            color: var(--primary-button-bg);
+            text-decoration: none;
+            transition: color 0.15s ease-in-out;
+        }
+        a:hover {
+            color: var(--primary-button-hover-bg);
+            text-decoration: underline;
+        }
+
+        /* Header (Copied from index.html) */
+        .main-header {
+            background-color: var(--background-color);
+            padding: 1rem 0;
+            border-bottom: 1px solid var(--border-color);
+            position: sticky;
+            top: 0;
+            z-index: 1020;
+        }
+        .main-header .container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .logo {
+            font-size: 1.6rem;
+            font-weight: 800;
+            display: flex;
+            align-items: center;
+            color: var(--text-color);
+        }
+        .logo svg {
+            width: 22px;
+            height: 22px;
+            margin-right: 10px;
+            fill: var(--text-color);
+        }
+        .logo:hover { text-decoration: none; color: var(--text-color); }
+
+        .main-nav { display: block; }
+        .main-nav ul { list-style: none; padding: 0; margin: 0; display: flex; }
+        .main-nav li { margin-left: 1.8rem; }
+        .main-nav a {
+            color: var(--text-color);
+            font-weight: 500;
+            font-size: 0.95rem;
+            padding: 0.3rem 0;
+            position: relative;
+        }
+        .main-nav a:hover, .main-nav a.active {
+            color: var(--accent-color-for-lines);
+            text-decoration: none;
+        }
+        .main-nav a::after {
+            content: ''; position: absolute; width: 0; height: 2px;
+            display: block; margin-top: 3px; right: 0;
+            background: var(--accent-color-for-lines);
+            transition: width 0.2s ease;
+        }
+        .main-nav a:hover::after, .main-nav a.active::after { width: 100%; left: 0; }
+
+        /* Hamburger Menu (Copied from index.html) */
+        .hamburger-menu {
+            display: none; cursor: pointer; background: none; border: none;
+            padding: 0; z-index: 1051;
+        }
+        .hamburger-menu .bar {
+            display: block; width: 28px; height: 3px; margin: 6px auto;
+            background-color: var(--text-color); transition: all 0.3s ease-in-out;
+            border-radius: 1px;
+        }
+        .hamburger-menu.is-active .bar:nth-child(1) { transform: translateY(9px) rotate(45deg); }
+        .hamburger-menu.is-active .bar:nth-child(2) { opacity: 0; }
+        .hamburger-menu.is-active .bar:nth-child(3) { transform: translateY(-9px) rotate(-45deg); }
+
+        .mobile-nav-panel {
+            position: fixed; top: 0; right: -100%; width: 80%; max-width: 320px;
+            height: 100vh; background-color: var(--background-color);
+            box-shadow: -3px 0 10px rgba(0,0,0,0.1); z-index: 1050;
+            transition: right 0.35s cubic-bezier(0.23, 1, 0.32, 1);
+            padding: 80px 0 20px 0; overflow-y: auto; display: flex; flex-direction: column;
+        }
+        .mobile-nav-panel.open { right: 0; }
+        .mobile-nav-panel ul { list-style: none; padding: 0; margin: 0; }
+        .mobile-nav-panel li a {
+            display: block; padding: 18px 30px; color: var(--text-color);
+            text-decoration: none; font-size: 1.1rem; font-weight: 500;
+            border-bottom: 1px solid var(--border-color);
+            transition: background-color 0.2s, color 0.2s;
+        }
+        .mobile-nav-panel li:first-child a { border-top: 1px solid var(--border-color); }
+        .mobile-nav-panel li a:hover, .mobile-nav-panel li a.active {
+            background-color: #f0f8ff; color: var(--accent-color-for-lines);
+        }
+
+        /* Section Styling */
+        section#all-skills {
+            padding: 60px 0; /* Reduced top padding as there's no large hero image */
+            background-color: var(--background-color);
+        }
+        .skills-header {
+            text-align: left;
+            margin-bottom: 40px;
+        }
+        .skills-header h1 { /* Main page title style */
+            font-size: 2.8rem;
+            font-weight: 800;
+            margin-bottom: 0.5rem;
+            color: var(--text-color);
+        }
+        .skills-header p { /* Subtitle style */
+            font-size: 1.1rem;
+            color: var(--secondary-text-color); /* Using secondary text color for subtitle */
+            line-height: 1.8;
+            max-width: 700px;
+        }
+
+        .skill-category {
+            margin-bottom: 40px;
+        }
+        .skill-category h3 { /* Category title style */
+            font-size: 1.7rem; /* Slightly larger than project card H3 */
+            font-weight: 700;
+            color: var(--text-color);
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid var(--border-color); /* Subtle underline for category */
+        }
+
+        .skills-grid {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 12px; /* Gap between skill tags */
+        }
+        .skill-tag {
+            background-color: var(--skill-tag-bg);
+            color: var(--skill-tag-text);
+            padding: 8px 18px; /* Padding for tags */
+            border-radius: var(--border-radius-md);
+            font-size: 0.9rem;
+            font-weight: 500;
+            line-height: 1.5; /* Ensure text fits well */
+            transition: background-color 0.2s, color 0.2s, border-color 0.2s;
+            border: 1px solid transparent; /* For hover effect consistency */
+        }
+        .skill-tag:hover {
+            background-color: var(--skill-tag-hover-bg);
+            color: var(--skill-tag-hover-text);
+            border-color: var(--skill-tag-hover-bg);
+        }
+        
+        /* Footer (Copied from index.html) */
+        .main-footer {
+            background-color: var(--background-color);
+            color: var(--text-color);
+            text-align: center;
+            padding: 50px 0;
+            font-size: 0.9rem;
+            border-top: 1px solid var(--border-color);
+        }
+        .social-icons { margin-bottom: 1.25rem; }
+        .social-icons a {
+            margin: 0 12px;
+            color: var(--text-color);
+            font-size: 1.6rem;
+            transition: color 0.2s;
+        }
+        .social-icons a:hover { color: var(--primary-button-bg); text-decoration: none; }
+        .social-icons svg { width: 26px; height: 26px; fill: currentColor; }
+        .main-footer p { margin-bottom: 0.5rem; color: var(--text-color); }
+        .main-footer a.footer-link { color: var(--primary-button-bg); font-weight: 500; }
+        .main-footer a.footer-link:hover { color: var(--primary-button-hover-bg); }
+
+        /* Responsive Adjustments */
+        @media (max-width: 991.98px) {
+            .main-nav { display: none; }
+            .hamburger-menu { display: block; }
+            .skills-header h1 { font-size: 2.4rem; }
+            .skill-category h3 { font-size: 1.5rem; }
+        }
+
+        @media (max-width: 767.98px) {
+            .main-header .container { align-items: center; }
+            .logo { margin-bottom: 0; }
+            section#all-skills { padding: 40px 0; }
+            .skills-header { text-align: center; }
+            .skills-header h1 { font-size: 2rem; }
+            .skills-header p { font-size: 1rem; }
+            .skill-category h3 { font-size: 1.3rem; text-align: center; }
+            .skills-grid { justify-content: center; }
+        }
+    </style>
+</head>
+<body>
+
+    <header class="main-header">
+        <div class="container">
+            <a href="index.html" class="logo">
+                <svg viewBox="0 0 20 20" fill="currentColor"><path d="M10 0L0 10L10 20L20 10L10 0Z"/></svg>
+                Anay Gawate
+            </a>
+            <nav class="main-nav">
+                <ul>
+            <li><a href="index.html">Home</a></li>
+            <li><a href="index.html#about">About</a></li>
+            <li><a href="index.html#projects">Projects</a></li>
+            <li><a href="skills.html" class="active">Skills</a></li> <!-- Active class here -->
+            <li><a href="index.html#experience">Experience</a></li>
+            <li><a href="index.html#education">Education</a></li>
+            <li><a href="index.html#resume">Resume</a></li>
+            <li><a href="index.html#contact">Contact</a></li>
+            <li><a href="index.html#blog">Blog</a></li>
+                </ul>
+            </nav>
+            
+            <button class="hamburger-menu" aria-label="Toggle menu" aria-expanded="false">
+                <span class="bar"></span>
+                <span class="bar"></span>
+                <span class="bar"></span>
+            </button>
+        </div>
+    </header>
+
+    <div class="mobile-nav-panel">
+        <ul>
+            <li><a href="index.html">Home</a></li>
+            <li><a href="index.html#about">About</a></li>
+            <li><a href="index.html#projects">Projects</a></li>
+            <li><a href="skills.html" class="active">Skills</a></li> <!-- Active class here -->
+            <li><a href="index.html#experience">Experience</a></li>
+            <li><a href="index.html#education">Education</a></li>
+            <li><a href="index.html#resume">Resume</a></li>
+            <li><a href="index.html#contact">Contact</a></li>
+            <li><a href="index.html#blog">Blog</a></li>
+        </ul>
+    </div>
+
+    <main>
+        <section id="all-skills">
+            <div class="container">
+                <div class="skills-header">
+                    <h1>Technical Skills</h1>
+                    <p>A comprehensive overview of my technical proficiencies, including programming languages, frameworks, tools, and core concepts I've worked with.</p>
+                </div>
+
+                <div class="skill-category">
+                    <h3>Programming Languages</h3>
+                    <div class="skills-grid">
+                        <div class="skill-tag">Python</div>
+                        <div class="skill-tag">Java</div>
+                        <div class="skill-tag">JavaScript (ES6+)</div>
+                        <div class="skill-tag">SQL</div>
+                        <div class="skill-tag">HTML5</div>
+                        <div class="skill-tag">CSS3</div>
+                        <div class="skill-tag">C++</div>
+                        <div class="skill-tag">Swift</div>
+                        <div class="skill-tag">Kotlin</div>
+                        <div class="skill-tag">TypeScript</div>
+                        <div class="skill-tag">Go</div>
+                    </div>
+                </div>
+
+                <div class="skill-category">
+                    <h3>Frameworks & Libraries</h3>
+                    <div class="skills-grid">
+                        <div class="skill-tag">React.js</div>
+                        <div class="skill-tag">Node.js</div>
+                        <div class="skill-tag">Express.js</div>
+                        <div class="skill-tag">Angular</div>
+                        <div class="skill-tag">Vue.js</div>
+                        <div class="skill-tag">Next.js</div>
+                        <div class="skill-tag">Spring Boot</div>
+                        <div class="skill-tag">Django</div>
+                        <div class="skill-tag">Flask</div>
+                        <div class="skill-tag">jQuery</div>
+                        <div class="skill-tag">SASS/SCSS</div>
+                        <div class="skill-tag">Bootstrap</div>
+                        <div class="skill-tag">Tailwind CSS</div>
+                        <div class="skill-tag">Redux</div>
+                        <div class="skill-tag">GraphQL (Apollo)</div>
+                        <div class="skill-tag">TensorFlow</div>
+                        <div class="skill-tag">PyTorch</div>
+                        <div class="skill-tag">Scikit-learn</div>
+                        <div class="skill-tag">Pandas</div>
+                        <div class="skill-tag">NumPy</div>
+                        <div class="skill-tag">Matplotlib</div>
+                    </div>
+                </div>
+
+                <div class="skill-category">
+                    <h3>Databases</h3>
+                    <div class="skills-grid">
+                        <div class="skill-tag">MongoDB</div>
+                        <div class="skill-tag">MySQL</div>
+                        <div class="skill-tag">PostgreSQL</div>
+                        <div class="skill-tag">SQLite</div>
+                        <div class="skill-tag">Firebase (Firestore/Realtime DB)</div>
+                        <div class="skill-tag">Redis</div>
+                        <div class="skill-tag">Oracle DB</div>
+                    </div>
+                </div>
+
+                <div class="skill-category">
+                    <h3>Tools & Platforms</h3>
+                    <div class="skills-grid">
+                        <div class="skill-tag">Git & GitHub</div>
+                        <div class="skill-tag">Docker</div>
+                        <div class="skill-tag">Kubernetes</div>
+                        <div class="skill-tag">AWS (EC2, S3, Lambda, RDS, etc.)</div>
+                        <div class="skill-tag">Microsoft Azure</div>
+                        <div class="skill-tag">Google Cloud Platform (GCP)</div>
+                        <div class="skill-tag">Jenkins</div>
+                        <div class="skill-tag">GitHub Actions (CI/CD)</div>
+                        <div class="skill-tag">CircleCI</div>
+                        <div class="skill-tag">Linux/Unix Shell (Bash)</div>
+                        <div class="skill-tag">VS Code</div>
+                        <div class="skill-tag">IntelliJ IDEA</div>
+                        <div class="skill-tag">Jira</div>
+                        <div class="skill-tag">Confluence</div>
+                        <div class="skill-tag">Postman</div>
+                        <div class="skill-tag">Figma</div>
+                    </div>
+                </div>
+                
+                <div class="skill-category">
+                    <h3>Concepts & Methodologies</h3>
+                    <div class="skills-grid">
+                        <div class="skill-tag">RESTful APIs</div>
+                        <div class="skill-tag">Agile Methodologies</div>
+                        <div class="skill-tag">Scrum</div>
+                        <div class="skill-tag">Data Structures</div>
+                        <div class="skill-tag">Algorithms</div>
+                        <div class="skill-tag">Problem Solving</div>
+                        <div class="skill-tag">Object-Oriented Programming (OOP)</div>
+                        <div class="skill-tag">Functional Programming</div>
+                        <div class="skill-tag">Test-Driven Development (TDD)</div>
+                        <div class="skill-tag">Microservices Architecture</div>
+                        <div class="skill-tag">Responsive Web Design</div>
+                        <div class="skill-tag">Software Development Life Cycle (SDLC)</div>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+    </main>
+
+    <footer class="main-footer">
+        <div class="container">
+            <div class="social-icons">
+                <a href="https://linkedin.com/in/anay2310" aria-label="LinkedIn" title="LinkedIn" target="_blank">
+                    <svg viewBox="0 0 24 24"><path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/></svg>
+                </a>
+                <a href="https://github.com/cheekychiku" aria-label="GitHub" title="GitHub" target="_blank">
+                     <svg viewBox="0 0 24 24"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg>
+                </a>
+                <a href="https://x.com/cheekychiku7" aria-label="Twitter" title="Twitter" target="_blank">
+                    <svg viewBox="0 0 24 24"><path d="M24 4.557c-.883.392-1.832.656-2.828.775 1.017-.609 1.798-1.574 2.165-2.724-.951.564-2.005.974-3.127 1.195-.897-.957-2.178-1.555-3.594-1.555-3.179 0-5.515 2.966-4.797 6.045-4.091-.205-7.719-2.165-10.148-5.144-.424.728-.666 1.581-.666 2.477 0 1.61.823 3.027 2.068 3.855-.76-.025-1.474-.234-2.101-.583v.06c0 2.247 1.592 4.123 3.7 4.557-.538.146-1.127.179-1.732.064.579 1.909 2.307 3.183 4.341 3.221-1.709 1.343-3.877 2.063-6.233 2.063-.399 0-.793-.023-1.175-.068 2.209 1.427 4.833 2.256 7.646 2.256 9.18 0 14.207-7.843 13.898-14.646.995-.718 1.852-1.616 2.538-2.634z"/></svg>
+                </a>
+            </div>
+            <p>© <span id="currentYear"></span> Anay Gawate. All rights reserved.</p> 
+            
+            <a href="mailto:pixel.anay@gmail.com"><p>pixel.anay@gmail.com</p></a>
+
+        </div>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const mobileNavLinks = document.querySelectorAll('.mobile-nav-panel a');
+            const header = document.querySelector('.main-header');
+            const headerOffset = header ? header.offsetHeight : 70;
+
+            const hamburger = document.querySelector('.hamburger-menu');
+            const mobileNavPanel = document.querySelector('.mobile-nav-panel');
+
+            if (hamburger && mobileNavPanel) {
+                hamburger.addEventListener('click', () => {
+                    const isOpen = mobileNavPanel.classList.toggle('open');
+                    hamburger.classList.toggle('is-active', isOpen);
+                    hamburger.setAttribute('aria-expanded', isOpen);
+                });
+
+                document.addEventListener('click', function(event) {
+                    const isClickInsideNav = mobileNavPanel.contains(event.target);
+                    const isClickOnHamburger = hamburger.contains(event.target);
+                    if (mobileNavPanel.classList.contains('open') && !isClickInsideNav && !isClickOnHamburger) {
+                        mobileNavPanel.classList.remove('open');
+                        hamburger.classList.remove('is-active');
+                        hamburger.setAttribute('aria-expanded', 'false');
+                    }
+                });
+            }
+
+            function closeMobileMenu() {
+                if (mobileNavPanel && mobileNavPanel.classList.contains('open')) {
+                    mobileNavPanel.classList.remove('open');
+                    if(hamburger) hamburger.classList.remove('is-active');
+                    if(hamburger) hamburger.setAttribute('aria-expanded', 'false');
+                }
+            }
+            
+            function handleNavLinkClick(e) {
+                const hrefAttribute = this.getAttribute('href');
+                
+                // Close mobile menu regardless of link type
+                closeMobileMenu(); 
+
+                if (hrefAttribute.startsWith('#')) { // For potential same-page anchors 
+                     e.preventDefault(); // Prevent default for on-page smooth scroll
+                    const targetId = hrefAttribute;
+                    // Check if the target is on the current page or another page
+                    if (window.location.pathname.endsWith(this.pathname) || this.pathname === "" || this.href.split('#')[0] === window.location.href.split('#')[0]) { // Target on current page
+                        const targetElement = document.querySelector(targetId);
+                        if (targetElement) {
+                            const elementPosition = targetElement.getBoundingClientRect().top + window.pageYOffset;
+                            const offsetPosition = elementPosition - headerOffset;
+                            window.scrollTo({ top: offsetPosition, behavior: 'smooth' });
+                        }
+                    } else { // Target is on another page (e.g., index.html#about from skills.html)
+                        window.location.href = hrefAttribute; // Regular navigation
+                    }
+                } else if (!hrefAttribute.startsWith('mailto:') && !this.getAttribute('target')) { // Full page navigation, not mailto or new tab
+                    e.preventDefault(); // Prevent default to allow menu to close if it was open.
+                    window.location.href = hrefAttribute; // Then navigate.
+                }
+                // For mailto: or target="_blank" links, let the browser handle naturally.
+            }
+
+            const allNavLinks = document.querySelectorAll('.main-nav a, .mobile-nav-panel a');
+            allNavLinks.forEach(anchor => {
+                anchor.addEventListener('click', handleNavLinkClick);
+            });
+
+            const yearSpan = document.getElementById('currentYear');
+            if (yearSpan) {
+                yearSpan.textContent = new Date().getFullYear();
+            }
+        });
+    </script>
+
+</body>
+</html>
