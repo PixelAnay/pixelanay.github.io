@@ -256,6 +256,101 @@
         .main-footer a.footer-link { color: var(--primary-button-bg); font-weight: 500; }
         .main-footer a.footer-link:hover { color: var(--primary-button-hover-bg); }
 
+        /* Footer */
+        .main-footer {
+            background-color: var(--background-color);
+            color: var(--text-color);
+            text-align: center;
+            padding: 50px 0;
+            font-size: 0.9rem;
+            border-top: 1px solid var(--border-color);
+        }
+        .social-icons { margin-bottom: 1.25rem; }
+        .social-icons a {
+            margin: 0 12px;
+            color: var(--text-color); /* Black icons */
+            font-size: 1.6rem;
+            transition: color 0.2s;
+        }
+        .social-icons a:hover { color: var(--primary-button-bg); text-decoration: none; }
+        .social-icons svg { width: 26px; height: 26px; fill: currentColor; }
+        .main-footer p { margin-bottom: 0.5rem; color: var(--text-color); }
+        .main-footer a.footer-link { color: var(--primary-button-bg); font-weight: 500; }
+        .main-footer a.footer-link:hover { color: var(--primary-button-hover-bg); }
+
+
+                /* Footer Email Copy Button */
+        .email-copy-container {
+            display: flex;
+            align-items: center;
+            justify-content: center; /* Aligns with other centered footer content */
+            gap: 0.4rem; /* Space between email, button, and feedback */
+            margin-top: 0.5rem; /* Space from the copyright line */
+            margin-bottom: 0.5rem; /* Consistent with other p elements in footer */
+            color: var(--text-color); /* Inherit default text color for the email link */
+        }
+
+        #emailToCopy.footer-link { /* Ensure it uses the footer-link styles */
+            color: var(--primary-button-bg);
+            font-weight: 500;
+        }
+        #emailToCopy.footer-link:hover {
+            color: var(--primary-button-hover-bg);
+            text-decoration: underline;
+        }
+
+        .copy-button {
+            background: none;
+            border: none;
+            padding: 2px 4px; /* Minimal padding */
+            cursor: pointer;
+            line-height: 1; /* Helps align SVG */
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--text-color); /* Initial icon color (will be overridden by SVG stroke) */
+            border-radius: var(--border-radius-sm); /* Subtle rounding */
+        }
+
+        .copy-button .copy-icon-svg {
+            width: 14px; /* Adjust size as needed */
+            height: 14px;
+            stroke: var(--secondary-text-color); /* SVG stroke color for the icon lines */
+            transition: stroke 0.2s ease-in-out;
+        }
+
+        .copy-button:hover .copy-icon-svg {
+            stroke: var(--primary-button-bg); /* Icon color on hover */
+        }
+        .copy-button:focus {
+            outline: 1px dotted var(--primary-button-bg);
+            outline-offset: 2px;
+        }
+        .copy-button:focus-visible { /* More modern focus styling for keyboard users */
+             outline: 2px solid var(--primary-button-bg);
+             outline-offset: 1px;
+        }
+
+
+        .copy-feedback {
+            font-size: 0.8rem;
+            color: var(--accent-color-for-lines); /* Pastel blue for feedback */
+            font-weight: 500;
+            margin-left: 0.25rem; /* Slight space from the button */
+            display: none; /* Hidden by default */
+            animation: fadeInOut 2s ease-in-out;
+        }
+
+        .copy-feedback.show {
+            display: inline;
+        }
+
+        @keyframes fadeInOut {
+            0%, 100% { opacity: 0; }
+            10%, 90% { opacity: 1; }
+        }
+
+
         /* Responsive Adjustments */
         @media (max-width: 991.98px) {
             .main-nav { display: none; }
@@ -444,8 +539,16 @@
             </div>
             <p>© <span id="currentYear"></span> Anay Gawate. All rights reserved.</p> 
             
-            <a href="mailto:pixel.anay@gmail.com"><p>pixel.anay@gmail.com</p></a>
-
+                        <div class="email-copy-container">
+                <a href="mailto:pixel.anay@gmail.com" id="emailToCopy" class="footer-link"><p>pixel.anay@gmail.com</p></a>
+                <button id="copyEmailButton" class="copy-button" aria-label="Copy email address" title="Copy email">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="copy-icon-svg">
+                        <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
+                        <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
+                    </svg>
+                </button>
+                <span id="copyFeedback" class="copy-feedback"><p>Copied!</p></span>
+            </div>
         </div>
     </footer>
 
@@ -457,6 +560,58 @@
 
             const hamburger = document.querySelector('.hamburger-menu');
             const mobileNavPanel = document.querySelector('.mobile-nav-panel');
+
+                       // --- Start of new code for email copy button ---
+            const copyButton = document.getElementById('copyEmailButton');
+            const emailLink = document.getElementById('emailToCopy'); // The <a> tag containing the email
+            const copyFeedback = document.getElementById('copyFeedback');
+
+            if (copyButton && emailLink && copyFeedback) {
+                copyButton.addEventListener('click', function() {
+                    const emailText = emailLink.textContent.trim(); // Get the text content of the <a> tag
+
+                    if (navigator.clipboard && navigator.clipboard.writeText) {
+                        navigator.clipboard.writeText(emailText).then(function() {
+                            // Success
+                            copyFeedback.classList.add('show');
+                            // The animation will handle hiding it.
+                            // If not using animation, you'd use setTimeout to remove 'show'
+                            setTimeout(function() {
+                                copyFeedback.classList.remove('show');
+                            }, 2000); // Ensure it's hidden after animation duration
+                        }).catch(function(err) {
+                            console.error('Failed to copy email: ', err);
+                            // You could provide a fallback or alert the user
+                            alert('Could not copy email. Please copy it manually.');
+                        });
+                    } else {
+                        // Fallback for older browsers or insecure contexts (e.g., file://)
+                        console.warn('Clipboard API not available. Attempting fallback.');
+                        try {
+                            const textArea = document.createElement("textarea");
+                            textArea.value = emailText;
+                            textArea.style.position = "fixed"; // Prevent scrolling to bottom
+                            textArea.style.top = "0";
+                            textArea.style.left = "0";
+                            textArea.style.opacity = "0"; // Make it invisible
+                            document.body.appendChild(textArea);
+                            textArea.focus();
+                            textArea.select();
+                            document.execCommand('copy');
+                            document.body.removeChild(textArea);
+
+                            copyFeedback.classList.add('show');
+                            setTimeout(function() {
+                                copyFeedback.classList.remove('show');
+                            }, 2000);
+                        } catch (err) {
+                            console.error('Fallback copy failed: ', err);
+                            alert('Could not copy email. Please copy it manually.');
+                        }
+                    }
+                });
+            }
+            // --- End of new code for email copy button ---
 
             if (hamburger && mobileNavPanel) {
                 hamburger.addEventListener('click', () => {
