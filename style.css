@@ -328,6 +328,30 @@ html:not([data-theme="dark"]) .theme-toggle-button .moon-icon { opacity: 0; tran
 .mobile-nav-panel.open {
   right: 0;
 }
+/* ... existing .btn styles ... */
+
+/* Styles for buttons with icons */
+.btn-icon {
+    display: inline-flex; /* To align icon and text vertically */
+    align-items: center;  /* Vertically center icon and text */
+    gap: 10px;            /* Space between icon and text (adjust as needed) */
+}
+
+.btn-svg-icon {
+    /* Width and height are set inline on the SVG, but can be adjusted here if necessary. */
+    /* The `stroke="currentColor"` on the SVG ensures it inherits the button's text color,
+       so it will automatically change color on hover along with the button text. */
+    /* Adding a slight vertical adjustment if needed, but usually align-items is enough */
+    /* position: relative; */
+    /* top: 1px; */ /* Example: uncomment and adjust if vertical alignment isn't perfect */
+}
+
+/* 
+   No specific color rules needed for the SVG icon itself for .btn-secondary
+   because `stroke="currentColor"` on the SVG element will make it inherit
+   the `color` property of the button. When the button's text color changes
+   (e.g., on hover), the SVG's stroke color will also change.
+*/
 .mobile-nav-panel ul {
   list-style: none;
   padding: 0;
@@ -408,6 +432,15 @@ section {
   line-height: 1.8;
   color: var(--text-color);
   transition: color 0.3s ease;
+}
+/* Inside Hero Section styles, e.g., after .hero p */
+.hero-actions {
+  display: flex;
+  flex-wrap: wrap; /* Allows buttons to wrap on smaller screens if needed */
+  justify-content: center; /* Centers buttons if they wrap */
+  gap: 15px; /* Creates space between the buttons */
+  /* The vertical spacing will be handled by margin-bottom on .hero p 
+     and margin-top on .social-icons below it. */
 }
 
 /* Typing Cursor for Hero Title */
