@@ -6,7 +6,27 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Anay Gawate - Technical Skills</title>
     <link rel="icon" href="assets/svgfav.svg" type="image/svg+xml">
+    <!-- INLINE SCRIPT TO PREVENT THEME FLASH -->
+    <script>
+      (function() {
+        let themeToApply = 'light'; // Default to light unless specified otherwise
+        const savedTheme = localStorage.getItem('theme');
 
+        if (savedTheme) {
+          themeToApply = savedTheme; // User has a saved preference
+        } else {
+          // No saved theme, default to 'dark' as per your requirement
+          themeToApply = 'dark';
+        }
+
+        if (themeToApply === 'dark') {
+          document.documentElement.setAttribute('data-theme', 'dark');
+        }
+        // If themeToApply is 'light', the data-theme attribute is not set,
+        // and your CSS will default to light mode.
+      })();
+    </script>
+    <!-- END INLINE SCRIPT -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">

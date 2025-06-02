@@ -125,9 +125,9 @@ img {
   text-decoration: none;
 }
 .btn:hover {
-  background-color: #000000; 
+  background-color: #000000;
   color: #fff;
-  border-color: var(--primary-button-hover-bg); 
+  border-color: var(--primary-button-hover-bg);
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
   text-decoration: none;
 }
@@ -191,12 +191,12 @@ img {
   text-decoration: none;
   display: flex;
   align-items: center;
-  margin-right: auto; 
+  margin-right: auto;
   flex-shrink: 0;
   transition: color 0.3s ease;
 }
 .logo:hover {
-  color: var(--logo-color-light); 
+  color: var(--logo-color-light);
   text-decoration: none;
 }
 .logo img,
@@ -422,7 +422,7 @@ section {
     50% { opacity: 0; }
 }
 
-.hero .social-icons { 
+.hero .social-icons {
   margin-top: 1rem;
 }
 .hero .social-icons a {
@@ -469,7 +469,7 @@ section {
   height: 280px;
   border-radius: 50%;
   object-fit: cover;
-  border: 6px solid var(--background-color); 
+  border: 6px solid var(--background-color);
   box-shadow: var(--box-shadow-lg);
   transition: border-color 0.3s ease, box-shadow 0.3s ease; /* For theme switch */
 }
@@ -521,7 +521,7 @@ section {
 }
 /* Fallback for non-JS or if is-visible isn't immediately applied */
 .project-card:hover {
-  transform: translateY(-6px); 
+  transform: translateY(-6px);
   box-shadow: var(--box-shadow-hover);
 }
 .project-image {
@@ -583,14 +583,14 @@ section {
   background-color: var(--background-color);
   transition: background-color 0.2s, color 0.2s, border-color 0.2s, transform 0.2s ease-out;
 }
-.skills-list li:hover { 
+.skills-list li:hover {
   background-color: var(--text-color);
   color: var(--background-color);
   border-color: var(--text-color);
   transform: scale(1.05);
 }
 
-section#all-skills { 
+section#all-skills {
   padding: 60px 0;
 }
 .skills-header {
@@ -628,31 +628,48 @@ section#all-skills {
   flex-wrap: wrap;
   gap: 12px;
 }
+/* Specific styles for .skill-tag, ensuring its reveal and hover are correctly handled */
 .skill-tag {
-  background-color: var(--skill-tag-bg);
-  color: var(--skill-tag-text);
-  padding: 8px 18px;
-  border-radius: var(--border-radius-md);
-  font-size: 0.9rem;
-  font-weight: 500;
-  line-height: 1.5;
-  border: 1px solid transparent;
-  opacity: 0; /* For reveal */
-  transform: translateY(20px); /* For reveal */
-  transition: background-color 0.2s, color 0.2s, border-color 0.2s, transform 0.3s ease-out, opacity 0.5s ease-out;
+    background-color: var(--skill-tag-bg);
+    color: var(--skill-tag-text);
+    padding: 8px 18px;
+    border-radius: var(--border-radius-md);
+    font-size: 0.9rem;
+    font-weight: 500;
+    line-height: 1.5;
+    border: 1px solid transparent;
+
+    /* Initial state specifically for skill-tag reveal */
+    opacity: 0;
+    transform: translateY(20px); /* Slightly less translateY for a potentially smoother feel */
+
+    /*
+      Transitions for .skill-tag:
+      - Opacity and - (for reveal) use the --reveal-stagger-delay.
+    */
+    transition: opacity 0.1s ease-out var(--reveal-stagger-delay, 0s),
+                transform 0.1s ease-out var(--reveal-stagger-delay, 0s);
 }
+
 .skill-tag.is-visible {
     opacity: 1;
-    transform: translateY(0);
+    transform: translateY(0); /* Target state for reveal */
 }
+
 .skill-tag:hover {
-  background-color: var(--skill-tag-hover-bg);
-  color: var(--skill-tag-hover-text);
-  border-color: var(--skill-tag-hover-bg);
-  transform: translateY(0) scale(1.08); /* Ensure Y-transform from reveal is maintained if needed, then scale */
-}
-.skill-tag.is-visible:hover { /* More specific for hover after reveal */
-    transform: scale(1.08) translateY(0); /* Apply scale on top of revealed state */
+    background-color: var(--skill-tag-hover-bg);
+    color: var(--skill-tag-hover-text);
+    border-color: var(--skill-tag-hover-bg);
+    transform: translateY(0) scale(1.08);
+
+    /*
+      Define explicit transitions for hover effects to ensure they are
+      fast, consistent, and NOT affected by --reveal-stagger-delay.
+    */
+    transition-property: background-color, color, border-color, transform;
+    transition-duration: 0.2s; /* Fast duration for all hover effects */
+    transition-timing-function: ease-in-out;
+    transition-delay: 0s; /* CRITICAL: No delay for hover transitions */
 }
 
 
@@ -677,7 +694,7 @@ section#all-skills {
   position: relative;
   margin-bottom: 40px;
   opacity: 0; /* For reveal */
-  transition: opacity 1s ease-out, transform 0.3s ease-out;
+  transition: opacity 1s ease-out, transform 0.3s ease-out; /* Retaining this specific longer opacity reveal for timeline items */
 }
 .timeline-item.is-visible {
     opacity: 1;
@@ -740,7 +757,7 @@ section#all-skills {
 }
 
 /* Resume Section */
-.centered-action .btn { 
+.centered-action .btn {
   font-size: 1.05rem;
   padding: 0.8rem 1.6rem;
 }
@@ -822,7 +839,7 @@ section#all-skills {
 .contact-form textarea {
   width: 100%;
   padding: 0.85rem;
-  border: 1px solid var(--text-color); 
+  border: 1px solid var(--text-color);
   border-radius: var(--border-radius-md);
   font-size: 1rem;
   font-family: var(--font-family-main);
@@ -871,14 +888,14 @@ section#all-skills {
 .social-icons a {
   margin: 0 12px;
   color: var(--text-color);
-  font-size: 1.6rem; 
+  font-size: 1.6rem;
   transition: color 0.2s, transform 0.2s ease-in-out;
   text-decoration: none;
 }
 .social-icons a:hover {
-  color: var(--primary-button-bg); 
+  color: var(--primary-button-bg);
   text-decoration: none;
-  transform: scale(1.1); 
+  transform: scale(1.1);
 }
 .social-icons svg {
   width: 26px;
@@ -893,8 +910,8 @@ section#all-skills {
   margin-top: 0.5rem;
   margin-bottom: 0.5rem;
 }
-#emailToCopy.footer-link, 
-.main-footer a.footer-link { 
+#emailToCopy.footer-link,
+.main-footer a.footer-link {
   color: var(--primary-button-bg);
   font-weight: 500;
   text-decoration: none;
@@ -931,7 +948,7 @@ section#all-skills {
   outline: 1px dotted var(--primary-button-bg);
   outline-offset: 2px;
 }
-.copy-button:focus-visible { 
+.copy-button:focus-visible {
   outline: 2px solid var(--primary-button-bg);
   outline-offset: 1px;
 }
@@ -956,20 +973,45 @@ section#all-skills {
 /* Page Enhancements & Utilities               */
 /* ============================================= */
 
-/* Scroll Reveal - Base styles are now on individual component selectors for more control */
-/* Removed generic .project-card, .timeline-item etc. from here as transitions are now specific */
-.hero > *:not(.btn):not(.social-icons), /* Hero text elements */
+/* Scroll Reveal Animations */
+
+/* Rule 1: Initial hidden state for MOST reveal elements.
+   .skill-tag will define its own initial state. */
+.hero > *,
 .about-content, .about-image-container,
-.skills-header, .skill-category,
-#resume.centered-action, #contact .contact-form {
+.skills-header, .skill-category, /* These are on skills.html but are not .skill-tag */
+#resume.centered-action, #contact .contact-form,
+.project-card, .timeline-item, .blog-post-summary {
     opacity: 0;
     transform: translateY(30px);
-    transition: opacity 0.8s ease-out, transform 0.8s ease-out;
 }
-.hero > *:not(.btn):not(.social-icons).is-visible,
+
+/* Rule 2: Transitions for general reveal elements.
+   These use --reveal-stagger-delay if set by JS, or 0ms default.
+   .skill-tag will define its own transitions. */
+.hero > *,
+.about-content, .about-image-container,
+.skills-header, .skill-category,
+#resume.centered-action, #contact .contact-form,
+.project-card, .blog-post-summary { /* .timeline-item has its own, .skill-tag has its own */
+    transition: opacity 0.6s ease-out var(--reveal-stagger-delay, 0s),
+                transform 0.6s ease-out var(--reveal-stagger-delay, 0s);
+}
+
+/* .timeline-item uses the --reveal-stagger-delay for transform, but a longer, specific opacity transition */
+.timeline-item {
+    transition: opacity 1s ease-out var(--reveal-stagger-delay, 0s),
+                transform 0.6s ease-out var(--reveal-stagger-delay, 0s);
+}
+
+
+/* Rule 3: Visible state for MOST reveal elements.
+   .skill-tag.is-visible will define its own target state. */
+.hero > *.is-visible,
 .about-content.is-visible, .about-image-container.is-visible,
 .skills-header.is-visible, .skill-category.is-visible,
-#resume.centered-action.is-visible, #contact .contact-form.is-visible {
+#resume.centered-action.is-visible, #contact .contact-form.is-visible,
+.project-card.is-visible, .timeline-item.is-visible, .blog-post-summary.is-visible {
     opacity: 1;
     transform: translateY(0);
 }
@@ -983,16 +1025,16 @@ section#all-skills {
     position: fixed;
     bottom: 25px;
     right: 25px;
-    z-index: 999; 
+    z-index: 999;
     border: none;
     outline: none;
     background-color: var(--primary-button-bg);
     cursor: pointer;
     padding: 10px;
-    border-radius: 50%; 
+    border-radius: 50%;
     box-shadow: var(--box-shadow-lg);
-    font-size: 0; 
-    line-height: 0; 
+    font-size: 0;
+    line-height: 0;
     transition: background-color 0.3s, opacity 0.3s ease-in-out, visibility 0.3s ease-in-out, transform 0.2s ease-out;
 }
 #backToTopBtn.show { /* Class to be added by JS */
@@ -1004,11 +1046,11 @@ section#all-skills {
     transform: translateY(-2px) scale(1.05); /* Slight lift and grow on hover */
 }
 #backToTopBtn svg {
-    width: 20px;  
-    height: 20px; 
-    stroke: var(--text-color); 
+    width: 20px;
+    height: 20px;
+    stroke: var(--text-color);
     /* fill: var(--text-color); /* For fill-based SVGs */
-    display: block; 
+    display: block;
     transition: stroke 0.3s ease;
 }
 
@@ -1036,7 +1078,7 @@ section#all-skills {
 }
 
 [data-theme="dark"] .btn {
-    color: var(--primary-button-text-color-dark); 
+    color: var(--primary-button-text-color-dark);
 }
 [data-theme="dark"] .btn-secondary {
     border-color: var(--text-color);
@@ -1050,7 +1092,7 @@ section#all-skills {
 }
 [data-theme="dark"] .btn-outline-primary {
     color: var(--text-color);
-    background-color: transparent; 
+    background-color: transparent;
     border-color: var(--text-color);
 }
 [data-theme="dark"] .btn-outline-primary:hover {
@@ -1117,10 +1159,10 @@ section#all-skills {
 [data-theme="dark"] .timeline-icon {
     background-color: var(--primary-button-bg);
     color: var(--primary-button-text-color-dark);
-    border-color: var(--background-color); 
+    border-color: var(--background-color);
 }
 [data-theme="dark"] .timeline-item .company-school {
-    color: #c0c0c0; 
+    color: #c0c0c0;
 }
 
 [data-theme="dark"] .contact-form input[type="email"],
@@ -1165,7 +1207,7 @@ section#all-skills {
 }
 [data-theme="dark"] #emailToCopy.footer-link:hover,
 [data-theme="dark"] .main-footer a.footer-link:hover {
-    color: #6eb1f7; 
+    color: #6eb1f7;
 }
 
 [data-theme="dark"] #backToTopBtn {
@@ -1182,14 +1224,14 @@ section#all-skills {
 /* ============================================= */
 /* Media Queries (Responsive Design)           */
 /* ============================================= */
-@media (max-width: 991.98px) { 
+@media (max-width: 991.98px) {
   .main-nav { display: none; }
-  .hamburger-menu { display: block; order: 3; margin-left: 0; } 
-  .logo { margin-right: 0; order: 1; } 
+  .hamburger-menu { display: block; order: 3; margin-left: 0; }
+  .logo { margin-right: 0; order: 1; }
   .theme-toggle-button {
-    order: 2; 
-    margin-left: auto; 
-    margin-right: 10px; 
+    order: 2;
+    margin-left: auto;
+    margin-right: 10px;
   }
 
   .hero h1 { font-size: 2.6rem; }
@@ -1216,7 +1258,7 @@ section#all-skills {
   .projects-grid { grid-template-columns: 1fr; }
 
   .timeline::before { left: 15px; }
-  .timeline-item { padding-left: 50px; transform: translateX(-20px); /* Adjust reveal for smaller screens */ }
+  .timeline-item { padding-left: 50px; transform: translateX(0); /* Adjusted default for mobile, reveal handles its initial negative offset */ }
   .timeline-icon { width: 36px; height: 36px; left: -2px; }
   .timeline-icon svg { width: 18px; height: 18px; }
 
@@ -1225,10 +1267,10 @@ section#all-skills {
   .blog-post-summary h3 { font-size: 1.4rem; }
 
   section#all-skills { padding: 40px 0; }
-  .skills-header { text-align: center; } 
+  .skills-header { text-align: center; }
   .skill-category h3 { font-size: 1.3rem; text-align: center; }
-  .skills-grid { justify-content: center; } 
+  .skills-grid { justify-content: center; }
 
-  #backToTopBtn { bottom: 15px; right: 15px; padding: 8px; } 
+  #backToTopBtn { bottom: 15px; right: 15px; padding: 8px; }
   #backToTopBtn svg { width: 20px; height: 20px; } /* Unified size with desktop */
 }

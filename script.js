@@ -125,7 +125,7 @@ document.addEventListener("DOMContentLoaded", function () {
     // Apply stagger delays before observing
     const staggerGroups = {
         '.project-card': 100,
-        '.skill-tag': 50,
+        '.skill-tag': 10, // Stagger interval for skill tags
         '.timeline-item': 100,
         '.blog-post-summary': 100
         // Add other selectors if needed
@@ -135,10 +135,8 @@ document.addEventListener("DOMContentLoaded", function () {
         const items = document.querySelectorAll(selector);
         items.forEach((item, index) => {
             const delay = index * staggerGroups[selector];
-            // The transition-delay applies to all transitioned properties by default
-            // If specific properties need different delays, CSS custom properties or more complex JS is needed.
-            // For this setup, a single delay for the reveal (opacity, transform) is fine.
-            item.style.transitionDelay = `${delay}ms`;
+            // Use a CSS custom property for the stagger delay
+            item.style.setProperty('--reveal-stagger-delay', `${delay}ms`);
         });
     }
     
@@ -160,26 +158,37 @@ document.addEventListener("DOMContentLoaded", function () {
     if (typeof IntersectionObserver !== 'undefined' && revealElements.length > 0) {
         const revealObserver = new IntersectionObserver(revealCallback, revealObserverOptions);
         revealElements.forEach(el => {
+            // Ensure all revealElements have the custom property defined, defaulting to 0ms if not in a staggerGroup
+            if (!el.style.getPropertyValue('--reveal-stagger-delay')) {
+                el.style.setProperty('--reveal-stagger-delay', '0ms');
+            }
             revealObserver.observe(el);
         });
-    } else {
-        revealElements.forEach(el => el.classList.add('is-visible'));
+    } else { // Fallback if IntersectionObserver is not supported
+        revealElements.forEach(el => {
+            el.classList.add('is-visible');
+            // Ensure the custom property is set for fallback as well
+            if (!el.style.getPropertyValue('--reveal-stagger-delay')) {
+                el.style.setProperty('--reveal-stagger-delay', '0ms');
+            }
+        });
     }
 
 
-     // --- THEME TOGGLE LOGIC ---
+// --- UPDATED THEME TOGGLE LOGIC ---
     const themeToggleButton = document.getElementById("theme-toggle");
-    const prefersDarkScheme = window.matchMedia("(prefers-color-scheme: dark)");
 
+    // This function now primarily manages applying the theme attribute
+    // AND updating the toggle button's state (ARIA labels, title).
     function applyTheme(theme) {
         if (theme === "dark") {
             document.documentElement.setAttribute("data-theme", "dark");
             if (themeToggleButton) {
-                themeToggleButton.setAttribute("aria-label", "Switch to light mode");
-                themeToggleButton.setAttribute("title", "Switch to light mode");
+                 themeToggleButton.setAttribute("aria-label", "Switch to light mode");
+                 themeToggleButton.setAttribute("title", "Switch to light mode");
             }
-        } else {
-            document.documentElement.removeAttribute("data-theme"); // Assumes no attribute means light
+        } else { // 'light'
+            document.documentElement.removeAttribute("data-theme");
             if (themeToggleButton) {
                 themeToggleButton.setAttribute("aria-label", "Switch to dark mode");
                 themeToggleButton.setAttribute("title", "Switch to dark mode");
@@ -187,27 +196,31 @@ document.addEventListener("DOMContentLoaded", function () {
         }
     }
 
-    const savedTheme = localStorage.getItem("theme");
-    if (savedTheme) {
-        applyTheme(savedTheme);
-    } else {
-        // --- MODIFICATION HERE ---
-        applyTheme("dark"); // Default to dark
-        // --- END MODIFICATION ---
-    }
+    // Initialize the theme and button state.
+    // The inline script has already attempted to set the 'data-theme' attribute.
+    // This ensures the button's ARIA labels and titles are correct based on localStorage
+    // or the default 'dark' theme if localStorage is empty.
+    const initialTheme = localStorage.getItem("theme") || 'dark'; // Default to 'dark' if no theme in localStorage
+    applyTheme(initialTheme);
+
 
     if (themeToggleButton) {
         themeToggleButton.addEventListener("click", () => {
-            const currentTheme = document.documentElement.getAttribute("data-theme");
-            if (currentTheme === "dark") {
-                localStorage.setItem("theme", "light");
-                applyTheme("light");
+            // Determine the new theme by checking the current 'data-theme' attribute
+            const currentAttributeTheme = document.documentElement.getAttribute("data-theme");
+            let newTheme;
+
+            if (currentAttributeTheme === "dark") {
+                newTheme = "light";
             } else {
-                localStorage.setItem("theme", "dark");
-                applyTheme("dark");
+                newTheme = "dark";
             }
+            
+            localStorage.setItem("theme", newTheme);
+            applyTheme(newTheme);
         });
     }
+// --- END UPDATED THEME TOGGLE LOGIC ---
     // --- MOBILE MENU & NAVIGATION ---
     function closeMobileMenu() {
         if (mobileNavPanel && mobileNavPanel.classList.contains("open")) {
