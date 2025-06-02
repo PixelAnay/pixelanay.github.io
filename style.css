@@ -28,6 +28,15 @@
   --primary-button-text-color-dark: #ffffff;
   --logo-color-light: var(--text-color);
   --logo-color-dark: #e4e6eb; /* Defaulted dark logo color here */
+
+  /* Particle Colors */
+  --particle-color-1-light: rgb(255, 68, 0);
+  --particle-color-2-light:  rgb(0, 136, 255);
+  --particle-color-3-light:  rgba(7, 255, 255, 0.731);
+
+  --particle-color-1-dark: rgb(255, 68, 0);
+  --particle-color-2-dark: rgb(255, 255, 255);
+  --particle-color-3-dark: rgba(7, 255, 255, 0.731);
 }
 
 /* ============================================= */
@@ -328,30 +337,20 @@ html:not([data-theme="dark"]) .theme-toggle-button .moon-icon { opacity: 0; tran
 .mobile-nav-panel.open {
   right: 0;
 }
-/* ... existing .btn styles ... */
 
-/* Styles for buttons with icons */
 .btn-icon {
-    display: inline-flex; /* To align icon and text vertically */
-    align-items: center;  /* Vertically center icon and text */
-    gap: 10px;            /* Space between icon and text (adjust as needed) */
+    display: inline-flex; 
+    align-items: center;  
+    gap: 10px;            
 }
 
-.btn-svg-icon {
-    /* Width and height are set inline on the SVG, but can be adjusted here if necessary. */
-    /* The `stroke="currentColor"` on the SVG ensures it inherits the button's text color,
-       so it will automatically change color on hover along with the button text. */
-    /* Adding a slight vertical adjustment if needed, but usually align-items is enough */
-    /* position: relative; */
-    /* top: 1px; */ /* Example: uncomment and adjust if vertical alignment isn't perfect */
+.btn-icon .btn-svg-icon { /* Added .btn-icon parent for specificity */
+    transition: transform 0.2s ease-in-out;
+}
+.btn-icon:hover .btn-svg-icon {
+    transform: translateY(2px);
 }
 
-/* 
-   No specific color rules needed for the SVG icon itself for .btn-secondary
-   because `stroke="currentColor"` on the SVG element will make it inherit
-   the `color` property of the button. When the button's text color changes
-   (e.g., on hover), the SVG's stroke color will also change.
-*/
 .mobile-nav-panel ul {
   list-style: none;
   padding: 0;
@@ -398,13 +397,17 @@ section {
 .section-title::after {
   content: "";
   display: block;
-  width: 80px;
+  width: 0px; /* Initial width for animation */
   height: 4px;
   background: var(--accent-color-for-lines);
   margin: 15px auto 0;
   border-radius: 2px;
-  transition: background-color 0.3s ease; /* For theme switch */
+  transition: background-color 0.3s ease, width 0.5s ease-out 0.3s; /* Added width transition with delay */
 }
+.section-title.is-visible::after {
+    width: 80px; /* Target width when visible */
+}
+
 
 /* Hero Section */
 .hero {
@@ -415,14 +418,28 @@ section {
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  overflow: hidden; /* To contain any initial animations */
+  overflow: hidden; 
+  position: relative; /* Added for canvas positioning */
 }
+#hero-particles-canvas {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 0; /* Behind hero content */
+}
+.hero .container { /* Ensure hero content is above canvas */
+    position: relative;
+    z-index: 1;
+}
+
 .hero h1 {
   font-size: 3.2rem;
   margin-bottom: 1rem;
   font-weight: 800;
   color: var(--text-color);
-  min-height: 1.3em; /* Reserve space for typing text */
+  min-height: 1.3em; 
   transition: color 0.3s ease;
 }
 .hero p {
@@ -433,17 +450,13 @@ section {
   color: var(--text-color);
   transition: color 0.3s ease;
 }
-/* Inside Hero Section styles, e.g., after .hero p */
 .hero-actions {
   display: flex;
-  flex-wrap: wrap; /* Allows buttons to wrap on smaller screens if needed */
-  justify-content: center; /* Centers buttons if they wrap */
-  gap: 15px; /* Creates space between the buttons */
-  /* The vertical spacing will be handled by margin-bottom on .hero p 
-     and margin-top on .social-icons below it. */
+  flex-wrap: wrap; 
+  justify-content: center; 
+  gap: 15px; 
 }
 
-/* Typing Cursor for Hero Title */
 .hero-title-cursor {
     animation: blink 0.7s step-end infinite;
     font-weight: bold;
@@ -459,11 +472,11 @@ section {
   margin-top: 1rem;
 }
 .hero .social-icons a {
-  display: inline-block; /* Needed for transform and animation */
+  display: inline-block; 
   transition: color 0.2s, transform 0.2s ease-in-out;
-  opacity: 0; /* Initial state for animation */
-  transform: translateY(20px); /* Initial state for animation */
-  animation: heroIconEntry 0.5s cubic-bezier(0.215, 0.610, 0.355, 1) forwards; /* cubic-bezier for a bit of bounce */
+  opacity: 0; 
+  transform: translateY(20px); 
+  animation: heroIconEntry 0.5s cubic-bezier(0.215, 0.610, 0.355, 1) forwards; 
 }
 @keyframes heroIconEntry {
     to {
@@ -471,13 +484,12 @@ section {
         transform: translateY(0);
     }
 }
-/* Stagger animation delays for hero social icons */
-#social-icon-pack a:nth-of-type(1) { animation-delay: 1.7s; } /* Adjusted based on typing speed */
+#social-icon-pack a:nth-of-type(1) { animation-delay: 1.7s; } 
 #social-icon-pack a:nth-of-type(2) { animation-delay: 1.8s; }
 #social-icon-pack a:nth-of-type(3) { animation-delay: 1.9s; }
 
 .hero .social-icons a:hover {
-  transform: scale(1.15) translateY(-2px); /* Enhanced pop effect */
+  transform: scale(1.15) translateY(-2px); 
 }
 
 
@@ -504,7 +516,7 @@ section {
   object-fit: cover;
   border: 6px solid var(--background-color);
   box-shadow: var(--box-shadow-lg);
-  transition: border-color 0.3s ease, box-shadow 0.3s ease; /* For theme switch */
+  transition: border-color 0.3s ease, box-shadow 0.3s ease; 
 }
 #about .section-title {
   text-align: left;
@@ -535,24 +547,22 @@ section {
   border: 1px solid var(--border-color);
   display: flex;
   flex-direction: column;
-  /* Combined transitions for reveal and hover */
-  opacity: 0; /* Initial state for reveal */
-  transform: translateY(30px); /* Initial state for reveal */
-  transition: opacity 0.6s ease-out, /* Reveal opacity */
-              transform 0.6s ease-out, /* Covers both reveal and hover transform */
-              box-shadow 0.3s ease-out, /* Hover box-shadow */
-              background-color 0.3s ease, /* Theme switch */
-              border-color 0.3s ease; /* Theme switch */
+  opacity: 0; 
+  transform: translateY(30px); 
+  transition: opacity 0.6s ease-out, 
+              transform 0.6s ease-out, 
+              box-shadow 0.3s ease-out, 
+              background-color 0.3s ease, 
+              border-color 0.3s ease; 
 }
 .project-card.is-visible {
     opacity: 1;
-    transform: translateY(0px); /* Target state for reveal */
+    transform: translateY(0px); 
 }
-.project-card.is-visible:hover { /* Further transform on hover */
+.project-card.is-visible:hover { 
     transform: translateY(-6px);
     box-shadow: var(--box-shadow-hover);
 }
-/* Fallback for non-JS or if is-visible isn't immediately applied */
 .project-card:hover {
   transform: translateY(-6px);
   box-shadow: var(--box-shadow-hover);
@@ -661,7 +671,6 @@ section#all-skills {
   flex-wrap: wrap;
   gap: 12px;
 }
-/* Specific styles for .skill-tag, ensuring its reveal and hover are correctly handled */
 .skill-tag {
     background-color: var(--skill-tag-bg);
     color: var(--skill-tag-text);
@@ -671,22 +680,15 @@ section#all-skills {
     font-weight: 500;
     line-height: 1.5;
     border: 1px solid transparent;
-
-    /* Initial state specifically for skill-tag reveal */
     opacity: 0;
-    transform: translateY(20px); /* Slightly less translateY for a potentially smoother feel */
-
-    /*
-      Transitions for .skill-tag:
-      - Opacity and - (for reveal) use the --reveal-stagger-delay.
-    */
+    transform: translateY(20px); 
     transition: opacity 0.1s ease-out var(--reveal-stagger-delay, 0s),
                 transform 0.1s ease-out var(--reveal-stagger-delay, 0s);
 }
 
 .skill-tag.is-visible {
     opacity: 1;
-    transform: translateY(0); /* Target state for reveal */
+    transform: translateY(0); 
 }
 
 .skill-tag:hover {
@@ -694,15 +696,10 @@ section#all-skills {
     color: var(--skill-tag-hover-text);
     border-color: var(--skill-tag-hover-bg);
     transform: translateY(0) scale(1.02);
-
-    /*
-      Define explicit transitions for hover effects to ensure they are
-      fast, consistent, and NOT affected by --reveal-stagger-delay.
-    */
     transition-property: background-color, color, border-color, transform;
-    transition-duration: 0.2s; /* Fast duration for all hover effects */
+    transition-duration: 0.2s; 
     transition-timing-function: ease-in-out;
-    transition-delay: 0s; /* CRITICAL: No delay for hover transitions */
+    transition-delay: 0s; 
 }
 
 
@@ -726,8 +723,8 @@ section#all-skills {
   padding-left: 60px;
   position: relative;
   margin-bottom: 40px;
-  opacity: 0; /* For reveal */
-  transition: opacity 1s ease-out, transform 0.3s ease-out; /* Retaining this specific longer opacity reveal for timeline items */
+  opacity: 0; 
+  transition: opacity 1s ease-out, transform 0.3s ease-out; 
 }
 .timeline-item.is-visible {
     opacity: 1;
@@ -752,7 +749,7 @@ section#all-skills {
   z-index: 1;
   transition: transform 0.3s ease-out, background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
 }
-.timeline-item:hover .timeline-icon { /* Hover the item to affect the icon */
+.timeline-item:hover .timeline-icon { 
     transform: scale(1.15);
     background-color: var(--primary-button-hover-bg);
 }
@@ -805,8 +802,8 @@ section#all-skills {
   border: 1px solid var(--border-color);
   text-align: left;
   max-width: 750px;
-  opacity: 0; /* For reveal */
-  transform: translateY(30px); /* For reveal */
+  opacity: 0; 
+  transform: translateY(30px); 
   transition: opacity 0.6s ease-out, transform 0.6s ease-out, box-shadow 0.3s ease-out, background-color 0.3s ease, border-color 0.3s ease;
 }
 .blog-post-summary.is-visible {
@@ -815,9 +812,9 @@ section#all-skills {
 }
 .blog-post-summary:hover {
   box-shadow: var(--box-shadow-hover);
-  transform: translateY(-4px); /* Slight lift on hover */
+  transform: translateY(-4px); 
 }
-.blog-post-summary.is-visible:hover { /* Ensure hover transform works with reveal */
+.blog-post-summary.is-visible:hover { 
     transform: translateY(-4px);
     box-shadow: var(--box-shadow-hover);
 }
@@ -1006,45 +1003,35 @@ section#all-skills {
 /* Page Enhancements & Utilities               */
 /* ============================================= */
 
-/* Scroll Reveal Animations */
-
-/* Rule 1: Initial hidden state for MOST reveal elements.
-   .skill-tag will define its own initial state. */
-.hero > *,
+.hero > *:not(#hero-particles-canvas), /* Ensure canvas itself is not animated by reveal */
 .about-content, .about-image-container,
-.skills-header, .skill-category, /* These are on skills.html but are not .skill-tag */
+.skills-header, .skill-category, 
 #resume.centered-action, #contact .contact-form,
-.project-card, .timeline-item, .blog-post-summary {
+.project-card, .timeline-item, .blog-post-summary, .section-title { /* Added .section-title */
     opacity: 0;
     transform: translateY(30px);
 }
 
-/* Rule 2: Transitions for general reveal elements.
-   These use --reveal-stagger-delay if set by JS, or 0ms default.
-   .skill-tag will define its own transitions. */
-.hero > *,
+.hero > *:not(#hero-particles-canvas),
 .about-content, .about-image-container,
 .skills-header, .skill-category,
 #resume.centered-action, #contact .contact-form,
-.project-card, .blog-post-summary { /* .timeline-item has its own, .skill-tag has its own */
+.project-card, .blog-post-summary, .section-title { /* Added .section-title */
     transition: opacity 0.6s ease-out var(--reveal-stagger-delay, 0s),
                 transform 0.6s ease-out var(--reveal-stagger-delay, 0s);
 }
 
-/* .timeline-item uses the --reveal-stagger-delay for transform, but a longer, specific opacity transition */
 .timeline-item {
     transition: opacity 1s ease-out var(--reveal-stagger-delay, 0s),
                 transform 0.6s ease-out var(--reveal-stagger-delay, 0s);
 }
 
 
-/* Rule 3: Visible state for MOST reveal elements.
-   .skill-tag.is-visible will define its own target state. */
-.hero > *.is-visible,
+.hero > *.is-visible:not(#hero-particles-canvas),
 .about-content.is-visible, .about-image-container.is-visible,
 .skills-header.is-visible, .skill-category.is-visible,
 #resume.centered-action.is-visible, #contact .contact-form.is-visible,
-.project-card.is-visible, .timeline-item.is-visible, .blog-post-summary.is-visible {
+.project-card.is-visible, .timeline-item.is-visible, .blog-post-summary.is-visible, .section-title.is-visible { /* Added .section-title.is-visible */
     opacity: 1;
     transform: translateY(0);
 }
@@ -1052,7 +1039,6 @@ section#all-skills {
 
 /* Back to Top Button */
 #backToTopBtn {
-    /* display: none; JS will handle visibility via opacity */
     opacity: 0;
     visibility: hidden;
     position: fixed;
@@ -1070,19 +1056,18 @@ section#all-skills {
     line-height: 0;
     transition: background-color 0.3s, opacity 0.3s ease-in-out, visibility 0.3s ease-in-out, transform 0.2s ease-out;
 }
-#backToTopBtn.show { /* Class to be added by JS */
+#backToTopBtn.show { 
     opacity: 1;
     visibility: visible;
 }
 #backToTopBtn:hover {
     background-color: var(--primary-button-hover-bg);
-    transform: translateY(-2px) scale(1.05); /* Slight lift and grow on hover */
+    transform: translateY(-2px) scale(1.05); 
 }
 #backToTopBtn svg {
     width: 20px;
     height: 20px;
     stroke: var(--text-color);
-    /* fill: var(--text-color); /* For fill-based SVGs */
     display: block;
     transition: stroke 0.3s ease;
 }
@@ -1151,12 +1136,12 @@ section#all-skills {
     border-top-color: var(--border-color);
 }
 [data-theme="dark"] .mobile-nav-panel {
-    background-color: var(--background-color); /* Already handled by var, but explicit */
-    box-shadow: -3px 0 10px rgba(0, 0, 0, 0.3); /* Darker shadow */
+    background-color: var(--background-color); 
+    box-shadow: -3px 0 10px rgba(0, 0, 0, 0.3); 
 }
 [data-theme="dark"] .mobile-nav-panel li a.active,
 [data-theme="dark"] .mobile-nav-panel li a:hover {
-  background-color: #2c2d2e; /* Slightly different from main bg */
+  background-color: #2c2d2e; 
   color: var(--accent-color-for-lines);
 }
 [data-theme="dark"] .main-nav a,
@@ -1183,7 +1168,7 @@ section#all-skills {
     border-color: var(--border-color);
 }
 [data-theme="dark"] .about-profile-pic {
-    border-color: var(--background-color); /* Match dark page background for inset */
+    border-color: var(--background-color); 
 }
 
 [data-theme="dark"] .timeline::before {
@@ -1291,7 +1276,7 @@ section#all-skills {
   .projects-grid { grid-template-columns: 1fr; }
 
   .timeline::before { left: 15px; }
-  .timeline-item { padding-left: 50px; transform: translateX(0); /* Adjusted default for mobile, reveal handles its initial negative offset */ }
+  .timeline-item { padding-left: 50px; transform: translateX(0); }
   .timeline-icon { width: 36px; height: 36px; left: -2px; }
   .timeline-icon svg { width: 18px; height: 18px; }
 
@@ -1305,5 +1290,5 @@ section#all-skills {
   .skills-grid { justify-content: center; }
 
   #backToTopBtn { bottom: 15px; right: 15px; padding: 8px; }
-  #backToTopBtn svg { width: 20px; height: 20px; } /* Unified size with desktop */
+  #backToTopBtn svg { width: 20px; height: 20px; } 
 }

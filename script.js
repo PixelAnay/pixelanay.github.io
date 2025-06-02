@@ -32,6 +32,119 @@ document.addEventListener("DOMContentLoaded", function () {
         setTimeout(typeWriter, 300);
     }
 
+    // --- HERO PARTICLE ANIMATION ---
+    const heroParticlesCanvas = document.getElementById('hero-particles-canvas');
+    let particleAnimationId; 
+
+    if (heroParticlesCanvas && (window.location.pathname.endsWith('index.html') || window.location.pathname.endsWith('/') || window.location.pathname.endsWith('/portfolio/') || window.location.pathname === '/portfolio')) {
+        const ctx = heroParticlesCanvas.getContext('2d');
+        let particlesArray;
+
+        class Particle {
+            constructor(x, y, directionX, directionY, size, color) {
+                this.x = x;
+                this.y = y;
+                this.directionX = directionX;
+                this.directionY = directionY;
+                this.size = size;
+                this.color = color;
+            }
+            draw() {
+                ctx.beginPath();
+                ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2, false);
+                ctx.fillStyle = this.color;
+                ctx.fill();
+            }
+            update() {
+                if (this.x > heroParticlesCanvas.width || this.x < 0) {
+                    this.directionX = -this.directionX;
+                }
+                if (this.y > heroParticlesCanvas.height || this.y < 0) {
+                    this.directionY = -this.directionY;
+                }
+                this.x += this.directionX;
+                this.y += this.directionY;
+                this.draw();
+            }
+        }
+
+        function getParticleThemeColors(theme) {
+            const styles = getComputedStyle(document.documentElement);
+            if (theme === 'dark') {
+                return [
+                    styles.getPropertyValue('--particle-color-1-dark').trim(),
+                    styles.getPropertyValue('--particle-color-2-dark').trim(),
+                    styles.getPropertyValue('--particle-color-3-dark').trim()
+                ];
+            } else {
+                return [
+                    styles.getPropertyValue('--particle-color-1-light').trim(),
+                    styles.getPropertyValue('--particle-color-2-light').trim(),
+                    styles.getPropertyValue('--particle-color-3-light').trim()
+                ];
+            }
+        }
+        
+        function initParticles(theme) {
+            particlesArray = [];
+            const numberOfParticles = Math.floor((heroParticlesCanvas.width * heroParticlesCanvas.height) / 15000); // Responsive particle count
+            const particleColors = getParticleThemeColors(theme);
+
+            for (let i = 0; i < numberOfParticles; i++) {
+                const size = Math.random() * 3.5 + 1; // Particle size
+                const x = Math.random() * (heroParticlesCanvas.width - size * 2) + size;
+                const y = Math.random() * (heroParticlesCanvas.height - size * 2) + size;
+                const directionX = (Math.random() * 0.6) - 0.3; // Movement speed (slower)
+                const directionY = (Math.random() * 0.6) - 0.3;
+                const color = particleColors[Math.floor(Math.random() * particleColors.length)];
+                particlesArray.push(new Particle(x, y, directionX, directionY, size, color));
+            }
+        }
+
+        function animateParticles() {
+            if (!ctx) return; // Ensure context exists
+            ctx.clearRect(0, 0, heroParticlesCanvas.width, heroParticlesCanvas.height);
+            if (particlesArray) { // Ensure particlesArray is initialized
+                for (let i = 0; i < particlesArray.length; i++) {
+                    particlesArray[i].update();
+                }
+            }
+            particleAnimationId = requestAnimationFrame(animateParticles);
+        }
+
+        function setupHeroParticles() {
+            if (!heroParticlesCanvas) return;
+            heroParticlesCanvas.width = heroParticlesCanvas.offsetWidth;
+            heroParticlesCanvas.height = heroParticlesCanvas.offsetHeight;
+            const currentTheme = document.documentElement.getAttribute('data-theme') || 'light';
+            initParticles(currentTheme);
+            if (particleAnimationId) cancelAnimationFrame(particleAnimationId); 
+            animateParticles();
+        }
+        
+        setTimeout(setupHeroParticles, 50); // Slight delay to ensure layout is stable
+
+        let resizeTimer;
+        window.addEventListener('resize', () => {
+            clearTimeout(resizeTimer);
+            resizeTimer = setTimeout(() => {
+                setupHeroParticles();
+            }, 250);
+        });
+
+        window.updateHeroParticleTheme = (newTheme) => {
+            if (particlesArray && particlesArray.length > 0) {
+                const newParticleColors = getParticleThemeColors(newTheme);
+                particlesArray.forEach(particle => {
+                    particle.color = newParticleColors[Math.floor(Math.random() * newParticleColors.length)];
+                });
+            } else {
+                setupHeroParticles(); // Re-initialize if array is not ready
+            }
+        };
+    }
+
+
     // --- CONTACT FORM ---
     const contactForm = document.getElementById('contactForm');
     if (contactForm) {
@@ -113,7 +226,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
     // --- SCROLL REVEAL WITH STAGGERING ---
     const revealElements = document.querySelectorAll(
-        '.project-card, .timeline-item, .skill-tag, .blog-post-summary, .about-content, .about-image-container, .skills-header, .skill-category, #resume.centered-action, #contact .contact-form, .hero > *:not(.btn):not(.social-icons)'
+        '.section-title, .project-card, .timeline-item, .skill-tag, .blog-post-summary, .about-content, .about-image-container, .skills-header, .skill-category, #resume.centered-action, #contact .contact-form, .hero > *:not(.btn):not(.social-icons):not(#hero-particles-canvas)'
     );
     const staggerGroups = { '.project-card': 100, '.skill-tag': 10, '.timeline-item': 100, '.blog-post-summary': 100 };
     for (const selector in staggerGroups) {
@@ -164,22 +277,27 @@ document.addEventListener("DOMContentLoaded", function () {
                 themeToggleButton.setAttribute("title", "Switch to dark mode");
             }
         }
+        // Update hero particle theme if the function exists
+        if (typeof window.updateHeroParticleTheme === 'function') {
+            window.updateHeroParticleTheme(theme);
+        }
     }
     const initialTheme = localStorage.getItem("theme") || 'dark';
-    applyTheme(initialTheme);
+    applyTheme(initialTheme); // Apply initial theme and update particles
+
     if (themeToggleButton) {
         themeToggleButton.addEventListener("click", () => {
             const currentAttributeTheme = document.documentElement.getAttribute("data-theme");
             let newTheme = (currentAttributeTheme === "dark") ? "light" : "dark";
             localStorage.setItem("theme", newTheme);
-            applyTheme(newTheme);
+            applyTheme(newTheme); // Apply new theme and update particles
         });
     }
 
     // --- MOBILE MENU & NAVIGATION ---
     const mainNavDesktopLinks = document.querySelectorAll('.main-nav a');
     const mobileNavPanelLinks = document.querySelectorAll('.mobile-nav-panel a');
-    const allNavLinks = [...mainNavDesktopLinks, ...mobileNavPanelLinks]; // Combined list of all nav links
+    const allNavLinks = [...mainNavDesktopLinks, ...mobileNavPanelLinks]; 
     let indexPageSectionsForNav = null;
 
     function closeMobileMenu() {
@@ -193,44 +311,36 @@ document.addEventListener("DOMContentLoaded", function () {
     }
 
     function handleNavLinkClick(e) {
-        const linkElement = this; // `this` refers to the clicked link
+        const linkElement = this; 
         const hrefAttribute = linkElement.getAttribute("href");
 
-        // Close mobile menu if open and the click is from within it
         if (mobileNavPanel && mobileNavPanel.contains(linkElement)) {
             closeMobileMenu();
         }
 
-        // For external links, mailto, or downloads, let the browser handle it
         if (hrefAttribute.startsWith("mailto:") || linkElement.getAttribute("target") === "_blank" || typeof linkElement.getAttribute("download") === "string") {
             return;
         }
 
-        e.preventDefault(); // Prevent default for internal navigation
+        e.preventDefault(); 
 
         const targetUrl = new URL(linkElement.href, window.location.origin);
         const currentUrl = new URL(window.location.href, window.location.origin);
 
-        // If it's a hash link on the same page
         if (targetUrl.pathname === currentUrl.pathname && targetUrl.hash) {
             const targetElement = document.querySelector(targetUrl.hash);
             if (targetElement) {
                 const elementPosition = targetElement.getBoundingClientRect().top + window.pageYOffset;
                 const offsetPosition = elementPosition - headerOffset;
                 window.scrollTo({ top: offsetPosition, behavior: "smooth" });
-                // Manually update history and active class for hash changes if not relying on scroll
-                // window.history.pushState(null, '', targetUrl.hash); // Optional: update URL bar for hash links
-                // setActiveNavLink(); // Call after scroll or immediately for hash links
             } else {
-                // Fallback if hash target doesn't exist, but still on same page (unlikely for good links)
                 window.location.href = linkElement.href;
             }
-        } else { // Navigating to a different page
+        } else { 
             window.location.href = linkElement.href;
         }
     }
 
-    // Add click listener to all specified navigable links
     document.querySelectorAll('.main-nav a, .mobile-nav-panel a, .hero a[href^="#"]').forEach(anchor => {
         anchor.addEventListener("click", handleNavLinkClick);
     });
@@ -251,68 +361,73 @@ document.addEventListener("DOMContentLoaded", function () {
     }
 
     // --- NAVIGATION HIGHLIGHTING LOGIC ---
-    const currentPathForNav = window.location.pathname.replace(/\/$/, ''); // Normalize: remove trailing slash
+    const currentPathForNav = window.location.pathname.replace(/\/$/, ''); 
     const currentHash = window.location.hash;
     const isIndexPageForNav = currentPathForNav.endsWith('index.html') || currentPathForNav === '' || currentPathForNav.endsWith('/portfolio') || currentPathForNav === '/portfolio';
 
 
     function setActiveNavLink() {
-        let activePath = window.location.pathname.replace(/\/$/, ''); // Normalize current path
+        let activePath = window.location.pathname.replace(/\/$/, ''); 
         let activeHash = window.location.hash;
         let foundActive = false;
 
-        allNavLinks.forEach(link => link.classList.remove('active')); // Clear all first
+        allNavLinks.forEach(link => link.classList.remove('active')); 
 
         allNavLinks.forEach(link => {
             const linkHref = link.getAttribute('href');
             const linkUrl = new URL(linkHref, window.location.origin);
-            let linkPath = linkUrl.pathname.replace(/\/$/, ''); // Normalize link path
+            let linkPath = linkUrl.pathname.replace(/\/$/, ''); 
             const linkHash = linkUrl.hash;
 
-            // Special handling for "index.html" links to match root path
             if (linkPath.endsWith('index.html')) {
                 linkPath = linkPath.substring(0, linkPath.lastIndexOf('index.html'));
-                if (linkPath.endsWith('/')) linkPath = linkPath.slice(0, -1); // remove trailing slash if it was like /folder/index.html
+                if (linkPath.endsWith('/')) linkPath = linkPath.slice(0, -1); 
             }
-             // Ensure root paths like "" or "/portfolio" match "index.html" links correctly
-            if ( (activePath === '' && linkPath === '') || (activePath === '/portfolio' && linkPath === '/portfolio') ) {
-                 // This is the root page.
+            
+            if (linkPath === '' && activePath.endsWith('/portfolio')) { // Handle case where link is "/" but current path is "/portfolio/"
+                activePath = '';
+            }
+            if (linkPath === '/portfolio' && activePath === '') { // Handle case where link is "/portfolio/" but current path is "/"
+                 // Don't do anything here, let the normal comparison proceed
             }
 
 
             if (linkPath === activePath) {
-                // If on index page, prioritize hash matching for sections
                 if (isIndexPageForNav && linkHash && linkHash === activeHash) {
                     link.classList.add('active');
                     foundActive = true;
-                    return; // Prioritize exact hash match on index
+                    return; 
                 }
-                // If on index page and no specific hash matches, but link is for a section (starts with #)
-                // This will be handled by scroll listener, but for initial load, we might need more.
-                // For now, if it's the index page and the link is just to index.html (no hash), it might be "Home"
-                if (isIndexPageForNav && !linkHash && !activeHash && !foundActive) { // e.g. index.html vs index.html#about
-                     if (linkHref === "index.html" || linkHref === "./" || linkHref === "/") { // "Home" link
+                if (isIndexPageForNav && !linkHash && !activeHash && !foundActive) { 
+                     if (linkHref === "index.html" || linkHref === "./" || linkHref === "/" || linkHref === "#about") { 
                         link.classList.add('active');
                         foundActive = true;
                      }
                 }
-                // For other pages (not index.html) or index.html link without hash
-                else if (!isIndexPageForNav && !linkHash && !foundActive) { // Full page match
+                else if (!isIndexPageForNav && !linkHash && !foundActive) { 
                     link.classList.add('active');
                     foundActive = true;
                 }
             }
         });
 
-        // Fallback for index page if no hash match but current URL is index.html (e.g., highlight "Home" or "About" by default)
         if (isIndexPageForNav && !activeHash && !foundActive) {
             allNavLinks.forEach(link => {
+                if (foundActive) return; // if already activated one via "#about" in previous block
                 const linkHref = link.getAttribute('href');
-                // Try to activate the 'Home' (index.html) or the first section link ('#about')
                 if (linkHref === 'index.html' || linkHref === '#' || linkHref === './' || linkHref.startsWith('#about')) {
                     link.classList.add('active');
                     foundActive = true;
-                    return; // Exit loop after activating one
+                }
+            });
+        }
+         // If still no active link and on index page, default to #about or first section
+        if (isIndexPageForNav && !foundActive && indexPageSectionsForNav && indexPageSectionsForNav.length > 0) {
+            const firstSectionId = indexPageSectionsForNav[0].id;
+            allNavLinks.forEach(link => {
+                if (link.getAttribute('href') === `#${firstSectionId}` || (firstSectionId === 'about' && (link.getAttribute('href') === 'index.html' || link.getAttribute('href') === './'))) {
+                    link.classList.add('active');
+                    foundActive = true;
                 }
             });
         }
@@ -325,27 +440,22 @@ document.addEventListener("DOMContentLoaded", function () {
         let currentSectionId = "";
         const currentScroll = window.pageYOffset;
 
-        // Determine current section based on scroll position
         indexPageSectionsForNav.forEach(section => {
-            const sectionTop = section.offsetTop - headerOffset - 50; // 50px buffer
+            const sectionTop = section.offsetTop - headerOffset - 50; 
             const sectionBottom = sectionTop + section.offsetHeight;
             if (currentScroll >= sectionTop && currentScroll < sectionBottom) {
                 currentSectionId = section.getAttribute("id");
             }
         });
 
-        // If near bottom of page, highlight last section or contact
-        if (window.innerHeight + window.pageYOffset >= document.body.offsetHeight - 100) { // Near bottom
+        if (window.innerHeight + window.pageYOffset >= document.body.offsetHeight - 100) { 
              const lastSection = indexPageSectionsForNav[indexPageSectionsForNav.length - 1];
              if (lastSection) currentSectionId = lastSection.id;
         }
 
 
-        // If no section is actively in view but scrolled (e.g., between sections),
-        // keep the last active one or default to first.
-        // For now, if currentSectionId is empty, we will rely on initial load or it means user is at top.
-        if (!currentSectionId && currentScroll < (indexPageSectionsForNav[0].offsetTop - headerOffset - 50)) {
-             currentSectionId = indexPageSectionsForNav[0].id; // Default to first section if at top
+        if (!currentSectionId && currentScroll < (indexPageSectionsForNav[0].offsetTop - headerOffset - 50) && indexPageSectionsForNav[0]) {
+             currentSectionId = indexPageSectionsForNav[0].id; 
         }
 
 
@@ -354,6 +464,9 @@ document.addEventListener("DOMContentLoaded", function () {
             const linkHref = link.getAttribute('href');
             if (linkHref && linkHref.startsWith('#') && linkHref.substring(1) === currentSectionId) {
                 link.classList.add('active');
+            } else if (linkHref === 'index.html' && currentScroll < (indexPageSectionsForNav[0].offsetTop - headerOffset - 50) && indexPageSectionsForNav[0]?.id === 'about' ){
+                 // Special case for "Home" or "About" at the very top of index.html
+                 link.classList.add('active');
             }
         });
     }
@@ -364,7 +477,7 @@ document.addEventListener("DOMContentLoaded", function () {
             window.addEventListener("scroll", highlightNavOnScroll);
         }
     }
-    setActiveNavLink(); // Call on initial load for all pages
+    setActiveNavLink(); 
 
 
     // --- FOOTER UTILITIES ---
