@@ -660,7 +660,7 @@ section#all-skills {
     background-color: var(--skill-tag-hover-bg);
     color: var(--skill-tag-hover-text);
     border-color: var(--skill-tag-hover-bg);
-    transform: translateY(0) scale(1.08);
+    transform: translateY(0) scale(1.02);
 
     /*
       Define explicit transitions for hover effects to ensure they are

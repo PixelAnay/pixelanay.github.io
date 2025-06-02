@@ -1,3 +1,4 @@
+// script.js
 document.addEventListener("DOMContentLoaded", function () {
     const header = document.querySelector(".main-header");
     const headerOffset = header ? header.offsetHeight : 70;
@@ -7,35 +8,29 @@ document.addEventListener("DOMContentLoaded", function () {
     const copyButton = document.getElementById("copyEmailButton");
     const emailLink = document.getElementById("emailToCopy");
     const copyFeedback = document.getElementById("copyFeedback");
-    let indexPageSections = null;
-    let mainNavLinksForHighlight = null;
-    let mobileNavLinksForHighlight = null;
 
     // --- HERO TITLE TYPING EFFECT ---
     const heroTitleElement = document.querySelector('.hero h1');
-    if (heroTitleElement && (window.location.pathname.endsWith('index.html') || window.location.pathname === '/')) {
+    if (heroTitleElement && (window.location.pathname.endsWith('index.html') || window.location.pathname.endsWith('/') || window.location.pathname.endsWith('/portfolio/') || window.location.pathname === '/portfolio' )) {
         const originalText = "Hello, I'm Anay";
         const typingSpeed = 80; // Milliseconds per character
         let charIndex = 0;
-        heroTitleElement.innerHTML = ' '; // Start with a non-breaking space to maintain height
-
+        heroTitleElement.innerHTML = ' ';
         function typeWriter() {
             if (charIndex < originalText.length) {
-                if (charIndex === 0) heroTitleElement.innerHTML = ''; // Clear placeholder
+                if (charIndex === 0) heroTitleElement.innerHTML = '';
                 heroTitleElement.textContent += originalText.charAt(charIndex);
                 charIndex++;
                 setTimeout(typeWriter, typingSpeed);
             } else {
-                // Add blinking cursor
                 const cursorSpan = document.createElement('span');
                 cursorSpan.className = 'hero-title-cursor';
                 cursorSpan.textContent = '_';
                 heroTitleElement.appendChild(cursorSpan);
             }
         }
-        setTimeout(typeWriter, 300); // Small delay before starting
+        setTimeout(typeWriter, 300);
     }
-
 
     // --- CONTACT FORM ---
     const contactForm = document.getElementById('contactForm');
@@ -47,18 +42,15 @@ document.addEventListener("DOMContentLoaded", function () {
             const originalButtonText = submitButton.textContent;
             submitButton.textContent = 'Sending...';
             submitButton.disabled = true;
-
             const formData = new FormData(form);
             fetch(form.action, {
                 method: form.method,
                 body: formData,
-                headers: {
-                    'Accept': 'application/json'
-                }
+                headers: { 'Accept': 'application/json' }
             }).then(response => {
                 if (response.ok) {
                     submitButton.textContent = 'Message Sent! Will get back to you soon.';
-                    form.reset(); 
+                    form.reset();
                     setTimeout(() => {
                         submitButton.textContent = originalButtonText;
                         submitButton.disabled = false;
@@ -82,70 +74,55 @@ document.addEventListener("DOMContentLoaded", function () {
         });
     }
 
-    // --- BACK TO TOP BUTTON LOGIC (with FADE) ---
+    // --- BACK TO TOP BUTTON LOGIC ---
     const backToTopButton = document.getElementById("backToTopBtn");
-    let triggerElement;
     const blogSection = document.getElementById("blog");
-    const allProjectsSection = document.getElementById("all-projects");
-    const allBlogPostsSection = document.getElementById("all-blog-posts");
-    const allSkillsSection = document.getElementById("all-skills");
     const mainFooter = document.querySelector("footer.main-footer");
+    let showOffsetThreshold;
+    const currentPathnameForBTT = window.location.pathname;
+    const isIndexPageForBTT = currentPathnameForBTT.endsWith('index.html') || currentPathnameForBTT.endsWith('/') || currentPathnameForBTT.endsWith('/portfolio/') || currentPathnameForBTT === '/portfolio';
 
-    if (window.location.pathname.endsWith('index.html') || window.location.pathname === '/') {
-        triggerElement = blogSection || mainFooter;
-    } else if (allProjectsSection || allBlogPostsSection || allSkillsSection) {
-        triggerElement = mainFooter; 
+    if (isIndexPageForBTT) {
+        if (blogSection) {
+            showOffsetThreshold = blogSection.offsetTop - headerOffset - 20;
+        } else if (mainFooter) {
+            showOffsetThreshold = mainFooter.offsetTop - window.innerHeight + 100;
+        } else {
+            showOffsetThreshold = window.innerHeight * 0.8;
+        }
     } else {
-        triggerElement = mainFooter;
+        if (mainFooter) {
+            showOffsetThreshold = mainFooter.offsetTop - window.innerHeight + 100;
+        } else {
+            showOffsetThreshold = window.innerHeight * 0.7;
+        }
     }
+    if (showOffsetThreshold < 0) showOffsetThreshold = window.innerHeight * 0.5;
 
-    if (backToTopButton) { // Simplified trigger logic: always have a button, show based on scroll depth.
+    if (backToTopButton) {
         window.addEventListener("scroll", function () {
             const documentScrollTop = document.documentElement.scrollTop || document.body.scrollTop;
-            const showOffset = window.innerHeight * 0.7; // Show after scrolling 70% of viewport height
-
-            if (documentScrollTop > showOffset) {
+            if (documentScrollTop > showOffsetThreshold) {
                 backToTopButton.classList.add('show');
             } else {
                 backToTopButton.classList.remove('show');
             }
         });
-
-        backToTopButton.addEventListener("click", () => {
-            window.scrollTo({ top: 0, behavior: 'smooth' });
-        });
+        backToTopButton.addEventListener("click", () => window.scrollTo({ top: 0, behavior: 'smooth' }));
     }
-
 
     // --- SCROLL REVEAL WITH STAGGERING ---
     const revealElements = document.querySelectorAll(
         '.project-card, .timeline-item, .skill-tag, .blog-post-summary, .about-content, .about-image-container, .skills-header, .skill-category, #resume.centered-action, #contact .contact-form, .hero > *:not(.btn):not(.social-icons)'
     );
-
-    // Apply stagger delays before observing
-    const staggerGroups = {
-        '.project-card': 100,
-        '.skill-tag': 10, // Stagger interval for skill tags
-        '.timeline-item': 100,
-        '.blog-post-summary': 100
-        // Add other selectors if needed
-    };
-
+    const staggerGroups = { '.project-card': 100, '.skill-tag': 10, '.timeline-item': 100, '.blog-post-summary': 100 };
     for (const selector in staggerGroups) {
         const items = document.querySelectorAll(selector);
         items.forEach((item, index) => {
-            const delay = index * staggerGroups[selector];
-            // Use a CSS custom property for the stagger delay
-            item.style.setProperty('--reveal-stagger-delay', `${delay}ms`);
+            item.style.setProperty('--reveal-stagger-delay', `${index * staggerGroups[selector]}ms`);
         });
     }
-    
-    const revealObserverOptions = {
-        root: null,
-        rootMargin: '0px',
-        threshold: 0.1 
-    };
-
+    const revealObserverOptions = { root: null, rootMargin: '0px', threshold: 0.1 };
     const revealCallback = (entries, observer) => {
         entries.forEach(entry => {
             if (entry.isIntersecting) {
@@ -154,32 +131,25 @@ document.addEventListener("DOMContentLoaded", function () {
             }
         });
     };
-
     if (typeof IntersectionObserver !== 'undefined' && revealElements.length > 0) {
         const revealObserver = new IntersectionObserver(revealCallback, revealObserverOptions);
         revealElements.forEach(el => {
-            // Ensure all revealElements have the custom property defined, defaulting to 0ms if not in a staggerGroup
             if (!el.style.getPropertyValue('--reveal-stagger-delay')) {
                 el.style.setProperty('--reveal-stagger-delay', '0ms');
             }
             revealObserver.observe(el);
         });
-    } else { // Fallback if IntersectionObserver is not supported
+    } else {
         revealElements.forEach(el => {
             el.classList.add('is-visible');
-            // Ensure the custom property is set for fallback as well
             if (!el.style.getPropertyValue('--reveal-stagger-delay')) {
                 el.style.setProperty('--reveal-stagger-delay', '0ms');
             }
         });
     }
 
-
-// --- UPDATED THEME TOGGLE LOGIC ---
+    // --- THEME TOGGLE LOGIC ---
     const themeToggleButton = document.getElementById("theme-toggle");
-
-    // This function now primarily manages applying the theme attribute
-    // AND updating the toggle button's state (ARIA labels, title).
     function applyTheme(theme) {
         if (theme === "dark") {
             document.documentElement.setAttribute("data-theme", "dark");
@@ -187,7 +157,7 @@ document.addEventListener("DOMContentLoaded", function () {
                  themeToggleButton.setAttribute("aria-label", "Switch to light mode");
                  themeToggleButton.setAttribute("title", "Switch to light mode");
             }
-        } else { // 'light'
+        } else {
             document.documentElement.removeAttribute("data-theme");
             if (themeToggleButton) {
                 themeToggleButton.setAttribute("aria-label", "Switch to dark mode");
@@ -195,192 +165,240 @@ document.addEventListener("DOMContentLoaded", function () {
             }
         }
     }
-
-    // Initialize the theme and button state.
-    // The inline script has already attempted to set the 'data-theme' attribute.
-    // This ensures the button's ARIA labels and titles are correct based on localStorage
-    // or the default 'dark' theme if localStorage is empty.
-    const initialTheme = localStorage.getItem("theme") || 'dark'; // Default to 'dark' if no theme in localStorage
+    const initialTheme = localStorage.getItem("theme") || 'dark';
     applyTheme(initialTheme);
-
-
     if (themeToggleButton) {
         themeToggleButton.addEventListener("click", () => {
-            // Determine the new theme by checking the current 'data-theme' attribute
             const currentAttributeTheme = document.documentElement.getAttribute("data-theme");
-            let newTheme;
-
-            if (currentAttributeTheme === "dark") {
-                newTheme = "light";
-            } else {
-                newTheme = "dark";
-            }
-            
+            let newTheme = (currentAttributeTheme === "dark") ? "light" : "dark";
             localStorage.setItem("theme", newTheme);
             applyTheme(newTheme);
         });
     }
-// --- END UPDATED THEME TOGGLE LOGIC ---
+
     // --- MOBILE MENU & NAVIGATION ---
+    const mainNavDesktopLinks = document.querySelectorAll('.main-nav a');
+    const mobileNavPanelLinks = document.querySelectorAll('.mobile-nav-panel a');
+    const allNavLinks = [...mainNavDesktopLinks, ...mobileNavPanelLinks]; // Combined list of all nav links
+    let indexPageSectionsForNav = null;
+
     function closeMobileMenu() {
         if (mobileNavPanel && mobileNavPanel.classList.contains("open")) {
             mobileNavPanel.classList.remove("open");
             if (hamburger) {
                 hamburger.classList.remove("is-active");
-                hamburger.setAttribute("aria-expanded", "false")
+                hamburger.setAttribute("aria-expanded", "false");
             }
         }
     }
 
     function handleNavLinkClick(e) {
-        const linkElement = this;
+        const linkElement = this; // `this` refers to the clicked link
         const hrefAttribute = linkElement.getAttribute("href");
+
+        // Close mobile menu if open and the click is from within it
+        if (mobileNavPanel && mobileNavPanel.contains(linkElement)) {
+            closeMobileMenu();
+        }
+
+        // For external links, mailto, or downloads, let the browser handle it
+        if (hrefAttribute.startsWith("mailto:") || linkElement.getAttribute("target") === "_blank" || typeof linkElement.getAttribute("download") === "string") {
+            return;
+        }
+
+        e.preventDefault(); // Prevent default for internal navigation
+
         const targetUrl = new URL(linkElement.href, window.location.origin);
         const currentUrl = new URL(window.location.href, window.location.origin);
-        const isMailTo = hrefAttribute.startsWith("mailto:");
-        const isTargetBlank = linkElement.getAttribute("target") === "_blank";
-        const isDownload = typeof linkElement.getAttribute("download") === "string";
-        if (isMailTo || isTargetBlank || isDownload) {
-            if (mobileNavPanel && mobileNavPanel.contains(linkElement)) {
-                closeMobileMenu()
-            }
-            return
-        }
-        e.preventDefault();
-        closeMobileMenu();
+
+        // If it's a hash link on the same page
         if (targetUrl.pathname === currentUrl.pathname && targetUrl.hash) {
             const targetElement = document.querySelector(targetUrl.hash);
             if (targetElement) {
                 const elementPosition = targetElement.getBoundingClientRect().top + window.pageYOffset;
                 const offsetPosition = elementPosition - headerOffset;
-                window.scrollTo(
-                    {
-                        top: offsetPosition,
-                        behavior: "smooth"
-                    })
+                window.scrollTo({ top: offsetPosition, behavior: "smooth" });
+                // Manually update history and active class for hash changes if not relying on scroll
+                // window.history.pushState(null, '', targetUrl.hash); // Optional: update URL bar for hash links
+                // setActiveNavLink(); // Call after scroll or immediately for hash links
+            } else {
+                // Fallback if hash target doesn't exist, but still on same page (unlikely for good links)
+                window.location.href = linkElement.href;
             }
-            else {
-                window.location.href = linkElement.href
-            }
-        }
-        else {
-            window.location.href = linkElement.href
+        } else { // Navigating to a different page
+            window.location.href = linkElement.href;
         }
     }
 
-    function highlightNav() {
-        if (!indexPageSections || indexPageSections.length === 0) return;
-        let currentSectionId = "";
-        const currentScroll = window.pageYOffset;
-        indexPageSections.forEach(section => {
-            const sectionTop = section.offsetTop - headerOffset - 50;
-            if (currentScroll >= sectionTop) {
-                currentSectionId = section.getAttribute("id")
-            }
-        });
-        if (!currentSectionId && currentScroll < indexPageSections[0].offsetTop - headerOffset - 50) {
-            currentSectionId = "about" // Default to 'about' if at the very top of index.html
-        }
-        const allNavLinksForHighlight = [...mainNavLinksForHighlight || [], ...mobileNavLinksForHighlight || []];
-        allNavLinksForHighlight.forEach(link => {
-            if (link) {
-                link.classList.remove("active");
-                const linkHref = link.getAttribute("href");
-                // Match hash for index page, or full path for other pages
-                if ((linkHref && linkHref.substring(1) === currentSectionId && (window.location.pathname.endsWith('index.html') || window.location.pathname === '/')) ||
-                    (link.href === window.location.href)) {
-                    link.classList.add("active")
-                }
-            }
-        })
-    }
+    // Add click listener to all specified navigable links
+    document.querySelectorAll('.main-nav a, .mobile-nav-panel a, .hero a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener("click", handleNavLinkClick);
+    });
+
     if (hamburger && mobileNavPanel) {
         hamburger.addEventListener("click", () => {
             const isOpen = mobileNavPanel.classList.toggle("open");
             hamburger.classList.toggle("is-active", isOpen);
-            hamburger.setAttribute("aria-expanded", isOpen)
+            hamburger.setAttribute("aria-expanded", isOpen);
         });
         document.addEventListener("click", function (event) {
-            const isClickInsideNav = mobileNavPanel.contains(event.target);
-            const isClickOnHamburger = hamburger.contains(event.target);
-            if (mobileNavPanel.classList.contains("open") && !isClickInsideNav && !isClickOnHamburger) {
-                closeMobileMenu()
+            if (mobileNavPanel.classList.contains("open") &&
+                !mobileNavPanel.contains(event.target) &&
+                !hamburger.contains(event.target)) {
+                closeMobileMenu();
             }
-        })
+        });
     }
-    const allNavigableLinks = document.querySelectorAll('.main-nav a, .mobile-nav-panel a, .hero a[href^="#"]');
-    if (allNavigableLinks) {
-        allNavigableLinks.forEach(anchor => {
-            anchor.addEventListener("click", handleNavLinkClick)
-        })
+
+    // --- NAVIGATION HIGHLIGHTING LOGIC ---
+    const currentPathForNav = window.location.pathname.replace(/\/$/, ''); // Normalize: remove trailing slash
+    const currentHash = window.location.hash;
+    const isIndexPageForNav = currentPathForNav.endsWith('index.html') || currentPathForNav === '' || currentPathForNav.endsWith('/portfolio') || currentPathForNav === '/portfolio';
+
+
+    function setActiveNavLink() {
+        let activePath = window.location.pathname.replace(/\/$/, ''); // Normalize current path
+        let activeHash = window.location.hash;
+        let foundActive = false;
+
+        allNavLinks.forEach(link => link.classList.remove('active')); // Clear all first
+
+        allNavLinks.forEach(link => {
+            const linkHref = link.getAttribute('href');
+            const linkUrl = new URL(linkHref, window.location.origin);
+            let linkPath = linkUrl.pathname.replace(/\/$/, ''); // Normalize link path
+            const linkHash = linkUrl.hash;
+
+            // Special handling for "index.html" links to match root path
+            if (linkPath.endsWith('index.html')) {
+                linkPath = linkPath.substring(0, linkPath.lastIndexOf('index.html'));
+                if (linkPath.endsWith('/')) linkPath = linkPath.slice(0, -1); // remove trailing slash if it was like /folder/index.html
+            }
+             // Ensure root paths like "" or "/portfolio" match "index.html" links correctly
+            if ( (activePath === '' && linkPath === '') || (activePath === '/portfolio' && linkPath === '/portfolio') ) {
+                 // This is the root page.
+            }
+
+
+            if (linkPath === activePath) {
+                // If on index page, prioritize hash matching for sections
+                if (isIndexPageForNav && linkHash && linkHash === activeHash) {
+                    link.classList.add('active');
+                    foundActive = true;
+                    return; // Prioritize exact hash match on index
+                }
+                // If on index page and no specific hash matches, but link is for a section (starts with #)
+                // This will be handled by scroll listener, but for initial load, we might need more.
+                // For now, if it's the index page and the link is just to index.html (no hash), it might be "Home"
+                if (isIndexPageForNav && !linkHash && !activeHash && !foundActive) { // e.g. index.html vs index.html#about
+                     if (linkHref === "index.html" || linkHref === "./" || linkHref === "/") { // "Home" link
+                        link.classList.add('active');
+                        foundActive = true;
+                     }
+                }
+                // For other pages (not index.html) or index.html link without hash
+                else if (!isIndexPageForNav && !linkHash && !foundActive) { // Full page match
+                    link.classList.add('active');
+                    foundActive = true;
+                }
+            }
+        });
+
+        // Fallback for index page if no hash match but current URL is index.html (e.g., highlight "Home" or "About" by default)
+        if (isIndexPageForNav && !activeHash && !foundActive) {
+            allNavLinks.forEach(link => {
+                const linkHref = link.getAttribute('href');
+                // Try to activate the 'Home' (index.html) or the first section link ('#about')
+                if (linkHref === 'index.html' || linkHref === '#' || linkHref === './' || linkHref.startsWith('#about')) {
+                    link.classList.add('active');
+                    foundActive = true;
+                    return; // Exit loop after activating one
+                }
+            });
+        }
     }
+
+
+    function highlightNavOnScroll() {
+        if (!isIndexPageForNav || !indexPageSectionsForNav || indexPageSectionsForNav.length === 0) return;
+
+        let currentSectionId = "";
+        const currentScroll = window.pageYOffset;
+
+        // Determine current section based on scroll position
+        indexPageSectionsForNav.forEach(section => {
+            const sectionTop = section.offsetTop - headerOffset - 50; // 50px buffer
+            const sectionBottom = sectionTop + section.offsetHeight;
+            if (currentScroll >= sectionTop && currentScroll < sectionBottom) {
+                currentSectionId = section.getAttribute("id");
+            }
+        });
+
+        // If near bottom of page, highlight last section or contact
+        if (window.innerHeight + window.pageYOffset >= document.body.offsetHeight - 100) { // Near bottom
+             const lastSection = indexPageSectionsForNav[indexPageSectionsForNav.length - 1];
+             if (lastSection) currentSectionId = lastSection.id;
+        }
+
+
+        // If no section is actively in view but scrolled (e.g., between sections),
+        // keep the last active one or default to first.
+        // For now, if currentSectionId is empty, we will rely on initial load or it means user is at top.
+        if (!currentSectionId && currentScroll < (indexPageSectionsForNav[0].offsetTop - headerOffset - 50)) {
+             currentSectionId = indexPageSectionsForNav[0].id; // Default to first section if at top
+        }
+
+
+        allNavLinks.forEach(link => {
+            link.classList.remove('active');
+            const linkHref = link.getAttribute('href');
+            if (linkHref && linkHref.startsWith('#') && linkHref.substring(1) === currentSectionId) {
+                link.classList.add('active');
+            }
+        });
+    }
+
+    if (isIndexPageForNav) {
+        indexPageSectionsForNav = document.querySelectorAll("main > section[id]");
+        if (indexPageSectionsForNav && indexPageSectionsForNav.length > 0) {
+            window.addEventListener("scroll", highlightNavOnScroll);
+        }
+    }
+    setActiveNavLink(); // Call on initial load for all pages
+
 
     // --- FOOTER UTILITIES ---
     if (copyButton && emailLink && copyFeedback) {
         copyButton.addEventListener("click", function () {
             const emailText = emailLink.textContent.trim();
             if (navigator.clipboard && navigator.clipboard.writeText) {
-                navigator.clipboard.writeText(emailText).then(function () {
+                navigator.clipboard.writeText(emailText).then(() => {
                     copyFeedback.classList.add("show");
-                    setTimeout(function () {
-                        copyFeedback.classList.remove("show")
-                    }, 2e3)
-                })["catch"](function (err) {
+                    setTimeout(() => copyFeedback.classList.remove("show"), 2000);
+                }).catch(err => {
                     console.error("Failed to copy email: ", err);
-                    alert("Could not copy email. Please copy it manually.")
-                })
-            }
-            else {
+                    alert("Could not copy email. Please copy it manually.");
+                });
+            } else {
                 try {
                     const textArea = document.createElement("textarea");
                     textArea.value = emailText;
-                    Object.assign(textArea.style,
-                        {
-                            position: "fixed",
-                            top: "0",
-                            left: "0",
-                            opacity: "0"
-                        });
+                    Object.assign(textArea.style, { position: "fixed", top: "0", left: "0", opacity: "0" });
                     document.body.appendChild(textArea);
                     textArea.focus();
                     textArea.select();
                     document.execCommand("copy");
                     document.body.removeChild(textArea);
                     copyFeedback.classList.add("show");
-                    setTimeout(function () {
-                        copyFeedback.classList.remove("show")
-                    }, 2e3)
-                }
-                catch (err) {
+                    setTimeout(() => copyFeedback.classList.remove("show"), 2000);
+                } catch (err) {
                     console.error("Fallback copy failed: ", err);
-                    alert("Could not copy email. Please copy it manually.")
+                    alert("Could not copy email. Please copy it manually.");
                 }
-            }
-        })
-    }
-    if (yearSpan) {
-        yearSpan.textContent = (new Date).getFullYear()
-    }
-
-    // --- PAGE SPECIFIC SETUP (for nav highlighting) ---
-    if (document.querySelector("main > section#about")) { // More robust check for index.html content
-        indexPageSections = document.querySelectorAll("main > section[id]");
-        mainNavLinksForHighlight = document.querySelectorAll('.main-nav a[href^="#"]');
-        mobileNavLinksForHighlight = document.querySelectorAll('.mobile-nav-panel a[href^="#"]');
-        if (indexPageSections && indexPageSections.length > 0) {
-            window.addEventListener("scroll", highlightNav);
-            highlightNav(); // Initial call
-        }
-    } else {
-        // For non-index pages, highlight the corresponding nav link based on page URL
-        const currentPath = window.location.pathname.split('/').pop();
-        document.querySelectorAll('.main-nav a, .mobile-nav-panel a').forEach(link => {
-            const linkPath = link.getAttribute('href').split('/').pop();
-            if (linkPath === currentPath) {
-                link.classList.add('active');
-            } else {
-                link.classList.remove('active');
             }
         });
+    }
+    if (yearSpan) {
+        yearSpan.textContent = new Date().getFullYear();
     }
 });
