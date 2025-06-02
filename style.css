@@ -103,8 +103,6 @@ img {
   padding-left: 15px;  /* Consistent padding */
 }
 
-/* Removed #container-nav as .container seems to be used everywhere */
-
 /* ============================================= */
 /* Generic Components                          */
 /* ============================================= */
@@ -123,9 +121,8 @@ img {
   padding: 0.75rem 1.5rem;
   line-height: 1.5;
   border-radius: var(--border-radius-md);
-  transition: 0.15s ease-in-out;
-  text-decoration: none; /* Ensure buttons that are links don't get underlined by default */
-
+  transition: background-color 0.15s ease-in-out, color 0.15s ease-in-out, border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out, transform 0.1s ease-out;
+  text-decoration: none;
 }
 .btn:hover {
   background-color: #000000; 
@@ -136,7 +133,10 @@ img {
 }
 .btn:focus {
   outline: 0;
-  box-shadow: 0 0 0 0.2rem rgba(173, 216, 230, 0.5); /* Consider making this color a variable */
+  box-shadow: 0 0 0 0.2rem rgba(173, 216, 230, 0.5);
+}
+.btn:active {
+  transform: scale(0.98); /* Added press-down effect */
 }
 
 .btn-secondary {
@@ -158,7 +158,7 @@ img {
 .btn-outline-primary:hover {
   color: var(--background-color);
   background-color: var(--text-color);
-  border-color: var(--text-color); /* Previously primary-button-bg, now consistent */
+  border-color: var(--text-color);
 }
 
 .btn-lg {
@@ -176,6 +176,7 @@ img {
   top: 0;
   z-index: 1020;
   border-bottom: 1px solid var(--border-color);
+  transition: background-color 0.3s ease, border-bottom-color 0.3s ease; /* For theme switch */
 }
 .main-header .container {
   display: flex;
@@ -190,22 +191,24 @@ img {
   text-decoration: none;
   display: flex;
   align-items: center;
-  margin-right: auto; /* Pushes logo left, other items right */
+  margin-right: auto; 
   flex-shrink: 0;
+  transition: color 0.3s ease;
 }
 .logo:hover {
-  color: var(--logo-color-light); /* Prevent hover color change if not desired */
+  color: var(--logo-color-light); 
   text-decoration: none;
 }
 .logo img,
 .logo svg {
-  margin-right: 10px; /* Original 15px looked a bit much with 30px icon */
-  fill: var(--logo-color-light); /* For SVG fill */
+  margin-right: 10px;
+  fill: var(--logo-color-light);
+  transition: fill 0.3s ease;
 }
 
 .main-nav {
-  display: block; /* Shown on desktop */
-  margin-right: 15px; /* Space between nav and theme toggle */
+  display: block;
+  margin-right: 15px;
 }
 .main-nav ul {
   list-style: none;
@@ -223,6 +226,7 @@ img {
   padding: 0.3rem 0;
   position: relative;
   text-decoration: none;
+  transition: color 0.3s ease;
 }
 .main-nav a.active,
 .main-nav a:hover {
@@ -238,44 +242,59 @@ img {
   margin-top: 3px;
   right: 0;
   background: var(--accent-color-for-lines);
-  transition: width 0.2s ease-out; /* Smoother transition */
+  transition: width 0.2s ease-out, background-color 0.3s ease; /* Smoother transition & theme */
 }
 .main-nav a.active::after,
 .main-nav a:hover::after {
   width: 100%;
   left: 0;
-  right: auto; /* Ensure it expands from left */
+  right: auto;
 }
 
 .theme-toggle-button {
   background: none;
   border: none;
   cursor: pointer;
-  padding: 5px;
-  margin-left: 10px; /* Space from main-nav on desktop */
+  padding: 0; /* Adjusted for direct icon sizing */
+  margin-left: 10px;
   display: inline-flex;
   align-items: center;
   justify-content: center;
   color: var(--text-color);
   transition: color 0.3s ease;
-  order: 1; /* Desktop order */
+  order: 1;
+  position: relative; /* For absolute positioning of SVGs */
+  width: 32px;       /* Ensure button has size for icons */
+  height: 32px;      /* Ensure button has size for icons */
 }
 .theme-toggle-button svg {
   width: 22px;
   height: 22px;
-  transition: opacity 0.3s ease, transform 0.3s ease;
+  transition: opacity 0.4s ease, transform 0.4s ease;
+  position: absolute; /* Add this */
+  top: 50%;           /* Add this */
+  left: 50%;          /* Add this */
+  transform: translate(-50%, -50%) scale(1); /* Add this, start with scale 1 */
 }
-.theme-toggle-button .moon-icon { display: none; }
+
+/* Light mode (default) icons visibility */
+html:not([data-theme="dark"]) .theme-toggle-button .sun-icon { opacity: 1; transform: translate(-50%, -50%) scale(1) rotate(0deg); }
+html:not([data-theme="dark"]) .theme-toggle-button .moon-icon { opacity: 0; transform: translate(-50%, -50%) scale(0.5) rotate(-90deg); }
+
+/* Dark mode icons visibility */
+[data-theme="dark"] .theme-toggle-button .sun-icon { opacity: 0; transform: translate(-50%, -50%) scale(0.5) rotate(90deg); }
+[data-theme="dark"] .theme-toggle-button .moon-icon { opacity: 1; transform: translate(-50%, -50%) scale(1) rotate(0deg); }
+
 
 .hamburger-menu {
-  display: none; /* Hidden on desktop */
+  display: none;
   cursor: pointer;
   background: transparent;
   border: none;
   padding: 0;
-  z-index: 1051; /* Ensure it's above mobile nav panel when closing */
-  margin-left: 10px; /* Space from theme toggle on desktop */
-  order: 2; /* Desktop order */
+  z-index: 1051;
+  margin-left: 10px;
+  order: 2;
 }
 .hamburger-menu .bar {
   display: block;
@@ -283,7 +302,7 @@ img {
   height: 3px;
   margin: 6px auto;
   background-color: var(--text-color);
-  transition: 0.3s ease-in-out;
+  transition: 0.3s ease-in-out, background-color 0.3s ease; /* Added theme transition */
   border-radius: 1px;
 }
 .hamburger-menu.is-active .bar:first-child { transform: translateY(9px) rotate(45deg); }
@@ -293,18 +312,18 @@ img {
 .mobile-nav-panel {
   position: fixed;
   top: 0;
-  right: -100%; /* Start off-screen */
+  right: -100%;
   width: 80%;
   max-width: 320px;
   height: 100vh;
   background-color: var(--background-color);
   box-shadow: -3px 0 10px rgba(0, 0, 0, 0.1);
   z-index: 1050;
-  transition: right 0.35s cubic-bezier(0.23, 1, 0.32, 1);
-  padding: 80px 0 20px; /* Space for header */
+  transition: right 0.35s cubic-bezier(0.23, 1, 0.32, 1), background-color 0.3s ease, box-shadow 0.3s ease; /* Added theme transition */
+  padding: 80px 0 20px;
   overflow-y: auto;
-  display: flex; /* Not strictly needed but okay */
-  flex-direction: column; /* Not strictly needed but okay */
+  display: flex;
+  flex-direction: column;
 }
 .mobile-nav-panel.open {
   right: 0;
@@ -322,14 +341,15 @@ img {
   color: var(--text-color);
   text-decoration: none;
   border-bottom: 1px solid var(--border-color);
-  transition: background-color 0.2s, color 0.2s;
+  transition: background-color 0.2s, color 0.2s, border-bottom-color 0.3s ease; /* Added theme transition */
 }
 .mobile-nav-panel li:first-child a {
   border-top: 1px solid var(--border-color);
+  transition: background-color 0.2s, color 0.2s, border-top-color 0.3s ease, border-bottom-color 0.3s ease; /* Added theme transition */
 }
 .mobile-nav-panel li a.active,
 .mobile-nav-panel li a:hover {
-  background-color: #f0f8ff; /* Consider a variable */
+  background-color: #f0f8ff;
   color: var(--accent-color-for-lines);
 }
 
@@ -338,7 +358,8 @@ img {
 /* ============================================= */
 section {
   padding: 80px 0;
-  background-color: var(--background-color); /* Default section background */
+  background-color: var(--background-color);
+  transition: background-color 0.3s ease; /* For theme switch */
 }
 
 .section-title {
@@ -348,6 +369,7 @@ section {
   font-weight: 700;
   position: relative;
   color: var(--text-color);
+  transition: color 0.3s ease; /* For theme switch */
 }
 .section-title::after {
   content: "";
@@ -357,6 +379,7 @@ section {
   background: var(--accent-color-for-lines);
   margin: 15px auto 0;
   border-radius: 2px;
+  transition: background-color 0.3s ease; /* For theme switch */
 }
 
 /* Hero Section */
@@ -364,16 +387,19 @@ section {
   padding: 100px 0;
   text-align: center;
   background-color: var(--background-color);
-  display: flex; /* Added for vertical centering if content allows */
-  flex-direction: column; /* Added */
-  justify-content: center; /* Added */
-  align-items: center; /* Added */
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden; /* To contain any initial animations */
 }
 .hero h1 {
   font-size: 3.2rem;
   margin-bottom: 1rem;
   font-weight: 800;
   color: var(--text-color);
+  min-height: 1.3em; /* Reserve space for typing text */
+  transition: color 0.3s ease;
 }
 .hero p {
   font-size: 1.2rem;
@@ -381,15 +407,44 @@ section {
   font-weight: 400;
   line-height: 1.8;
   color: var(--text-color);
+  transition: color 0.3s ease;
 }
-.hero .social-icons { /* Targeting social icons specifically in hero */
-  margin-top: 1rem; /* Was #social-icon-pack, making it more generic */
+
+/* Typing Cursor for Hero Title */
+.hero-title-cursor {
+    animation: blink 0.7s step-end infinite;
+    font-weight: bold;
+    margin-left: 2px;
+    color: var(--accent-color-for-lines);
+}
+@keyframes blink {
+    from, to { opacity: 1; }
+    50% { opacity: 0; }
+}
+
+.hero .social-icons { 
+  margin-top: 1rem;
 }
 .hero .social-icons a {
-  transition: color 0.2s, transform 0.2s ease-in-out; /* Add transform transition */
+  display: inline-block; /* Needed for transform and animation */
+  transition: color 0.2s, transform 0.2s ease-in-out;
+  opacity: 0; /* Initial state for animation */
+  transform: translateY(20px); /* Initial state for animation */
+  animation: heroIconEntry 0.5s cubic-bezier(0.215, 0.610, 0.355, 1) forwards; /* cubic-bezier for a bit of bounce */
 }
+@keyframes heroIconEntry {
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+/* Stagger animation delays for hero social icons */
+#social-icon-pack a:nth-of-type(1) { animation-delay: 1.7s; } /* Adjusted based on typing speed */
+#social-icon-pack a:nth-of-type(2) { animation-delay: 1.8s; }
+#social-icon-pack a:nth-of-type(3) { animation-delay: 1.9s; }
+
 .hero .social-icons a:hover {
-  transform: scale(1.1); /* Pop effect */
+  transform: scale(1.15) translateY(-2px); /* Enhanced pop effect */
 }
 
 
@@ -402,10 +457,10 @@ section {
 }
 .about-content {
   flex: 1;
-  min-width: 300px; /* Ensures content doesn't get too squished */
+  min-width: 300px;
 }
 .about-image-container {
-  flex-basis: 300px; /* Preferred size */
+  flex-basis: 300px;
   flex-shrink: 0;
   text-align: center;
 }
@@ -414,20 +469,22 @@ section {
   height: 280px;
   border-radius: 50%;
   object-fit: cover;
-  border: 6px solid var(--background-color); /* Creates a nice inset effect */
-  box-shadow: var(--box-shadow-lg); /* Elevated look */
+  border: 6px solid var(--background-color); 
+  box-shadow: var(--box-shadow-lg);
+  transition: border-color 0.3s ease, box-shadow 0.3s ease; /* For theme switch */
 }
 #about .section-title {
   text-align: left;
-  margin-left: 0; /* Align with content */
+  margin-left: 0;
 }
 #about .section-title::after {
-  margin: 15px 0 0; /* Align with content */
+  margin: 15px 0 0;
 }
 #about p {
   font-size: 1.05rem;
   line-height: 1.8;
   color: var(--text-color);
+  transition: color 0.3s ease;
 }
 
 /* Projects Section */
@@ -445,23 +502,39 @@ section {
   border: 1px solid var(--border-color);
   display: flex;
   flex-direction: column;
-  /* Scroll reveal transitions are at the bottom in "Page Enhancements" */
+  /* Combined transitions for reveal and hover */
+  opacity: 0; /* Initial state for reveal */
+  transform: translateY(30px); /* Initial state for reveal */
+  transition: opacity 0.6s ease-out, /* Reveal opacity */
+              transform 0.6s ease-out, /* Covers both reveal and hover transform */
+              box-shadow 0.3s ease-out, /* Hover box-shadow */
+              background-color 0.3s ease, /* Theme switch */
+              border-color 0.3s ease; /* Theme switch */
 }
+.project-card.is-visible {
+    opacity: 1;
+    transform: translateY(0px); /* Target state for reveal */
+}
+.project-card.is-visible:hover { /* Further transform on hover */
+    transform: translateY(-6px);
+    box-shadow: var(--box-shadow-hover);
+}
+/* Fallback for non-JS or if is-visible isn't immediately applied */
 .project-card:hover {
-  transform: translateY(-6px) !important; /* Ensure hover transform overrides reveal if needed */
-  box-shadow: var(--box-shadow-hover); /* Use defined hover shadow */
+  transform: translateY(-6px); 
+  box-shadow: var(--box-shadow-hover);
 }
 .project-image {
   width: 100%;
   height: 180px;
   object-fit: cover;
 }
-#all-projects .project-image { /* Specific to the all projects page if images should be larger */
+#all-projects .project-image {
   height: 230px;
 }
 .project-card-content {
   padding: 25px;
-  flex-grow: 1; /* Allows content to fill space */
+  flex-grow: 1;
   display: flex;
   flex-direction: column;
 }
@@ -470,15 +543,17 @@ section {
   margin-bottom: 0.75rem;
   font-weight: 700;
   color: var(--text-color);
+  transition: color 0.3s ease;
 }
 .project-card p {
   font-size: 0.95rem;
   margin-bottom: 1.5rem;
-  flex-grow: 1; /* Pushes actions to bottom */
+  flex-grow: 1;
   color: var(--text-color);
+  transition: color 0.3s ease;
 }
 .project-card-actions {
-  margin-top: auto; /* Pushes actions to bottom */
+  margin-top: auto;
 }
 .project-card .btn {
   font-size: 0.9rem;
@@ -506,15 +581,16 @@ section {
   border: 1px solid var(--text-color);
   color: var(--text-color);
   background-color: var(--background-color);
-  transition: background-color 0.2s, color 0.2s, border-color 0.2s;
+  transition: background-color 0.2s, color 0.2s, border-color 0.2s, transform 0.2s ease-out;
 }
-.skills-list li:hover { /* Hover state defined with .btn-secondary:hover, good */
+.skills-list li:hover { 
   background-color: var(--text-color);
   color: var(--background-color);
   border-color: var(--text-color);
+  transform: scale(1.05);
 }
-/* Skills Page Specifics */
-section#all-skills { /* Styles for the dedicated skills page */
+
+section#all-skills { 
   padding: 60px 0;
 }
 .skills-header {
@@ -526,12 +602,14 @@ section#all-skills { /* Styles for the dedicated skills page */
   font-weight: 800;
   margin-bottom: 0.5rem;
   color: var(--text-color);
+  transition: color 0.3s ease;
 }
 .skills-header p {
   font-size: 1.1rem;
   color: var(--secondary-text-color);
   line-height: 1.8;
-  max-width: 700px; /* Keeps paragraph readable */
+  max-width: 700px;
+  transition: color 0.3s ease;
 }
 .skill-category {
   margin-bottom: 40px;
@@ -543,6 +621,7 @@ section#all-skills { /* Styles for the dedicated skills page */
   margin-bottom: 20px;
   padding-bottom: 10px;
   border-bottom: 2px solid var(--border-color);
+  transition: color 0.3s ease, border-bottom-color 0.3s ease;
 }
 .skills-grid {
   display: flex;
@@ -557,15 +636,25 @@ section#all-skills { /* Styles for the dedicated skills page */
   font-size: 0.9rem;
   font-weight: 500;
   line-height: 1.5;
-  border: 1px solid transparent; /* For smoother hover transition if border appears */
-  transition: background-color 0.2s, color 0.2s, border-color 0.2s;
-  /* Scroll reveal transitions are at the bottom in "Page Enhancements" */
+  border: 1px solid transparent;
+  opacity: 0; /* For reveal */
+  transform: translateY(20px); /* For reveal */
+  transition: background-color 0.2s, color 0.2s, border-color 0.2s, transform 0.3s ease-out, opacity 0.5s ease-out;
+}
+.skill-tag.is-visible {
+    opacity: 1;
+    transform: translateY(0);
 }
 .skill-tag:hover {
   background-color: var(--skill-tag-hover-bg);
   color: var(--skill-tag-hover-text);
-  border-color: var(--skill-tag-hover-bg); /* Or transparent if no border desired */
+  border-color: var(--skill-tag-hover-bg);
+  transform: translateY(0) scale(1.08); /* Ensure Y-transform from reveal is maintained if needed, then scale */
 }
+.skill-tag.is-visible:hover { /* More specific for hover after reveal */
+    transform: scale(1.08) translateY(0); /* Apply scale on top of revealed state */
+}
+
 
 /* Experience & Education Section (Timeline) */
 .timeline {
@@ -573,38 +662,49 @@ section#all-skills { /* Styles for the dedicated skills page */
   max-width: 800px;
   margin: 0 auto;
 }
-.timeline::before { /* The central line */
+.timeline::before {
   content: "";
   position: absolute;
-  left: 20px; /* Aligns with icon center */
+  left: 20px;
   top: 0;
   bottom: 0;
-  width: 1px; /* Thinner line */
-  background-color: #c8c8c8; /* Lighter grey line */
+  width: 1px;
+  background-color: #c8c8c8;
+  transition: background-color 0.3s ease;
 }
 .timeline-item {
-  padding-left: 60px; /* Space for icon and its margin */
+  padding-left: 60px;
   position: relative;
   margin-bottom: 40px;
-  /* Scroll reveal transitions are at the bottom in "Page Enhancements" */
+  opacity: 0; /* For reveal */
+  transition: opacity 1s ease-out, transform 0.3s ease-out;
+}
+.timeline-item.is-visible {
+    opacity: 1;
+    transform: translateX(0);
 }
 .timeline-item:last-child {
   margin-bottom: 0;
 }
 .timeline-icon {
   position: absolute;
-  left: 0; /* Position icon at the start of padding-left */
-  top: 0; /* Align with top of item content */
+  left: 0;
+  top: 0;
   width: 42px;
   height: 42px;
   background-color: var(--primary-button-bg);
-  color: var(--text-color); /* Icon color */
+  color: var(--text-color);
   border-radius: 50%;
   display: flex;
   align-items: center;
   justify-content: center;
-  border: 3px solid var(--background-color); /* Creates "pop-out" effect */
-  z-index: 1; /* Above the timeline line */
+  border: 3px solid var(--background-color);
+  z-index: 1;
+  transition: transform 0.3s ease-out, background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
+}
+.timeline-item:hover .timeline-icon { /* Hover the item to affect the icon */
+    transform: scale(1.15);
+    background-color: var(--primary-button-hover-bg);
 }
 .timeline-icon svg {
   width: 20px;
@@ -616,27 +716,31 @@ section#all-skills { /* Styles for the dedicated skills page */
   margin-bottom: 0.25rem;
   font-weight: 700;
   color: var(--text-color);
+  transition: color 0.3s ease;
 }
 .timeline-item .company-school {
   font-weight: 600;
-  color: #444; /* Slightly darker than secondary text */
+  color: #444;
   display: block;
   margin-bottom: 0.25rem;
+  transition: color 0.3s ease;
 }
 .timeline-item .date {
   font-size: 0.9rem;
   color: var(--secondary-text-color);
   margin-bottom: 0.5rem;
   display: block;
+  transition: color 0.3s ease;
 }
 .timeline-item p {
   font-size: 0.95rem;
   color: var(--text-color);
   margin-bottom: 0;
+  transition: color 0.3s ease;
 }
 
 /* Resume Section */
-.centered-action .btn { /* Styles for prominent call-to-action buttons */
+.centered-action .btn { 
   font-size: 1.05rem;
   padding: 0.8rem 1.6rem;
 }
@@ -649,33 +753,47 @@ section#all-skills { /* Styles for the dedicated skills page */
   margin: 0 auto 30px;
   box-shadow: var(--box-shadow);
   border: 1px solid var(--border-color);
-  text-align: left; /* Ensure content within is left-aligned */
-  max-width: 750px; /* Consistent max width */
-  /* Scroll reveal transitions are at the bottom in "Page Enhancements" */
+  text-align: left;
+  max-width: 750px;
+  opacity: 0; /* For reveal */
+  transform: translateY(30px); /* For reveal */
+  transition: opacity 0.6s ease-out, transform 0.6s ease-out, box-shadow 0.3s ease-out, background-color 0.3s ease, border-color 0.3s ease;
+}
+.blog-post-summary.is-visible {
+    opacity: 1;
+    transform: translateY(0);
 }
 .blog-post-summary:hover {
-  box-shadow: var(--box-shadow-hover); /* Use defined hover shadow */
+  box-shadow: var(--box-shadow-hover);
+  transform: translateY(-4px); /* Slight lift on hover */
 }
-/* Specific to index page blog section if different */
+.blog-post-summary.is-visible:hover { /* Ensure hover transform works with reveal */
+    transform: translateY(-4px);
+    box-shadow: var(--box-shadow-hover);
+}
+
 #blog .blog-post-summary {
-  max-width: 700px; /* Can be different if needed */
+  max-width: 700px;
 }
 .blog-post-summary h3 {
   font-size: 1.6rem;
   color: var(--text-color);
   font-weight: 700;
   margin-bottom: 0.5rem;
+  transition: color 0.3s ease;
 }
 .blog-post-summary p {
   color: var(--text-color);
   margin-bottom: 1.5rem;
   font-size: 1rem;
+  transition: color 0.3s ease;
 }
 .blog-post-summary .post-meta {
   font-size: 0.85rem;
   color: var(--secondary-text-color);
   margin-bottom: 1rem;
   display: block;
+  transition: color 0.3s ease;
 }
 
 /* Contact Section */
@@ -687,6 +805,7 @@ section#all-skills { /* Styles for the dedicated skills page */
   border-radius: var(--border-radius-lg);
   border: 1px solid var(--border-color);
   box-shadow: var(--box-shadow);
+  transition: background-color 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
 }
 .form-group {
   margin-bottom: 1.75rem;
@@ -696,27 +815,28 @@ section#all-skills { /* Styles for the dedicated skills page */
   margin-bottom: 0.6rem;
   font-weight: 600;
   color: var(--text-color);
+  transition: color 0.3s ease;
 }
 .contact-form input[type="email"],
 .contact-form input[type="text"],
 .contact-form textarea {
   width: 100%;
   padding: 0.85rem;
-  border: 1px solid var(--text-color); /* Use var(--border-color) for consistency? */
+  border: 1px solid var(--text-color); 
   border-radius: var(--border-radius-md);
   font-size: 1rem;
   font-family: var(--font-family-main);
   line-height: 1.5;
   background-color: var(--background-color);
   color: var(--text-color);
-  transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+  transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out, background-color 0.3s ease, color 0.3s ease;
 }
 .contact-form input[type="email"]:focus,
 .contact-form input[type="text"]:focus,
 .contact-form textarea:focus {
-  border-color: var(--primary-button-bg); /* Use a theme accent for focus */
+  border-color: var(--primary-button-bg);
   outline: 0;
-  box-shadow: 0 0 0 0.2rem rgba(173, 216, 230, 0.5); /* Consider variable for this */
+  box-shadow: 0 0 0 0.2rem rgba(173, 216, 230, 0.5);
 }
 .contact-form textarea {
   min-height: 130px;
@@ -738,10 +858,12 @@ section#all-skills { /* Styles for the dedicated skills page */
   padding: 50px 0;
   font-size: 0.9rem;
   border-top: 1px solid var(--border-color);
+  transition: background-color 0.3s ease, color 0.3s ease, border-top-color 0.3s ease;
 }
-.main-footer p { /* Targeting p tags directly in footer for specific styling */
+.main-footer p {
   margin-bottom: 0.5rem;
   color: var(--text-color);
+  transition: color 0.3s ease;
 }
 .social-icons {
   margin-bottom: 1.25rem;
@@ -749,34 +871,34 @@ section#all-skills { /* Styles for the dedicated skills page */
 .social-icons a {
   margin: 0 12px;
   color: var(--text-color);
-  font-size: 1.6rem; /* Base size */
-  transition: color 0.2s, transform 0.2s ease-in-out; /* Add transform transition */
+  font-size: 1.6rem; 
+  transition: color 0.2s, transform 0.2s ease-in-out;
   text-decoration: none;
 }
 .social-icons a:hover {
-  color: var(--primary-button-bg); /* Or your preferred accent */
+  color: var(--primary-button-bg); 
   text-decoration: none;
-  transform: scale(1.1); /* Pop effect on hover */
-
+  transform: scale(1.1); 
 }
 .social-icons svg {
   width: 26px;
   height: 26px;
-  fill: currentColor; /* Inherits color from <a> tag */
+  fill: currentColor;
 }
 .email-copy-container {
   display: flex;
   align-items: center;
   justify-content: center;
   gap: 0.4rem;
-  margin-top: 0.5rem; /* Space from copyright text */
-  margin-bottom: 0.5rem; /* Space if more content below */
+  margin-top: 0.5rem;
+  margin-bottom: 0.5rem;
 }
-#emailToCopy.footer-link, /* Specific styling for email link if needed */
-.main-footer a.footer-link { /* General footer links */
+#emailToCopy.footer-link, 
+.main-footer a.footer-link { 
   color: var(--primary-button-bg);
   font-weight: 500;
   text-decoration: none;
+  transition: color 0.3s ease;
 }
 #emailToCopy.footer-link:hover,
 .main-footer a.footer-link:hover {
@@ -788,12 +910,13 @@ section#all-skills { /* Styles for the dedicated skills page */
   border: none;
   padding: 2px 4px;
   cursor: pointer;
-  line-height: 1; /* Prevents extra space */
+  line-height: 1;
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  color: var(--text-color); /* Base color */
+  color: var(--text-color);
   border-radius: var(--border-radius-sm);
+  transition: color 0.3s ease;
 }
 .copy-button .copy-icon-svg {
   width: 14px;
@@ -802,13 +925,13 @@ section#all-skills { /* Styles for the dedicated skills page */
   transition: stroke 0.2s ease-in-out;
 }
 .copy-button:hover .copy-icon-svg {
-  stroke: var(--primary-button-bg); /* Accent color on hover */
+  stroke: var(--primary-button-bg);
 }
 .copy-button:focus {
   outline: 1px dotted var(--primary-button-bg);
   outline-offset: 2px;
 }
-.copy-button:focus-visible { /* Modern focus styling */
+.copy-button:focus-visible { 
   outline: 2px solid var(--primary-button-bg);
   outline-offset: 1px;
 }
@@ -817,8 +940,8 @@ section#all-skills { /* Styles for the dedicated skills page */
   color: var(--accent-color-for-lines);
   font-weight: 500;
   margin-left: 0.25rem;
-  display: none; /* Hidden initially */
-  /* animation defined below */
+  display: none;
+  transition: color 0.3s ease;
 }
 .copy-feedback.show {
   display: inline;
@@ -833,53 +956,60 @@ section#all-skills { /* Styles for the dedicated skills page */
 /* Page Enhancements & Utilities               */
 /* ============================================= */
 
-/* Scroll Reveal Animations */
-.hero > *, /* Apply to direct children of hero for staggered effect if JS handles delay */
-.about-content, .about-image-container, /* About section elements */
-.skills-header, .skill-category, /* Skills page headers/sections */
-#resume.centered-action, #contact .contact-form, /* Other distinct sections */
-.project-card, .timeline-item, .skill-tag, .blog-post-summary {
+/* Scroll Reveal - Base styles are now on individual component selectors for more control */
+/* Removed generic .project-card, .timeline-item etc. from here as transitions are now specific */
+.hero > *:not(.btn):not(.social-icons), /* Hero text elements */
+.about-content, .about-image-container,
+.skills-header, .skill-category,
+#resume.centered-action, #contact .contact-form {
     opacity: 0;
     transform: translateY(30px);
-    transition: opacity 1s ease-out, transform 1s ease-out;
+    transition: opacity 0.8s ease-out, transform 0.8s ease-out;
 }
-.hero > *.is-visible,
+.hero > *:not(.btn):not(.social-icons).is-visible,
 .about-content.is-visible, .about-image-container.is-visible,
 .skills-header.is-visible, .skill-category.is-visible,
-#resume.centered-action.is-visible, #contact .contact-form.is-visible,
-.project-card.is-visible, .timeline-item.is-visible, .skill-tag.is-visible, .blog-post-summary.is-visible {
+#resume.centered-action.is-visible, #contact .contact-form.is-visible {
     opacity: 1;
     transform: translateY(0);
 }
 
+
 /* Back to Top Button */
 #backToTopBtn {
-    display: none; /* Hidden by default, JS will show it */
+    /* display: none; JS will handle visibility via opacity */
+    opacity: 0;
+    visibility: hidden;
     position: fixed;
     bottom: 25px;
     right: 25px;
-    z-index: 999; /* High z-index */
+    z-index: 999; 
     border: none;
     outline: none;
     background-color: var(--primary-button-bg);
     cursor: pointer;
-    padding: 10px; /* Adjust for SVG size */
-    border-radius: 50%; /* Circular button */
-    box-shadow: var(--box-shadow-lg); /* More pronounced shadow */
-    font-size: 0; /* Remove space for text if SVG is only child */
-    line-height: 0; /* Helps center SVG */
-    transition: background-color 0.3s, opacity 0.3s, transform 0.2s ease-out;
+    padding: 10px;
+    border-radius: 50%; 
+    box-shadow: var(--box-shadow-lg);
+    font-size: 0; 
+    line-height: 0; 
+    transition: background-color 0.3s, opacity 0.3s ease-in-out, visibility 0.3s ease-in-out, transform 0.2s ease-out;
+}
+#backToTopBtn.show { /* Class to be added by JS */
+    opacity: 1;
+    visibility: visible;
 }
 #backToTopBtn:hover {
     background-color: var(--primary-button-hover-bg);
-    transform: translateY(-2px); /* Slight lift on hover */
+    transform: translateY(-2px) scale(1.05); /* Slight lift and grow on hover */
 }
 #backToTopBtn svg {
-    width: 20px;   /* Adjust as needed */
-    height: 20px;  /* Adjust as needed */
-    stroke: var(--text-color); /* For stroke-based SVGs */
+    width: 20px;  
+    height: 20px; 
+    stroke: var(--text-color); 
     /* fill: var(--text-color); /* For fill-based SVGs */
-    display: block; /* Helps with layout within button */
+    display: block; 
+    transition: stroke 0.3s ease;
 }
 
 
@@ -903,16 +1033,10 @@ section#all-skills { /* Styles for the dedicated skills page */
     --box-shadow: 0 0.25rem 0.75rem rgba(0, 0, 0, 0.3);
     --box-shadow-lg: 0 0.5rem 1.5rem rgba(0, 0, 0, 0.35);
     --box-shadow-hover: 0 0.75rem 2rem rgba(0,0,0,0.4);
-
-    /* Update logo color variable for dark theme */
-    /* --logo-color-light is not used here; --logo-color-dark is already set in :root */
-    /* This ensures .logo and .logo svg automatically use --logo-color-dark due to CSS inheritance. */
-    /* The direct override below is more explicit if needed. */
 }
 
-/* Specific Dark Theme Component Adjustments */
 [data-theme="dark"] .btn {
-    color: var(--primary-button-text-color-dark); /* Ensure button text is light */
+    color: var(--primary-button-text-color-dark); 
 }
 [data-theme="dark"] .btn-secondary {
     border-color: var(--text-color);
@@ -926,7 +1050,7 @@ section#all-skills { /* Styles for the dedicated skills page */
 }
 [data-theme="dark"] .btn-outline-primary {
     color: var(--text-color);
-    background-color: transparent; /* Or var(--background-color) if preferred */
+    background-color: transparent; 
     border-color: var(--text-color);
 }
 [data-theme="dark"] .btn-outline-primary:hover {
@@ -941,16 +1065,23 @@ section#all-skills { /* Styles for the dedicated skills page */
     fill: var(--logo-color-dark);
 }
 
-[data-theme="dark"] .main-header,
-[data-theme="dark"] .mobile-nav-panel li a { /* Combined border for header and mobile nav links */
+[data-theme="dark"] .main-header {
     border-bottom-color: var(--border-color);
 }
+
+[data-theme="dark"] .mobile-nav-panel li a {
+    border-bottom-color: var(--border-color);
+}
+[data-theme="dark"] .mobile-nav-panel li:first-child a {
+    border-top-color: var(--border-color);
+}
 [data-theme="dark"] .mobile-nav-panel {
-    background-color: var(--background-color);
+    background-color: var(--background-color); /* Already handled by var, but explicit */
+    box-shadow: -3px 0 10px rgba(0, 0, 0, 0.3); /* Darker shadow */
 }
 [data-theme="dark"] .mobile-nav-panel li a.active,
 [data-theme="dark"] .mobile-nav-panel li a:hover {
-  background-color: #242526;
+  background-color: #2c2d2e; /* Slightly different from main bg */
   color: var(--accent-color-for-lines);
 }
 [data-theme="dark"] .main-nav a,
@@ -967,45 +1098,37 @@ section#all-skills { /* Styles for the dedicated skills page */
 [data-theme="dark"] .hamburger-menu .bar {
     background-color: var(--text-color);
 }
-[data-theme="dark"] .theme-toggle-button { /* Theme toggle icon color in dark mode */
+[data-theme="dark"] .theme-toggle-button {
     color: var(--text-color);
 }
-[data-theme="dark"] .theme-toggle-button .sun-icon { display: none; }
-[data-theme="dark"] .theme-toggle-button .moon-icon { display: inline-block; }
-
 
 [data-theme="dark"] .project-card,
 [data-theme="dark"] .blog-post-summary,
-[data-theme="dark"] .contact-form,
-[data-theme="dark"] .about-profile-pic { /* Ensure profile pic border matches dark bg */
+[data-theme="dark"] .contact-form {
     border-color: var(--border-color);
 }
-[data-theme="dark"] .project-card h3,
-[data-theme="dark"] .blog-post-summary h3 {
-    color: var(--text-color); /* Already covered by general h3 but explicit */
+[data-theme="dark"] .about-profile-pic {
+    border-color: var(--background-color); /* Match dark page background for inset */
 }
 
 [data-theme="dark"] .timeline::before {
     background-color: #555;
 }
 [data-theme="dark"] .timeline-icon {
-    background-color: var(--primary-button-bg); /* Use themed button color */
-    color: var(--primary-button-text-color-dark); /* Ensure icon contrast */
-    border-color: var(--background-color); /* Match dark page background */
+    background-color: var(--primary-button-bg);
+    color: var(--primary-button-text-color-dark);
+    border-color: var(--background-color); 
 }
 [data-theme="dark"] .timeline-item .company-school {
-    color: #c0c0c0; /* Lighter for readability */
+    color: #c0c0c0; 
 }
 
-[data-theme="dark"] .contact-form label {
-    color: var(--text-color);
-}
 [data-theme="dark"] .contact-form input[type="email"],
 [data-theme="dark"] .contact-form input[type="text"],
 [data-theme="dark"] .contact-form textarea {
   background-color: #242526;
   color: var(--text-color);
-  border-color: #555; /* Darker border */
+  border-color: #555;
 }
 [data-theme="dark"] .contact-form input[type="email"]:focus,
 [data-theme="dark"] .contact-form input[type="text"]:focus,
@@ -1014,7 +1137,7 @@ section#all-skills { /* Styles for the dedicated skills page */
   box-shadow: 0 0 0 0.2rem rgba(74, 144, 226, 0.25);
 }
 
-[data-theme="dark"] .skills-header p { /* Skills page paragraph */
+[data-theme="dark"] .skills-header p {
     color: var(--secondary-text-color);
 }
 [data-theme="dark"] .skill-category h3 {
@@ -1042,7 +1165,7 @@ section#all-skills { /* Styles for the dedicated skills page */
 }
 [data-theme="dark"] #emailToCopy.footer-link:hover,
 [data-theme="dark"] .main-footer a.footer-link:hover {
-    color: #6eb1f7; /* Slightly lighter accent */
+    color: #6eb1f7; 
 }
 
 [data-theme="dark"] #backToTopBtn {
@@ -1053,21 +1176,20 @@ section#all-skills { /* Styles for the dedicated skills page */
 }
 [data-theme="dark"] #backToTopBtn svg {
     stroke: var(--primary-button-text-color-dark);
-    /* fill: var(--primary-button-text-color-dark); /* For fill-based */
 }
 
 
 /* ============================================= */
 /* Media Queries (Responsive Design)           */
 /* ============================================= */
-@media (max-width: 991.98px) { /* Tablet and smaller */
+@media (max-width: 991.98px) { 
   .main-nav { display: none; }
-  .hamburger-menu { display: block; order: 3; margin-left: 0; } /* Order after theme toggle */
-  .logo { margin-right: 0; order: 1; } /* Logo first */
+  .hamburger-menu { display: block; order: 3; margin-left: 0; } 
+  .logo { margin-right: 0; order: 1; } 
   .theme-toggle-button {
-    order: 2; /* Theme toggle second */
-    margin-left: auto; /* Push it right, away from logo */
-    margin-right: 10px; /* Space before hamburger */
+    order: 2; 
+    margin-left: auto; 
+    margin-right: 10px; 
   }
 
   .hero h1 { font-size: 2.6rem; }
@@ -1081,14 +1203,9 @@ section#all-skills { /* Styles for the dedicated skills page */
 
   .skills-header h1 { font-size: 2.4rem; }
   .skill-category h3 { font-size: 1.5rem; }
-
-  /* Removed .profile-pic-nav as it's not in HTML */
 }
 
 @media (max-width: 767.98px) { /* Mobile */
-  /* .main-header .container { align-items: center; } /* Already set */
-  /* .logo { margin-bottom: 0; } /* Already handled by flex align-items */
-
   .hero { padding: 70px 0; }
   .hero h1, .skills-header h1 { font-size: 2rem; }
   .hero p, .skills-header p { font-size: 1rem; }
@@ -1099,8 +1216,8 @@ section#all-skills { /* Styles for the dedicated skills page */
   .projects-grid { grid-template-columns: 1fr; }
 
   .timeline::before { left: 15px; }
-  .timeline-item { padding-left: 50px; }
-  .timeline-icon { width: 36px; height: 36px; left: -2px; /* Adjust to align with thinner line */ }
+  .timeline-item { padding-left: 50px; transform: translateX(-20px); /* Adjust reveal for smaller screens */ }
+  .timeline-icon { width: 36px; height: 36px; left: -2px; }
   .timeline-icon svg { width: 18px; height: 18px; }
 
   .contact-form { padding: 25px; }
@@ -1108,10 +1225,10 @@ section#all-skills { /* Styles for the dedicated skills page */
   .blog-post-summary h3 { font-size: 1.4rem; }
 
   section#all-skills { padding: 40px 0; }
-  .skills-header { text-align: center; } /* Center on mobile */
+  .skills-header { text-align: center; } 
   .skill-category h3 { font-size: 1.3rem; text-align: center; }
-  .skills-grid { justify-content: center; } /* Center tags on mobile if they don't fill width */
+  .skills-grid { justify-content: center; } 
 
-  #backToTopBtn { bottom: 15px; right: 15px; padding: 8px; } /* Smaller and less padding on mobile */
-  #backToTopBtn svg { width: 32px; height: 32px; }
+  #backToTopBtn { bottom: 15px; right: 15px; padding: 8px; } 
+  #backToTopBtn svg { width: 20px; height: 20px; } /* Unified size with desktop */
 }
