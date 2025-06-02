@@ -87,11 +87,11 @@ document.addEventListener("DOMContentLoaded", function () {
         
         function initParticles(theme) {
             particlesArray = [];
-            const numberOfParticles = Math.floor((heroParticlesCanvas.width * heroParticlesCanvas.height) / 15000); // Responsive particle count
+            const numberOfParticles = Math.floor((heroParticlesCanvas.width * heroParticlesCanvas.height) / 11000); // Responsive particle count
             const particleColors = getParticleThemeColors(theme);
 
             for (let i = 0; i < numberOfParticles; i++) {
-                const size = Math.random() * 3.5 + 1; // Particle size
+                const size = Math.random() * 4 + 1; // Particle size
                 const x = Math.random() * (heroParticlesCanvas.width - size * 2) + size;
                 const y = Math.random() * (heroParticlesCanvas.height - size * 2) + size;
                 const directionX = (Math.random() * 0.6) - 0.3; // Movement speed (slower)
