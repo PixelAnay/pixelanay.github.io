@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Anay Gawate - Portfolio</title>
     <link rel="icon" href="assets/svgfav.svg" type="image/svg+xml">
+    
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
@@ -14,12 +15,19 @@
 </head>
 
 <body>
-
+<button id="backToTopBtn" title="Go to top"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+    <circle cx="12" cy="12" r="10"></circle>
+    <polyline points="16 12 12 8 8 12"></polyline>
+    <line x1="12" y1="16" x2="12" y2="8"></line>
+</svg></button>
     <header class="main-header">
         <div class="container">
             <a href="#" class="logo">
                 <img src="assets/svgfav.svg" alt="logo" height="30px" width="30px" style="margin-right: 15px;"> Anay Gawate
             </a>
+
+            
+
             <nav class="main-nav">
                 <ul>
                     <li><a href="#about" class="active">About</a></li>
@@ -33,6 +41,25 @@
 
                 </ul>
             </nav>
+
+            <!-- ADD THEME TOGGLE BUTTON HERE -->
+            <button id="theme-toggle" class="theme-toggle-button" aria-label="Switch to dark mode" title="Toggle theme">
+                <svg class="sun-icon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+    <circle cx="12" cy="12" r="5"></circle>
+    <line x1="12" y1="1" x2="12" y2="3"></line>
+    <line x1="12" y1="21" x2="12" y2="23"></line>
+    <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+    <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+    <line x1="1" y1="12" x2="3" y2="12"></line>
+    <line x1="21" y1="12" x2="23" y2="12"></line>
+    <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+    <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+</svg>
+                <svg class="moon-icon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+</svg>
+            </button>
+            <!-- END THEME TOGGLE BUTTON -->
 
             <button class="hamburger-menu" aria-label="Toggle menu" aria-expanded="false">
                 <span class="bar"></span>
@@ -116,20 +143,9 @@
                             </div>
                         </div>
                     </div>
+
                     <div class="project-card">
                         <img src="assets/bg2.jpg" loading="lazy" alt="placeholder image" class="project-image">
-                        <div class="project-card-content">
-                            <h3>Mobile Fitness Tracker</h3>
-                            <p>A cross-platform mobile application for tracking fitness activities, setting personalized goals, and visualizing progress with interactive charts. Includes features like GPS tracking and workout logging for a comprehensive
-                                experience.</p>
-                            <div class="project-card-actions">
-                                <a href="#" class="btn">App Link</a>
-                                <a href="#" class="btn btn-secondary" style="margin-left: 10px;">View Code</a>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="project-card">
-                        <img src="assets/bg3.jpg" loading="lazy" alt="placeholder image" class="project-image">
                         <div class="project-card-content">
                             <h3>Retro BrowserOS</h3>
                             <p>An interactive web dashboard designed for as a interface to mimic operating system. Users can upload data, generate various charts, apply filters, and derive actionable insights through an intuitive interface.</p>

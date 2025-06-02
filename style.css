@@ -1,142 +1,121 @@
-#container-nav,
-.container {
-  margin-right: auto;
-  margin-left: auto;
-}
-.btn,
-img {
-  vertical-align: middle;
-}
-.btn,
-body {
-  font-size: 1rem;
-  color: var(--text-color);
-  font-family: var(--font-family-main);
-}
-.btn,
-.btn-secondary,
-body,
-h1,
-h2,
-h3,
-h4,
-h5,
-h6,
-p {
-  color: var(--text-color);
-}
-.logo img,
-.logo svg {
-  margin-right: 10px;
-}
-.btn,
-.hero,
-.section-title,
-.see-all-container {
-  text-align: center;
-}
-.btn,
-body {
-  font-family: var(--font-family-main);
-}
-.btn:hover,
-.logo:hover,
-.mobile-nav-panel li a,
-.social-icons a:hover,
-a {
-  text-decoration: none;
-}
+/* ============================================= */
+/* Root Variables & Theme Setup                  */
+/* ============================================= */
 :root {
   --primary-button-bg: #cbe5ff;
-  --blacky: #000000;
   --primary-button-hover-bg: #9bc4d2;
   --text-color: #000000;
   --background-color: #ffffff;
   --secondary-text-color: #333333;
   --border-color: #e0e0e0;
   --accent-color-for-lines: #add8e6;
+
   --skill-tag-bg: #f0f3f7;
   --skill-tag-text: #0d141c;
   --skill-tag-hover-bg: #000000;
   --skill-tag-hover-text: #ffffff;
+
   --font-family-main: "Manrope", sans-serif;
   --border-radius-sm: 0.2rem;
   --border-radius-md: 0.375rem;
   --border-radius-lg: 0.5rem;
+
   --box-shadow: 0 0.25rem 0.75rem rgba(0, 0, 0, 0.05);
   --box-shadow-lg: 0 0.5rem 1.5rem rgba(0, 0, 0, 0.07);
+  --box-shadow-hover: 0 0.75rem 2rem rgba(0,0,0,0.1); /* Added for potential deeper hover shadows */
+
+  --primary-button-text-color-light: var(--text-color);
+  --primary-button-text-color-dark: #ffffff;
+  --logo-color-light: var(--text-color);
+  --logo-color-dark: #e4e6eb; /* Defaulted dark logo color here */
 }
+
+/* ============================================= */
+/* Global Resets & Base Styles                 */
+/* ============================================= */
 *,
 ::after,
 ::before {
   box-sizing: border-box;
 }
+
 html {
   scroll-behavior: smooth;
 }
+
 body {
   margin: 0;
+  font-family: var(--font-family-main);
+  font-size: 1rem;
   font-weight: 400;
   line-height: 1.7;
+  color: var(--text-color);
   background-color: var(--background-color);
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
-.container {
-  width: 98%;
-  max-width: 1140px;
-  padding-right: 5px;
-  padding-left: 5px;
-}
-#container-nav {
-  width: 90%;
-  padding-right: 15px;
-  padding-left: 15px;
-}
-h1,
-h2,
-h3,
-h4,
-h5,
-h6 {
+
+h1, h2, h3, h4, h5, h6 {
   margin-top: 0;
   margin-bottom: 1rem;
   font-weight: 700;
   line-height: 1.3;
+  color: var(--text-color);
 }
-h1 {
-  font-size: 2.8rem;
-}
-h2 {
-  font-size: 2.2rem;
-}
-h3 {
-  font-size: 1.5rem;
-}
-h4 {
-  font-size: 1.2rem;
-}
+
+h1 { font-size: 2.8rem; }
+h2 { font-size: 2.2rem; }
+h3 { font-size: 1.5rem; }
+h4 { font-size: 1.2rem; }
+
 p {
   margin-top: 0;
   margin-bottom: 1.25rem;
+  color: var(--text-color);
 }
+
 a {
   color: var(--primary-button-bg);
+  text-decoration: none;
   transition: color 0.15s ease-in-out;
 }
-#emailToCopy.footer-link:hover,
 a:hover {
   color: var(--primary-button-hover-bg);
   text-decoration: underline;
 }
+
 img {
+  vertical-align: middle;
   border-style: none;
   max-width: 100%;
   height: auto;
 }
+
+/* ============================================= */
+/* Layout Utilities                            */
+/* ============================================= */
+.container {
+  width: 98%;
+  max-width: 1140px;
+  margin-right: auto;
+  margin-left: auto;
+  padding-right: 15px; /* Consistent padding */
+  padding-left: 15px;  /* Consistent padding */
+}
+
+/* Removed #container-nav as .container seems to be used everywhere */
+
+/* ============================================= */
+/* Generic Components                          */
+/* ============================================= */
 .btn {
   display: inline-block;
+  font-family: var(--font-family-main);
+  font-size: 1rem;
   font-weight: 600;
+  color: var(--primary-button-text-color-light);
+  text-align: center;
+  vertical-align: middle;
   cursor: pointer;
   user-select: none;
   background-color: var(--primary-button-bg);
@@ -145,82 +124,88 @@ img {
   line-height: 1.5;
   border-radius: var(--border-radius-md);
   transition: 0.15s ease-in-out;
+  text-decoration: none; /* Ensure buttons that are links don't get underlined by default */
+
 }
 .btn:hover {
-  background-color: #000;
+  background-color: #000000; 
   color: #fff;
-  border-color: var(--primary-button-hover-bg);
+  border-color: var(--primary-button-hover-bg); 
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  text-decoration: none;
 }
 .btn:focus {
   outline: 0;
-  box-shadow: 0 0 0 0.2rem rgba(173, 216, 230, 0.5);
+  box-shadow: 0 0 0 0.2rem rgba(173, 216, 230, 0.5); /* Consider making this color a variable */
 }
+
 .btn-secondary {
   background-color: transparent;
   border: 2px solid var(--text-color);
+  color: var(--text-color);
 }
-.btn-secondary:hover,
-.skills-list li:hover {
+.btn-secondary:hover {
   background-color: var(--text-color);
   color: var(--background-color);
   border-color: var(--text-color);
 }
+
 .btn-outline-primary {
-  color: #000;
-  background-color: #fff;
-  border-color: #000;
+  color: var(--text-color);
+  background-color: var(--background-color);
+  border-color: var(--text-color);
 }
 .btn-outline-primary:hover {
-  color: #fff;
-  background-color: #000;
-  border-color: var(--primary-button-bg);
+  color: var(--background-color);
+  background-color: var(--text-color);
+  border-color: var(--text-color); /* Previously primary-button-bg, now consistent */
 }
-#about p,
-.hero,
-.hero h1,
-.hero p,
-.logo,
-.logo:hover,
-.main-nav a,
-.mobile-nav-panel li a,
-.section-title {
-  color: var(--text-color);
-}
-.main-header,
-.mobile-nav-panel li a {
-  border-bottom: 1px solid var(--border-color);
-}
+
 .btn-lg {
   padding: 0.9rem 1.85rem;
   font-size: 1.1rem;
 }
+
+/* ============================================= */
+/* Header                                      */
+/* ============================================= */
 .main-header {
   background-color: var(--background-color);
   padding: 1rem 0;
   position: sticky;
   top: 0;
   z-index: 1020;
+  border-bottom: 1px solid var(--border-color);
 }
 .main-header .container {
   display: flex;
   justify-content: space-between;
   align-items: center;
 }
+
 .logo {
   font-size: 1.4rem;
   font-weight: 800;
-  margin: 5px;
+  color: var(--logo-color-light);
+  text-decoration: none;
   display: flex;
   align-items: center;
+  margin-right: auto; /* Pushes logo left, other items right */
+  flex-shrink: 0;
 }
+.logo:hover {
+  color: var(--logo-color-light); /* Prevent hover color change if not desired */
+  text-decoration: none;
+}
+.logo img,
 .logo svg {
-  width: 22px;
-  height: 22px;
-  fill: var(--text-color);
+  margin-right: 10px; /* Original 15px looked a bit much with 30px icon */
+  fill: var(--logo-color-light); /* For SVG fill */
 }
+
 .main-nav {
-  display: block;
+  display: block; /* Shown on desktop */
+  margin-right: 15px; /* Space between nav and theme toggle */
 }
 .main-nav ul {
   list-style: none;
@@ -234,8 +219,10 @@ img {
 .main-nav a {
   font-weight: 500;
   font-size: 0.95rem;
+  color: var(--text-color);
   padding: 0.3rem 0;
   position: relative;
+  text-decoration: none;
 }
 .main-nav a.active,
 .main-nav a:hover {
@@ -251,36 +238,44 @@ img {
   margin-top: 3px;
   right: 0;
   background: var(--accent-color-for-lines);
-  transition: width 0.2s;
+  transition: width 0.2s ease-out; /* Smoother transition */
 }
 .main-nav a.active::after,
 .main-nav a:hover::after {
   width: 100%;
   left: 0;
+  right: auto; /* Ensure it expands from left */
 }
-.profile-pic-nav {
-  width: 40px;
-  height: 40px;
-  border-radius: 50%;
-  object-fit: cover;
-  border: 2px solid var(--border-color);
-  margin-left: 15px;
-}
-.hamburger-menu {
-  display: none;
+
+.theme-toggle-button {
+  background: none;
+  border: none;
   cursor: pointer;
-  background: 0 0;
-  margin: 5px;
+  padding: 5px;
+  margin-left: 10px; /* Space from main-nav on desktop */
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--text-color);
+  transition: color 0.3s ease;
+  order: 1; /* Desktop order */
+}
+.theme-toggle-button svg {
+  width: 22px;
+  height: 22px;
+  transition: opacity 0.3s ease, transform 0.3s ease;
+}
+.theme-toggle-button .moon-icon { display: none; }
+
+.hamburger-menu {
+  display: none; /* Hidden on desktop */
+  cursor: pointer;
+  background: transparent;
   border: none;
   padding: 0;
-  z-index: 1051;
-}
-.hero,
-.mobile-nav-panel,
-.project-card,
-.skills-list li,
-section {
-  background-color: var(--background-color);
+  z-index: 1051; /* Ensure it's above mobile nav panel when closing */
+  margin-left: 10px; /* Space from theme toggle on desktop */
+  order: 2; /* Desktop order */
 }
 .hamburger-menu .bar {
   display: block;
@@ -291,34 +286,25 @@ section {
   transition: 0.3s ease-in-out;
   border-radius: 1px;
 }
-.hamburger-menu.is-active .bar:first-child {
-  transform: translateY(9px) rotate(45deg);
-}
-.hamburger-menu.is-active .bar:nth-child(2) {
-  opacity: 0;
-}
-.hamburger-menu.is-active .bar:nth-child(3) {
-  transform: translateY(-9px) rotate(-45deg);
-}
+.hamburger-menu.is-active .bar:first-child { transform: translateY(9px) rotate(45deg); }
+.hamburger-menu.is-active .bar:nth-child(2) { opacity: 0; }
+.hamburger-menu.is-active .bar:nth-child(3) { transform: translateY(-9px) rotate(-45deg); }
+
 .mobile-nav-panel {
   position: fixed;
   top: 0;
-  right: -100%;
+  right: -100%; /* Start off-screen */
   width: 80%;
   max-width: 320px;
   height: 100vh;
+  background-color: var(--background-color);
   box-shadow: -3px 0 10px rgba(0, 0, 0, 0.1);
   z-index: 1050;
   transition: right 0.35s cubic-bezier(0.23, 1, 0.32, 1);
-  padding: 80px 0 20px;
+  padding: 80px 0 20px; /* Space for header */
   overflow-y: auto;
-  display: flex;
-  flex-direction: column;
-}
-.about-profile-pic,
-.blog-post-summary:hover,
-.project-card:hover {
-  box-shadow: var(--box-shadow-lg);
+  display: flex; /* Not strictly needed but okay */
+  flex-direction: column; /* Not strictly needed but okay */
 }
 .mobile-nav-panel.open {
   right: 0;
@@ -333,6 +319,9 @@ section {
   padding: 18px 30px;
   font-size: 1.1rem;
   font-weight: 500;
+  color: var(--text-color);
+  text-decoration: none;
+  border-bottom: 1px solid var(--border-color);
   transition: background-color 0.2s, color 0.2s;
 }
 .mobile-nav-panel li:first-child a {
@@ -340,17 +329,25 @@ section {
 }
 .mobile-nav-panel li a.active,
 .mobile-nav-panel li a:hover {
-  background-color: #f0f8ff;
+  background-color: #f0f8ff; /* Consider a variable */
   color: var(--accent-color-for-lines);
 }
+
+/* ============================================= */
+/* Page Sections                               */
+/* ============================================= */
 section {
   padding: 80px 0;
+  background-color: var(--background-color); /* Default section background */
 }
+
 .section-title {
+  text-align: center;
   margin-bottom: 60px;
   font-size: 2.4rem;
   font-weight: 700;
   position: relative;
+  color: var(--text-color);
 }
 .section-title::after {
   content: "";
@@ -361,28 +358,42 @@ section {
   margin: 15px auto 0;
   border-radius: 2px;
 }
+
+/* Hero Section */
 .hero {
   padding: 100px 0;
-  min-height: auto;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
+  text-align: center;
+  background-color: var(--background-color);
+  display: flex; /* Added for vertical centering if content allows */
+  flex-direction: column; /* Added */
+  justify-content: center; /* Added */
+  align-items: center; /* Added */
 }
 .hero h1 {
   font-size: 3.2rem;
   margin-bottom: 1rem;
   font-weight: 800;
+  color: var(--text-color);
 }
 .hero p {
   font-size: 1.2rem;
   margin-bottom: 2.5rem;
   font-weight: 400;
   line-height: 1.8;
+  color: var(--text-color);
 }
-#social-icon-pack {
-  margin: 1rem;
+.hero .social-icons { /* Targeting social icons specifically in hero */
+  margin-top: 1rem; /* Was #social-icon-pack, making it more generic */
 }
+.hero .social-icons a {
+  transition: color 0.2s, transform 0.2s ease-in-out; /* Add transform transition */
+}
+.hero .social-icons a:hover {
+  transform: scale(1.1); /* Pop effect */
+}
+
+
+/* About Section */
 #about .container {
   display: flex;
   flex-wrap: wrap;
@@ -391,10 +402,10 @@ section {
 }
 .about-content {
   flex: 1;
-  min-width: 300px;
+  min-width: 300px; /* Ensures content doesn't get too squished */
 }
 .about-image-container {
-  flex-basis: 300px;
+  flex-basis: 300px; /* Preferred size */
   flex-shrink: 0;
   text-align: center;
 }
@@ -403,19 +414,23 @@ section {
   height: 280px;
   border-radius: 50%;
   object-fit: cover;
-  border: 6px solid var(--background-color);
+  border: 6px solid var(--background-color); /* Creates a nice inset effect */
+  box-shadow: var(--box-shadow-lg); /* Elevated look */
 }
 #about .section-title {
   text-align: left;
-  margin-left: 0;
+  margin-left: 0; /* Align with content */
 }
 #about .section-title::after {
-  margin: 15px 0 0;
+  margin: 15px 0 0; /* Align with content */
 }
 #about p {
   font-size: 1.05rem;
   line-height: 1.8;
+  color: var(--text-color);
 }
+
+/* Projects Section */
 .projects-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
@@ -423,32 +438,30 @@ section {
   margin-bottom: 40px;
 }
 .project-card {
+  background-color: var(--background-color);
   border-radius: var(--border-radius-lg);
   overflow: hidden;
   box-shadow: var(--box-shadow);
-  transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+  border: 1px solid var(--border-color);
   display: flex;
   flex-direction: column;
-  border: 1px solid var(--border-color);
-}
-.skill-tag,
-.skills-list li {
-  transition: background-color 0.2s, color 0.2s, border-color 0.2s;
+  /* Scroll reveal transitions are at the bottom in "Page Enhancements" */
 }
 .project-card:hover {
-  transform: translateY(-6px);
+  transform: translateY(-6px) !important; /* Ensure hover transform overrides reveal if needed */
+  box-shadow: var(--box-shadow-hover); /* Use defined hover shadow */
 }
 .project-image {
   width: 100%;
   height: 180px;
   object-fit: cover;
 }
-#all-projects .project-image {
+#all-projects .project-image { /* Specific to the all projects page if images should be larger */
   height: 230px;
 }
 .project-card-content {
   padding: 25px;
-  flex-grow: 1;
+  flex-grow: 1; /* Allows content to fill space */
   display: flex;
   flex-direction: column;
 }
@@ -458,25 +471,25 @@ section {
   font-weight: 700;
   color: var(--text-color);
 }
-.project-card p,
-.skills-list li {
+.project-card p {
   font-size: 0.95rem;
+  margin-bottom: 1.5rem;
+  flex-grow: 1; /* Pushes actions to bottom */
   color: var(--text-color);
 }
-.project-card p {
-  margin-bottom: 1.5rem;
-  flex-grow: 1;
-}
 .project-card-actions {
-  margin-top: auto;
+  margin-top: auto; /* Pushes actions to bottom */
 }
 .project-card .btn {
   font-size: 0.9rem;
   padding: 0.6rem 1.1rem;
 }
 .see-all-container {
+  text-align: center;
   margin-top: 50px;
 }
+
+/* Skills Section */
 .skills-list {
   display: flex;
   flex-wrap: wrap;
@@ -487,179 +500,26 @@ section {
 }
 .skills-list li {
   padding: 10px 20px;
+  font-size: 0.95rem;
   border-radius: var(--border-radius-md);
   font-weight: 500;
   border: 1px solid var(--text-color);
-}
-.timeline {
-  position: relative;
-  max-width: 800px;
-  margin: 0 auto;
-}
-.timeline::before {
-  content: "";
-  position: absolute;
-  left: 20px;
-  top: 0;
-  bottom: 0;
-  width: 1px;
-  background-color: #c8c8c8;
-}
-.timeline-item {
-  padding-left: 60px;
-  position: relative;
-  margin-bottom: 40px;
-}
-.timeline-item:last-child {
-  margin-bottom: 0;
-}
-.timeline-icon {
-  position: absolute;
-  left: 0;
-  top: 0;
-  width: 42px;
-  height: 42px;
-  background-color: var(--primary-button-bg);
   color: var(--text-color);
-  border-radius: 50%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  border: 3px solid var(--background-color);
-  z-index: 1;
-}
-#blog .blog-post-summary,
-.blog-post-summary {
-  padding: 30px;
-  border-radius: var(--border-radius-lg);
-  margin: 0 auto 30px;
-  box-shadow: var(--box-shadow);
   background-color: var(--background-color);
-  text-align: left;
+  transition: background-color 0.2s, color 0.2s, border-color 0.2s;
 }
-.timeline-icon svg {
-  width: 20px;
-  height: 20px;
-  fill: currentColor;
+.skills-list li:hover { /* Hover state defined with .btn-secondary:hover, good */
+  background-color: var(--text-color);
+  color: var(--background-color);
+  border-color: var(--text-color);
 }
-.timeline-item h3 {
-  font-size: 1.3rem;
-  margin-bottom: 0.25rem;
-  font-weight: 700;
-  color: var(--text-color);
-}
-.timeline-item .company-school {
-  font-weight: 600;
-  color: #444;
-  display: block;
-  margin-bottom: 0.25rem;
-}
-.timeline-item .date {
-  font-size: 0.9rem;
-  color: var(--secondary-text-color);
-  margin-bottom: 0.5rem;
-  display: block;
-}
-.timeline-item p {
-  font-size: 0.95rem;
-  color: var(--text-color);
-  margin-bottom: 0;
-}
-.centered-action .btn {
-  font-size: 1.05rem;
-  padding: 0.8rem 1.6rem;
-}
-#blog .blog-post-summary {
-  border: 1px solid var(--border-color);
-  max-width: 700px;
-}
-#blog .blog-post-summary h3 {
-  font-size: 1.5rem;
-  color: #515151;
-  font-weight: 700;
-}
-#blog .blog-post-summary p {
-  color: var(--text-color);
-  margin-bottom: 1.5rem;
-}
-.blog-post-summary {
-  border: 1px solid var(--border-color);
-  max-width: 750px;
-}
-.blog-post-summary h3 {
-  font-size: 1.6rem;
-  color: var(--text-color);
-  font-weight: 700;
-  margin-bottom: 0.5rem;
-}
-.blog-post-summary p {
-  color: var(--text-color);
-  margin-bottom: 1.5rem;
-  font-size: 1rem;
-}
-.blog-post-summary .post-meta {
-  font-size: 0.85rem;
-  color: var(--secondary-text-color);
-  margin-bottom: 1rem;
-  display: block;
-}
-.contact-form {
-  max-width: 700px;
-  margin: 0 auto;
-  background: var(--background-color);
-  padding: 35px;
-  border-radius: var(--border-radius-lg);
-  border: 1px solid var(--border-color);
-  box-shadow: var(--box-shadow);
-}
-.form-group {
-  margin-bottom: 1.75rem;
-}
-.skill-category,
-.skills-header {
-  margin-bottom: 40px;
-}
-.contact-form label {
-  display: block;
-  margin-bottom: 0.6rem;
-  font-weight: 600;
-  color: var(--text-color);
-}
-.contact-form input[type="email"],
-.contact-form input[type="text"],
-.contact-form textarea {
-  width: 100%;
-  padding: 0.85rem;
-  border: 1px solid var(--text-color);
-  border-radius: var(--border-radius-md);
-  font-size: 1rem;
-  font-family: var(--font-family-main);
-  line-height: 1.5;
-  background-color: var(--background-color);
-  color: var(--text-color);
-  transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
-}
-.contact-form input[type="email"]:focus,
-.contact-form input[type="text"]:focus,
-.contact-form textarea:focus {
-  border-color: var(--primary-button-bg);
-  outline: 0;
-  box-shadow: 0 0 0 0.2rem rgba(173, 216, 230, 0.5);
-}
-.contact-form textarea {
-  min-height: 130px;
-  resize: vertical;
-}
-.contact-form .btn {
-  width: 100%;
-  padding: 0.85rem 1.25rem;
-  font-size: 1.1rem;
-}
-section#all-skills {
+/* Skills Page Specifics */
+section#all-skills { /* Styles for the dedicated skills page */
   padding: 60px 0;
 }
 .skills-header {
   text-align: left;
+  margin-bottom: 40px;
 }
 .skills-header h1 {
   font-size: 2.8rem;
@@ -671,7 +531,10 @@ section#all-skills {
   font-size: 1.1rem;
   color: var(--secondary-text-color);
   line-height: 1.8;
-  max-width: 700px;
+  max-width: 700px; /* Keeps paragraph readable */
+}
+.skill-category {
+  margin-bottom: 40px;
 }
 .skill-category h3 {
   font-size: 1.7rem;
@@ -694,13 +557,180 @@ section#all-skills {
   font-size: 0.9rem;
   font-weight: 500;
   line-height: 1.5;
-  border: 1px solid transparent;
+  border: 1px solid transparent; /* For smoother hover transition if border appears */
+  transition: background-color 0.2s, color 0.2s, border-color 0.2s;
+  /* Scroll reveal transitions are at the bottom in "Page Enhancements" */
 }
 .skill-tag:hover {
   background-color: var(--skill-tag-hover-bg);
   color: var(--skill-tag-hover-text);
-  border-color: var(--skill-tag-hover-bg);
+  border-color: var(--skill-tag-hover-bg); /* Or transparent if no border desired */
 }
+
+/* Experience & Education Section (Timeline) */
+.timeline {
+  position: relative;
+  max-width: 800px;
+  margin: 0 auto;
+}
+.timeline::before { /* The central line */
+  content: "";
+  position: absolute;
+  left: 20px; /* Aligns with icon center */
+  top: 0;
+  bottom: 0;
+  width: 1px; /* Thinner line */
+  background-color: #c8c8c8; /* Lighter grey line */
+}
+.timeline-item {
+  padding-left: 60px; /* Space for icon and its margin */
+  position: relative;
+  margin-bottom: 40px;
+  /* Scroll reveal transitions are at the bottom in "Page Enhancements" */
+}
+.timeline-item:last-child {
+  margin-bottom: 0;
+}
+.timeline-icon {
+  position: absolute;
+  left: 0; /* Position icon at the start of padding-left */
+  top: 0; /* Align with top of item content */
+  width: 42px;
+  height: 42px;
+  background-color: var(--primary-button-bg);
+  color: var(--text-color); /* Icon color */
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 3px solid var(--background-color); /* Creates "pop-out" effect */
+  z-index: 1; /* Above the timeline line */
+}
+.timeline-icon svg {
+  width: 20px;
+  height: 20px;
+  fill: currentColor;
+}
+.timeline-item h3 {
+  font-size: 1.3rem;
+  margin-bottom: 0.25rem;
+  font-weight: 700;
+  color: var(--text-color);
+}
+.timeline-item .company-school {
+  font-weight: 600;
+  color: #444; /* Slightly darker than secondary text */
+  display: block;
+  margin-bottom: 0.25rem;
+}
+.timeline-item .date {
+  font-size: 0.9rem;
+  color: var(--secondary-text-color);
+  margin-bottom: 0.5rem;
+  display: block;
+}
+.timeline-item p {
+  font-size: 0.95rem;
+  color: var(--text-color);
+  margin-bottom: 0;
+}
+
+/* Resume Section */
+.centered-action .btn { /* Styles for prominent call-to-action buttons */
+  font-size: 1.05rem;
+  padding: 0.8rem 1.6rem;
+}
+
+/* Blog Section */
+.blog-post-summary {
+  background-color: var(--background-color);
+  padding: 30px;
+  border-radius: var(--border-radius-lg);
+  margin: 0 auto 30px;
+  box-shadow: var(--box-shadow);
+  border: 1px solid var(--border-color);
+  text-align: left; /* Ensure content within is left-aligned */
+  max-width: 750px; /* Consistent max width */
+  /* Scroll reveal transitions are at the bottom in "Page Enhancements" */
+}
+.blog-post-summary:hover {
+  box-shadow: var(--box-shadow-hover); /* Use defined hover shadow */
+}
+/* Specific to index page blog section if different */
+#blog .blog-post-summary {
+  max-width: 700px; /* Can be different if needed */
+}
+.blog-post-summary h3 {
+  font-size: 1.6rem;
+  color: var(--text-color);
+  font-weight: 700;
+  margin-bottom: 0.5rem;
+}
+.blog-post-summary p {
+  color: var(--text-color);
+  margin-bottom: 1.5rem;
+  font-size: 1rem;
+}
+.blog-post-summary .post-meta {
+  font-size: 0.85rem;
+  color: var(--secondary-text-color);
+  margin-bottom: 1rem;
+  display: block;
+}
+
+/* Contact Section */
+.contact-form {
+  max-width: 700px;
+  margin: 0 auto;
+  background: var(--background-color);
+  padding: 35px;
+  border-radius: var(--border-radius-lg);
+  border: 1px solid var(--border-color);
+  box-shadow: var(--box-shadow);
+}
+.form-group {
+  margin-bottom: 1.75rem;
+}
+.contact-form label {
+  display: block;
+  margin-bottom: 0.6rem;
+  font-weight: 600;
+  color: var(--text-color);
+}
+.contact-form input[type="email"],
+.contact-form input[type="text"],
+.contact-form textarea {
+  width: 100%;
+  padding: 0.85rem;
+  border: 1px solid var(--text-color); /* Use var(--border-color) for consistency? */
+  border-radius: var(--border-radius-md);
+  font-size: 1rem;
+  font-family: var(--font-family-main);
+  line-height: 1.5;
+  background-color: var(--background-color);
+  color: var(--text-color);
+  transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+}
+.contact-form input[type="email"]:focus,
+.contact-form input[type="text"]:focus,
+.contact-form textarea:focus {
+  border-color: var(--primary-button-bg); /* Use a theme accent for focus */
+  outline: 0;
+  box-shadow: 0 0 0 0.2rem rgba(173, 216, 230, 0.5); /* Consider variable for this */
+}
+.contact-form textarea {
+  min-height: 130px;
+  resize: vertical;
+}
+.contact-form .btn {
+  width: 100%;
+  padding: 0.85rem 1.25rem;
+  font-size: 1.1rem;
+}
+
+/* ============================================= */
+/* Footer                                      */
+/* ============================================= */
 .main-footer {
   background-color: var(--background-color);
   color: var(--text-color);
@@ -709,53 +739,60 @@ section#all-skills {
   font-size: 0.9rem;
   border-top: 1px solid var(--border-color);
 }
+.main-footer p { /* Targeting p tags directly in footer for specific styling */
+  margin-bottom: 0.5rem;
+  color: var(--text-color);
+}
 .social-icons {
   margin-bottom: 1.25rem;
 }
 .social-icons a {
   margin: 0 12px;
   color: var(--text-color);
-  font-size: 1.6rem;
-  transition: color 0.2s;
-}
-.email-copy-container,
-.main-footer p {
-  margin-bottom: 0.5rem;
-  color: var(--text-color);
+  font-size: 1.6rem; /* Base size */
+  transition: color 0.2s, transform 0.2s ease-in-out; /* Add transform transition */
+  text-decoration: none;
 }
 .social-icons a:hover {
-  color: var(--primary-button-bg);
+  color: var(--primary-button-bg); /* Or your preferred accent */
+  text-decoration: none;
+  transform: scale(1.1); /* Pop effect on hover */
+
 }
 .social-icons svg {
   width: 26px;
   height: 26px;
-  fill: currentColor;
-}
-#emailToCopy.footer-link,
-.main-footer a.footer-link {
-  color: var(--primary-button-bg);
-  font-weight: 500;
-}
-.main-footer a.footer-link:hover {
-  color: var(--primary-button-hover-bg);
+  fill: currentColor; /* Inherits color from <a> tag */
 }
 .email-copy-container {
   display: flex;
   align-items: center;
   justify-content: center;
   gap: 0.4rem;
-  margin-top: 0.5rem;
+  margin-top: 0.5rem; /* Space from copyright text */
+  margin-bottom: 0.5rem; /* Space if more content below */
+}
+#emailToCopy.footer-link, /* Specific styling for email link if needed */
+.main-footer a.footer-link { /* General footer links */
+  color: var(--primary-button-bg);
+  font-weight: 500;
+  text-decoration: none;
+}
+#emailToCopy.footer-link:hover,
+.main-footer a.footer-link:hover {
+  color: var(--primary-button-hover-bg);
+  text-decoration: underline;
 }
 .copy-button {
-  background: 0 0;
+  background: transparent;
   border: none;
   padding: 2px 4px;
   cursor: pointer;
-  line-height: 1;
+  line-height: 1; /* Prevents extra space */
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  color: var(--text-color);
+  color: var(--text-color); /* Base color */
   border-radius: var(--border-radius-sm);
 }
 .copy-button .copy-icon-svg {
@@ -765,13 +802,13 @@ section#all-skills {
   transition: stroke 0.2s ease-in-out;
 }
 .copy-button:hover .copy-icon-svg {
-  stroke: var(--primary-button-bg);
+  stroke: var(--primary-button-bg); /* Accent color on hover */
 }
 .copy-button:focus {
   outline: 1px dotted var(--primary-button-bg);
   outline-offset: 2px;
 }
-.copy-button:focus-visible {
+.copy-button:focus-visible { /* Modern focus styling */
   outline: 2px solid var(--primary-button-bg);
   outline-offset: 1px;
 }
@@ -780,122 +817,301 @@ section#all-skills {
   color: var(--accent-color-for-lines);
   font-weight: 500;
   margin-left: 0.25rem;
-  display: none;
-  animation: 2s ease-in-out fadeInOut;
+  display: none; /* Hidden initially */
+  /* animation defined below */
 }
 .copy-feedback.show {
   display: inline;
+  animation: fadeInOut 2s ease-in-out;
 }
 @keyframes fadeInOut {
-  0%,
-  100% {
+  0%, 100% { opacity: 0; }
+  10%, 90% { opacity: 1; }
+}
+
+/* ============================================= */
+/* Page Enhancements & Utilities               */
+/* ============================================= */
+
+/* Scroll Reveal Animations */
+.hero > *, /* Apply to direct children of hero for staggered effect if JS handles delay */
+.about-content, .about-image-container, /* About section elements */
+.skills-header, .skill-category, /* Skills page headers/sections */
+#resume.centered-action, #contact .contact-form, /* Other distinct sections */
+.project-card, .timeline-item, .skill-tag, .blog-post-summary {
     opacity: 0;
-  }
-  10%,
-  90% {
+    transform: translateY(30px);
+    transition: opacity 1s ease-out, transform 1s ease-out;
+}
+.hero > *.is-visible,
+.about-content.is-visible, .about-image-container.is-visible,
+.skills-header.is-visible, .skill-category.is-visible,
+#resume.centered-action.is-visible, #contact .contact-form.is-visible,
+.project-card.is-visible, .timeline-item.is-visible, .skill-tag.is-visible, .blog-post-summary.is-visible {
     opacity: 1;
-  }
+    transform: translateY(0);
 }
-@media (max-width: 991.98px) {
-  #about .container,
-  #about .section-title {
-    text-align: center;
-  }
-  .main-nav,
-  .profile-pic-nav {
-    display: none;
-  }
-  .hamburger-menu {
-    display: block;
-  }
-  .hero h1 {
-    font-size: 2.6rem;
-  }
-  .hero p {
-    font-size: 1.1rem;
-  }
-  .section-title {
-    font-size: 2rem;
-  }
-  #about .container {
-    flex-direction: column;
-  }
-  #about .section-title::after {
-    margin: 15px auto 0;
-  }
-  .about-image-container {
-    margin-bottom: 30px;
-  }
-  .skills-header h1 {
-    font-size: 2.4rem;
-  }
-  .skill-category h3 {
-    font-size: 1.5rem;
-  }
+
+/* Back to Top Button */
+#backToTopBtn {
+    display: none; /* Hidden by default, JS will show it */
+    position: fixed;
+    bottom: 25px;
+    right: 25px;
+    z-index: 999; /* High z-index */
+    border: none;
+    outline: none;
+    background-color: var(--primary-button-bg);
+    cursor: pointer;
+    padding: 10px; /* Adjust for SVG size */
+    border-radius: 50%; /* Circular button */
+    box-shadow: var(--box-shadow-lg); /* More pronounced shadow */
+    font-size: 0; /* Remove space for text if SVG is only child */
+    line-height: 0; /* Helps center SVG */
+    transition: background-color 0.3s, opacity 0.3s, transform 0.2s ease-out;
 }
-@media (max-width: 767.98px) {
-  .main-header .container {
-    align-items: center;
+#backToTopBtn:hover {
+    background-color: var(--primary-button-hover-bg);
+    transform: translateY(-2px); /* Slight lift on hover */
+}
+#backToTopBtn svg {
+    width: 20px;   /* Adjust as needed */
+    height: 20px;  /* Adjust as needed */
+    stroke: var(--text-color); /* For stroke-based SVGs */
+    /* fill: var(--text-color); /* For fill-based SVGs */
+    display: block; /* Helps with layout within button */
+}
+
+
+/* ============================================= */
+/* Dark Theme Overrides                        */
+/* ============================================= */
+[data-theme="dark"] {
+    --primary-button-bg: #4A90E2;
+    --primary-button-hover-bg: #357ABD;
+    --text-color: #e4e6eb;
+    --background-color: #18191a;
+    --secondary-text-color: #b0b3b8;
+    --border-color: #3a3b3c;
+    --accent-color-for-lines: #4A90E2;
+
+    --skill-tag-bg: #242526;
+    --skill-tag-text: #e4e6eb;
+    --skill-tag-hover-bg: #4A90E2;
+    --skill-tag-hover-text: #ffffff;
+
+    --box-shadow: 0 0.25rem 0.75rem rgba(0, 0, 0, 0.3);
+    --box-shadow-lg: 0 0.5rem 1.5rem rgba(0, 0, 0, 0.35);
+    --box-shadow-hover: 0 0.75rem 2rem rgba(0,0,0,0.4);
+
+    /* Update logo color variable for dark theme */
+    /* --logo-color-light is not used here; --logo-color-dark is already set in :root */
+    /* This ensures .logo and .logo svg automatically use --logo-color-dark due to CSS inheritance. */
+    /* The direct override below is more explicit if needed. */
+}
+
+/* Specific Dark Theme Component Adjustments */
+[data-theme="dark"] .btn {
+    color: var(--primary-button-text-color-dark); /* Ensure button text is light */
+}
+[data-theme="dark"] .btn-secondary {
+    border-color: var(--text-color);
+    color: var(--text-color);
+}
+[data-theme="dark"] .btn-secondary:hover,
+[data-theme="dark"] .skills-list li:hover {
+    background-color: var(--text-color);
+    color: var(--background-color);
+    border-color: var(--text-color);
+}
+[data-theme="dark"] .btn-outline-primary {
+    color: var(--text-color);
+    background-color: transparent; /* Or var(--background-color) if preferred */
+    border-color: var(--text-color);
+}
+[data-theme="dark"] .btn-outline-primary:hover {
+    color: var(--background-color);
+    background-color: var(--text-color);
+    border-color: var(--text-color);
+}
+
+[data-theme="dark"] .logo,
+[data-theme="dark"] .logo svg {
+    color: var(--logo-color-dark);
+    fill: var(--logo-color-dark);
+}
+
+[data-theme="dark"] .main-header,
+[data-theme="dark"] .mobile-nav-panel li a { /* Combined border for header and mobile nav links */
+    border-bottom-color: var(--border-color);
+}
+[data-theme="dark"] .mobile-nav-panel {
+    background-color: var(--background-color);
+}
+[data-theme="dark"] .mobile-nav-panel li a.active,
+[data-theme="dark"] .mobile-nav-panel li a:hover {
+  background-color: #242526;
+  color: var(--accent-color-for-lines);
+}
+[data-theme="dark"] .main-nav a,
+[data-theme="dark"] .mobile-nav-panel li a {
+    color: var(--text-color);
+}
+[data-theme="dark"] .main-nav a.active,
+[data-theme="dark"] .main-nav a:hover {
+  color: var(--accent-color-for-lines);
+}
+[data-theme="dark"] .main-nav a::after {
+  background: var(--accent-color-for-lines);
+}
+[data-theme="dark"] .hamburger-menu .bar {
+    background-color: var(--text-color);
+}
+[data-theme="dark"] .theme-toggle-button { /* Theme toggle icon color in dark mode */
+    color: var(--text-color);
+}
+[data-theme="dark"] .theme-toggle-button .sun-icon { display: none; }
+[data-theme="dark"] .theme-toggle-button .moon-icon { display: inline-block; }
+
+
+[data-theme="dark"] .project-card,
+[data-theme="dark"] .blog-post-summary,
+[data-theme="dark"] .contact-form,
+[data-theme="dark"] .about-profile-pic { /* Ensure profile pic border matches dark bg */
+    border-color: var(--border-color);
+}
+[data-theme="dark"] .project-card h3,
+[data-theme="dark"] .blog-post-summary h3 {
+    color: var(--text-color); /* Already covered by general h3 but explicit */
+}
+
+[data-theme="dark"] .timeline::before {
+    background-color: #555;
+}
+[data-theme="dark"] .timeline-icon {
+    background-color: var(--primary-button-bg); /* Use themed button color */
+    color: var(--primary-button-text-color-dark); /* Ensure icon contrast */
+    border-color: var(--background-color); /* Match dark page background */
+}
+[data-theme="dark"] .timeline-item .company-school {
+    color: #c0c0c0; /* Lighter for readability */
+}
+
+[data-theme="dark"] .contact-form label {
+    color: var(--text-color);
+}
+[data-theme="dark"] .contact-form input[type="email"],
+[data-theme="dark"] .contact-form input[type="text"],
+[data-theme="dark"] .contact-form textarea {
+  background-color: #242526;
+  color: var(--text-color);
+  border-color: #555; /* Darker border */
+}
+[data-theme="dark"] .contact-form input[type="email"]:focus,
+[data-theme="dark"] .contact-form input[type="text"]:focus,
+[data-theme="dark"] .contact-form textarea:focus {
+  border-color: var(--accent-color-for-lines);
+  box-shadow: 0 0 0 0.2rem rgba(74, 144, 226, 0.25);
+}
+
+[data-theme="dark"] .skills-header p { /* Skills page paragraph */
+    color: var(--secondary-text-color);
+}
+[data-theme="dark"] .skill-category h3 {
+    border-bottom-color: var(--border-color);
+}
+
+[data-theme="dark"] .main-footer {
+    border-top-color: var(--border-color);
+}
+[data-theme="dark"] .social-icons a {
+    color: var(--text-color);
+}
+[data-theme="dark"] .social-icons a:hover {
+    color: var(--accent-color-for-lines);
+}
+[data-theme="dark"] .copy-button .copy-icon-svg {
+    stroke: var(--secondary-text-color);
+}
+[data-theme="dark"] .copy-button:hover .copy-icon-svg {
+    stroke: var(--accent-color-for-lines);
+}
+[data-theme="dark"] #emailToCopy.footer-link,
+[data-theme="dark"] .main-footer a.footer-link {
+    color: var(--accent-color-for-lines);
+}
+[data-theme="dark"] #emailToCopy.footer-link:hover,
+[data-theme="dark"] .main-footer a.footer-link:hover {
+    color: #6eb1f7; /* Slightly lighter accent */
+}
+
+[data-theme="dark"] #backToTopBtn {
+    background-color: var(--primary-button-bg);
+}
+[data-theme="dark"] #backToTopBtn:hover {
+    background-color: var(--primary-button-hover-bg);
+}
+[data-theme="dark"] #backToTopBtn svg {
+    stroke: var(--primary-button-text-color-dark);
+    /* fill: var(--primary-button-text-color-dark); /* For fill-based */
+}
+
+
+/* ============================================= */
+/* Media Queries (Responsive Design)           */
+/* ============================================= */
+@media (max-width: 991.98px) { /* Tablet and smaller */
+  .main-nav { display: none; }
+  .hamburger-menu { display: block; order: 3; margin-left: 0; } /* Order after theme toggle */
+  .logo { margin-right: 0; order: 1; } /* Logo first */
+  .theme-toggle-button {
+    order: 2; /* Theme toggle second */
+    margin-left: auto; /* Push it right, away from logo */
+    margin-right: 10px; /* Space before hamburger */
   }
-  .logo {
-    margin-bottom: 0;
-  }
-  .hero {
-    padding: 70px 0;
-  }
-  .hero h1,
-  .skills-header h1 {
-    font-size: 2rem;
-  }
-  .hero p,
-  .skills-header p {
-    font-size: 1rem;
-  }
-  section {
-    padding: 60px 0;
-  }
-  .section-title {
-    font-size: 1.8rem;
-    margin-bottom: 40px;
-  }
-  .projects-grid {
-    grid-template-columns: 1fr;
-  }
-  .timeline::before {
-    left: 15px;
-  }
-  .timeline-item {
-    padding-left: 50px;
-  }
-  .timeline-icon {
-    width: 36px;
-    height: 36px;
-    left: -2px;
-  }
-  .timeline-icon svg {
-    width: 18px;
-    height: 18px;
-  }
-  .contact-form {
-    padding: 25px;
-  }
-  .blog-post-summary {
-    padding: 20px;
-  }
-  .blog-post-summary h3 {
-    font-size: 1.4rem;
-  }
-  section#all-skills {
-    padding: 40px 0;
-  }
-  .skills-header {
-    text-align: center;
-  }
-  .skill-category h3 {
-    font-size: 1.3rem;
-    text-align: center;
-  }
-  .skills-grid {
-    justify-content: center;
-  }
+
+  .hero h1 { font-size: 2.6rem; }
+  .hero p { font-size: 1.1rem; }
+  .section-title { font-size: 2rem; }
+
+  #about .container { flex-direction: column; text-align: center; }
+  #about .section-title { text-align: center; margin-left: auto; margin-right: auto; }
+  #about .section-title::after { margin: 15px auto 0; }
+  .about-image-container { margin-bottom: 30px; }
+
+  .skills-header h1 { font-size: 2.4rem; }
+  .skill-category h3 { font-size: 1.5rem; }
+
+  /* Removed .profile-pic-nav as it's not in HTML */
+}
+
+@media (max-width: 767.98px) { /* Mobile */
+  /* .main-header .container { align-items: center; } /* Already set */
+  /* .logo { margin-bottom: 0; } /* Already handled by flex align-items */
+
+  .hero { padding: 70px 0; }
+  .hero h1, .skills-header h1 { font-size: 2rem; }
+  .hero p, .skills-header p { font-size: 1rem; }
+
+  section { padding: 60px 0; }
+  .section-title { font-size: 1.8rem; margin-bottom: 40px; }
+
+  .projects-grid { grid-template-columns: 1fr; }
+
+  .timeline::before { left: 15px; }
+  .timeline-item { padding-left: 50px; }
+  .timeline-icon { width: 36px; height: 36px; left: -2px; /* Adjust to align with thinner line */ }
+  .timeline-icon svg { width: 18px; height: 18px; }
+
+  .contact-form { padding: 25px; }
+  .blog-post-summary { padding: 20px; }
+  .blog-post-summary h3 { font-size: 1.4rem; }
+
+  section#all-skills { padding: 40px 0; }
+  .skills-header { text-align: center; } /* Center on mobile */
+  .skill-category h3 { font-size: 1.3rem; text-align: center; }
+  .skills-grid { justify-content: center; } /* Center tags on mobile if they don't fill width */
+
+  #backToTopBtn { bottom: 15px; right: 15px; padding: 8px; } /* Smaller and less padding on mobile */
+  #backToTopBtn svg { width: 32px; height: 32px; }
 }

@@ -36,6 +36,25 @@
                 </ul>
             </nav>
 
+            <!-- ADD THEME TOGGLE BUTTON HERE -->
+            <button id="theme-toggle" class="theme-toggle-button" aria-label="Switch to dark mode" title="Toggle theme">
+                <svg class="sun-icon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+    <circle cx="12" cy="12" r="5"></circle>
+    <line x1="12" y1="1" x2="12" y2="3"></line>
+    <line x1="12" y1="21" x2="12" y2="23"></line>
+    <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+    <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+    <line x1="1" y1="12" x2="3" y2="12"></line>
+    <line x1="21" y1="12" x2="23" y2="12"></line>
+    <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+    <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+</svg>
+                <svg class="moon-icon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+</svg>
+            </button>
+            <!-- END THEME TOGGLE BUTTON -->
+
             <button class="hamburger-menu" aria-label="Toggle menu" aria-expanded="false">
                 <span class="bar"></span>
                 <span class="bar"></span>
@@ -128,138 +147,7 @@
                             </div>
                         </div>
                     </div>
-                    <!-- Project 6 -->
-                    <div class="project-card">
-                        <img src="assets/bg2.jpg" loading="lazy" alt="Project Zeta Thumbnail" class="project-image">
-                        <div class="project-card-content">
-                            <h3>Project Zeta: Cloud File Storage</h3>
-                            <p>A secure cloud file storage and sharing platform, leveraging AWS S3 and Lambda functions. Features user authentication, file versioning, and access control.</p>
-                            <div class="project-card-actions">
-                                <a href="#" class="btn">Explore</a>
-                                <a href="#" class="btn btn-secondary" style="margin-left: 10px;">Architecture</a>
-                            </div>
-                        </div>
-                    </div>
-                    <!-- Project 7 -->
-                    <div class="project-card">
-                        <img src="assets/bg3.jpg" loading="lazy" alt="Project Eta Thumbnail" class="project-image">
-                        <div class="project-card-content">
-                            <h3>Project Eta: Indie Game "Pixel Quest"</h3>
-                            <p>A 2D platformer game developed using the Godot Engine and GDScript. Features procedurally generated levels and unique pixel art style.</p>
-                            <div class="project-card-actions">
-                                <a href="#" class="btn">Play Game</a>
-                                <a href="#" class="btn btn-secondary" style="margin-left: 10px;">DevLog</a>
-                            </div>
-                        </div>
-                    </div>
-                    <!-- Project 8 -->
-                    <div class="project-card">
-                        <img src="assets/bg4.jpg" loading="lazy" alt="Project Theta Thumbnail" class="project-image">
-                        <div class="project-card-content">
-                            <h3>Project Theta: Real-time Stock Visualizer</h3>
-                            <p>A web application that fetches and displays real-time stock market data using WebSockets and D3.js for dynamic charting and analysis.</p>
-                            <div class="project-card-actions">
-                                <a href="#" class="btn">View Dashboard</a>
-                                <a href="#" class="btn btn-secondary" style="margin-left: 10px;">Source</a>
-                            </div>
-                        </div>
-                    </div>
-                    <!-- Project 9 -->
-                    <div class="project-card">
-                        <img src="assets/bg1.jpg" loading="lazy" alt="Project Iota Thumbnail" class="project-image">
-                        <div class="project-card-content">
-                            <h3>Project Iota: Community Forum Platform</h3>
-                            <p>A full-stack forum application built with Django and PostgreSQL. Supports user profiles, threaded discussions, moderation tools, and rich text editing.</p>
-                            <div class="project-card-actions">
-                                <a href="#" class="btn">Join Forum</a>
-                                <a href="#" class="btn btn-secondary" style="margin-left: 10px;">GitHub</a>
-                            </div>
-                        </div>
-                    </div>
-                    <!-- Project 10 -->
-                    <div class="project-card">
-                        <img src="assets/bg2.jpg" loading="lazy" alt="Project Kappa Thumbnail" class="project-image">
-                        <div class="project-card-content">
-                            <h3>Project Kappa: Machine Learning Model for Sentiment Analysis</h3>
-                            <p>A Python-based machine learning model trained to perform sentiment analysis on text data. Utilizes Scikit-learn and Pandas for data processing and model evaluation.</p>
-                            <div class="project-card-actions">
-                                <a href="#" class="btn">Test Model</a>
-                                <a href="#" class="btn btn-secondary" style="margin-left: 10px;">Paper</a>
-                            </div>
-                        </div>
-                    </div>
-                    <!-- Project 11 -->
-                    <div class="project-card">
-                        <img src="assets/bg3.jpg" loading="lazy" alt="Project Lambda Thumbnail" class="project-image">
-                        <div class="project-card-content">
-                            <h3>Project Lambda: Online Code Editor</h3>
-                            <p>A browser-based code editor with syntax highlighting for multiple languages, real-time collaboration features, and code execution capabilities for simple scripts.</p>
-                            <div class="project-card-actions">
-                                <a href="#" class="btn">Open Editor</a>
-                                <a href="#" class="btn btn-secondary" style="margin-left: 10px;">Repo</a>
-                            </div>
-                        </div>
-                    </div>
-                    <!-- Project 12 -->
-                    <div class="project-card">
-                        <img src="assets/bg4.jpg" loading="lazy" alt="Project Mu Thumbnail" class="project-image">
-                        <div class="project-card-content">
-                            <h3>Project Mu: Augmented Reality Product Visualizer</h3>
-                            <p>An AR mobile app (Android/iOS) that allows users to visualize furniture and home decor products in their own space. Built with Unity and ARCore/ARKit.</p>
-                            <div class="project-card-actions">
-                                <a href="#" class="btn">Download App</a>
-                                <a href="#" class="btn btn-secondary" style="margin-left: 10px;">Case Study</a>
-                            </div>
-                        </div>
-                    </div>
-                    <!-- Project 13 -->
-                    <div class="project-card">
-                        <img src="assets/bg1.jpg" loading="lazy" alt="Project Nu Thumbnail" class="project-image">
-                        <div class="project-card-content">
-                            <h3>Project Nu: Event Ticketing System</h3>
-                            <p>A web platform for creating, managing, and selling tickets for events. Includes QR code generation, attendee management, and Stripe integration for payments.</p>
-                            <div class="project-card-actions">
-                                <a href="#" class="btn">Browse Events</a>
-                                <a href="#" class="btn btn-secondary" style="margin-left: 10px;">GitHub</a>
-                            </div>
-                        </div>
-                    </div>
-                    <!-- Project 14 -->
-                    <div class="project-card">
-                        <img src="assets/bg2.jpg" loading="lazy" alt="Project Xi Thumbnail" class="project-image">
-                        <div class="project-card-content">
-                            <h3>Project Xi: Travel Itinerary Planner</h3>
-                            <p>An AI-powered travel planner that suggests itineraries based on user preferences, budget, and time constraints. Uses Next.js and integrates with various travel APIs.</p>
-                            <div class="project-card-actions">
-                                <a href="#" class="btn">Plan Trip</a>
-                                <a href="#" class="btn btn-secondary" style="margin-left: 10px;">Source Code</a>
-                            </div>
-                        </div>
-                    </div>
-                    <!-- Project 15 -->
-                    <div class="project-card">
-                        <img src="assets/bg3.jpg" loading="lazy" alt="Project Omicron Thumbnail" class="project-image">
-                        <div class="project-card-content">
-                            <h3>Project Omicron: Music Streaming Service UI</h3>
-                            <p>A sleek user interface concept for a music streaming service, designed with Figma and implemented using HTML, CSS, and vanilla JavaScript for interactivity.</p>
-                            <div class="project-card-actions">
-                                <a href="#" class="btn">View UI</a>
-                                <a href="#" class="btn btn-secondary" style="margin-left: 10px;">Figma Link</a>
-                            </div>
-                        </div>
-                    </div>
-                    <!-- Project 16 -->
-                    <div class="project-card">
-                        <img src="assets/bg4.jpg" loading="lazy" alt="Project Pi Thumbnail" class="project-image">
-                        <div class="project-card-content">
-                            <h3>Project Pi: Cybersecurity Training Module</h3>
-                            <p>An interactive e-learning module focused on common cybersecurity threats and best practices for end-users. Developed with Articulate Storyline and SCORM compliant.</p>
-                            <div class="project-card-actions">
-                                <a href="#" class="btn">Start Module</a>
-                                <a href="#" class="btn btn-secondary" style="margin-left: 10px;">Details</a>
-                            </div>
-                        </div>
-                    </div>
+
 
                 </div>
             </div>
