@@ -1,343 +1,304 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
+<head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Anay Gawate - Portfolio</title>
-    <link rel="icon" href="assets/svgfav.svg" type="image/svg+xml">
-    <!-- INLINE SCRIPT TO PREVENT THEME FLASH -->
-    <script>
-      (function() {
-        let themeToApply = 'light'; // Default to light unless specified otherwise
-        const savedTheme = localStorage.getItem('theme');
-        if (savedTheme) {
-          themeToApply = savedTheme; // User has a saved preference
-        } else {
-          // No saved theme, default to 'dark' as per your requirement
-          themeToApply = 'dark';
-        }
-        if (themeToApply === 'dark') {
-          document.documentElement.setAttribute('data-theme', 'dark');
-        }
-        // If themeToApply is 'light', the data-theme attribute is not set,
-        // and your CSS will default to light mode.
-      })();
-    </script>
-    <!-- END INLINE SCRIPT -->
+    <title>Anay Gawate | Web & Software Developer</title>
+    <meta name="description" content="Explore the portfolio of Anay Gawate, a passionate Computer Science student specializing in web development, software engineering, and innovative tech solutions.">
+    <link rel="icon" href="https://anay.pages.dev/assets/svgfav.svg" type="image/svg+xml">
+
+    <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;700&family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+    
+    <!-- Font Awesome (for icons) -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+    <!-- Your Stylesheet -->
     <link rel="stylesheet" href="style.css">
-    <meta name="description" content="Explore the portfolio of Anay Gawate, a passionate Computer Science student specializing in web development, software engineering, and innovative tech solutions. View my projects and skills.">
-  </head>
-  <body>
-    <button id="backToTopBtn" title="Go to top">
-      <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-        <circle cx="12" cy="12" r="10"></circle>
-        <polyline points="16 12 12 8 8 12"></polyline>
-        <line x1="12" y1="16" x2="12" y2="8"></line>
-      </svg>
-    </button>
-    <header class="main-header">
-      <div class="container">
-        <a href="#" class="logo">
-          <img src="assets/svgfav.svg" alt="logo" height="30px" width="30px" style="margin-right: 15px;"> Anay Gawate </a>
-        <nav class="main-nav">
-          <ul>
-            <li>
-              <a href="#about" class="active">About</a>
-            </li>
-            <li>
-              <a href="#projects">Projects</a>
-            </li>
-            <li>
-              <a href="#skills">Skills</a>
-            </li>
-            <li>
-              <a href="#experience">Experience</a>
-            </li>
-            <li>
-              <a href="#education">Education</a>
-            </li>
-            <li>
-              <a href="#contact">Contact</a>
-            </li>
-            <li>
-              <a href="#blog">Blog</a>
-            </li>
-          </ul>
-        </nav>
-        <!-- ADD THEME TOGGLE BUTTON HERE -->
-        <button id="theme-toggle" class="theme-toggle-button" aria-label="Switch to dark mode" title="Toggle theme">
-          <svg class="sun-icon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-            <circle cx="12" cy="12" r="5"></circle>
-            <line x1="12" y1="1" x2="12" y2="3"></line>
-            <line x1="12" y1="21" x2="12" y2="23"></line>
-            <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
-            <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
-            <line x1="1" y1="12" x2="3" y2="12"></line>
-            <line x1="21" y1="12" x2="23" y2="12"></line>
-            <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
-            <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
-          </svg>
-          <svg class="moon-icon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-            <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
-          </svg>
-        </button>
-        <!-- END THEME TOGGLE BUTTON -->
-        <button class="hamburger-menu" aria-label="Toggle menu" aria-expanded="false">
-          <span class="bar"></span>
-          <span class="bar"></span>
-          <span class="bar"></span>
-        </button>
-      </div>
+</head>
+<body>
+
+    <!-- HEADER -->
+    <header class="header">
+        <div class="header-container">
+            <a href="#" class="logo">A<span>/</span>G</a>
+            <nav class="navbar">
+                <a href="#about" class="nav-link">About</a>
+                <a href="projects.html" class="nav-link">Projects</a>
+                <a href="skills.html" class="nav-link">Skills</a>
+                <a href="#experience" class="nav-link">Experience</a>
+                <a href="#education-heading" class="nav-link" id="education-nav-link">Education</a>
+                <a href="#contact" class="nav-link">Contact</a>
+            </nav>
+            <button class="hamburger" aria-label="Open menu">
+                <div class="bar"></div>
+                <div class="bar"></div>
+                <div class="bar"></div>
+            </button>
+        </div>
     </header>
-    <div class="mobile-nav-panel">
-      <ul>
-        <li>
-          <a href="#about">About</a>
-        </li>
-        <li>
-          <a href="#projects">Projects</a>
-        </li>
-        <li>
-          <a href="#skills">Skills</a>
-        </li>
-        <li>
-          <a href="#experience">Experience</a>
-        </li>
-        <li>
-          <a href="#education">Education</a>
-        </li>
-        <li>
-          <a href="#contact">Contact</a>
-        </li>
-        <li>
-          <a href="#blog">Blog</a>
-        </li>
-      </ul>
-    </div>
+
     <main>
-      <section class="hero">
-        <canvas id="hero-particles-canvas"></canvas>
-        <!-- Added for particle animation -->
-        <div class="container">
-          <h1>Hello, I'm Anay</h1>
-          <p>I build fast, beautiful web apps. I am dedicated to crafting innovative solutions and continuously learning in the evolving tech landscape. Here’s my work!</p>
-          <div class="hero-actions">
-            <a href="#projects" class="btn btn-lg">View My Work</a>
-            <a href="assets/functionalsample.pdf" class="btn btn-lg btn-secondary btn-icon" download="functionalsample.pdf"> Download Resume <svg class="btn-svg-icon" xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
-                <polyline points="7 10 12 15 17 10"></polyline>
-                <line x1="12" y1="15" x2="12" y2="3"></line>
-              </svg>
-            </a>
-          </div>
-          <div class="social-icons" id="social-icon-pack">
-            <a href="https://www.linkedin.com/in/anaygawate/" aria-label="LinkedIn" title="LinkedIn" target="_blank">
-              <svg viewBox="0 0 24 24">
-                <path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z" />
-              </svg>
-            </a>
-            <a href="https://github.com/pixelanay" aria-label="GitHub" title="GitHub" target="_blank">
-              <svg viewBox="0 0 24 24">
-                <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z" />
-              </svg>
-            </a>
-            <a href="https://x.com/pixelanay" aria-label="Twitter" title="Twitter" target="_blank">
-              <svg viewBox="0 0 24 24">
-                <path d="M24 4.557c-.883.392-1.832.656-2.828.775 1.017-.609 1.798-1.574 2.165-2.724-.951.564-2.005.974-3.127 1.195-.897-.957-2.178-1.555-3.594-1.555-3.179 0-5.515 2.966-4.797 6.045-4.091-.205-7.719-2.165-10.148-5.144-.424.728-.666 1.581-.666 2.477 0 1.61.823 3.027 2.068 3.855-.76-.025-1.474-.234-2.101-.583v.06c0 2.247 1.592 4.123 3.7 4.557-.538.146-1.127.179-1.732.064.579 1.909 2.307 3.183 4.341 3.221-1.709 1.343-3.877 2.063-6.233 2.063-.399 0-.793-.023-1.175-.068 2.209 1.427 4.833 2.256 7.646 2.256 9.18 0 14.207-7.843 13.898-14.646.995-.718 1.852-1.616 2.538-2.634z" />
-              </svg>
-            </a>
-          </div>
-        </div>
-      </section>
-      <section id="about">
-        <div class="container">
-          <div class="about-image-container">
-            <img src="assets/profile.jpg" alt="Anay - Profile Picture" class="about-profile-pic">
-          </div>
-          <div class="about-content">
-            <h2 class="section-title">About Me</h2>
-            <p>I am currently pursuing a Btech in Computer Science.</p>
-            <p>I thrive on building real stuff that works, from full-stack web apps to AI Interfaces. Whether it's solving technical puzzles, designing for humans, or digging through data, I'm all in. I’m here to contribute to teams that build stuff.</p>
-          </div>
-        </div>
-      </section>
-      <section id="projects">
-        <div class="container">
-          <h2 class="section-title">Featured Projects</h2>
-          <div class="projects-grid">
-            <div class="project-card">
-              <img src="assets/bg1.jpg" loading="lazy" alt="placeholder image" class="project-image">
-              <div class="project-card-content">
-                <h3>Offline Reddit</h3>
-                <p>A full-featured reddit content downloader built with modern technologies. Focused on a clean UI and robust backend.</p>
-                <div class="project-card-actions">
-                  <a href="https://github.com/pixelanay/OfflineReddit" class="btn btn-secondary">View Code</a>
+        <!-- HERO SECTION -->
+        <section class="hero" id="home">
+            <div class="starfield">
+                <div class="stars1"></div>
+                <div class="stars2"></div>
+                <div class="stars3"></div>
+            </div>
+            <div class="hero-content">
+                <h1 class="hero-title" data-text-split>Hello, I'm Anay</h1>
+                <p class="hero-subtitle">I build fast, beautiful web apps. I am dedicated to crafting innovative solutions and continuously learning in the evolving tech landscape. Here’s my work!</p>
+                <div class="hero-actions">
+                    <a href="#work" class="btn btn-primary interactive">View My Work</a>
+                    <a href="https://anay.pages.dev/assets/functionalsample.pdf" class="btn btn-secondary interactive" download="AnayGawate-Resume.pdf">
+                        Download Resume <i class="fas fa-download"></i>
+                    </a>
                 </div>
-              </div>
-            </div>
-            <div class="project-card">
-              <img src="assets/bg2.jpg" loading="lazy" alt="placeholder image" class="project-image">
-              <div class="project-card-content">
-                <h3>Retro BrowserOS</h3>
-                <p>An interactive web dashboard designed for as a interface to mimic operating system.</p>
-                <div class="project-card-actions">
-                  <a href="https://pixelanay.github.io/OS" class="btn">Live Site</a>
-                  <a href="https://github.com/PixelAnay/OS" class="btn btn-secondary" style="margin-left: 10px;">View Code</a>
+                 <div class="hero-socials">
+                    <a href="https://www.linkedin.com/in/anaygawate/" aria-label="LinkedIn" target="_blank"><i class="fab fa-linkedin-in"></i></a>
+                    <a href="https://github.com/pixelanay" aria-label="GitHub" target="_blank"><i class="fab fa-github"></i></a>
                 </div>
-              </div>
             </div>
-          </div>
-          <div class="see-all-container">
-            <a href="projects.html" class="btn btn-lg btn-secondary">See All Projects</a>
-          </div>
+        </section>
+
+        <!-- ABOUT SECTION -->
+        <section class="content-section" id="about">
+            <div class="container">
+                <h2 class="section-title">01 <span>//</span> About Me</h2>
+                <div class="about-content">
+                    <div class="about-text">
+                        <p>I am currently pursuing a B.Tech in Computer Science. I thrive on building real stuff that works, from full-stack web apps to AI Interfaces. Whether it's solving technical puzzles, designing for humans, or digging through data, I'm all in. I’m here to contribute to teams that build great products.</p>
+                    </div>
+                    <div class="about-image interactive">
+                        <img src="https://anay.pages.dev/assets/profile.jpg" alt="A photo of Anay Gawate">
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- WORK SECTION -->
+        <section class="content-section" id="work">
+            <div class="container">
+                <h2 class="section-title">02 <span>//</span> Featured Projects</h2>
+                
+                <div class="work-accordion">
+                    <div class="accordion-item">
+                        <div class="accordion-item__title" role="button" aria-expanded="false" aria-controls="project-1-content">
+                            <div>
+                                <h3>Offline Reddit</h3>
+                                <p>A full-featured Reddit content downloader</p>
+                            </div>
+                            <span class="toggle-icon"></span>
+                        </div>
+                        <div class="accordion-item__content" id="project-1-content">
+                            <div class="accordion-item__details">
+                                <p class="accordion-item__description">A robust desktop application built with modern technologies, focused on a clean UI and a powerful backend for downloading Reddit content for offline viewing.</p>
+                                <div class="project-links">
+                                     <a href="https://github.com/pixelanay/OfflineReddit" class="btn btn-secondary interactive" target="_blank">View Code <i class="fab fa-github"></i></a>
+                                </div>
+                            </div>
+                            <div class="accordion-item__gallery">
+                                <div class="gallery-image-wrapper">
+                                    <img src="https://anay.pages.dev/assets/bg1.jpg" alt="Project Image 1">
+                                    <button class="enlarge-btn" aria-label="Enlarge image"><i class="fas fa-expand"></i></button>
+                                </div>
+                                <div class="gallery-image-wrapper">
+                                    <img src="https://anay.pages.dev/assets/bg2.jpg" alt="Project Image 2">
+                                    <button class="enlarge-btn" aria-label="Enlarge image"><i class="fas fa-expand"></i></button>
+                                </div>
+                                <div class="gallery-image-wrapper">
+                                    <img src="https://anay.pages.dev/assets/bg3.jpg" alt="Project Image 1">
+                                    <button class="enlarge-btn" aria-label="Enlarge image"><i class="fas fa-expand"></i></button>
+                                </div>
+                                 <div class="gallery-image-wrapper">
+                                    <img src="https://anay.pages.dev/assets/bg4.jpg" alt="Project Image 2">
+                                    <button class="enlarge-btn" aria-label="Enlarge image"><i class="fas fa-expand"></i></button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="accordion-item">
+                        <div class="accordion-item__title" role="button" aria-expanded="false" aria-controls="project-2-content">
+                            <div>
+                                <h3>Retro BrowserOS</h3>
+                                <p>Interactive web-based operating system</p>
+                            </div>
+                            <span class="toggle-icon"></span>
+                        </div>
+                         <div class="accordion-item__content" id="project-2-content">
+                            <div class="accordion-item__details">
+                                <p class="accordion-item__description">An interactive web dashboard designed to mimic a retro-style operating system, showcasing dynamic UI elements and creative frontend development.</p>
+                                <div class="project-links">
+                                     <a href="https://pixelanay.github.io/OS" class="btn btn-secondary interactive" target="_blank">Live Site <i class="fas fa-arrow-up-right-from-square"></i></a>
+                                     <a href="https://github.com/PixelAnay/OS" class="btn btn-secondary interactive" target="_blank">View Code <i class="fab fa-github"></i></a>
+                                </div>
+                            </div>
+                            <div class="accordion-item__gallery">
+                               <div class="gallery-image-wrapper">
+                                    <img src="https://anay.pages.dev/assets/bg3.jpg" alt="Project Image 1">
+                                    <button class="enlarge-btn" aria-label="Enlarge image"><i class="fas fa-expand"></i></button>
+                                </div>
+                                 <div class="gallery-image-wrapper">
+                                    <img src="https://anay.pages.dev/assets/bg4.jpg" alt="Project Image 2">
+                                    <button class="enlarge-btn" aria-label="Enlarge image"><i class="fas fa-expand"></i></button>
+                                 </div>
+                                   <div class="gallery-image-wrapper">
+                                    <img src="https://anay.pages.dev/assets/bg1.jpg" alt="Project Image 1">
+                                    <button class="enlarge-btn" aria-label="Enlarge image"><i class="fas fa-expand"></i></button>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                 <div class="see-all-container">
+                    <!-- UPDATED LINK -->
+                    <a href="projects.html" class="btn btn-secondary interactive">See All Projects</a>
+                </div>
+            </div>
+        </section>
+
+        <!-- SKILLS SECTION -->
+        <section class="content-section" id="skills">
+            <div class="container">
+                <h2 class="section-title">03 <span>//</span> Technical Skills</h2>
+                <ul class="skills-list">
+                    <li class="interactive">Java</li>
+                    <li class="interactive">Python</li>
+                    <li class="interactive">JavaScript</li>
+                    <li class="interactive">React.js</li>
+                    <li class="interactive">HTML5 & CSS3</li>
+                    <li class="interactive">SASS</li>
+                    <li class="interactive">SQL</li>
+                    <li class="interactive">Git & GitHub</li>
+                    <li class="interactive">Data Structures</li>
+                    <li class="interactive">Algorithms</li>
+                    <li class="interactive">Figma</li>
+                    <li class="interactive">Webflow</li>
+                </ul>
+                <div class="see-all-container">
+                    <!-- UPDATED LINK -->
+                    <a href="skills.html" class="btn btn-secondary interactive">View All Skills</a>
+                </div>
+            </div>
+        </section>
+
+        <!-- EXPERIENCE & EDUCATION SECTION -->
+        <section class="content-section" id="experience">
+            <div class="container">
+                <div class="dual-section-container">
+                    <div class="timeline-column">
+                        <h2 class="section-title">04 <span>//</span> Experience</h2>
+                        <div class="timeline">
+                            <div class="timeline-item">
+                                <div class="timeline-icon"><i class="fas fa-briefcase"></i></div>
+                                <h3>Software Engineering Intern</h3>
+                                <span class="company-school">Innovatech Solutions Ltd.</span>
+                                <span class="date">Summer 2023</span>
+                                <p>Contributed to the development of a new client portal using Angular and Spring Boot, enhancing front-end performance and user experience.</p>
+                            </div>
+                            <div class="timeline-item">
+                                <div class="timeline-icon"><i class="fas fa-chalkboard-user"></i></div>
+                                <h3>Teaching Assistant</h3>
+                                <span class="company-school">State University, CS Dept.</span>
+                                <span class="date">Fall 2022 - Spring 2023</span>
+                                <p>Assisted professors in teaching foundational programming concepts in Python to over 100 students, leading lab sessions and grading assignments.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="timeline-column">
+                        <h2 class="section-title" id="education-heading">05 <span>//</span> Education</h2>
+                        <div class="timeline">
+                             <div class="timeline-item">
+                                <div class="timeline-icon"><i class="fas fa-graduation-cap"></i></div>
+                                <h3>B.Sc. in Computer Science</h3>
+                                <span class="company-school">State University</span>
+                                <span class="date">Expected May 2029</span>
+                                <p>Relevant Coursework: Data Structures & Algorithms, Web Development (Full Stack), Operating Systems, Artificial Intelligence.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+
+        <!-- CONTACT SECTION -->
+        <section class="content-section" id="contact">
+            <div class="container">
+                <h2 class="section-title">06 <span>//</span> Get In Touch</h2>
+                <p class="contact-intro">I'm always excited to connect and discuss potential projects or opportunities. Whether you have a question or just want to say hi, feel free to reach out!</p>
+                <!-- In index.html, inside the contact section... -->
+
+<div class="contact-form-container">
+        <!-- START: NEW EMAIL LINK SECTION -->
+ 
+
+    <a href="mailto:pixel.anay@gmail.com" class="contact-email-link interactive">
+        <i class="far fa-envelope"></i>
+        <span>pixel.anay@gmail.com</span>
+    </a>
+       <div class="form-divider"><span>OR</span></div>
+    <!-- END: NEW EMAIL LINK SECTION -->
+    <form action="https://formspree.io/f/mgvkgypw" method="POST" class="contact-form">
+        <div class="form-group">
+             <label for="name">Your Name</label>
+            <input type="text" name="name" id="name" required placeholder="e.g. Jane Doe">
         </div>
-      </section>
-      <section id="skills">
-        <div class="container">
-          <h2 class="section-title">Technical Skills</h2>
-          <ul class="skills-list">
-            <li>Java</li>
-            <li>Python</li>
-            <li>JavaScript</li>
-            <li>React.js</li>
-            <li>HTML5</li>
-            <li>CSS3 & SASS</li>
-            <li>SQL</li>
-            <li>Git & GitHub</li>
-            <li>Data Structures</li>
-            <li>Algorithms</li>
-          </ul>
-          <div class="see-all-container">
-            <a href="skills.html" class="btn btn-lg btn-secondary">View All Skills</a>
-          </div>
+        <div class="form-group">
+            <label for="email">Your Email</label>
+            <input type="email" name="email" id="email" required placeholder="your.email@example.com">
         </div>
-      </section>
-      <section id="experience">
-        <div class="container">
-          <h2 class="section-title">Professional Experience</h2>
-          <div class="timeline">
-            <div class="timeline-item">
-              <div class="timeline-icon">
-                <svg viewBox="0 0 24 24">
-                  <path d="M20 6h-4V4c0-1.11-.89-2-2-2h-4c-1.11 0-2 .89-2 2v2H4c-1.11 0-1.99.89-1.99 2L2 19c0 1.11.89 2 2 2h16c1.11 0 2-.89 2-2V8c0-1.11-.89-2-2-2zm-6 0h-4V4h4v2z"></path>
-                </svg>
-              </div>
-              <h3>Software Engineering Intern</h3>
-              <span class="company-school">Innovatech Solutions Ltd.</span>
-              <span class="date">Summer 2023 (June - August)</span>
-              <p>Contributed to the development of a new client portal using Angular and Spring Boot.</p>
-            </div>
-            <div class="timeline-item">
-              <div class="timeline-icon">
-                <svg viewBox="0 0 24 24">
-                  <path d="M12 1L3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V5l-9-4zm0 10.99h7c-.53 4.12-3.28 7.79-7 8.94V12H5V6.3l7-3.11v8.8z"></path>
-                </svg>
-              </div>
-              <h3>Teaching Assistant - Intro to Programming</h3>
-              <span class="company-school">State University, CS Department</span>
-              <span class="date">Fall 2022 - Spring 2023</span>
-              <p>Assisted professors in teaching foundational programming concepts in Python to over 100 students.</p>
-            </div>
-          </div>
+        <div class="form-group">
+             <label for="message">Your Message</label>
+            <textarea name="message" id="message" rows="5" required placeholder="Project details or hello..."></textarea>
         </div>
-      </section>
-      <section id="education">
-        <div class="container">
-          <h2 class="section-title">Education</h2>
-          <div class="timeline">
-            <div class="timeline-item">
-              <div class="timeline-icon">
-                <svg viewBox="0 0 24 24">
-                  <path d="M5 13.18v4L12 21l7-3.82v-4L12 17l-7-3.82zM12 3L1 9l11 6 9-4.91V17h2V9L12 3z"></path>
-                </svg>
-              </div>
-              <h3>Bachelor of Science in Computer Science</h3>
-              <span class="company-school">State University</span>
-              <span class="date">Expected Graduation: May 2029</span>
-              <p>Relevant Coursework: Data Structures & Algorithms, Web Development (Full Stack), Operating Systems, Artificial Intelligence. </p>
+        <button type="submit" class="btn btn-primary interactive">Send</button>
+    </form>
+
+
+
+</div>
             </div>
-          </div>
-        </div>
-      </section>
-      <section id="contact">
-        <canvas id="hero-particles-canvas"></canvas>
-        <div class="container">
-          <h2 class="section-title">Get In Touch</h2>
-          <p style="text-align: center; max-width: 600px; margin-left: auto; margin-right: auto; margin-bottom: 40px;"> I'm always excited to connect with new people and discuss potential projects or opportunities. Whether you have a question or just want to say hi, feel free to reach out! </p>
-          <form class="contact-form" id="contactForm" action="https://formspree.io/f/mgvkgypw" method="POST">
-            <div class="form-group">
-              <label for="name">Full Name</label>
-              <input type="text" id="name" name="name" placeholder="e.g., Jane Doe" required>
-            </div>
-            <div class="form-group">
-              <label for="email">Email Address</label>
-              <input type="email" id="email" name="email" placeholder="your.email@example.com" required>
-            </div>
-            <div class="form-group">
-              <label for="subject">Subject</label>
-              <input type="text" id="subject" name="subject" placeholder="e.g., Project Inquiry" required>
-            </div>
-            <div class="form-group">
-              <label for="message">Message</label>
-              <textarea id="message" name="message" placeholder="Your message here..." required></textarea>
-            </div>
-            <button type="submit" class="btn">Send Message</button>
-          </form>
-        </div>
-      </section>
-      <section id="blog">
-        <div class="container">
-          <h2 class="section-title">Latest Blog Posts</h2>
-          <div class="blog-post-summary">
-            <h3>My Journey into Web3 and Decentralized Applications</h3>
-            <p>Exploring the fascinating world of blockchain technology, smart contracts, and the potential of Web3.</p>
-            <a href="#" class="btn btn-outline-primary">Read More</a>
-          </div>
-          <div class="see-all-container">
-            <a href="blogs.html" class="btn btn-lg btn-secondary">View All Blog Posts</a>
-          </div>
-        </div>
-      </section>
+        </section>
     </main>
-    <footer class="main-footer">
-      <div class="container">
-        <div class="social-icons">
-          <a href="https://www.linkedin.com/in/anaygawate" aria-label="LinkedIn" title="LinkedIn" target="_blank">
-            <svg viewBox="0 0 24 24">
-              <path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z" />
-            </svg>
-          </a>
-          <a href="https://github.com/pixelanay" aria-label="GitHub" title="GitHub" target="_blank">
-            <svg viewBox="0 0 24 24">
-              <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z" />
-            </svg>
-          </a>
-          <a href="https://x.com/pixelanay" aria-label="Twitter" title="Twitter" target="_blank">
-            <svg viewBox="0 0 24 24">
-              <path d="M24 4.557c-.883.392-1.832.656-2.828.775 1.017-.609 1.798-1.574 2.165-2.724-.951.564-2.005.974-3.127 1.195-.897-.957-2.178-1.555-3.594-1.555-3.179 0-5.515 2.966-4.797 6.045-4.091-.205-7.719-2.165-10.148-5.144-.424.728-.666 1.581-.666 2.477 0 1.61.823 3.027 2.068 3.855-.76-.025-1.474-.234-2.101-.583v.06c0 2.247 1.592 4.123 3.7 4.557-.538.146-1.127.179-1.732.064.579 1.909 2.307 3.183 4.341 3.221-1.709 1.343-3.877 2.063-6.233 2.063-.399 0-.793-.023-1.175-.068 2.209 1.427 4.833 2.256 7.646 2.256 9.18 0 14.207-7.843 13.898-14.646.995-.718 1.852-1.616 2.538-2.634z" />
-            </svg>
-          </a>
+
+    <!-- FOOTER -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-socials">
+                    <a href="https://www.linkedin.com/in/anaygawate/" aria-label="LinkedIn" target="_blank"><i class="fab fa-linkedin-in"></i></a>
+                    <a href="https://github.com/pixelanay" aria-label="GitHub" target="_blank"><i class="fab fa-github"></i></a>
+                </div>
+                 <div class="email-copy-container">
+                    <span id="emailToCopy" class="footer-link">pixel.anay@gmail.com</span>
+                    <button id="copyEmailButton" class="copy-button" aria-label="Copy email address" title="Copy email">
+                        <i class="far fa-copy"></i>
+                    </button>
+                    <span id="copyFeedback" class="copy-feedback">Copied!</span>
+                </div>
+                <p>© <span id="currentYear">2024</span> Anay Gawate. All Rights Reserved.</p>
+            </div>
         </div>
-        <p>© <span id="currentYear"></span> Anay Gawate. All rights reserved. </p>
-        <div class="email-copy-container">
-          <a href="mailto:pixel.anay@gmail.com" id="emailToCopy" class="footer-link">
-            <p>pixel.anay@gmail.com</p>
-          </a>
-          <button id="copyEmailButton" class="copy-button" aria-label="Copy email address" title="Copy email">
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="copy-icon-svg">
-              <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
-              <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
-            </svg>
-          </button>
-          <span id="copyFeedback" class="copy-feedback">
-            <p>Copied!</p>
-          </span>
-        </div>
-      </div>
     </footer>
+
+    <!-- LIGHTBOX / GALLERY MODAL -->
+    <div class="lightbox" id="lightbox">
+        <button class="lightbox__close" aria-label="Close gallery">×</button>
+        <button class="lightbox__nav lightbox__prev" aria-label="Previous image">❮</button>
+        <button class="lightbox__nav lightbox__next" aria-label="Next image">❯</button>
+        <div class="lightbox__content">
+            <img src="" alt="Enlarged project image" class="lightbox__image">
+            <div class="lightbox__counter"></div>
+        </div>
+    </div>
+
+    <!-- Your Script -->
     <script src="script.js"></script>
-  </body>
+
+</body>
 </html>
