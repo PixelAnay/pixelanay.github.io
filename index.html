@@ -10,8 +10,8 @@
     <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;700&family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
-    
+  <link rel="preload" href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;700&family=Poppins:wght@300;400;600&display=swap" as="style" onload="this.rel='stylesheet'">
+<noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;700&family=Poppins:wght@300;400;600&display=swap"></noscript>
     <!-- Font Awesome (for icons) -->
 <!-- NEW and NON-BLOCKING -->
 <!-- CORRECTED Non-Blocking Font Awesome -->
@@ -295,7 +295,8 @@
     </div>
 
     <!-- Your Script -->
-    <script src="script.js"></script>
+  <script src="script.js" defer></script>
+>
 
 </body>
 </html>
