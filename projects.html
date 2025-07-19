@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Projects | Anay Gawate</title>
     <meta name="description" content="A detailed showcase of web and software development projects by Anay Gawate, including full-stack applications, desktop tools, and interactive web experiences.">
-    <link rel="icon" href="https://anay.pages.dev/assets/svgfav.svg" type="image/svg+xml">
+    <link rel="icon" href="assets/svgfav.svg" type="image/svg+xml">
 
     <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -17,94 +17,6 @@
 
     <!-- Your Stylesheet -->
     <link rel="stylesheet" href="style.css">
-
-    <!-- 
-        NOTE: The styles below are for the updated project layout. 
-        For best practice, move them into your main 'style.css' file.
-    -->
-    <style>
-        /* --- Project Showcase Section --- */
-
-        /* NEW: Add accent separators using pseudo-elements */
-        .project-showcase::before {
-            content: '';
-            display: block;
-            width: 100%;  /* Or whatever width you use for other separators */
-            height: 2px;  /* A good thickness */
-            /* 
-               IMPORTANT: Replace this with your actual accent color. 
-               Using a CSS variable is best practice.
-            */
-            background-color: #ffffff4b; /* Example accent color (teal) */
-            margin-left: auto;
-        
-            margin-right: auto;
-        }
-
-        /* Space out the separators from the content */
-        .project-showcase::before {
-            margin-bottom: 3rem;
-        }
-        .project-showcase::after {
-            margin-top: 3rem;
-        }
-
-
-        /* --- Project Entry Layout --- */
-
-        /* Mobile-first: The new HTML order naturally creates the desired vertical stack. */
-        .project-entry {
-            display: flex;
-            flex-direction: column;
-            gap: 1.5rem; /* Space between title, image, and footer sections */
-            padding-bottom: 3rem; 
-        }
-
-        .project-details-footer {
-            display: flex;
-            flex-direction: column;
-            gap: 1.5rem; /* Space between tech list and buttons */
-        }
-
-        /* Desktop layout using CSS Grid for advanced control */
-        @media (min-width: 992px) {
-            .project-entry {
-                display: grid;
-                align-items: center;
-                gap: 2rem 4rem; /* row-gap column-gap */
-                padding-top: 0; /* Reset padding as it's handled by the separator or grid gap */
-                padding-bottom: 0;
-            }
-
-            .project-entry + .project-entry {
-                 padding-top: 3rem;
-            }
-
-            /* Configuration for ODD rows (1st, 3rd, etc.): Image on LEFT */
-            .project-entry:nth-child(odd) {
-                grid-template-columns: 6fr 5fr;
-                grid-template-areas: 
-                    "image header"
-                    "image footer";
-            }
-
-            .project-entry:nth-child(odd) .project-image-container { grid-area: image; }
-            .project-entry:nth-child(odd) .project-text-content { grid-area: header; align-self: end; }
-            .project-entry:nth-child(odd) .project-details-footer { grid-area: footer; align-self: start; }
-            
-            /* Configuration for EVEN rows (2nd, etc.): Image on RIGHT */
-            .project-entry:nth-child(even) {
-                grid-template-columns: 5fr 6fr;
-                grid-template-areas: 
-                    "header image"
-                    "footer image";
-            }
-
-            .project-entry:nth-child(even) .project-image-container { grid-area: image; }
-            .project-entry:nth-child(even) .project-text-content { grid-area: header; align-self: end; }
-            .project-entry:nth-child(even) .project-details-footer { grid-area: footer; align-self: start; }
-        }
-    </style>
 </head>
 <body>
 
@@ -140,109 +52,128 @@
         <!-- PROJECTS SHOWCASE -->
         <section class="content-section" id="projects">
             <div class="container">
-                <div class="project-showcase">
-
-        
+                <div class="work-accordion">
 
                     <!-- Project 1: Offline Reddit -->
-                    <div class="project-entry animate-on-scroll" data-gallery-images="https://anay.pages.dev/assets/bg1.jpg, https://anay.pages.dev/assets/bg2.jpg, https://anay.pages.dev/assets/bg4.jpg">
-                        <div class="project-text-content">
-                            <span class="project-type">Desktop Application</span>
-                            <h3>Offline Reddit</h3>
-                            <div class="project-description">
-                                <p>A full-featured, cross-platform desktop app for downloading Reddit content. Users can save subreddits, posts, and media for offline viewing, with a focus on a clean UI and efficient backend processing.</p>
+                    <div class="accordion-item animate-on-scroll" data-gallery-images="assets/bg1.webp, assets/bg2.webp, assets/bg4.webp">
+                        <div class="accordion-item__title" role="button" aria-expanded="false" aria-controls="project-1-content">
+                            <div>
+                                <h3>Offline Reddit</h3>
+                                <p>Desktop Application</p>
                             </div>
+                            <span class="toggle-icon"></span>
                         </div>
-                        <div class="project-image-container">
-                             <div class="project-main-image interactive">
-                                <img src="https://anay.pages.dev/assets/bg1.jpg" alt="Main view of Offline Reddit project.">
-                                <button class="enlarge-btn" aria-label="Enlarge image"><i class="fas fa-expand"></i></button>
-                             </div>
-                             <div class="project-thumbnails">
-                                <!-- Thumbnails will be generated by JavaScript here -->
-                             </div>
-                        </div>
-                        <div class="project-details-footer">
-                            <ul class="project-tech-list">
-                                <li>Electron.js</li>
-                                <li>React.js</li>
-                                <li>Node.js</li>
-                                <li>CSS-in-JS</li>
-                            </ul>
-                            <div class="project-links">
-                                <a href="https://github.com/pixelanay/OfflineReddit" class="btn btn-secondary interactive" target="_blank">View Code <i class="fab fa-github"></i></a>
+                        <div class="accordion-item__content" id="project-1-content">
+                            <div class="accordion-item__details">
+                                <div class="project-description">
+                                    <p>A full-featured, cross-platform desktop app for downloading Reddit content. Users can save subreddits, posts, and media for offline viewing, with a focus on a clean UI and efficient backend processing.</p>
+                                </div>
+                                <ul class="project-tech-list">
+                                    <li>Electron.js</li>
+                                    <li>React.js</li>
+                                    <li>Node.js</li>
+                                    <li>CSS-in-JS</li>
+                                </ul>
+                                <div class="project-links">
+                                    <a href="https://github.com/pixelanay/OfflineReddit" class="btn btn-secondary interactive" target="_blank">View Code <i class="fab fa-github"></i></a>
+                                </div>
+                            </div>
+                            <div class="accordion-item__gallery">
+                                 <div class="project-main-image interactive">
+                                    <img src="assets/bg1.webp" alt="Main view of Offline Reddit project.">
+                                    <button class="enlarge-btn" aria-label="Enlarge image"><i class="fas fa-expand"></i></button>
+                                 </div>
+                                 <div class="project-thumbnails">
+                                    <!-- Thumbnails will be generated by JavaScript here -->
+                                 </div>
                             </div>
                         </div>
                     </div>
 
                     <!-- Project 2: Retro BrowserOS -->
-                    <div class="project-entry animate-on-scroll" data-gallery-images="https://anay.pages.dev/assets/bg3.jpg, https://anay.pages.dev/assets/bg1.jpg, https://anay.pages.dev/assets/bg2.jpg">
-                        <div class="project-text-content">
-                            <span class="project-type">Interactive Web Experience</span>
-                            <h3>Retro BrowserOS</h3>
-                            <div class="project-description">
-                                <p>An interactive web dashboard mimicking a retro-style operating system. This project showcases dynamic UI elements, creative frontend development, and a passion for nostalgic design using modern web technologies.</p>
+                    <div class="accordion-item animate-on-scroll" data-gallery-images="assets/bg3.webp, assets/bg1.webp, assets/bg2.webp">
+                        <div class="accordion-item__title" role="button" aria-expanded="false" aria-controls="project-2-content">
+                            <div>
+                                <h3>Retro BrowserOS</h3>
+                                <p>Interactive Web Experience</p>
                             </div>
+                            <span class="toggle-icon"></span>
                         </div>
-                        <div class="project-image-container">
-                            <div class="project-main-image interactive">
-                                <img src="https://anay.pages.dev/assets/bg3.jpg" alt="Main view of Retro BrowserOS project.">
-                                <button class="enlarge-btn" aria-label="Enlarge image"><i class="fas fa-expand"></i></button>
-                             </div>
-                             <div class="project-thumbnails">
-                                <!-- Thumbnails will be generated by JavaScript here -->
-                             </div>
-                        </div>
-                        <div class="project-details-footer">
-                            <ul class="project-tech-list">
-                                <li>HTML5</li>
-                                <li>CSS3</li>
-                                <li>JavaScript</li>
-                                <li>SASS</li>
-                            </ul>
-                            <div class="project-links">
-                                <a href="https://pixelanay.github.io/OS" class="btn btn-primary interactive" target="_blank">Live Site <i class="fas fa-arrow-up-right-from-square"></i></a>
-                                <a href="https://github.com/PixelAnay/OS" class="btn btn-secondary interactive" target="_blank">View Code <i class="fab fa-github"></i></a>
+                        <div class="accordion-item__content" id="project-2-content">
+                            <div class="accordion-item__details">
+                                <div class="project-description">
+                                    <p>An interactive web dashboard mimicking a retro-style operating system. This project showcases dynamic UI elements, creative frontend development, and a passion for nostalgic design using modern web technologies.</p>
+                                </div>
+                                <ul class="project-tech-list">
+                                    <li>HTML5</li>
+                                    <li>CSS3</li>
+                                    <li>JavaScript</li>
+                                    <li>SASS</li>
+                                </ul>
+                                <div class="project-links">
+                                    <a href="https://pixelanay.github.io/OS" class="btn btn-primary interactive" target="_blank">Live Site <i class="fas fa-arrow-up-right-from-square"></i></a>
+                                    <a href="https://github.com/PixelAnay/OS" class="btn btn-secondary interactive" target="_blank">View Code <i class="fab fa-github"></i></a>
+                                </div>
+                            </div>
+                            <div class="accordion-item__gallery">
+                                <div class="project-main-image interactive">
+                                    <img src="assets/bg3.webp" alt="Main view of Retro BrowserOS project.">
+                                    <button class="enlarge-btn" aria-label="Enlarge image"><i class="fas fa-expand"></i></button>
+                                 </div>
+                                 <div class="project-thumbnails">
+                                    <!-- Thumbnails will be generated by JavaScript here -->
+                                 </div>
                             </div>
                         </div>
                     </div>
 
                     <!-- Project 3: Data Viz Dashboard -->
-                    <div class="project-entry animate-on-scroll" data-gallery-images="https://anay.pages.dev/assets/bg2.jpg, https://anay.pages.dev/assets/bg4.jpg">
-                        <div class="project-text-content">
-                            <span class="project-type">Full-Stack Web App</span>
-                            <h3>Data Visualization Dashboard</h3>
-                            <div class="project-description">
-                                <p>A web-based platform for visualizing complex datasets. Features a RESTful API backend to serve data and a React frontend with D3.js to render interactive charts and graphs, helping users derive insights from raw data.</p>
+                    <div class="accordion-item animate-on-scroll" data-gallery-images="assets/bg2.webp, assets/bg4.webp">
+                        <div class="accordion-item__title" role="button" aria-expanded="false" aria-controls="project-3-content">
+                            <div>
+                                <h3>Data Visualization Dashboard</h3>
+                                <p>Full-Stack Web App</p>
                             </div>
+                            <span class="toggle-icon"></span>
                         </div>
-                        <div class="project-image-container">
-                            <div class="project-main-image interactive">
-                                <img src="https://anay.pages.dev/assets/bg2.jpg" alt="Main view of Data Viz Dashboard project.">
-                                <button class="enlarge-btn" aria-label="Enlarge image"><i class="fas fa-expand"></i></button>
-                             </div>
-                             <div class="project-thumbnails">
-                                <!-- Thumbnails will be generated by JavaScript here -->
-                             </div>
-                        </div>
-                        <div class="project-details-footer">
-                            <ul class="project-tech-list">
-                                <li>React.js</li>
-                                <li>D3.js</li>
-                                <li>Node.js</li>
-                                <li>Express.js</li>
-                                <li>PostgreSQL</li>
-                            </ul>
-                            <div class="project-links">
-                                <a href="#" class="btn btn-secondary interactive disabled" aria-disabled="true" target="_blank">Private Repo <i class="fas fa-lock"></i></a>
+                        <div class="accordion-item__content" id="project-3-content">
+                            <div class="accordion-item__details">
+                                <div class="project-description">
+                                    <p>A web-based platform for visualizing complex datasets. Features a RESTful API backend to serve data and a React frontend with D3.js to render interactive charts and graphs, helping users derive insights from raw data.</p>
+                                </div>
+                                <ul class="project-tech-list">
+                                    <li>React.js</li>
+                                    <li>D3.js</li>
+                                    <li>Node.js</li>
+                                    <li>Express.js</li>
+                                    <li>PostgreSQL</li>
+                                </ul>
+                                <div class="project-links">
+                                    <a href="#" class="btn btn-secondary interactive disabled" aria-disabled="true" target="_blank">Private Repo <i class="fas fa-lock"></i></a>
+                                </div>
+                            </div>
+                            <div class="accordion-item__gallery">
+                                <div class="project-main-image interactive">
+                                    <img src="assets/bg2.webp" alt="Main view of Data Viz Dashboard project.">
+                                    <button class="enlarge-btn" aria-label="Enlarge image"><i class="fas fa-expand"></i></button>
+                                 </div>
+                                 <div class="project-thumbnails">
+                                    <!-- Thumbnails will be generated by JavaScript here -->
+                                 </div>
                             </div>
                         </div>
                     </div>
+
                 </div>
             </div>
         </section>
     </main>
-
+<!-- BACK TO HOME BUTTON -->
+<div class="back-to-home-container">
+    <a href="index.html" class="btn btn-secondary interactive">
+        <i class="fas fa-arrow-left"></i> Back to Home
+    </a>
+</div>
     <!-- FOOTER -->
     <footer class="footer">
         <div class="container">

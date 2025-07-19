@@ -144,37 +144,21 @@ if (animatedElements.length > 0) {
             if (e.key === 'ArrowLeft') showPrevImage();
         });
 
-        // --- ACCORDION GALLERY (INDEX PAGE) ---
-        const workAccordion = document.querySelector('.work-accordion');
-        if (workAccordion) {
-            workAccordion.addEventListener('click', (e) => {
-                const enlargeBtn = e.target.closest('.enlarge-btn');
-                if (!enlargeBtn) return;
-                
-                e.preventDefault();
-                const wrapper = enlargeBtn.closest('.gallery-image-wrapper');
-                const gallery = enlargeBtn.closest('.accordion-item__gallery');
-                const allWrappers = Array.from(gallery.querySelectorAll('.gallery-image-wrapper'));
-                const allImageSrcs = allWrappers.map(w => w.querySelector('img').src);
-                const clickedIndex = allWrappers.indexOf(wrapper);
-
-                openLightbox(allImageSrcs, clickedIndex);
-            });
-        }
-        
-        // --- NEW/IMPROVED: PROJECTS PAGE THUMBNAIL GALLERY ---
-        const projectEntries = document.querySelectorAll('.project-entry[data-gallery-images]');
-        projectEntries.forEach(entry => {
-            const mainImageContainer = entry.querySelector('.project-main-image');
+        // --- UNIFIED THUMBNAIL GALLERY SCRIPT ---
+        // This single block now handles all project galleries on all pages.
+        const projectGalleries = document.querySelectorAll('.accordion-item[data-gallery-images]');
+        projectGalleries.forEach(gallery => {
+            const mainImageContainer = gallery.querySelector('.project-main-image');
+            if (!mainImageContainer) return;
+            
             const mainImage = mainImageContainer.querySelector('img');
-            const thumbnailsContainer = entry.querySelector('.project-thumbnails');
-            const enlargeBtn = entry.querySelector('.enlarge-btn');
+            const thumbnailsContainer = gallery.querySelector('.project-thumbnails');
+            const enlargeBtn = gallery.querySelector('.enlarge-btn');
 
-            const imageUrls = entry.dataset.galleryImages.split(',').map(s => s.trim()).filter(Boolean);
+            const imageUrls = gallery.dataset.galleryImages.split(',').map(s => s.trim()).filter(Boolean);
             
             if (imageUrls.length > 1) {
-                // 1. Create thumbnails
-                thumbnailsContainer.innerHTML = ''; // Clear placeholder
+                thumbnailsContainer.innerHTML = ''; 
                 imageUrls.forEach((url, index) => {
                     const thumb = document.createElement('img');
                     thumb.src = url;
@@ -186,23 +170,20 @@ if (animatedElements.length > 0) {
                     thumbnailsContainer.appendChild(thumb);
                 });
 
-                // 2. Add click listener to thumbnails
                 thumbnailsContainer.addEventListener('click', e => {
                     if (e.target.tagName === 'IMG') {
                         const newIndex = parseInt(e.target.dataset.index, 10);
                         mainImage.src = imageUrls[newIndex];
                         mainImageContainer.dataset.currentIndex = newIndex;
 
-                        // Update active state
                         thumbnailsContainer.querySelectorAll('img').forEach(t => t.classList.remove('is-active'));
                         e.target.classList.add('is-active');
                     }
                 });
             } else {
-                 thumbnailsContainer.style.display = 'none'; // Hide thumbnail area if only one image
+                 thumbnailsContainer.style.display = 'none';
             }
 
-            // 3. Add click listener for opening the lightbox
             enlargeBtn.addEventListener('click', (e) => {
                 e.preventDefault();
                 const startIndex = parseInt(mainImageContainer.dataset.currentIndex, 10) || 0;
