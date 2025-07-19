@@ -633,11 +633,29 @@ input, textarea {
     .nav-open .hamburger .bar:nth-child(1) { top: 50%; transform: translateY(-50%) rotate(45deg); }
     .nav-open .hamburger .bar:nth-child(2) { opacity: 0; }
     .nav-open .hamburger .bar:nth-child(3) { top: 50%; transform: translateY(-50%) rotate(-45deg); }
-    .navbar {
-        position: fixed; top: 0; right: 0; width: 100%; height: 100vh; background: var(--dark-bg);
-        flex-direction: column; justify-content: center; align-items: center;
-        transform: translateX(100%); transition: transform 0.5s cubic-bezier(0.7, 0, 0.3, 1); display: flex;
-    }
+/* This is your NEW, corrected code */
+.navbar {
+    position: fixed;
+    top: 0;
+    right: 0;
+    width: 100%;
+    height: 100vh; /* Use 100vh to ensure it covers the full viewport height */
+    background: var(--dark-bg);
+    
+    display: flex;
+    flex-direction: column;
+    align-items: center; /* Keep this to center links horizontally */
+
+    /* --- FIX STARTS HERE --- */
+    justify-content: flex-start; /* Aligns links to the top instead of centering */
+    padding-top: 8rem;          /* Pushes links down to be clear of the header area */
+    padding-bottom: 4rem;       /* Adds comfortable space at the bottom when scrolled */
+    overflow-y: auto;           /* Makes the menu scrollable if content is too tall */
+    /* --- FIX ENDS HERE --- */
+
+    transform: translateX(100%);
+    transition: transform 0.5s cubic-bezier(0.7, 0, 0.3, 1);
+}
     .nav-open .navbar { transform: translateX(0); }
     .nav-link { font-size: 1.5rem; margin: 0.7rem 0; }
 

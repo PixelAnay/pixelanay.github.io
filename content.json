@@ -1,0 +1,139 @@
+{
+  "global": {
+    "name": "Anay Gawate",
+    "contactEmail": "pixel.anay@gmail.com",
+    "formspreeEndpoint": "https://formspree.io/f/mgvkgypw",
+    "socials": [
+      {
+        "name": "LinkedIn",
+        "url": "https://www.linkedin.com/in/anaygawate/",
+        "iconClass": "fab fa-linkedin-in"
+      },
+      {
+        "name": "GitHub",
+        "url": "https://github.com/pixelanay",
+        "iconClass": "fab fa-github"
+      },
+            {
+        "name": "LeetCode",
+        "url": "https://leetcode.com/pixelanay",
+        "iconClass": "fa-solid fa-code"
+      }
+    ]
+  },
+
+  "//": "--- CONTENT FOR INDEX.HTML ---",
+  "homePage": {
+    "greeting": "Hello, I'm Anay",
+    "tagline": "I build fast, beautiful web apps. I am dedicated to crafting innovative solutions and continuously learning in the evolving tech landscape. Here’s my work!",
+    "resumeUrl": "https://anay.pages.dev/assets/functionalsample.pdf",
+    "profileImageUrl": "assets/profile.webp",
+    "bio": "I am currently pursuing a B.Tech in Computer Science. I thrive on building real stuff that works, from full-stack web apps to AI Interfaces. Whether it's solving technical puzzles, designing for humans, or digging through data, I'm all in. I’m here to contribute to teams that build great products.",
+    "featuredSkills": [
+      "Java", "Python", "JavaScript", "React.js", "HTML5 & CSS3", "SASS", "SQL", 
+      "Git & GitHub", "Data Structures", "Algorithms", "Figma", "Webflow"
+    ],
+    "experience": [
+      {
+        "title": "Software Engineering Intern",
+        "company": "Innovatech Solutions Ltd.",
+        "date": "Summer 2023",
+        "description": "Contributed to the development of a new client portal using Angular and Spring Boot, enhancing front-end performance and user experience."
+      },
+      {
+        "title": "Teaching Assistant",
+        "company": "State University, CS Dept.",
+        "date": "Fall 2022 - Spring 2023",
+        "description": "Assisted professors in teaching foundational programming concepts in Python to over 100 students, leading lab sessions and grading assignments."
+      }
+    ],
+    "education": [
+      {
+        "degree": "B.Sc. in Computer Science",
+        "school": "State University",
+        "date": "Expected May 2029",
+        "description": "Relevant Coursework: Data Structures & Algorithms, Web Development (Full Stack), Operating Systems, Artificial Intelligence."
+      }
+    ]
+  },
+
+  "//": "--- CONTENT FOR PROJECTS.HTML ---",
+  "projectsPage": {
+    "title": "My Projects",
+    "subtitle": "A collection of my work, from full-stack web applications and robust desktop tools to interactive front-end experiments. Each project reflects my commitment to clean code, thoughtful design, and practical problem-solving."
+  },
+  "allProjects": [
+    {
+      "featured": true,
+      "title": "Offline Reddit",
+      "category": "Desktop Application",
+      "description": "A full-featured, cross-platform desktop app for downloading Reddit content. Users can save subreddits, posts, and media for offline viewing, with a focus on a clean UI and efficient backend processing.",
+      "tech": ["Electron.js", "React.js", "Node.js", "CSS-in-JS"],
+      "galleryImages": ["assets/bg1.webp", "assets/bg2.webp", "assets/bg4.webp"],
+      "links": [
+        { "type": "code", "url": "https://github.com/pixelanay/OfflineReddit", "text": "View Code", "iconClass": "fab fa-github" }
+      ]
+    },
+    {
+      "featured": true,
+      "title": "Retro BrowserOS",
+      "category": "Interactive Web Experience",
+      "description": "An interactive web dashboard mimicking a retro-style operating system. This project showcases dynamic UI elements, creative frontend development, and a passion for nostalgic design using modern web technologies.",
+      "tech": ["HTML5", "CSS3", "JavaScript", "SASS"],
+      "galleryImages": ["assets/bg3.webp", "assets/bg1.webp", "assets/bg2.webp"],
+      "links": [
+        { "type": "live", "url": "https://pixelanay.github.io/OS", "text": "Live Site", "iconClass": "fas fa-arrow-up-right-from-square" },
+        { "type": "code", "url": "https://github.com/PixelAnay/OS", "text": "View Code", "iconClass": "fab fa-github" }
+      ]
+    },
+    {
+      "featured": false,
+      "title": "Data Visualization Dashboard",
+      "category": "Full-Stack Web App",
+      "description": "A web-based platform for visualizing complex datasets. Features a RESTful API backend to serve data and a React frontend with D3.js to render interactive charts and graphs, helping users derive insights from raw data.",
+      "tech": ["React.js", "D3.js", "Node.js", "Express.js", "PostgreSQL"],
+      "galleryImages": ["assets/bg2.webp", "assets/bg4.webp"],
+      "links": [
+        { "type": "disabled", "url": "#", "text": "Private Repo", "iconClass": "fas fa-lock" }
+      ]
+    }
+  ],
+
+  "//": "--- CONTENT FOR SKILLS.HTML ---",
+  "skillsPage": {
+    "title": "My Toolkit",
+    "subtitle": "I believe in using the right tool for the job. Here's a look at the languages, frameworks, and technologies I work with to build efficient, scalable, and beautiful applications."
+  },
+  "allSkills": [
+    {
+      "categoryTitle": "Languages",
+      "iconClass": "fas fa-code",
+      "items": ["JavaScript (ES6+)", "TypeScript", "Python", "Java", "HTML5", "CSS3 / SASS", "SQL"]
+    },
+    {
+      "categoryTitle": "Frontend Development",
+      "iconClass": "fas fa-desktop",
+      "items": ["React.js", "Next.js", "Redux Toolkit", "Styled Components", "Tailwind CSS", "D3.js", "Webpack"]
+    },
+    {
+      "categoryTitle": "Backend & Databases",
+      "iconClass": "fas fa-server",
+      "items": ["Node.js", "Express.js", "Spring Boot", "REST APIs", "GraphQL", "PostgreSQL", "MongoDB", "Firebase"]
+    },
+    {
+      "categoryTitle": "Tools & Platforms",
+      "iconClass": "fas fa-tools",
+      "items": ["Git & GitHub", "Docker", "Vite", "Jira", "Postman", "VS Code"]
+    },
+    {
+      "categoryTitle": "CS Fundamentals",
+      "iconClass": "fas fa-brain",
+      "items": ["Data Structures", "Algorithms", "Object-Oriented Programming", "Operating Systems", "Agile Methodologies"]
+    },
+    {
+      "categoryTitle": "Design",
+      "iconClass": "fas fa-palette",
+      "items": ["Figma", "Webflow", "Responsive Design", "UI/UX Principles", "Prototyping"]
+    }
+  ]
+}

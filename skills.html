@@ -6,22 +6,15 @@
     <title>Skills | Anay Gawate</title>
     <meta name="description" content="A comprehensive overview of Anay Gawate's technical skills, including programming languages, frameworks, developer tools, and design expertise.">
     <link rel="icon" href="https://anay.pages.dev/assets/svgfav.svg" type="image/svg+xml">
-
-    <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link rel="preload" href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;700&family=Poppins:wght@300;400;600&display=swap" as="style" onload="this.rel='stylesheet'">
-<noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;700&family=Poppins:wght@300;400;600&display=swap"></noscript> 
-    <!-- Font Awesome (for icons) -->
-<!-- NEW and NON-BLOCKING -->
-<!-- CORRECTED Non-Blocking Font Awesome -->
-<link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" as="style" onload="this.rel='stylesheet'">
-<noscript><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css"></noscript>
-    <!-- Your Stylesheet -->
+    <link rel="preload" href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;700&family=Poppins:wght@300;400;600&display=swap" as="style" onload="this.rel='stylesheet'">
+    <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;700&family=Poppins:wght@300;400;600&display=swap"></noscript> 
+    <link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" as="style" onload="this.rel='stylesheet'">
+    <noscript><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css"></noscript>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-
     <!-- HEADER -->
     <header class="header">
         <div class="header-container">
@@ -35,9 +28,7 @@
                 <a href="index.html#contact" class="nav-link">Contact</a>
             </nav>
             <button class="hamburger" aria-label="Open menu" aria-expanded="false" aria-controls="navbar">
-                <div class="bar"></div>
-                <div class="bar"></div>
-                <div class="bar"></div>
+                <div class="bar"></div><div class="bar"></div><div class="bar"></div>
             </button>
         </div>
     </header>
@@ -46,94 +37,16 @@
         <!-- PAGE HERO -->
         <section class="page-hero">
             <div class="container">
-                <h1 class="page-title animate-on-scroll">My Toolkit</h1>
-                <p class="page-subtitle animate-on-scroll" style="transition-delay: 100ms;">I believe in using the right tool for the job. Here's a look at the languages, frameworks, and technologies I work with to build efficient, scalable, and beautiful applications.</p>
+                <h1 id="page-title" class="page-title animate-on-scroll"></h1>
+                <p id="page-subtitle" class="page-subtitle animate-on-scroll" style="transition-delay: 100ms;"></p>
             </div>
         </section>
 
         <!-- SKILLS GRID -->
         <section class="content-section" id="skills-grid-section">
             <div class="container">
-                <div class="skills-grid">
-                    <!-- Category 1: Languages -->
-                    <div class="skills-category animate-on-scroll">
-                        <h3 class="skills-category-title"><i class="fas fa-code"></i>Languages</h3>
-                        <ul class="skill-items-list">
-                            <li>JavaScript (ES6+)</li>
-                            <li>TypeScript</li>
-                            <li>Python</li>
-                            <li>Java</li>
-                            <li>HTML5</li>
-                            <li>CSS3 / SASS</li>
-                            <li>SQL</li>
-                        </ul>
-                    </div>
-
-                    <!-- Category 2: Frontend -->
-                    <div class="skills-category animate-on-scroll">
-                        <h3 class="skills-category-title"><i class="fas fa-desktop"></i>Frontend Development</h3>
-                        <ul class="skill-items-list">
-                            <li>React.js</li>
-                            <li>Next.js</li>
-                            <li>Redux Toolkit</li>
-                            <li>Styled Components</li>
-                            <li>Tailwind CSS</li>
-                            <li>D3.js</li>
-                            <li>Webpack</li>
-                        </ul>
-                    </div>
-                    
-                    <!-- Category 3: Backend -->
-                    <div class="skills-category animate-on-scroll">
-                        <h3 class="skills-category-title"><i class="fas fa-server"></i>Backend & Databases</h3>
-                        <ul class="skill-items-list">
-                            <li>Node.js</li>
-                            <li>Express.js</li>
-                            <li>Spring Boot</li>
-                            <li>REST APIs</li>
-                            <li>GraphQL</li>
-                            <li>PostgreSQL</li>
-                            <li>MongoDB</li>
-                            <li>Firebase</li>
-                        </ul>
-                    </div>
-
-                    <!-- Category 4: Tools & Platforms -->
-                    <div class="skills-category animate-on-scroll">
-                        <h3 class="skills-category-title"><i class="fas fa-tools"></i>Tools & Platforms</h3>
-                        <ul class="skill-items-list">
-                            <li>Git & GitHub</li>
-                            <li>Docker</li>
-                            <li>Vite</li>
-                            <li>Jira</li>
-                            <li>Postman</li>
-                            <li>VS Code</li>
-                        </ul>
-                    </div>
-                    
-                    <!-- Category 5: CS Fundamentals -->
-                    <div class="skills-category animate-on-scroll">
-                        <h3 class="skills-category-title"><i class="fas fa-brain"></i>CS Fundamentals</h3>
-                        <ul class="skill-items-list">
-                            <li>Data Structures</li>
-                            <li>Algorithms</li>
-                            <li>Object-Oriented Programming</li>
-                            <li>Operating Systems</li>
-                            <li>Agile Methodologies</li>
-                        </ul>
-                    </div>
-
-                    <!-- Category 6: Design -->
-                    <div class="skills-category animate-on-scroll">
-                        <h3 class="skills-category-title"><i class="fas fa-palette"></i>Design</h3>
-                        <ul class="skill-items-list">
-                            <li>Figma</li>
-                            <li>Webflow</li>
-                            <li>Responsive Design</li>
-                            <li>UI/UX Principles</li>
-                            <li>Prototyping</li>
-                        </ul>
-                    </div>
+                <div id="skills-grid-container" class="skills-grid">
+                    <!-- Skill categories will be dynamically inserted here -->
                 </div>
             </div>
         </section>
@@ -150,25 +63,25 @@
     <footer class="footer">
         <div class="container">
             <div class="footer-content">
-                <div class="footer-socials">
-                    <a href="https://www.linkedin.com/in/anaygawate/" aria-label="LinkedIn" target="_blank" rel="noopener noreferrer"><i class="fab fa-linkedin-in"></i></a>
-                    <a href="https://github.com/pixelanay" aria-label="GitHub" target="_blank" rel="noopener noreferrer"><i class="fab fa-github"></i></a>
-                </div>
+                <div id="footer-socials-container" class="footer-socials"></div>
                  <div class="email-copy-container">
-                    <span id="emailToCopy" class="footer-link">pixel.anay@gmail.com</span>
-                    <button id="copyEmailButton" class="copy-button" aria-label="Copy email address" title="Copy email">
-                        <i class="far fa-copy"></i>
-                    </button>
+                    <span id="emailToCopy" class="footer-link"></span>
+                    <button id="copyEmailButton" class="copy-button" aria-label="Copy email address" title="Copy email"><i class="far fa-copy"></i></button>
                     <span id="copyFeedback" class="copy-feedback">Copied!</span>
                 </div>
-                <p>© <span id="currentYear"></span> Anay Gawate. All Rights Reserved.</p>
+                <p>© <span id="currentYear"></span> <span id="footer-name"></span>. All Rights Reserved.</p>
             </div>
         </div>
     </footer>
 
-    <!-- Your Script -->
-  <script src="script.js" defer></script>
+    <!-- TEMPLATE FOR DYNAMIC SKILL CATEGORIES -->
+    <template id="skills-category-template">
+        <div class="skills-category animate-on-scroll">
+            <h3 class="skills-category-title"><i class="category-icon"></i><span class="category-title"></span></h3>
+            <ul class="skill-items-list"></ul>
+        </div>
+    </template>
 
-
+    <script src="script.js" defer></script>
 </body>
 </html>

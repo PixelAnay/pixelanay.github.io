@@ -10,18 +10,20 @@
     <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link rel="preload" href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;700&family=Poppins:wght@300;400;600&display=swap" as="style" onload="this.rel='stylesheet'">
-<noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;700&family=Poppins:wght@300;400;600&display=swap"></noscript>
-    <!-- Font Awesome (for icons) -->
-<!-- NEW and NON-BLOCKING -->
-<!-- CORRECTED Non-Blocking Font Awesome -->
-<link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" as="style" onload="this.rel='stylesheet'">
-<noscript><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css"></noscript>
+    <link rel="preload" href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;700&family=Poppins:wght@300;400;600&display=swap" as="style" onload="this.rel='stylesheet'">
+    <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;700&family=Poppins:wght@300;400;600&display=swap"></noscript>
+    
+    <!-- Font Awesome -->
+    <link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" as="style" onload="this.rel='stylesheet'">
+    <noscript><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css"></noscript>
 
     <!-- Your Stylesheet -->
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
+
+    <!-- This site's content is now dynamically loaded from content.json -->
+    <!-- To make changes, please edit the content.json file. -->
 
     <!-- HEADER -->
     <header class="header">
@@ -52,17 +54,16 @@
                 <div class="stars3"></div>
             </div>
             <div class="hero-content">
-                <h1 class="hero-title" data-text-split>Hello, I'm Anay</h1>
-                <p class="hero-subtitle">I build fast, beautiful web apps. I am dedicated to crafting innovative solutions and continuously learning in the evolving tech landscape. Here’s my work!</p>
+                <h1 id="hero-title" class="hero-title" data-text-split></h1>
+                <p id="hero-subtitle" class="hero-subtitle"></p>
                 <div class="hero-actions">
                     <a href="#work" class="btn btn-primary interactive">View My Work</a>
-                    <a href="https://anay.pages.dev/assets/functionalsample.pdf" class="btn btn-secondary interactive" download="AnayGawate-Resume.pdf">
+                    <a id="resume-button" href="#" class="btn btn-secondary interactive" download="AnayGawate-Resume.pdf">
                         Download Resume <i class="fas fa-download"></i>
                     </a>
                 </div>
-                 <div class="hero-socials">
-                    <a href="https://www.linkedin.com/in/anaygawate/" aria-label="LinkedIn" target="_blank" rel="noopener noreferrer"><i class="fab fa-linkedin-in"></i></a>
-                    <a href="https://github.com/pixelanay" aria-label="GitHub" target="_blank" rel="noopener noreferrer"><i class="fab fa-github"></i></a>
+                 <div id="hero-socials-container" class="hero-socials">
+                    <!-- Social Icons will be inserted here -->
                 </div>
             </div>
         </section>
@@ -73,10 +74,10 @@
                 <h2 class="section-title animate-on-scroll">01 <span>//</span> About Me</h2>
                 <div class="about-content animate-on-scroll">
                     <div class="about-text">
-                        <p>I am currently pursuing a B.Tech in Computer Science. I thrive on building real stuff that works, from full-stack web apps to AI Interfaces. Whether it's solving technical puzzles, designing for humans, or digging through data, I'm all in. I’m here to contribute to teams that build great products.</p>
+                        <p id="about-bio"></p>
                     </div>
                     <div class="about-image interactive">
-                        <img src="assets/profile.webp" alt="A photo of Anay Gawate" loading="lazy" width="400" height="400">
+                        <img id="about-image" src="" alt="A photo of Anay Gawate" loading="lazy" width="400" height="400">
                     </div>
                 </div>
             </div>
@@ -87,77 +88,8 @@
             <div class="container">
                 <h2 class="section-title animate-on-scroll">02 <span>//</span> Featured Projects</h2>
                 
-                <div class="work-accordion">
-                    <!-- Project 1: Offline Reddit -->
-                    <div class="accordion-item animate-on-scroll" data-gallery-images="assets/bg1.webp, assets/bg2.webp, assets/bg4.webp">
-                        <div class="accordion-item__title" role="button" aria-expanded="false" aria-controls="project-1-content">
-                            <div>
-                                <h3>Offline Reddit</h3>
-                                <p>Desktop Application</p>
-                            </div>
-                            <span class="toggle-icon" aria-hidden="true"></span>
-                        </div>
-                        <div class="accordion-item__content" id="project-1-content" role="region">
-                            <div class="accordion-item__details">
-                                <div class="project-description">
-                                    <p>A robust desktop application built with modern technologies, focused on a clean UI and a powerful backend for downloading Reddit content for offline viewing.</p>
-                                </div>
-                                <ul class="project-tech-list">
-                                    <li>Electron.js</li>
-                                    <li>React.js</li>
-                                    <li>Node.js</li>
-                                </ul>
-                                <div class="project-links">
-                                    <a href="https://github.com/pixelanay/OfflineReddit" class="btn btn-secondary interactive" target="_blank" rel="noopener noreferrer">View Code <i class="fab fa-github"></i></a>
-                                </div>
-                            </div>
-                            <div class="accordion-item__gallery">
-                                 <div class="project-main-image interactive">
-                                    <img src="assets/bg1.webp" alt="Main view of Offline Reddit project." loading="lazy" width="1280" height="720">
-                                    <button class="enlarge-btn" aria-label="Enlarge image"><i class="fas fa-expand"></i></button>
-                                 </div>
-                                 <div class="project-thumbnails">
-                                    <!-- Thumbnails will be generated by JavaScript here -->
-                                 </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Project 2: Retro BrowserOS -->
-                    <div class="accordion-item animate-on-scroll" data-gallery-images="assets/bg3.webp, assets/bg1.webp, assets/bg2.webp">
-                        <div class="accordion-item__title" role="button" aria-expanded="false" aria-controls="project-2-content">
-                            <div>
-                                <h3>Retro BrowserOS</h3>
-                                <p>Interactive Web Experience</p>
-                            </div>
-                            <span class="toggle-icon" aria-hidden="true"></span>
-                        </div>
-                        <div class="accordion-item__content" id="project-2-content" role="region">
-                            <div class="accordion-item__details">
-                                <div class="project-description">
-                                    <p>An interactive web dashboard designed to mimic a retro-style operating system, showcasing dynamic UI elements and creative frontend development.</p>
-                                </div>
-                                <ul class="project-tech-list">
-                                    <li>HTML5</li>
-                                    <li>CSS3</li>
-                                    <li>JavaScript</li>
-                                </ul>
-                                <div class="project-links">
-                                    <a href="https://pixelanay.github.io/OS" class="btn btn-primary interactive" target="_blank" rel="noopener noreferrer">Live Site <i class="fas fa-arrow-up-right-from-square"></i></a>
-                                    <a href="https://github.com/PixelAnay/OS" class="btn btn-secondary interactive" target="_blank" rel="noopener noreferrer">View Code <i class="fab fa-github"></i></a>
-                                </div>
-                            </div>
-                            <div class="accordion-item__gallery">
-                                <div class="project-main-image interactive">
-                                    <img src="assets/bg3.webp" alt="Main view of Retro BrowserOS project." loading="lazy" width="1280" height="720">
-                                    <button class="enlarge-btn" aria-label="Enlarge image"><i class="fas fa-expand"></i></button>
-                                 </div>
-                                 <div class="project-thumbnails">
-                                    <!-- Thumbnails will be generated by JavaScript here -->
-                                 </div>
-                            </div>
-                        </div>
-                    </div>
+                <div id="projects-container" class="work-accordion">
+                    <!-- Featured Projects will be dynamically inserted here -->
                 </div>
 
                  <div class="see-all-container animate-on-scroll">
@@ -170,19 +102,8 @@
         <section class="content-section" id="skills">
             <div class="container">
                 <h2 class="section-title animate-on-scroll">03 <span>//</span> Technical Skills</h2>
-                <ul class="skills-list animate-on-scroll">
-                    <li class="interactive">Java</li>
-                    <li class="interactive">Python</li>
-                    <li class="interactive">JavaScript</li>
-                    <li class="interactive">React.js</li>
-                    <li class="interactive">HTML5 & CSS3</li>
-                    <li class="interactive">SASS</li>
-                    <li class="interactive">SQL</li>
-                    <li class="interactive">Git & GitHub</li>
-                    <li class="interactive">Data Structures</li>
-                    <li class="interactive">Algorithms</li>
-                    <li class="interactive">Figma</li>
-                    <li class="interactive">Webflow</li>
+                <ul id="skills-list-container" class="skills-list animate-on-scroll">
+                    <!-- Skills will be dynamically inserted here -->
                 </ul>
                 <div class="see-all-container animate-on-scroll">
                     <a href="skills.html" class="btn btn-secondary interactive">View All Skills</a>
@@ -196,39 +117,19 @@
                 <div class="dual-section-container">
                     <div class="timeline-column animate-on-scroll">
                         <h2 class="section-title">04 <span>//</span> Experience</h2>
-                        <div class="timeline">
-                            <div class="timeline-item">
-                                <div class="timeline-icon"><i class="fas fa-briefcase"></i></div>
-                                <h3>Software Engineering Intern</h3>
-                                <span class="company-school">Innovatech Solutions Ltd.</span>
-                                <span class="date">Summer 2023</span>
-                                <p>Contributed to the development of a new client portal using Angular and Spring Boot, enhancing front-end performance and user experience.</p>
-                            </div>
-                            <div class="timeline-item">
-                                <div class="timeline-icon"><i class="fas fa-chalkboard-user"></i></div>
-                                <h3>Teaching Assistant</h3>
-                                <span class="company-school">State University, CS Dept.</span>
-                                <span class="date">Fall 2022 - Spring 2023</span>
-                                <p>Assisted professors in teaching foundational programming concepts in Python to over 100 students, leading lab sessions and grading assignments.</p>
-                            </div>
+                        <div id="experience-container" class="timeline">
+                           <!-- Experience items will be dynamically inserted here -->
                         </div>
                     </div>
                     <div class="timeline-column animate-on-scroll">
                         <h2 class="section-title" id="education-heading">05 <span>//</span> Education</h2>
-                        <div class="timeline">
-                             <div class="timeline-item">
-                                <div class="timeline-icon"><i class="fas fa-graduation-cap"></i></div>
-                                <h3>B.Sc. in Computer Science</h3>
-                                <span class="company-school">State University</span>
-                                <span class="date">Expected May 2029</span>
-                                <p>Relevant Coursework: Data Structures & Algorithms, Web Development (Full Stack), Operating Systems, Artificial Intelligence.</p>
-                            </div>
+                        <div id="education-container" class="timeline">
+                            <!-- Education items will be dynamically inserted here -->
                         </div>
                     </div>
                 </div>
             </div>
         </section>
-
 
         <!-- CONTACT SECTION -->
         <section class="content-section" id="contact">
@@ -237,12 +138,12 @@
                 <div class="animate-on-scroll">
                     <p class="contact-intro">I'm always excited to connect and discuss potential projects or opportunities. Whether you have a question or just want to say hi, feel free to reach out!</p>
                     <div class="contact-form-container">
-                        <a href="mailto:pixel.anay@gmail.com" class="contact-email-link interactive">
+                        <a id="contact-email-link" href="#" class="contact-email-link interactive">
                             <i class="far fa-envelope"></i>
-                            <span>pixel.anay@gmail.com</span>
+                            <span id="contact-email-text"></span>
                         </a>
                        <div class="form-divider"><span>OR</span></div>
-                        <form action="https://formspree.io/f/mgvkgypw" method="POST" class="contact-form">
+                        <form id="contact-form" action="#" method="POST" class="contact-form">
                             <div class="form-group">
                                  <label for="name">Your Name</label>
                                 <input type="text" name="name" id="name" required placeholder="e.g. Jane Doe">
@@ -267,18 +168,17 @@
     <footer class="footer">
         <div class="container">
             <div class="footer-content">
-                <div class="footer-socials">
-                    <a href="https://www.linkedin.com/in/anaygawate/" aria-label="LinkedIn" target="_blank" rel="noopener noreferrer"><i class="fab fa-linkedin-in"></i></a>
-                    <a href="https://github.com/pixelanay" aria-label="GitHub" target="_blank" rel="noopener noreferrer"><i class="fab fa-github"></i></a>
+                <div id="footer-socials-container" class="footer-socials">
+                    <!-- Footer socials will be inserted here -->
                 </div>
                  <div class="email-copy-container">
-                    <span id="emailToCopy" class="footer-link">pixel.anay@gmail.com</span>
+                    <span id="emailToCopy" class="footer-link"></span>
                     <button id="copyEmailButton" class="copy-button" aria-label="Copy email address" title="Copy email">
                         <i class="far fa-copy"></i>
                     </button>
                     <span id="copyFeedback" class="copy-feedback">Copied!</span>
                 </div>
-                <p>© <span id="currentYear"></span> Anay Gawate. All Rights Reserved.</p>
+                <p>© <span id="currentYear"></span> <span id="footer-name"></span>. All Rights Reserved.</p>
             </div>
         </div>
     </footer>
@@ -293,10 +193,58 @@
             <div class="lightbox__counter" aria-live="polite"></div>
         </div>
     </div>
+    
+    <!-- TEMPLATES FOR DYNAMIC CONTENT -->
+    <template id="project-template">
+        <div class="accordion-item animate-on-scroll" data-gallery-images="">
+            <div class="accordion-item__title" role="button" aria-expanded="false" aria-controls="project-content">
+                <div>
+                    <h3 class="project-title"></h3>
+                    <p class="project-category"></p>
+                </div>
+                <span class="toggle-icon" aria-hidden="true"></span>
+            </div>
+            <div class="accordion-item__content" id="project-content" role="region">
+                <div class="accordion-item__details">
+                    <div class="project-description">
+                        <p></p>
+                    </div>
+                    <ul class="project-tech-list"></ul>
+                    <div class="project-links"></div>
+                </div>
+                <div class="accordion-item__gallery">
+                     <div class="project-main-image interactive">
+                        <img src="" alt="" loading="lazy" width="1280" height="720">
+                        <button class="enlarge-btn" aria-label="Enlarge image"><i class="fas fa-expand"></i></button>
+                     </div>
+                     <div class="project-thumbnails"></div>
+                </div>
+            </div>
+        </div>
+    </template>
+    
+    <template id="experience-template">
+        <div class="timeline-item">
+            <div class="timeline-icon"><i class="fas fa-briefcase"></i></div>
+            <h3 class="item-title"></h3>
+            <span class="company-school item-company"></span>
+            <span class="date item-date"></span>
+            <p class="item-description"></p>
+        </div>
+    </template>
+
+    <template id="education-template">
+        <div class="timeline-item">
+            <div class="timeline-icon"><i class="fas fa-graduation-cap"></i></div>
+            <h3 class="item-degree"></h3>
+            <span class="company-school item-school"></span>
+            <span class="date item-date"></span>
+            <p class="item-description"></p>
+        </div>
+    </template>
+
 
     <!-- Your Script -->
-  <script src="script.js" defer></script>
->
-
+    <script src="script.js" defer></script>
 </body>
 </html>
