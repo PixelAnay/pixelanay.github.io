@@ -28,6 +28,7 @@
 
 html {
     scroll-behavior: smooth;
+    background-color: var(--dark-bg); /* Added for consistent scrollbar track */
 }
 
 body {
@@ -36,9 +37,7 @@ body {
     font-family: var(--font-body);
     line-height: 1.6;
     overflow-x: hidden;
-    -webkit-user-select: none;
-    -ms-user-select: none;
-    user-select: none;
+    /* REMOVED user-select: none; for better UX */
 }
 .body-no-scroll { overflow: hidden; }
 
@@ -65,9 +64,10 @@ img { max-width: 100%; display: block; object-fit: cover; }
     outline: 2px solid var(--accent-color);
     outline-offset: 3px;
 }
-
+/* Allow text selection on inputs and textareas */
 input, textarea {
     -webkit-user-select: text;
+    -moz-user-select: text;
     -ms-user-select: text;
     user-select: text;
 }
@@ -78,6 +78,7 @@ input, textarea {
     position: fixed; top: 0; left: 0; width: 100%; z-index: 1000;
     background: rgba(11, 11, 15, 0.6);
     backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
     border-bottom: 1px solid var(--border-color);
     transition: top var(--transition-med);
 }
@@ -114,7 +115,7 @@ input, textarea {
     margin-bottom: var(--spacing-sm); line-height: 1.1;
     margin-top: 2.5rem;
     text-shadow: 0 0 20px var(--accent-glow); 
-    white-space: nowrap; /* Add this line */
+    white-space: nowrap;
 }
 .hero-title span {
     display: inline-block; opacity: 0;
@@ -159,7 +160,7 @@ input, textarea {
 }
 .section-title span { color: var(--accent-color); }
 
-/* Staggered Animation Base State */
+/* Animation for elements revealed on scroll */
 .animate-on-scroll {
     opacity: 0;
     transform: translateY(40px);
@@ -188,7 +189,7 @@ input, textarea {
     padding: 0.5rem 1rem; border: 1px solid var(--border-color);
     border-radius: 5px; font-weight: 400;
     transition: background-color var(--transition-fast), color var(--transition-fast);
-    cursor: pointer;
+    cursor: default; /* Changed from pointer as they are not clickable */
 }
 .skills-list li:hover { background-color: var(--accent-color); color: var(--dark-bg); }
 .see-all-container { margin-top: var(--spacing-lg); text-align: center; }
@@ -249,6 +250,19 @@ input, textarea {
     padding-top: 5px;
 }
 .project-links .btn { padding: 0.75rem 1.5rem; }
+.btn.disabled {
+    cursor: not-allowed;
+    background-color: var(--card-bg);
+    border-color: rgba(160, 160, 176, 0.3);
+    color: var(--text-secondary);
+    opacity: 0.7;
+}
+.btn.disabled:hover {
+    transform: none;
+    background-color: var(--card-bg);
+    color: var(--text-secondary);
+}
+
 
 .enlarge-btn {
     position: absolute; bottom: 8px; right: 8px;
@@ -294,7 +308,7 @@ input, textarea {
     border: 1px solid var(--border-color);
 }
 
-/* --- THE FIX IS HERE --- */
+/* Project Image Aspect Ratio Fix */
 .project-main-image {
     border: 1px solid var(--border-color);
     border-radius: 8px;
@@ -308,9 +322,8 @@ input, textarea {
     width: 100%;
     height: 100%;
     transition: transform var(--transition-med);
-    object-fit: contain; /* This ensures the whole image is visible */
+    object-fit: contain; /* Ensures the whole image is visible without distortion */
 }
-/* --- END OF FIX --- */
 
 .project-thumbnails {
     display: grid;
@@ -319,13 +332,13 @@ input, textarea {
 }
 .project-thumbnails img {
     height: 60px;
+    width: 100%; /* Ensure thumbnails fill the grid cell width */
     border-radius: 4px;
     border: 2px solid var(--border-color);
     cursor: pointer;
     opacity: 0.6;
     transition: opacity var(--transition-fast), border-color var(--transition-fast), box-shadow var(--transition-fast);
-    /* 'object-fit: cover' is good for thumbnails to keep them uniform */
-    object-fit: cover; 
+    object-fit: cover; /* Keeps thumbnails uniform */
 }
 .project-thumbnails img:hover {
     opacity: 1;
@@ -441,7 +454,7 @@ input, textarea {
 }
 .btn-primary:hover {
     background-color: var(--dark-bg); color: var(--text-primary);
-    transform: translateY(-3px) scale(1);
+    transform: translateY(-3px) scale(1.02);
  
 }
 .btn-secondary {
@@ -495,7 +508,7 @@ input, textarea {
 .copy-feedback.is-visible { opacity: 1; visibility: visible; }
 
 
-/* LIGHTBOX STYLES (NO CHANGE) */
+/* LIGHTBOX STYLES */
 .lightbox {
     position: fixed; top: 0; left: 0; width: 100vw; height: 100vh;
     background-color: rgba(11, 11, 15, 0.9); backdrop-filter: blur(10px);
@@ -513,7 +526,7 @@ input, textarea {
     position: fixed; top: 20px; right: 30px; font-size: 3rem; font-weight: 300; line-height: 1;
     color: var(--text-secondary); background: none; border: none;
     transition: color var(--transition-fast), transform var(--transition-fast);
-    cursor: pointer;
+    cursor: pointer; z-index: 11;
 }
 .lightbox__close:hover { color: var(--text-primary); transform: scale(1.1); }
 .lightbox__nav {
@@ -533,23 +546,18 @@ input, textarea {
     background: rgba(11, 11, 15, 0.5); padding: 5px 15px; border-radius: 20px;
 }
 
-/* ------------------------------------------- */
-/* --- NEW & REDESIGNED STYLES START HERE --- */
-/* ------------------------------------------- */
 
-/* --- SHARED STYLES FOR NEW PAGES --- */
+/* --- PAGE-SPECIFIC STYLES --- */
 .page-hero {
     padding-top: var(--spacing-xl);
     padding-bottom: 0;
 }
-
 .page-title {
     font-size: clamp(2.5rem, 6vw, 4rem);
     text-align: center;
     line-height: 1.1;
     text-shadow: 0 0 20px var(--accent-glow);
 }
-
 .page-subtitle {
     font-size: clamp(1rem, 2.5vw, 1.1rem);
     max-width: 600px;
@@ -557,7 +565,6 @@ input, textarea {
     text-align: center;
     font-weight: 300;
 }
-
 /* Removes the large top padding on a section that directly follows a page hero */
 .page-hero + .content-section {
     padding-top: 0;
@@ -611,8 +618,8 @@ input, textarea {
 .skill-items-list li:hover {
     transform: translateY(-3px);
     color: #fff;
-
 }
+
 
 /* --- RESPONSIVE DESIGN --- */
 @media (max-width: 1024px) {
@@ -660,7 +667,11 @@ input, textarea {
     .accordion-item__details { text-align: center; }
 
     .lightbox__close { right: 15px; }
+    .lightbox__nav { width: 40px; height: 40px; font-size: 1.2rem; }
+    .lightbox__prev { left: 10px; }
+    .lightbox__next { right: 10px; }
 }
+/* Mobile Tap Highlight Color */
 * {
   -webkit-tap-highlight-color: transparent;
 }

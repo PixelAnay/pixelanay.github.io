@@ -24,15 +24,15 @@
     <header class="header">
         <div class="header-container">
             <a href="index.html" class="logo">A<span>/</span>G</a>
-            <nav class="navbar">
+            <nav class="navbar" id="navbar">
                 <a href="index.html#about" class="nav-link">About</a>
-                <a href="projects.html" class="nav-link active">Projects</a>
+                <a href="projects.html" class="nav-link active" aria-current="page">Projects</a>
                 <a href="skills.html" class="nav-link">Skills</a>
                 <a href="index.html#experience" class="nav-link">Experience</a>
-                <a href="index.html#education-heading" class="nav-link" id="education-nav-link">Education</a>
+                <a href="index.html#education-heading" class="nav-link">Education</a>
                 <a href="index.html#contact" class="nav-link">Contact</a>
             </nav>
-            <button class="hamburger" aria-label="Open menu">
+            <button class="hamburger" aria-label="Open menu" aria-expanded="false" aria-controls="navbar">
                 <div class="bar"></div>
                 <div class="bar"></div>
                 <div class="bar"></div>
@@ -61,9 +61,9 @@
                                 <h3>Offline Reddit</h3>
                                 <p>Desktop Application</p>
                             </div>
-                            <span class="toggle-icon"></span>
+                            <span class="toggle-icon" aria-hidden="true"></span>
                         </div>
-                        <div class="accordion-item__content" id="project-1-content">
+                        <div class="accordion-item__content" id="project-1-content" role="region">
                             <div class="accordion-item__details">
                                 <div class="project-description">
                                     <p>A full-featured, cross-platform desktop app for downloading Reddit content. Users can save subreddits, posts, and media for offline viewing, with a focus on a clean UI and efficient backend processing.</p>
@@ -75,12 +75,12 @@
                                     <li>CSS-in-JS</li>
                                 </ul>
                                 <div class="project-links">
-                                    <a href="https://github.com/pixelanay/OfflineReddit" class="btn btn-secondary interactive" target="_blank">View Code <i class="fab fa-github"></i></a>
+                                    <a href="https://github.com/pixelanay/OfflineReddit" class="btn btn-secondary interactive" target="_blank" rel="noopener noreferrer">View Code <i class="fab fa-github"></i></a>
                                 </div>
                             </div>
                             <div class="accordion-item__gallery">
                                  <div class="project-main-image interactive">
-                                    <img src="assets/bg1.webp" alt="Main view of Offline Reddit project.">
+                                    <img src="assets/bg1.webp" alt="Main view of Offline Reddit project." loading="lazy" width="1280" height="720">
                                     <button class="enlarge-btn" aria-label="Enlarge image"><i class="fas fa-expand"></i></button>
                                  </div>
                                  <div class="project-thumbnails">
@@ -97,9 +97,9 @@
                                 <h3>Retro BrowserOS</h3>
                                 <p>Interactive Web Experience</p>
                             </div>
-                            <span class="toggle-icon"></span>
+                            <span class="toggle-icon" aria-hidden="true"></span>
                         </div>
-                        <div class="accordion-item__content" id="project-2-content">
+                        <div class="accordion-item__content" id="project-2-content" role="region">
                             <div class="accordion-item__details">
                                 <div class="project-description">
                                     <p>An interactive web dashboard mimicking a retro-style operating system. This project showcases dynamic UI elements, creative frontend development, and a passion for nostalgic design using modern web technologies.</p>
@@ -111,13 +111,13 @@
                                     <li>SASS</li>
                                 </ul>
                                 <div class="project-links">
-                                    <a href="https://pixelanay.github.io/OS" class="btn btn-primary interactive" target="_blank">Live Site <i class="fas fa-arrow-up-right-from-square"></i></a>
-                                    <a href="https://github.com/PixelAnay/OS" class="btn btn-secondary interactive" target="_blank">View Code <i class="fab fa-github"></i></a>
+                                    <a href="https://pixelanay.github.io/OS" class="btn btn-primary interactive" target="_blank" rel="noopener noreferrer">Live Site <i class="fas fa-arrow-up-right-from-square"></i></a>
+                                    <a href="https://github.com/PixelAnay/OS" class="btn btn-secondary interactive" target="_blank" rel="noopener noreferrer">View Code <i class="fab fa-github"></i></a>
                                 </div>
                             </div>
                             <div class="accordion-item__gallery">
                                 <div class="project-main-image interactive">
-                                    <img src="assets/bg3.webp" alt="Main view of Retro BrowserOS project.">
+                                    <img src="assets/bg3.webp" alt="Main view of Retro BrowserOS project." loading="lazy" width="1280" height="720">
                                     <button class="enlarge-btn" aria-label="Enlarge image"><i class="fas fa-expand"></i></button>
                                  </div>
                                  <div class="project-thumbnails">
@@ -134,9 +134,9 @@
                                 <h3>Data Visualization Dashboard</h3>
                                 <p>Full-Stack Web App</p>
                             </div>
-                            <span class="toggle-icon"></span>
+                            <span class="toggle-icon" aria-hidden="true"></span>
                         </div>
-                        <div class="accordion-item__content" id="project-3-content">
+                        <div class="accordion-item__content" id="project-3-content" role="region">
                             <div class="accordion-item__details">
                                 <div class="project-description">
                                     <p>A web-based platform for visualizing complex datasets. Features a RESTful API backend to serve data and a React frontend with D3.js to render interactive charts and graphs, helping users derive insights from raw data.</p>
@@ -149,12 +149,12 @@
                                     <li>PostgreSQL</li>
                                 </ul>
                                 <div class="project-links">
-                                    <a href="#" class="btn btn-secondary interactive disabled" aria-disabled="true" target="_blank">Private Repo <i class="fas fa-lock"></i></a>
+                                    <a href="#" class="btn btn-secondary interactive disabled" aria-disabled="true">Private Repo <i class="fas fa-lock"></i></a>
                                 </div>
                             </div>
                             <div class="accordion-item__gallery">
                                 <div class="project-main-image interactive">
-                                    <img src="assets/bg2.webp" alt="Main view of Data Viz Dashboard project.">
+                                    <img src="assets/bg2.webp" alt="Main view of Data Viz Dashboard project." loading="lazy" width="1280" height="720">
                                     <button class="enlarge-btn" aria-label="Enlarge image"><i class="fas fa-expand"></i></button>
                                  </div>
                                  <div class="project-thumbnails">
@@ -167,20 +167,22 @@
                 </div>
             </div>
         </section>
+        
+        <!-- BACK TO HOME BUTTON -->
+        <div class="back-to-home-container">
+            <a href="index.html" class="btn btn-secondary interactive">
+                <i class="fas fa-arrow-left"></i> Back to Home
+            </a>
+        </div>
     </main>
-<!-- BACK TO HOME BUTTON -->
-<div class="back-to-home-container">
-    <a href="index.html" class="btn btn-secondary interactive">
-        <i class="fas fa-arrow-left"></i> Back to Home
-    </a>
-</div>
+
     <!-- FOOTER -->
     <footer class="footer">
         <div class="container">
             <div class="footer-content">
                 <div class="footer-socials">
-                    <a href="https://www.linkedin.com/in/anaygawate/" aria-label="LinkedIn" target="_blank"><i class="fab fa-linkedin-in"></i></a>
-                    <a href="https://github.com/pixelanay" aria-label="GitHub" target="_blank"><i class="fab fa-github"></i></a>
+                    <a href="https://www.linkedin.com/in/anaygawate/" aria-label="LinkedIn" target="_blank" rel="noopener noreferrer"><i class="fab fa-linkedin-in"></i></a>
+                    <a href="https://github.com/pixelanay" aria-label="GitHub" target="_blank" rel="noopener noreferrer"><i class="fab fa-github"></i></a>
                 </div>
                  <div class="email-copy-container">
                     <span id="emailToCopy" class="footer-link">pixel.anay@gmail.com</span>
@@ -189,19 +191,19 @@
                     </button>
                     <span id="copyFeedback" class="copy-feedback">Copied!</span>
                 </div>
-                <p>© <span id="currentYear">2024</span> Anay Gawate. All Rights Reserved.</p>
+                <p>© <span id="currentYear"></span> Anay Gawate. All Rights Reserved.</p>
             </div>
         </div>
     </footer>
 
     <!-- LIGHTBOX / GALLERY MODAL -->
-    <div class="lightbox" id="lightbox">
+    <div class="lightbox" id="lightbox" role="dialog" aria-modal="true" aria-hidden="true">
         <button class="lightbox__close" aria-label="Close gallery">×</button>
         <button class="lightbox__nav lightbox__prev" aria-label="Previous image">❮</button>
         <button class="lightbox__nav lightbox__next" aria-label="Next image">❯</button>
         <div class="lightbox__content">
             <img src="" alt="Enlarged project image" class="lightbox__image">
-            <div class="lightbox__counter"></div>
+            <div class="lightbox__counter" aria-live="polite"></div>
         </div>
     </div>
 

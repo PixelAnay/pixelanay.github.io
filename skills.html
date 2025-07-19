@@ -24,15 +24,15 @@
     <header class="header">
         <div class="header-container">
             <a href="index.html" class="logo">A<span>/</span>G</a>
-            <nav class="navbar">
+            <nav class="navbar" id="navbar">
                 <a href="index.html#about" class="nav-link">About</a>
                 <a href="projects.html" class="nav-link">Projects</a>
-                <a href="skills.html" class="nav-link active">Skills</a>
+                <a href="skills.html" class="nav-link active" aria-current="page">Skills</a>
                 <a href="index.html#experience" class="nav-link">Experience</a>
-                <a href="index.html#education-heading" class="nav-link" id="education-nav-link">Education</a>
+                <a href="index.html#education-heading" class="nav-link">Education</a>
                 <a href="index.html#contact" class="nav-link">Contact</a>
             </nav>
-            <button class="hamburger" aria-label="Open menu">
+            <button class="hamburger" aria-label="Open menu" aria-expanded="false" aria-controls="navbar">
                 <div class="bar"></div>
                 <div class="bar"></div>
                 <div class="bar"></div>
@@ -50,7 +50,7 @@
         </section>
 
         <!-- SKILLS GRID -->
-        <section class="content-section" id="skills">
+        <section class="content-section" id="skills-grid-section">
             <div class="container">
                 <div class="skills-grid">
                     <!-- Category 1: Languages -->
@@ -135,20 +135,22 @@
                 </div>
             </div>
         </section>
+        
+        <!-- BACK TO HOME BUTTON -->
+        <div class="back-to-home-container">
+            <a href="index.html" class="btn btn-secondary interactive">
+                <i class="fas fa-arrow-left"></i> Back to Home
+            </a>
+        </div>
     </main>
-<!-- BACK TO HOME BUTTON -->
-<div class="back-to-home-container">
-    <a href="index.html" class="btn btn-secondary interactive">
-        <i class="fas fa-arrow-left"></i> Back to Home
-    </a>
-</div>
+
     <!-- FOOTER -->
     <footer class="footer">
         <div class="container">
             <div class="footer-content">
                 <div class="footer-socials">
-                    <a href="https://www.linkedin.com/in/anaygawate/" aria-label="LinkedIn" target="_blank"><i class="fab fa-linkedin-in"></i></a>
-                    <a href="https://github.com/pixelanay" aria-label="GitHub" target="_blank"><i class="fab fa-github"></i></a>
+                    <a href="https://www.linkedin.com/in/anaygawate/" aria-label="LinkedIn" target="_blank" rel="noopener noreferrer"><i class="fab fa-linkedin-in"></i></a>
+                    <a href="https://github.com/pixelanay" aria-label="GitHub" target="_blank" rel="noopener noreferrer"><i class="fab fa-github"></i></a>
                 </div>
                  <div class="email-copy-container">
                     <span id="emailToCopy" class="footer-link">pixel.anay@gmail.com</span>
@@ -157,7 +159,7 @@
                     </button>
                     <span id="copyFeedback" class="copy-feedback">Copied!</span>
                 </div>
-                <p>© <span id="currentYear">2024</span> Anay Gawate. All Rights Reserved.</p>
+                <p>© <span id="currentYear"></span> Anay Gawate. All Rights Reserved.</p>
             </div>
         </div>
     </footer>

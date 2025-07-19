@@ -1,99 +1,116 @@
 document.addEventListener('DOMContentLoaded', function() {
     const body = document.body;
-// --- NEW: STAGGERED FADE-IN ANIMATION FOR PAGE CONTENT ---
-const animatedElements = document.querySelectorAll('.animate-on-scroll');
-if (animatedElements.length > 0) {
-    const animateOnScrollObserver = new IntersectionObserver((entries, observer) => {
-        entries.forEach((entry, index) => {
-            if (entry.isIntersecting) {
-                // Add a staggered delay based on the element's order in the DOM
-                entry.target.style.transitionDelay = `${index * 100}ms`;
-                entry.target.classList.add('is-visible');
-                observer.unobserve(entry.target); // Stop observing once it's visible
-            }
-        });
-    }, {
-        root: null,
-        threshold: 0.1, // Trigger when 10% of the element is visible
-    });
 
-    animatedElements.forEach(el => {
-        animateOnScrollObserver.observe(el);
-    });
-}
-    // --- WORK SECTION ACCORDION ---
+    // --- OBSERVERS ---
+    // Consolidated observer for all 'animate on scroll' elements
+    const animatedElements = document.querySelectorAll('.animate-on-scroll');
+    if (animatedElements.length > 0) {
+        const animateOnScrollObserver = new IntersectionObserver((entries, observer) => {
+            entries.forEach((entry, index) => {
+                if (entry.isIntersecting) {
+                    // Stagger delay for a nicer effect, but only if not already set via inline style
+                    if (!entry.target.style.transitionDelay) {
+                         entry.target.style.transitionDelay = `${index * 100}ms`;
+                    }
+                    entry.target.classList.add('is-visible');
+                    observer.unobserve(entry.target);
+                }
+            });
+        }, {
+            root: null,
+            threshold: 0.1,
+        });
+
+        animatedElements.forEach(el => {
+            animateOnScrollObserver.observe(el);
+        });
+    }
+
+    // --- UI INTERACTIONS ---
+
+    // Mobile Navigation
+    const hamburger = document.querySelector('.hamburger');
+    const navMenu = document.querySelector('.navbar');
+    if (hamburger && navMenu) {
+        const navLinks = navMenu.querySelectorAll('.nav-link');
+        hamburger.addEventListener('click', () => {
+            body.classList.toggle('nav-open');
+            body.classList.toggle('body-no-scroll');
+            const isExpanded = hamburger.getAttribute('aria-expanded') === 'true';
+            hamburger.setAttribute('aria-expanded', !isExpanded);
+        });
+
+        navLinks.forEach(link => {
+            link.addEventListener('click', () => {
+                body.classList.remove('nav-open', 'body-no-scroll');
+                hamburger.setAttribute('aria-expanded', 'false');
+            });
+        });
+    }
+    
+    // Hide/Show Header on Scroll
+    const header = document.querySelector('.header');
+    if(header) {
+        let lastScrollY = window.scrollY;
+        window.addEventListener('scroll', () => {
+            if (lastScrollY < window.scrollY && window.scrollY > 100) {
+                header.classList.add('hidden');
+            } else {
+                header.classList.remove('hidden');
+            }
+            lastScrollY = window.scrollY;
+        });
+    }
+
+    // Work Section Accordion
     const accordionItems = document.querySelectorAll('.accordion-item');
     accordionItems.forEach(item => {
         const title = item.querySelector('.accordion-item__title');
         title.addEventListener('click', () => {
             const wasActive = item.classList.contains('is-active');
+            // Close all items
             accordionItems.forEach(otherItem => {
                 otherItem.classList.remove('is-active');
                 otherItem.querySelector('.accordion-item__title').setAttribute('aria-expanded', 'false');
             });
+            // If it wasn't active, open it
             if (!wasActive) {
                 item.classList.add('is-active');
                 title.setAttribute('aria-expanded', 'true');
             }
         });
     });
+    
+    // Intelligent Scroll for Education Link (for desktop view)
+    const educationNavLink = document.getElementById('education-nav-link');
+    if (educationNavLink) {
+        educationNavLink.addEventListener('click', function(event) {
+            if (window.innerWidth > 768) {
+                event.preventDefault();
+                const experienceSection = document.getElementById('experience');
+                if (experienceSection) {
+                    experienceSection.scrollIntoView({ behavior: 'smooth' });
+                }
+            }
+        });
+    }
 
-    // --- HERO TEXT SPLIT & ANIMATE ---
+    // --- DYNAMIC CONTENT & ANIMATIONS ---
+
+    // Hero Text Split & Animate
     const textToSplit = document.querySelector('[data-text-split]');
     if (textToSplit) {
         const text = textToSplit.innerText;
         textToSplit.innerHTML = '';
         text.split('').forEach((char, index) => {
             const span = document.createElement('span');
-            span.innerHTML = char === ' ' ? ' ' : char;
+            span.innerHTML = char === ' ' ? ' ' : char; // Use non-breaking space
             span.style.animationDelay = `${index * 0.04}s`;
             textToSplit.appendChild(span);
         });
     }
 
-    // --- HIDE/SHOW HEADER ON SCROLL ---
-    let lastScrollY = window.scrollY;
-    const header = document.querySelector('.header');
-    window.addEventListener('scroll', () => {
-        if (lastScrollY < window.scrollY && window.scrollY > 100) {
-            header.classList.add('hidden');
-        } else {
-            header.classList.remove('hidden');
-        }
-        lastScrollY = window.scrollY;
-    });
-
-    // --- MOBILE NAVIGATION ---
-    const hamburger = document.querySelector('.hamburger');
-    const navMenu = document.querySelector('.navbar');
-    const navLinks = document.querySelectorAll('.nav-link');
-    hamburger.addEventListener('click', () => {
-        body.classList.toggle('nav-open');
-        body.classList.toggle('body-no-scroll');
-    });
-    navLinks.forEach(link => {
-        // This general listener closes the menu. The specific listener below handles the scroll.
-        link.addEventListener('click', () => {
-            body.classList.remove('nav-open');
-            body.classList.remove('body-no-scroll');
-        });
-    });
-
-    // --- FADE-IN SECTION ON SCROLL ---
-    const sections = document.querySelectorAll('.content-section');
-    const revealSection = (entries, observer) => {
-        const [entry] = entries;
-        if (!entry.isIntersecting) return;
-        entry.target.classList.add('is-visible');
-        observer.unobserve(entry.target);
-    };
-    const sectionObserver = new IntersectionObserver(revealSection, {
-        root: null,
-        threshold: 0.1,
-    });
-    sections.forEach(section => sectionObserver.observe(section));
-
-    // --- LIGHTBOX GALLERY ---
+    // Lightbox Gallery
     const lightbox = document.getElementById('lightbox');
     if (lightbox) {
         const lightboxImg = lightbox.querySelector('.lightbox__image');
@@ -106,25 +123,29 @@ if (animatedElements.length > 0) {
         let currentImageIndex = 0;
 
         const openLightbox = (images, index) => {
-            currentGalleryImages = images.filter(img => img.trim() !== '');
+            currentGalleryImages = images.filter(img => img && img.trim() !== '');
             if (currentGalleryImages.length === 0) return;
             currentImageIndex = index;
             body.classList.add('body-no-scroll');
             lightbox.classList.add('is-open');
+            lightbox.setAttribute('aria-hidden', 'false');
             showImage();
         };
 
         const closeLightbox = () => {
             body.classList.remove('body-no-scroll');
             lightbox.classList.remove('is-open');
+            lightbox.setAttribute('aria-hidden', 'true');
         };
 
         const showImage = () => {
             if (currentImageIndex < 0 || currentImageIndex >= currentGalleryImages.length) return;
             lightboxImg.src = currentGalleryImages[currentImageIndex];
+            // Reset animation for image fade-in
             lightboxImg.style.animation = 'none';
             void lightboxImg.offsetWidth;
             lightboxImg.style.animation = '';
+            
             lightboxCounter.textContent = `${currentImageIndex + 1} / ${currentGalleryImages.length}`;
             prevBtn.style.display = currentGalleryImages.length > 1 && currentImageIndex > 0 ? 'flex' : 'none';
             nextBtn.style.display = currentGalleryImages.length > 1 && currentImageIndex < currentGalleryImages.length - 1 ? 'flex' : 'none';
@@ -144,8 +165,7 @@ if (animatedElements.length > 0) {
             if (e.key === 'ArrowLeft') showPrevImage();
         });
 
-        // --- UNIFIED THUMBNAIL GALLERY SCRIPT ---
-        // This single block now handles all project galleries on all pages.
+        // Unified Thumbnail Gallery Script
         const projectGalleries = document.querySelectorAll('.accordion-item[data-gallery-images]');
         projectGalleries.forEach(gallery => {
             const mainImageContainer = gallery.querySelector('.project-main-image');
@@ -154,19 +174,17 @@ if (animatedElements.length > 0) {
             const mainImage = mainImageContainer.querySelector('img');
             const thumbnailsContainer = gallery.querySelector('.project-thumbnails');
             const enlargeBtn = gallery.querySelector('.enlarge-btn');
-
             const imageUrls = gallery.dataset.galleryImages.split(',').map(s => s.trim()).filter(Boolean);
             
-            if (imageUrls.length > 1) {
+            if (imageUrls.length > 1 && thumbnailsContainer) {
                 thumbnailsContainer.innerHTML = ''; 
                 imageUrls.forEach((url, index) => {
                     const thumb = document.createElement('img');
                     thumb.src = url;
                     thumb.alt = `Project thumbnail ${index + 1}`;
                     thumb.dataset.index = index;
-                    if (index === 0) {
-                        thumb.classList.add('is-active');
-                    }
+                    thumb.loading = 'lazy';
+                    if (index === 0) thumb.classList.add('is-active');
                     thumbnailsContainer.appendChild(thumb);
                 });
 
@@ -175,34 +193,37 @@ if (animatedElements.length > 0) {
                         const newIndex = parseInt(e.target.dataset.index, 10);
                         mainImage.src = imageUrls[newIndex];
                         mainImageContainer.dataset.currentIndex = newIndex;
-
                         thumbnailsContainer.querySelectorAll('img').forEach(t => t.classList.remove('is-active'));
                         e.target.classList.add('is-active');
                     }
                 });
-            } else {
+            } else if (thumbnailsContainer) {
                  thumbnailsContainer.style.display = 'none';
             }
 
-            enlargeBtn.addEventListener('click', (e) => {
-                e.preventDefault();
-                const startIndex = parseInt(mainImageContainer.dataset.currentIndex, 10) || 0;
-                openLightbox(imageUrls, startIndex);
-            });
+            if(enlargeBtn) {
+                enlargeBtn.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    const startIndex = parseInt(mainImageContainer.dataset.currentIndex, 10) || 0;
+                    openLightbox(imageUrls, startIndex);
+                });
+            }
         });
     }
 
-    // --- FOOTER: DYNAMIC YEAR ---
+    // --- FOOTER SCRIPTS ---
+
+    // Dynamic Year
     const currentYearEl = document.getElementById('currentYear');
     if (currentYearEl) {
         currentYearEl.textContent = new Date().getFullYear();
     }
 
-    // --- FOOTER: EMAIL COPY ---
+    // Email Copy
     const copyBtn = document.getElementById('copyEmailButton');
-    const emailTextEl = document.getElementById('emailToCopy');
-    const copyFeedbackEl = document.getElementById('copyFeedback');
-    if (copyBtn && emailTextEl && copyFeedbackEl) {
+    if (copyBtn) {
+        const emailTextEl = document.getElementById('emailToCopy');
+        const copyFeedbackEl = document.getElementById('copyFeedback');
         copyBtn.addEventListener('click', () => {
             const email = emailTextEl.textContent.trim();
             navigator.clipboard.writeText(email).then(() => {
@@ -212,22 +233,8 @@ if (animatedElements.length > 0) {
                 }, 2000);
             }).catch(err => {
                 console.error('Failed to copy email: ', err);
+                alert('Failed to copy email. Please copy it manually.');
             });
-        });
-    }
-
-    // --- INTELLIGENT SCROLL FOR EDUCATION LINK ---
-    const educationNavLink = document.getElementById('education-nav-link');
-    if (educationNavLink) {
-        educationNavLink.addEventListener('click', function(event) {
-            // On desktop screens (where the columns are side-by-side)
-            if (window.innerWidth > 768) {
-                event.preventDefault();
-                const experienceSection = document.getElementById('experience');
-                if (experienceSection) {
-                    experienceSection.scrollIntoView({ behavior: 'smooth' });
-                }
-            }
         });
     }
 });

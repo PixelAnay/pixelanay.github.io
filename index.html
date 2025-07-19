@@ -23,7 +23,7 @@
     <!-- HEADER -->
     <header class="header">
         <div class="header-container">
-            <a href="#" class="logo">A<span>/</span>G</a>
+            <a href="index.html" class="logo">A<span>/</span>G</a>
             <nav class="navbar">
                 <a href="#about" class="nav-link">About</a>
                 <a href="projects.html" class="nav-link">Projects</a>
@@ -32,7 +32,7 @@
                 <a href="#education-heading" class="nav-link" id="education-nav-link">Education</a>
                 <a href="#contact" class="nav-link">Contact</a>
             </nav>
-            <button class="hamburger" aria-label="Open menu">
+            <button class="hamburger" aria-label="Open menu" aria-expanded="false" aria-controls="navbar">
                 <div class="bar"></div>
                 <div class="bar"></div>
                 <div class="bar"></div>
@@ -58,8 +58,8 @@
                     </a>
                 </div>
                  <div class="hero-socials">
-                    <a href="https://www.linkedin.com/in/anaygawate/" aria-label="LinkedIn" target="_blank"><i class="fab fa-linkedin-in"></i></a>
-                    <a href="https://github.com/pixelanay" aria-label="GitHub" target="_blank"><i class="fab fa-github"></i></a>
+                    <a href="https://www.linkedin.com/in/anaygawate/" aria-label="LinkedIn" target="_blank" rel="noopener noreferrer"><i class="fab fa-linkedin-in"></i></a>
+                    <a href="https://github.com/pixelanay" aria-label="GitHub" target="_blank" rel="noopener noreferrer"><i class="fab fa-github"></i></a>
                 </div>
             </div>
         </section>
@@ -67,13 +67,13 @@
         <!-- ABOUT SECTION -->
         <section class="content-section" id="about">
             <div class="container">
-                <h2 class="section-title">01 <span>//</span> About Me</h2>
-                <div class="about-content">
+                <h2 class="section-title animate-on-scroll">01 <span>//</span> About Me</h2>
+                <div class="about-content animate-on-scroll">
                     <div class="about-text">
                         <p>I am currently pursuing a B.Tech in Computer Science. I thrive on building real stuff that works, from full-stack web apps to AI Interfaces. Whether it's solving technical puzzles, designing for humans, or digging through data, I'm all in. I’m here to contribute to teams that build great products.</p>
                     </div>
                     <div class="about-image interactive">
-                        <img src="assets/profile.webp" alt="A photo of Anay Gawate">
+                        <img src="assets/profile.webp" alt="A photo of Anay Gawate" loading="lazy" width="400" height="400">
                     </div>
                 </div>
             </div>
@@ -82,9 +82,8 @@
         <!-- WORK SECTION -->
         <section class="content-section" id="work">
             <div class="container">
-                <h2 class="section-title">02 <span>//</span> Featured Projects</h2>
+                <h2 class="section-title animate-on-scroll">02 <span>//</span> Featured Projects</h2>
                 
-                <!-- START: UNIFIED ACCORDION STRUCTURE -->
                 <div class="work-accordion">
                     <!-- Project 1: Offline Reddit -->
                     <div class="accordion-item animate-on-scroll" data-gallery-images="assets/bg1.webp, assets/bg2.webp, assets/bg4.webp">
@@ -93,9 +92,9 @@
                                 <h3>Offline Reddit</h3>
                                 <p>Desktop Application</p>
                             </div>
-                            <span class="toggle-icon"></span>
+                            <span class="toggle-icon" aria-hidden="true"></span>
                         </div>
-                        <div class="accordion-item__content" id="project-1-content">
+                        <div class="accordion-item__content" id="project-1-content" role="region">
                             <div class="accordion-item__details">
                                 <div class="project-description">
                                     <p>A robust desktop application built with modern technologies, focused on a clean UI and a powerful backend for downloading Reddit content for offline viewing.</p>
@@ -106,12 +105,12 @@
                                     <li>Node.js</li>
                                 </ul>
                                 <div class="project-links">
-                                    <a href="https://github.com/pixelanay/OfflineReddit" class="btn btn-secondary interactive" target="_blank">View Code <i class="fab fa-github"></i></a>
+                                    <a href="https://github.com/pixelanay/OfflineReddit" class="btn btn-secondary interactive" target="_blank" rel="noopener noreferrer">View Code <i class="fab fa-github"></i></a>
                                 </div>
                             </div>
                             <div class="accordion-item__gallery">
                                  <div class="project-main-image interactive">
-                                    <img src="assets/bg1.webp" alt="Main view of Offline Reddit project.">
+                                    <img src="assets/bg1.webp" alt="Main view of Offline Reddit project." loading="lazy" width="1280" height="720">
                                     <button class="enlarge-btn" aria-label="Enlarge image"><i class="fas fa-expand"></i></button>
                                  </div>
                                  <div class="project-thumbnails">
@@ -128,9 +127,9 @@
                                 <h3>Retro BrowserOS</h3>
                                 <p>Interactive Web Experience</p>
                             </div>
-                            <span class="toggle-icon"></span>
+                            <span class="toggle-icon" aria-hidden="true"></span>
                         </div>
-                        <div class="accordion-item__content" id="project-2-content">
+                        <div class="accordion-item__content" id="project-2-content" role="region">
                             <div class="accordion-item__details">
                                 <div class="project-description">
                                     <p>An interactive web dashboard designed to mimic a retro-style operating system, showcasing dynamic UI elements and creative frontend development.</p>
@@ -141,13 +140,13 @@
                                     <li>JavaScript</li>
                                 </ul>
                                 <div class="project-links">
-                                    <a href="https://pixelanay.github.io/OS" class="btn btn-primary interactive" target="_blank">Live Site <i class="fas fa-arrow-up-right-from-square"></i></a>
-                                    <a href="https://github.com/PixelAnay/OS" class="btn btn-secondary interactive" target="_blank">View Code <i class="fab fa-github"></i></a>
+                                    <a href="https://pixelanay.github.io/OS" class="btn btn-primary interactive" target="_blank" rel="noopener noreferrer">Live Site <i class="fas fa-arrow-up-right-from-square"></i></a>
+                                    <a href="https://github.com/PixelAnay/OS" class="btn btn-secondary interactive" target="_blank" rel="noopener noreferrer">View Code <i class="fab fa-github"></i></a>
                                 </div>
                             </div>
                             <div class="accordion-item__gallery">
                                 <div class="project-main-image interactive">
-                                    <img src="assets/bg3.webp" alt="Main view of Retro BrowserOS project.">
+                                    <img src="assets/bg3.webp" alt="Main view of Retro BrowserOS project." loading="lazy" width="1280" height="720">
                                     <button class="enlarge-btn" aria-label="Enlarge image"><i class="fas fa-expand"></i></button>
                                  </div>
                                  <div class="project-thumbnails">
@@ -157,9 +156,8 @@
                         </div>
                     </div>
                 </div>
-                <!-- END: UNIFIED ACCORDION STRUCTURE -->
 
-                 <div class="see-all-container">
+                 <div class="see-all-container animate-on-scroll">
                     <a href="projects.html" class="btn btn-secondary interactive">See All Projects</a>
                 </div>
             </div>
@@ -168,8 +166,8 @@
         <!-- SKILLS SECTION -->
         <section class="content-section" id="skills">
             <div class="container">
-                <h2 class="section-title">03 <span>//</span> Technical Skills</h2>
-                <ul class="skills-list">
+                <h2 class="section-title animate-on-scroll">03 <span>//</span> Technical Skills</h2>
+                <ul class="skills-list animate-on-scroll">
                     <li class="interactive">Java</li>
                     <li class="interactive">Python</li>
                     <li class="interactive">JavaScript</li>
@@ -183,7 +181,7 @@
                     <li class="interactive">Figma</li>
                     <li class="interactive">Webflow</li>
                 </ul>
-                <div class="see-all-container">
+                <div class="see-all-container animate-on-scroll">
                     <a href="skills.html" class="btn btn-secondary interactive">View All Skills</a>
                 </div>
             </div>
@@ -193,7 +191,7 @@
         <section class="content-section" id="experience">
             <div class="container">
                 <div class="dual-section-container">
-                    <div class="timeline-column">
+                    <div class="timeline-column animate-on-scroll">
                         <h2 class="section-title">04 <span>//</span> Experience</h2>
                         <div class="timeline">
                             <div class="timeline-item">
@@ -212,7 +210,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="timeline-column">
+                    <div class="timeline-column animate-on-scroll">
                         <h2 class="section-title" id="education-heading">05 <span>//</span> Education</h2>
                         <div class="timeline">
                              <div class="timeline-item">
@@ -232,29 +230,31 @@
         <!-- CONTACT SECTION -->
         <section class="content-section" id="contact">
             <div class="container">
-                <h2 class="section-title">06 <span>//</span> Get In Touch</h2>
-                <p class="contact-intro">I'm always excited to connect and discuss potential projects or opportunities. Whether you have a question or just want to say hi, feel free to reach out!</p>
-                <div class="contact-form-container">
-                    <a href="mailto:pixel.anay@gmail.com" class="contact-email-link interactive">
-                        <i class="far fa-envelope"></i>
-                        <span>pixel.anay@gmail.com</span>
-                    </a>
-                   <div class="form-divider"><span>OR</span></div>
-                    <form action="https://formspree.io/f/mgvkgypw" method="POST" class="contact-form">
-                        <div class="form-group">
-                             <label for="name">Your Name</label>
-                            <input type="text" name="name" id="name" required placeholder="e.g. Jane Doe">
-                        </div>
-                        <div class="form-group">
-                            <label for="email">Your Email</label>
-                            <input type="email" name="email" id="email" required placeholder="your.email@example.com">
-                        </div>
-                        <div class="form-group">
-                             <label for="message">Your Message</label>
-                            <textarea name="message" id="message" rows="5" required placeholder="Project details or hello..."></textarea>
-                        </div>
-                        <button type="submit" class="btn btn-primary interactive">Send</button>
-                    </form>
+                <h2 class="section-title animate-on-scroll">06 <span>//</span> Get In Touch</h2>
+                <div class="animate-on-scroll">
+                    <p class="contact-intro">I'm always excited to connect and discuss potential projects or opportunities. Whether you have a question or just want to say hi, feel free to reach out!</p>
+                    <div class="contact-form-container">
+                        <a href="mailto:pixel.anay@gmail.com" class="contact-email-link interactive">
+                            <i class="far fa-envelope"></i>
+                            <span>pixel.anay@gmail.com</span>
+                        </a>
+                       <div class="form-divider"><span>OR</span></div>
+                        <form action="https://formspree.io/f/mgvkgypw" method="POST" class="contact-form">
+                            <div class="form-group">
+                                 <label for="name">Your Name</label>
+                                <input type="text" name="name" id="name" required placeholder="e.g. Jane Doe">
+                            </div>
+                            <div class="form-group">
+                                <label for="email">Your Email</label>
+                                <input type="email" name="email" id="email" required placeholder="your.email@example.com">
+                            </div>
+                            <div class="form-group">
+                                 <label for="message">Your Message</label>
+                                <textarea name="message" id="message" rows="5" required placeholder="Project details or hello..."></textarea>
+                            </div>
+                            <button type="submit" class="btn btn-primary interactive">Send</button>
+                        </form>
+                    </div>
                 </div>
             </div>
         </section>
@@ -265,8 +265,8 @@
         <div class="container">
             <div class="footer-content">
                 <div class="footer-socials">
-                    <a href="https://www.linkedin.com/in/anaygawate/" aria-label="LinkedIn" target="_blank"><i class="fab fa-linkedin-in"></i></a>
-                    <a href="https://github.com/pixelanay" aria-label="GitHub" target="_blank"><i class="fab fa-github"></i></a>
+                    <a href="https://www.linkedin.com/in/anaygawate/" aria-label="LinkedIn" target="_blank" rel="noopener noreferrer"><i class="fab fa-linkedin-in"></i></a>
+                    <a href="https://github.com/pixelanay" aria-label="GitHub" target="_blank" rel="noopener noreferrer"><i class="fab fa-github"></i></a>
                 </div>
                  <div class="email-copy-container">
                     <span id="emailToCopy" class="footer-link">pixel.anay@gmail.com</span>
@@ -275,19 +275,19 @@
                     </button>
                     <span id="copyFeedback" class="copy-feedback">Copied!</span>
                 </div>
-                <p>© <span id="currentYear">2024</span> Anay Gawate. All Rights Reserved.</p>
+                <p>© <span id="currentYear"></span> Anay Gawate. All Rights Reserved.</p>
             </div>
         </div>
     </footer>
 
     <!-- LIGHTBOX / GALLERY MODAL -->
-    <div class="lightbox" id="lightbox">
+    <div class="lightbox" id="lightbox" role="dialog" aria-modal="true" aria-hidden="true">
         <button class="lightbox__close" aria-label="Close gallery">×</button>
         <button class="lightbox__nav lightbox__prev" aria-label="Previous image">❮</button>
         <button class="lightbox__nav lightbox__next" aria-label="Next image">❯</button>
         <div class="lightbox__content">
             <img src="" alt="Enlarged project image" class="lightbox__image">
-            <div class="lightbox__counter"></div>
+            <div class="lightbox__counter" aria-live="polite"></div>
         </div>
     </div>
 
