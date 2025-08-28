@@ -35,25 +35,41 @@
     ],
     "experience": [
       {
-        "title": "Software Engineering Intern",
-        "company": "Innovatech Solutions Ltd.",
-        "date": "Summer 2023",
-        "description": "Contributed to the development of a new client portal using Angular and Spring Boot, enhancing front-end performance and user experience."
+        "title": "Android Developer",
+        "company": "CodeWithAnay",
+        "date": "August 2020",
+        "description": "Contributed to the development of some Android utility applications with 10k+ downloads each."
       },
       {
-        "title": "Teaching Assistant",
-        "company": "State University, CS Dept.",
-        "date": "Fall 2022 - Spring 2023",
-        "description": "Assisted professors in teaching foundational programming concepts in Python to over 100 students, leading lab sessions and grading assignments."
+        "title": "Web Developer",
+        "company": "ATech Solutions",
+        "date": "January 2021 - April 2021",
+        "description": "Designed and created beautiful websites for clients. For ecommerce as well as blogging."
       }
     ],
     "education": [
+               {
+        "degree": "Class 10th",
+        "school": "GA Shah CBSE School",
+        "date": "2022",
+        "description": "Scored oveerall of a 90.40% in final boards exam."
+      },
+
+         {
+        "degree": "Class 12th",
+        "school": "Spring Dales HSC Jr College",
+        "date": "2024",
+        "description": "Explored opportunities."
+      },
       {
-        "degree": "B.Sc. in Computer Science",
-        "school": "State University",
+        "degree": "B.Tech in Computer Science",
+        "school": "MIT ADT University",
         "date": "Expected May 2029",
         "description": "Relevant Coursework: Data Structures & Algorithms, Web Development (Full Stack), Operating Systems, Artificial Intelligence."
       }
+      
+
+      
     ]
   },
 

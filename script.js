@@ -1,21 +1,16 @@
 document.addEventListener('DOMContentLoaded', function() {
     const body = document.body;
 
-    // ===================================================================
-    // === 1. DYNAMIC CONTENT LOADING (ROUTER)
-    // ===================================================================
     async function loadContent() {
         try {
             const response = await fetch('content.json');
             if (!response.ok) throw new Error(`HTTP error! status: ${response.status}`);
             const data = await response.json();
 
-            // Populate content present on all pages
             populateGlobalContent(data.global);
 
-            // Populate content specific to the current page
-            if (document.getElementById('home')) { // ID of the hero section on index.html
-                populateHomePage(data.homePage, data.allProjects, data.global); // Pass global data here
+            if (document.getElementById('home')) { 
+                populateHomePage(data.homePage, data.allProjects, data.global); 
             }
             if (document.getElementById('all-projects-container')) {
                 populateProjectsPage(data.projectsPage, data.allProjects);
@@ -23,8 +18,7 @@ document.addEventListener('DOMContentLoaded', function() {
             if (document.getElementById('skills-grid-container')) {
                 populateSkillsPage(data.skillsPage, data.allSkills);
             }
-            
-            // NOW that the content is on the page, initialize all interactive scripts
+
             initializeInteractivity();
 
         } catch (error) {
@@ -32,13 +26,10 @@ document.addEventListener('DOMContentLoaded', function() {
             document.querySelector('main').innerHTML = `<div style="text-align: center; padding: 5rem; color: #ff00ff;"><h2>Error</h2><p>Could not load website content. Please try again later.</p></div>`;
         }
     }
-    
-    // --- POPULATION FUNCTIONS ---
 
     function populateGlobalContent(global) {
         document.title = document.title.replace('Anay Gawate', global.name);
-        
-        // Footer Socials
+
         const footerSocialsContainer = document.getElementById('footer-socials-container');
         if (footerSocialsContainer) {
             footerSocialsContainer.innerHTML = '';
@@ -46,39 +37,33 @@ document.addEventListener('DOMContentLoaded', function() {
                 footerSocialsContainer.innerHTML += `<a href="${social.url}" aria-label="${social.name}" target="_blank" rel="noopener noreferrer"><i class="${social.iconClass}"></i></a>`;
             });
         }
-        
-        // Footer Contact
+
         if(document.getElementById('emailToCopy')) document.getElementById('emailToCopy').textContent = global.contactEmail;
         if(document.getElementById('footer-name')) document.getElementById('footer-name').textContent = global.name;
     }
 
-    // CORRECTED FUNCTION
-    function populateHomePage(home, allProjects, global) { // Accepts global data now
-        // Hero Section
+    function populateHomePage(home, allProjects, global) { 
+
         document.getElementById('hero-title').textContent = home.greeting;
         document.getElementById('hero-subtitle').textContent = home.tagline;
         document.getElementById('resume-button').href = home.resumeUrl;
-        
+
         const heroSocialsContainer = document.getElementById('hero-socials-container');
         if (heroSocialsContainer) {
             heroSocialsContainer.innerHTML = '';
-            // FIX: Use the 'global' object passed into the function
+
             global.socials.forEach(social => {
                 heroSocialsContainer.innerHTML += `<a href="${social.url}" aria-label="${social.name}" target="_blank" rel="noopener noreferrer"><i class="${social.iconClass}"></i></a>`;
             });
         }
 
-        // About Section
         document.getElementById('about-bio').textContent = home.bio;
         document.getElementById('about-image').src = home.profileImageUrl;
 
-        // Contact Section
-        // FIX: Use the 'global' object passed into the function
         document.getElementById('contact-email-link').href = `mailto:${global.contactEmail}`;
         document.getElementById('contact-email-text').textContent = global.contactEmail;
         document.getElementById('contact-form').action = global.formspreeEndpoint;
 
-        // Populate Sections
         const featuredProjects = allProjects.filter(p => p.featured);
         renderProjects(featuredProjects, 'projects-container');
         populateSkills(home.featuredSkills, 'skills-list-container');
@@ -91,7 +76,7 @@ document.addEventListener('DOMContentLoaded', function() {
         document.getElementById('page-subtitle').textContent = pageData.subtitle;
         renderProjects(allProjects, 'all-projects-container');
     }
-    
+
     function populateSkillsPage(pageData, allSkills) {
         document.getElementById('page-title').textContent = pageData.title;
         document.getElementById('page-subtitle').textContent = pageData.subtitle;
@@ -158,7 +143,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 a.innerHTML = `${link.text} <i class="${link.iconClass}"></i>`;
                 linksContainer.appendChild(a);
             });
-            
+
             container.appendChild(clone);
         });
     }
@@ -207,12 +192,8 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }
 
-    // ===================================================================
-    // === 2. UI INITIALIZATION (ALL YOUR ORIGINAL SCRIPT LOGIC)
-    // ===================================================================
     function initializeInteractivity() {
-        
-        // --- OBSERVERS ---
+
         const animatedElements = document.querySelectorAll('.animate-on-scroll');
         if (animatedElements.length > 0) {
             const animateOnScrollObserver = new IntersectionObserver((entries, observer) => {
@@ -229,7 +210,6 @@ document.addEventListener('DOMContentLoaded', function() {
             animatedElements.forEach(el => animateOnScrollObserver.observe(el));
         }
 
-        // --- UI INTERACTIONS ---
         const hamburger = document.querySelector('.hamburger');
         const navMenu = document.querySelector('.navbar');
         if (hamburger && navMenu) {
@@ -249,7 +229,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 });
             });
         }
-        
+
         const header = document.querySelector('.header');
         if(header) {
             let lastScrollY = window.scrollY;
@@ -278,7 +258,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 }
             });
         });
-        
+
         const educationNavLink = document.getElementById('education-nav-link');
         if (educationNavLink) {
             educationNavLink.addEventListener('click', function(event) {
@@ -293,7 +273,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 }
             });
         }
-        
+
         const textToSplit = document.querySelector('[data-text-split]');
         if (textToSplit && textToSplit.textContent.length > 0) {
             const text = textToSplit.textContent;
@@ -362,7 +342,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 const thumbnailsContainer = gallery.querySelector('.project-thumbnails');
                 const enlargeBtn = gallery.querySelector('.enlarge-btn');
                 const imageUrls = gallery.dataset.galleryImages.split(',').map(s => s.trim()).filter(Boolean);
-                
+
                 if (imageUrls.length > 1 && thumbnailsContainer) {
                     thumbnailsContainer.innerHTML = ''; 
                     imageUrls.forEach((url, index) => {
@@ -399,7 +379,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
         const currentYearEl = document.getElementById('currentYear');
         if (currentYearEl) currentYearEl.textContent = new Date().getFullYear();
-        
+
         const copyBtn = document.getElementById('copyEmailButton');
         if (copyBtn) {
             const emailTextEl = document.getElementById('emailToCopy');
@@ -414,8 +394,5 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     }
 
-    // ===================================================================
-    // === 3. KICK OFF THE PROCESS
-    // ===================================================================
     loadContent();
 });

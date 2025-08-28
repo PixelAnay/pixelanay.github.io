@@ -7,25 +7,25 @@
     <meta name="description" content="Explore the portfolio of Anay Gawate, a passionate Computer Science student specializing in web development, software engineering, and innovative tech solutions.">
     <link rel="icon" href="https://anay.pages.dev/assets/svgfav.svg" type="image/svg+xml">
 
-    <!-- Google Fonts -->
+    
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link rel="preload" href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;700&family=Poppins:wght@300;400;600&display=swap" as="style" onload="this.rel='stylesheet'">
     <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;700&family=Poppins:wght@300;400;600&display=swap"></noscript>
     
-    <!-- Font Awesome -->
+    
     <link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" as="style" onload="this.rel='stylesheet'">
     <noscript><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css"></noscript>
 
-    <!-- Your Stylesheet -->
+    
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
-    <!-- This site's content is now dynamically loaded from content.json -->
-    <!-- To make changes, please edit the content.json file. -->
+    
+    
 
-    <!-- HEADER -->
+    
     <header class="header">
         <div class="header-container">
             <a href="index.html" class="logo">A<span>/</span>G</a>
@@ -46,7 +46,7 @@
     </header>
 
     <main>
-        <!-- HERO SECTION -->
+        
         <section class="hero" id="home">
             <div class="starfield">
                 <div class="stars1"></div>
@@ -63,12 +63,12 @@
                     </a>
                 </div>
                  <div id="hero-socials-container" class="hero-socials">
-                    <!-- Social Icons will be inserted here -->
+                    
                 </div>
             </div>
         </section>
 
-        <!-- ABOUT SECTION -->
+        
         <section class="content-section" id="about">
             <div class="container">
                 <h2 class="section-title animate-on-scroll">01 <span>//</span> About Me</h2>
@@ -83,13 +83,13 @@
             </div>
         </section>
 
-        <!-- WORK SECTION -->
+        
         <section class="content-section" id="work">
             <div class="container">
                 <h2 class="section-title animate-on-scroll">02 <span>//</span> Featured Projects</h2>
                 
                 <div id="projects-container" class="work-accordion">
-                    <!-- Featured Projects will be dynamically inserted here -->
+                    
                 </div>
 
                  <div class="see-all-container animate-on-scroll">
@@ -98,12 +98,12 @@
             </div>
         </section>
 
-        <!-- SKILLS SECTION -->
+        
         <section class="content-section" id="skills">
             <div class="container">
                 <h2 class="section-title animate-on-scroll">03 <span>//</span> Technical Skills</h2>
                 <ul id="skills-list-container" class="skills-list animate-on-scroll">
-                    <!-- Skills will be dynamically inserted here -->
+                    
                 </ul>
                 <div class="see-all-container animate-on-scroll">
                     <a href="skills.html" class="btn btn-secondary interactive">View All Skills</a>
@@ -111,27 +111,27 @@
             </div>
         </section>
 
-        <!-- EXPERIENCE & EDUCATION SECTION -->
+        
         <section class="content-section" id="experience">
             <div class="container">
                 <div class="dual-section-container">
                     <div class="timeline-column animate-on-scroll">
                         <h2 class="section-title">04 <span>//</span> Experience</h2>
                         <div id="experience-container" class="timeline">
-                           <!-- Experience items will be dynamically inserted here -->
+                           
                         </div>
                     </div>
                     <div class="timeline-column animate-on-scroll">
                         <h2 class="section-title" id="education-heading">05 <span>//</span> Education</h2>
                         <div id="education-container" class="timeline">
-                            <!-- Education items will be dynamically inserted here -->
+                            
                         </div>
                     </div>
                 </div>
             </div>
         </section>
 
-        <!-- CONTACT SECTION -->
+        
         <section class="content-section" id="contact">
             <div class="container">
                 <h2 class="section-title animate-on-scroll">06 <span>//</span> Get In Touch</h2>
@@ -146,7 +146,7 @@
                         <form id="contact-form" action="#" method="POST" class="contact-form">
                             <div class="form-group">
                                  <label for="name">Your Name</label>
-                                <input type="text" name="name" id="name" required placeholder="e.g. Jane Doe">
+                                <input type="text" name="name" id="name" required placeholder="e.g. Jane">
                             </div>
                             <div class="form-group">
                                 <label for="email">Your Email</label>
@@ -164,12 +164,12 @@
         </section>
     </main>
 
-    <!-- FOOTER -->
+    
     <footer class="footer">
         <div class="container">
             <div class="footer-content">
                 <div id="footer-socials-container" class="footer-socials">
-                    <!-- Footer socials will be inserted here -->
+                    
                 </div>
                  <div class="email-copy-container">
                     <span id="emailToCopy" class="footer-link"></span>
@@ -183,7 +183,7 @@
         </div>
     </footer>
 
-    <!-- LIGHTBOX / GALLERY MODAL -->
+    
     <div class="lightbox" id="lightbox" role="dialog" aria-modal="true" aria-hidden="true">
         <button class="lightbox__close" aria-label="Close gallery">×</button>
         <button class="lightbox__nav lightbox__prev" aria-label="Previous image">❮</button>
@@ -194,7 +194,7 @@
         </div>
     </div>
     
-    <!-- TEMPLATES FOR DYNAMIC CONTENT -->
+    
     <template id="project-template">
         <div class="accordion-item animate-on-scroll" data-gallery-images="">
             <div class="accordion-item__title" role="button" aria-expanded="false" aria-controls="project-content">
@@ -243,8 +243,7 @@
         </div>
     </template>
 
-
-    <!-- Your Script -->
+    
     <script src="script.js" defer></script>
 </body>
 </html>
