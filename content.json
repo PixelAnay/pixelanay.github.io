@@ -31,7 +31,7 @@
     "bio": "I am currently pursuing a B.Tech in Computer Science. I thrive on building real stuff that works, from full-stack web apps to AI Interfaces. Whether it's solving technical puzzles, designing for humans, or digging through data, I'm all in. I’m here to contribute to teams that build great products.",
     "featuredSkills": [
       "Java", "Python", "JavaScript", "React.js", "HTML5 & CSS3", "SASS", "SQL", 
-      "Git & GitHub", "Data Structures", "Algorithms", "Figma", "Webflow"
+      "Git & GitHub", "Data Structures", "Algorithms", "Figma", "Webflow", "Flutter"
     ],
     "experience": [
       {
@@ -59,13 +59,13 @@
         "degree": "Class 12th",
         "school": "Spring Dales HSC Jr College",
         "date": "2024",
-        "description": "Explored opportunities."
+        "description": "Explored opportunities & focused on personal projects while improving my coding skills."
       },
       {
         "degree": "B.Tech in Computer Science",
         "school": "MIT ADT University",
         "date": "Expected May 2029",
-        "description": "Relevant Coursework: Data Structures & Algorithms, Web Development (Full Stack), Operating Systems, Artificial Intelligence."
+        "description": "Relevant Coursework: CSE Core, Data Structures & Algorithms, Web Development (Full Stack), Operating Systems, Artificial Intelligence."
       }
       
 
@@ -79,6 +79,17 @@
     "subtitle": "A collection of my work, from full-stack web applications and robust desktop tools to interactive front-end experiments. Each project reflects my commitment to clean code, thoughtful design, and practical problem-solving."
   },
   "allProjects": [
+    {
+      "featured": true,
+      "title": "Journease - Travel Planner",
+      "category": "Android & Web Application",
+      "description": "A full-featured app for all your travel needs, with a focus on a clean UI and efficient backend processing.",
+      "tech": ["Flutter", "Frontend", "Backend"],
+      "galleryImages": ["assets/journease1.webp", "assets/journease2.webp", "assets/journease3.webp"],
+      "links": [
+        { "type": "code", "url": "https://journeasesih.vercel.app", "text": "Live Site", "iconClass": "fas fa-arrow-up-right-from-square" }
+      ]
+    },
     {
       "featured": true,
       "title": "Offline Reddit",
@@ -100,17 +111,6 @@
       "links": [
         { "type": "live", "url": "https://pixelanay.github.io/OS", "text": "Live Site", "iconClass": "fas fa-arrow-up-right-from-square" },
         { "type": "code", "url": "https://github.com/PixelAnay/OS", "text": "View Code", "iconClass": "fab fa-github" }
-      ]
-    },
-    {
-      "featured": false,
-      "title": "Data Visualization Dashboard",
-      "category": "Full-Stack Web App",
-      "description": "A web-based platform for visualizing complex datasets. Features a RESTful API backend to serve data and a React frontend with D3.js to render interactive charts and graphs, helping users derive insights from raw data.",
-      "tech": ["React.js", "D3.js", "Node.js", "Express.js", "PostgreSQL"],
-      "galleryImages": ["assets/bg2.webp", "assets/bg4.webp"],
-      "links": [
-        { "type": "disabled", "url": "#", "text": "Private Repo", "iconClass": "fas fa-lock" }
       ]
     }
   ],
