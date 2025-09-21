@@ -26,7 +26,7 @@
   "homePage": {
     "greeting": "Hello, I'm Anay",
     "tagline": "I build fast, beautiful web apps. I am dedicated to crafting innovative solutions and continuously learning in the evolving tech landscape. Here’s my work!",
-    "resumeUrl": "https://anay.pages.dev/assets/functionalsample.pdf",
+    "resumeUrl": "/assets/resume-hx.pdf",
     "profileImageUrl": "assets/profile.webp",
     "bio": "I am currently pursuing a B.Tech in Computer Science. I thrive on building real stuff that works, from full-stack web apps to AI Interfaces. Whether it's solving technical puzzles, designing for humans, or digging through data, I'm all in. I’m here to contribute to teams that build great products.",
     "featuredSkills": [
