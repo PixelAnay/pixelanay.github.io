@@ -1,4 +1,4 @@
-<div align="center">
+[<div align="center">
 
 # Anay Gawate
 ### CSE Student | Building apps that should exist | Flutter · Embedded · Self-taught since 14
@@ -136,3 +136,4 @@ This repository powers the personal portfolio website and uses a content-driven 
 - `index.html`, `projects.html`, `skills.html` for page structure
 
 To run locally, just open `index.html` in a browser, or deploy to static hosting (Vercel/Netlify/Cloudflare Pages).
+](https://github.com/PixelAnay/pixelanay.github.io/blob/main/README.md)
