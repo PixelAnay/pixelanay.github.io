@@ -10,7 +10,7 @@ document.addEventListener('DOMContentLoaded', function() {
             populateGlobalContent(data.global);
 
             if (document.getElementById('home')) { 
-                populateHomePage(data.homePage, data.allProjects, data.global); 
+                populateHomePage(data.homePage, data.allProjects, data.global, data.honorsAndAwards, data.featuredLinks); 
             }
             if (document.getElementById('all-projects-container')) {
                 populateProjectsPage(data.projectsPage, data.allProjects);
@@ -32,17 +32,14 @@ document.addEventListener('DOMContentLoaded', function() {
 
         const footerSocialsContainer = document.getElementById('footer-socials-container');
         if (footerSocialsContainer) {
-            footerSocialsContainer.innerHTML = '';
-            global.socials.forEach(social => {
-                footerSocialsContainer.innerHTML += `<a href="${social.url}" aria-label="${social.name}" target="_blank" rel="noopener noreferrer"><i class="${social.iconClass}"></i></a>`;
-            });
+            renderSocialLinks(footerSocialsContainer, global.socials);
         }
 
         if(document.getElementById('emailToCopy')) document.getElementById('emailToCopy').textContent = global.contactEmail;
         if(document.getElementById('footer-name')) document.getElementById('footer-name').textContent = global.name;
     }
 
-    function populateHomePage(home, allProjects, global) { 
+    function populateHomePage(home, allProjects, global, honorsAndAwards, featuredLinks) { 
 
         document.getElementById('hero-title').textContent = home.greeting;
         document.getElementById('hero-subtitle').textContent = home.tagline;
@@ -50,11 +47,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
         const heroSocialsContainer = document.getElementById('hero-socials-container');
         if (heroSocialsContainer) {
-            heroSocialsContainer.innerHTML = '';
-
-            global.socials.forEach(social => {
-                heroSocialsContainer.innerHTML += `<a href="${social.url}" aria-label="${social.name}" target="_blank" rel="noopener noreferrer"><i class="${social.iconClass}"></i></a>`;
-            });
+            renderSocialLinks(heroSocialsContainer, global.socials);
         }
 
         document.getElementById('about-bio').textContent = home.bio;
@@ -66,15 +59,27 @@ document.addEventListener('DOMContentLoaded', function() {
 
         const featuredProjects = allProjects.filter(p => p.featured);
         renderProjects(featuredProjects, 'projects-container');
+        if (featuredLinks) populateFeaturedLinks(featuredLinks, 'featured-links-container');
         populateSkills(home.featuredSkills, 'skills-list-container');
         populateExperience(home.experience, 'experience-container');
         populateEducation(home.education, 'education-container');
+        if (honorsAndAwards) populateAwards(honorsAndAwards, 'awards-container');
     }
 
     function populateProjectsPage(pageData, allProjects) {
         document.getElementById('page-title').textContent = pageData.title;
         document.getElementById('page-subtitle').textContent = pageData.subtitle;
         renderProjects(allProjects, 'all-projects-container');
+    }
+
+    function renderSocialLinks(container, socials) {
+        container.innerHTML = '';
+        socials.forEach(social => {
+            const iconMarkup = social.iconUrl
+                ? `<span class="social-icon-image" style="--icon-url: url('${social.iconUrl}')" aria-hidden="true"></span>`
+                : `<i class="${social.iconClass}" aria-hidden="true"></i>`;
+            container.innerHTML += `<a href="${social.url}" aria-label="${social.name}" target="_blank" rel="noopener noreferrer">${iconMarkup}</a>`;
+        });
     }
 
     function populateSkillsPage(pageData, allSkills) {
@@ -392,6 +397,40 @@ document.addEventListener('DOMContentLoaded', function() {
                 }).catch(err => console.error('Failed to copy email: ', err));
             });
         }
+    }
+
+    function populateAwards(awardsItems, containerId) {
+        const container = document.getElementById(containerId);
+        const template = document.getElementById('experience-template');
+        if (!container || !template) return;
+        container.innerHTML = '';
+
+        awardsItems.forEach(item => {
+            const clone = template.content.cloneNode(true);
+            clone.querySelector('.item-title').textContent = item.title;
+            clone.querySelector('.item-company').textContent = item.associatedWith || 'Award';
+            clone.querySelector('.item-date').textContent = item.date;
+            clone.querySelector('.item-description').textContent = item.description;
+            container.appendChild(clone);
+        });
+    }
+
+    function populateFeaturedLinks(links, containerId) {
+        const container = document.getElementById(containerId);
+        if (!container) return;
+        container.innerHTML = '';
+
+        links.forEach(link => {
+            const div = document.createElement('div');
+            div.className = 'featured-link-card interactive';
+            div.innerHTML = `
+                <a href="${link.url}" target="_blank" rel="noopener noreferrer" class="featured-link-content">
+                    <h3>${link.title}</h3>
+                    <i class="fas fa-arrow-up-right-from-square featured-link-icon"></i>
+                </a>
+            `;
+            container.appendChild(div);
+        });
     }
 
     loadContent();

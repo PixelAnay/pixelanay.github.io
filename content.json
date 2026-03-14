@@ -1,7 +1,13 @@
 {
   "global": {
     "name": "Anay Gawate",
+    "pronouns": "He/Him",
+    "headline": "CSE Student | Building apps that should exist | Flutter · Embedded · Self-taught since 14",
     "contactEmail": "pixel.anay@gmail.com",
+    "organization": "ProjectFuel",
+    "location": "Pune District, Maharashtra, India",
+    "connections": "30+",
+    "openTo": ["Technical Internships"],
     "formspreeEndpoint": "https://formspree.io/f/mgvkgypw",
     "socials": [
       {
@@ -17,7 +23,8 @@
             {
         "name": "LeetCode",
         "url": "https://leetcode.com/pixelanay",
-        "iconClass": "fa-solid fa-code"
+        "iconClass": "fa-solid fa-code",
+        "iconUrl": "https://cdn.simpleicons.org/leetcode"
       }
     ]
   },
@@ -26,50 +33,37 @@
   "homePage": {
     "greeting": "Hello, I'm Anay",
     "tagline": "I build fast, beautiful web apps. I am dedicated to crafting innovative solutions and continuously learning in the evolving tech landscape. Here’s my work!",
+    "linkedinTagline": "CSE Student | Building apps that should exist | Flutter · Embedded · Self-taught since 14",
     "resumeUrl": "/assets/resume-hx.pdf",
     "profileImageUrl": "assets/profile.webp",
     "bio": "I am currently pursuing a B.Tech in Computer Science. I thrive on building real stuff that works, from full-stack web apps to AI Interfaces. Whether it's solving technical puzzles, designing for humans, or digging through data, I'm all in. I’m here to contribute to teams that build great products.",
+    "aboutExtended": [
+      "I've been building things on the internet since I was 14 — starting with Android apps in Java/Kotlin, crashing RC planes, and figuring out how computers actually work.",
+      "Currently a CS student, but most of what I know came from just doing things. I built a full cross-platform nutrition tracker in Flutter because the good ones cost money and I didn't think they should.",
+      "It runs on Android, iOS and web, uses Firebase for auth and database, and has a crowdsourced food database I've been building myself.",
+      "I work across the stack — Flutter, C/C++, Python, Java, web frontend, embedded systems, Linux, local LLMs.",
+      "I've deployed on Vercel, Netlify and Cloudflare, run models locally with Ollama and LM Studio, and I know my way around hardware as well as software.",
+      "Open to technical internships where I can actually build something."
+    ],
     "featuredSkills": [
-      "Java", "Python", "JavaScript", "React.js", "HTML5 & CSS3", "SASS", "SQL", 
-      "Git & GitHub", "Data Structures", "Algorithms", "Figma", "Webflow", "Flutter"
+      "Flutter", "Firebase", "Node.js", "Android Development", "Cross-platform Development", "Kotlin", "Java", "Dart", "JavaScript", "Python (Programming Language)", "C++", "Embedded C"
     ],
     "experience": [
       {
         "title": "Android Developer",
-        "company": "CodeWithAnay",
-        "date": "August 2020",
-        "description": "Contributed to the development of some Android utility applications with 10k+ downloads each."
-      },
-      {
-        "title": "Web Developer",
-        "company": "ATech Solutions",
-        "date": "January 2021 - April 2021",
-        "description": "Designed and created beautiful websites for clients. For ecommerce as well as blogging."
+        "company": "ProjectFuel · Self-employed",
+        "date": "2021 - Present",
+        "description": "Independently developed and published Android applications from age 15. First app reached 10K+ organic downloads on the Google Play Store. Continued shipping across Android, iOS, and Web, including a Flutter-based nutrition and health tracker backed by Firebase.",
+        "skills": ["Flutter", "Java", "Kotlin", "Android Development", "Firebase"]
       }
     ],
     "education": [
-               {
-        "degree": "Class 10th",
-        "school": "GA Shah CBSE School",
-        "date": "2022",
-        "description": "Scored oveerall of a 90.40% in final boards exam."
-      },
-
-         {
-        "degree": "Class 12th",
-        "school": "Spring Dales HSC Jr College",
-        "date": "2024",
-        "description": "Explored opportunities & focused on personal projects while improving my coding skills."
-      },
       {
-        "degree": "B.Tech in Computer Science",
+        "degree": "Bachelor of Technology - BTech, Computer Science",
         "school": "MIT ADT University",
-        "date": "Expected May 2029",
-        "description": "Relevant Coursework: CSE Core, Data Structures & Algorithms, Web Development (Full Stack), Operating Systems, Artificial Intelligence."
+        "date": "Jul 2025 - Jul 2029",
+        "description": "Currently pursuing undergraduate studies in Computer Science while building cross-platform apps and systems projects."
       }
-      
-
-      
     ]
   },
 
@@ -79,6 +73,18 @@
     "subtitle": "A collection of my work, from full-stack web applications and robust desktop tools to interactive front-end experiments. Each project reflects my commitment to clean code, thoughtful design, and practical problem-solving."
   },
   "allProjects": [
+    {
+      "featured": true,
+      "title": "PureFuel",
+      "category": "Cross-platform Mobile & Web Application",
+      "description": "A cross-platform nutrition and health tracker for Android, iOS, and Web built as a free, ad-free alternative to paid apps. Includes Firebase auth/database and a crowdsourced food database.",
+      "tech": ["Flutter", "Firebase", "Node.js"],
+      "galleryImages": ["assets/bg1.webp", "assets/bg2.webp", "assets/bg4.webp"],
+      "links": [
+        { "type": "playstore", "url": "https://play.google.com/store", "text": "Google Play", "iconClass": "fab fa-google-play" },
+        { "type": "code", "url": "https://purefuel.web.app", "text": "Live Site", "iconClass": "fas fa-arrow-up-right-from-square" }
+      ]
+    },
     {
       "featured": true,
       "title": "Journease - Travel Planner",
@@ -92,26 +98,12 @@
     },
     {
       "featured": true,
-      "title": "Offline Reddit",
-      "category": "Desktop Application",
-      "description": "A full-featured, cross-platform desktop app for downloading Reddit content. Users can save subreddits, posts, and media for offline viewing, with a focus on a clean UI and efficient backend processing.",
-      "tech": ["Electron.js", "React.js", "Node.js", "CSS-in-JS"],
-      "galleryImages": ["assets/bg1.webp", "assets/bg2.webp", "assets/bg4.webp"],
-      "links": [
-        { "type": "code", "url": "https://github.com/pixelanay/OfflineReddit", "text": "View Code", "iconClass": "fab fa-github" }
-      ]
-    },
-    {
-      "featured": true,
-      "title": "Retro BrowserOS",
-      "category": "Interactive Web Experience",
-      "description": "An interactive web dashboard mimicking a retro-style operating system. This project showcases dynamic UI elements, creative frontend development, and a passion for nostalgic design using modern web technologies.",
-      "tech": ["HTML5", "CSS3", "JavaScript", "SASS"],
-      "galleryImages": ["assets/bg3.webp", "assets/bg1.webp", "assets/bg2.webp"],
-      "links": [
-        { "type": "live", "url": "https://pixelanay.github.io/OS", "text": "Live Site", "iconClass": "fas fa-arrow-up-right-from-square" },
-        { "type": "code", "url": "https://github.com/PixelAnay/OS", "text": "View Code", "iconClass": "fab fa-github" }
-      ]
+      "title": "School Management System (In Development)",
+      "category": "Cross-platform Application",
+      "description": "Building a full-featured cross-platform school management application in Flutter for a private school, with broad operational and data management features.",
+      "tech": ["Flutter", "Firebase"],
+      "galleryImages": ["assets/bg2.webp", "assets/bg3.webp", "assets/bg4.webp"],
+      "links": []
     }
   ],
 
@@ -124,32 +116,65 @@
     {
       "categoryTitle": "Languages",
       "iconClass": "fas fa-code",
-      "items": ["JavaScript (ES6+)", "TypeScript", "Python", "Java", "HTML5", "CSS3 / SASS", "SQL"]
+      "items": ["JavaScript", "Python", "Java", "Dart", "C++", "Embedded C", "C (Programming Language)"]
     },
     {
       "categoryTitle": "Frontend Development",
       "iconClass": "fas fa-desktop",
-      "items": ["React.js", "Next.js", "Redux Toolkit", "Styled Components", "Tailwind CSS", "D3.js", "Webpack"]
+      "items": ["Flutter", "HTML", "Cascading Style Sheets (CSS)"]
     },
     {
       "categoryTitle": "Backend & Databases",
       "iconClass": "fas fa-server",
-      "items": ["Node.js", "Express.js", "Spring Boot", "REST APIs", "GraphQL", "PostgreSQL", "MongoDB", "Firebase"]
+      "items": ["Node.js", "Firebase"]
     },
     {
       "categoryTitle": "Tools & Platforms",
       "iconClass": "fas fa-tools",
-      "items": ["Git & GitHub", "Docker", "Vite", "Jira", "Postman", "VS Code"]
+      "items": ["Git", "GitHub", "Cloudflare", "Bash", "Linux", "Local LLMs", "Arduino"]
     },
     {
       "categoryTitle": "CS Fundamentals",
       "iconClass": "fas fa-brain",
-      "items": ["Data Structures", "Algorithms", "Object-Oriented Programming", "Operating Systems", "Agile Methodologies"]
+      "items": ["Cross-platform Development", "Android Development", "REST APIs"]
     },
     {
       "categoryTitle": "Design",
       "iconClass": "fas fa-palette",
-      "items": ["Figma", "Webflow", "Responsive Design", "UI/UX Principles", "Prototyping"]
+      "items": ["Google Play"]
+    }
+  ],
+  "featuredLinks": [
+    {
+      "title": "Anay Gawate | Portfolio",
+      "url": "https://anaygawate.vercel.app",
+      "type": "portfolio"
+    },
+    {
+      "title": "PixelAnay - Overview",
+      "url": "https://github.com/pixelanay",
+      "type": "github"
+    },
+    {
+      "title": "Volt & Vision",
+      "url": "https://www.youtube.com/@voltandvision",
+      "type": "youtube"
+    }
+  ],
+  "volunteering": [
+    {
+      "role": "Class Representative",
+      "organization": "School of Computing, MIT ADT University",
+      "date": "Aug 2025 - Present",
+      "description": "Primary point of contact between 70+ students and faculty for 2 semesters in FY."
+    }
+  ],
+  "honorsAndAwards": [
+    {
+      "title": "Smart India Hackathon - Top 100 Teams",
+      "date": "Sep 2025",
+      "associatedWith": "MIT ADT University",
+      "description": "Journease, a smart travel companion for logging trips, memories, analysis, and insights, was recognized among the top 100 teams."
     }
   ]
 }
