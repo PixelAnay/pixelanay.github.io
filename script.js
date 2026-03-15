@@ -113,10 +113,112 @@ document.addEventListener('DOMContentLoaded', function () {
 
     // Extracts a YouTube video ID from any common YouTube URL format
     function getYouTubeId(url) {
-        const match = url.match(
-            /(?:youtube\.com\/(?:watch\?v=|shorts\/|embed\/)|youtu\.be\/)([a-zA-Z0-9_-]{11})/
-        );
-        return match ? match[1] : null;
+        if (!url || typeof url !== 'string') return null;
+
+        try {
+            const parsedUrl = new URL(url);
+            const hostname = parsedUrl.hostname.toLowerCase().replace(/^www\./, '');
+
+            if (hostname === 'youtu.be') {
+                const pathId = parsedUrl.pathname.split('/').filter(Boolean)[0];
+                if (pathId && /^[a-zA-Z0-9_-]{11}$/.test(pathId)) return pathId;
+            }
+
+            if (hostname.endsWith('youtube.com') || hostname === 'youtube-nocookie.com') {
+                const searchId = parsedUrl.searchParams.get('v');
+                if (searchId && /^[a-zA-Z0-9_-]{11}$/.test(searchId)) return searchId;
+
+                const pathSegments = parsedUrl.pathname.split('/').filter(Boolean);
+                const markerIndex = pathSegments.findIndex(seg => ['embed', 'shorts', 'live', 'v'].includes(seg.toLowerCase()));
+                if (markerIndex !== -1) {
+                    const pathId = pathSegments[markerIndex + 1];
+                    if (pathId && /^[a-zA-Z0-9_-]{11}$/.test(pathId)) return pathId;
+                }
+            }
+        } catch {
+            // Fall back to regex parsing below for malformed URLs
+        }
+
+        const fallbackMatch = url.match(/(?:youtube\.com\/(?:watch\?v=|shorts\/|embed\/|live\/)|youtu\.be\/)([a-zA-Z0-9_-]{11})/i);
+        return fallbackMatch ? fallbackMatch[1] : null;
+    }
+
+    function createYouTubeEmbed(videoId, title) {
+        const iframe = document.createElement('iframe');
+        iframe.src = `https://www.youtube.com/embed/${videoId}`;
+        iframe.style.minHeight = '100%';
+        iframe.title = title;
+        iframe.setAttribute('frameborder', '0');
+        iframe.setAttribute('allow', 'accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture');
+        iframe.setAttribute('allowfullscreen', '');
+        iframe.className = 'project-embed';
+        return iframe;
+    }
+
+    function renderProjectMainMedia(mainImageContainer, mediaItem, projectTitle) {
+        if (!mainImageContainer || !mediaItem) return;
+
+        let mainImg = mainImageContainer.querySelector('img');
+        let existingEmbed = mainImageContainer.querySelector('.project-embed');
+
+        if (existingEmbed) {
+            existingEmbed.src = '';
+            existingEmbed.remove();
+        }
+
+        if (!mainImg) {
+            mainImg = document.createElement('img');
+            mainImg.loading = 'lazy';
+            mainImg.width = 1280;
+            mainImg.height = 720;
+            mainImageContainer.prepend(mainImg);
+        }
+
+        if (mediaItem.type === 'youtube') {
+            const iframe = createYouTubeEmbed(mediaItem.videoId, mediaItem.title || `${projectTitle} video`);
+            mainImageContainer.prepend(iframe);
+            mainImg.style.display = 'none';
+            mainImageContainer.style.removeProperty('max-height');
+            mainImageContainer.style.removeProperty('aspect-ratio');
+            mainImageContainer.classList.add('is-embed');
+            return;
+        }
+
+        mainImageContainer.classList.remove('is-embed');
+        mainImageContainer.style.maxHeight = '460px';
+        mainImageContainer.style.aspectRatio = 'auto';
+        mainImg.style.display = 'block';
+        mainImg.src = mediaItem.src;
+        mainImg.alt = mediaItem.alt || `Main view of ${projectTitle} project.`;
+    }
+
+    function getProjectMediaItems(project) {
+        const mediaItems = [];
+        const links = Array.isArray(project.links) ? project.links : [];
+        const galleryImages = Array.isArray(project.galleryImages) ? project.galleryImages : [];
+
+        const addedVideoIds = new Set();
+        links.forEach((link, index) => {
+            const videoId = getYouTubeId(link.url);
+            if (!videoId || addedVideoIds.has(videoId)) return;
+            addedVideoIds.add(videoId);
+            mediaItems.push({
+                type: 'youtube',
+                videoId,
+                title: `${project.title} video ${index + 1}`
+            });
+        });
+
+        galleryImages.forEach((imageUrl, index) => {
+            if (!imageUrl || !imageUrl.trim()) return;
+            mediaItems.push({
+                type: 'image',
+                src: imageUrl,
+                alt: `${project.title} image ${index + 1}`
+            });
+        });
+
+        return mediaItems;
     }
 
     function renderProjects(projects, containerId) {
@@ -136,30 +238,21 @@ document.addEventListener('DOMContentLoaded', function () {
             clone.querySelector('.project-category').textContent = project.category;
             clone.querySelector('.project-description p').textContent = project.description;
 
-            // Check if any link is a YouTube link — if so, render embed as primary media
-            const youtubeLink = project.links.find(l => getYouTubeId(l.url));
             const mainImageContainer = clone.querySelector('.project-main-image');
-            const mainImg = mainImageContainer.querySelector('img');
             const enlargeBtn = mainImageContainer.querySelector('.enlarge-btn');
+            const mediaItems = getProjectMediaItems(project);
+            clone.querySelector('.accordion-item').dataset.galleryMedia = JSON.stringify(mediaItems);
 
-            if (youtubeLink) {
-                const videoId = getYouTubeId(youtubeLink.url);
-                const iframe = document.createElement('iframe');
-                iframe.src = `https://www.youtube.com/embed/${videoId}`;
-                iframe.style.minHeight = '100%';
-                iframe.title = `${project.title} video`;
-                iframe.setAttribute('frameborder', '0');
-                iframe.setAttribute('allow', 'accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture');
-                iframe.setAttribute('allowfullscreen', '');
-                iframe.className = 'project-embed';
-                mainImg.replaceWith(iframe);
-                if (enlargeBtn) enlargeBtn.remove();
-                mainImageContainer.classList.add('is-embed');
-                clone.querySelector('.accordion-item').dataset.galleryImages = '';
-            } else {
-                mainImg.src = project.galleryImages[0];
-                mainImg.alt = `Main view of ${project.title} project.`;
-                clone.querySelector('.accordion-item').dataset.galleryImages = project.galleryImages.join(', ');
+            if (mediaItems.length > 0) {
+                renderProjectMainMedia(mainImageContainer, mediaItems[0], project.title);
+                mainImageContainer.dataset.currentIndex = '0';
+
+                const hasAnyImage = mediaItems.some(item => item.type === 'image');
+                if (enlargeBtn && !hasAnyImage) {
+                    enlargeBtn.remove();
+                }
+            } else if (enlargeBtn) {
+                enlargeBtn.remove();
             }
 
             const techList = clone.querySelector('.project-tech-list');
@@ -350,65 +443,103 @@ document.addEventListener('DOMContentLoaded', function () {
 
         const lightbox = document.getElementById('lightbox');
         if (lightbox) {
+            const lightboxContent = lightbox.querySelector('.lightbox__content');
             const lightboxImg = lightbox.querySelector('.lightbox__image');
+            const lightboxVideo = document.createElement('iframe');
+            lightboxVideo.className = 'lightbox__video';
+            lightboxVideo.title = 'Project video preview';
+            lightboxVideo.setAttribute('frameborder', '0');
+            lightboxVideo.setAttribute('allow', 'accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture');
+            lightboxVideo.setAttribute('allowfullscreen', '');
+            lightboxVideo.style.display = 'none';
+            if (lightboxContent) {
+                lightboxContent.appendChild(lightboxVideo);
+            }
             const lightboxCounter = lightbox.querySelector('.lightbox__counter');
             const closeBtn = lightbox.querySelector('.lightbox__close');
             const prevBtn = lightbox.querySelector('.lightbox__prev');
             const nextBtn = lightbox.querySelector('.lightbox__next');
-            let currentGalleryImages = [];
-            let currentImageIndex = 0;
+            let currentGalleryMedia = [];
+            let currentMediaIndex = 0;
 
-            const openLightbox = (images, index) => {
-                currentGalleryImages = images.filter(img => img && img.trim() !== '');
-                if (currentGalleryImages.length === 0) return;
-                currentImageIndex = index;
+            const openLightbox = (mediaItems, index) => {
+                currentGalleryMedia = mediaItems.filter(item => item && item.type && (item.type === 'youtube' || (item.type === 'image' && item.src)));
+                if (currentGalleryMedia.length === 0) return;
+                currentMediaIndex = index;
                 body.classList.add('body-no-scroll');
                 lightbox.classList.add('is-open');
                 lightbox.setAttribute('aria-hidden', 'false');
-                showImage();
+                showMedia();
             };
             const closeLightbox = () => {
                 body.classList.remove('body-no-scroll');
                 lightbox.classList.remove('is-open');
                 lightbox.setAttribute('aria-hidden', 'true');
+                lightboxVideo.src = '';
             };
-            const showImage = () => {
-                if (currentImageIndex < 0 || currentImageIndex >= currentGalleryImages.length) return;
-                lightboxImg.src = currentGalleryImages[currentImageIndex];
-                lightboxImg.style.animation = 'none';
-                void lightboxImg.offsetWidth;
-                lightboxImg.style.animation = '';
-                lightboxCounter.textContent = `${currentImageIndex + 1} / ${currentGalleryImages.length}`;
-                prevBtn.style.display = currentGalleryImages.length > 1 && currentImageIndex > 0 ? 'flex' : 'none';
-                nextBtn.style.display = currentGalleryImages.length > 1 && currentImageIndex < currentGalleryImages.length - 1 ? 'flex' : 'none';
+            const showMedia = () => {
+                if (currentMediaIndex < 0 || currentMediaIndex >= currentGalleryMedia.length) return;
+
+                const currentItem = currentGalleryMedia[currentMediaIndex];
+                if (currentItem.type === 'youtube') {
+                    lightboxImg.style.display = 'none';
+                    lightboxVideo.style.display = 'block';
+                    lightboxVideo.src = `https://www.youtube.com/embed/${currentItem.videoId}`;
+                } else {
+                    lightboxVideo.src = '';
+                    lightboxVideo.style.display = 'none';
+                    lightboxImg.style.display = 'block';
+                    lightboxImg.src = currentItem.src;
+                    lightboxImg.style.animation = 'none';
+                    void lightboxImg.offsetWidth;
+                    lightboxImg.style.animation = '';
+                }
+
+                lightboxCounter.textContent = `${currentMediaIndex + 1} / ${currentGalleryMedia.length}`;
+                prevBtn.style.display = currentGalleryMedia.length > 1 && currentMediaIndex > 0 ? 'flex' : 'none';
+                nextBtn.style.display = currentGalleryMedia.length > 1 && currentMediaIndex < currentGalleryMedia.length - 1 ? 'flex' : 'none';
             };
-            const showNextImage = () => { if (currentImageIndex < currentGalleryImages.length - 1) { currentImageIndex++; showImage(); } };
-            const showPrevImage = () => { if (currentImageIndex > 0) { currentImageIndex--; showImage(); } };
+            const showNextMedia = () => { if (currentMediaIndex < currentGalleryMedia.length - 1) { currentMediaIndex++; showMedia(); } };
+            const showPrevMedia = () => { if (currentMediaIndex > 0) { currentMediaIndex--; showMedia(); } };
 
             closeBtn.addEventListener('click', closeLightbox);
-            nextBtn.addEventListener('click', showNextImage);
-            prevBtn.addEventListener('click', showPrevImage);
+            nextBtn.addEventListener('click', showNextMedia);
+            prevBtn.addEventListener('click', showPrevMedia);
             lightbox.addEventListener('click', (e) => { if (e.target === lightbox) closeLightbox(); });
             document.addEventListener('keydown', (e) => {
                 if (!lightbox.classList.contains('is-open')) return;
                 if (e.key === 'Escape') closeLightbox();
-                if (e.key === 'ArrowRight') showNextImage();
-                if (e.key === 'ArrowLeft') showPrevImage();
+                if (e.key === 'ArrowRight') showNextMedia();
+                if (e.key === 'ArrowLeft') showPrevMedia();
             });
 
-            const projectGalleries = document.querySelectorAll('.accordion-item[data-gallery-images]');
+            const projectGalleries = document.querySelectorAll('.accordion-item[data-gallery-media]');
             projectGalleries.forEach(gallery => {
                 const mainImageContainer = gallery.querySelector('.project-main-image');
                 if (!mainImageContainer) return;
 
-                // Skip gallery init for embed projects
-                if (mainImageContainer.classList.contains('is-embed')) return;
-
                 const mainImage = mainImageContainer.querySelector('img');
                 const thumbnailsContainer = gallery.querySelector('.project-thumbnails');
                 const enlargeBtn = gallery.querySelector('.enlarge-btn');
-                const imageUrls = gallery.dataset.galleryImages.split(',').map(s => s.trim()).filter(Boolean);
-                if (!imageUrls.length) return;
+                let mediaItems = [];
+
+                try {
+                    mediaItems = JSON.parse(gallery.dataset.galleryMedia || '[]');
+                } catch {
+                    mediaItems = [];
+                }
+                if (!mediaItems.length) return;
+
+                const hasAnyImage = mediaItems.some(item => item.type === 'image');
+                const updateEnlargeButton = (index) => {
+                    if (!enlargeBtn) return;
+                    const currentItem = mediaItems[index];
+                    if (!currentItem || currentItem.type !== 'image') {
+                        enlargeBtn.style.display = 'none';
+                        return;
+                    }
+                    enlargeBtn.style.display = hasAnyImage ? 'flex' : 'none';
+                };
 
                 // Let image define its own height after load — removes fixed aspect ratio constraint
                 if (mainImage) {
@@ -424,12 +555,17 @@ document.addEventListener('DOMContentLoaded', function () {
                     });
                 }
 
-                if (imageUrls.length > 1 && thumbnailsContainer) {
+                if (mediaItems.length > 1 && thumbnailsContainer) {
                     thumbnailsContainer.innerHTML = '';
-                    imageUrls.forEach((url, index) => {
+                    mediaItems.forEach((item, index) => {
                         const thumb = document.createElement('img');
-                        thumb.src = url;
-                        thumb.alt = `Project thumbnail ${index + 1}`;
+                        if (item.type === 'youtube') {
+                            thumb.src = `https://img.youtube.com/vi/${item.videoId}/hqdefault.jpg`;
+                            thumb.alt = `Project video thumbnail ${index + 1}`;
+                        } else {
+                            thumb.src = item.src;
+                            thumb.alt = `Project image thumbnail ${index + 1}`;
+                        }
                         thumb.dataset.index = index;
                         thumb.loading = 'lazy';
                         if (index === 0) thumb.classList.add('is-active');
@@ -438,10 +574,9 @@ document.addEventListener('DOMContentLoaded', function () {
                     thumbnailsContainer.addEventListener('click', e => {
                         if (e.target.tagName === 'IMG') {
                             const newIndex = parseInt(e.target.dataset.index, 10);
-                            if (mainImage) {
-                                mainImage.src = imageUrls[newIndex];
-                                mainImageContainer.dataset.currentIndex = newIndex;
-                            }
+                            renderProjectMainMedia(mainImageContainer, mediaItems[newIndex], gallery.querySelector('.project-title')?.textContent || 'project');
+                            mainImageContainer.dataset.currentIndex = String(newIndex);
+                            updateEnlargeButton(newIndex);
                             thumbnailsContainer.querySelectorAll('img').forEach(t => t.classList.remove('is-active'));
                             e.target.classList.add('is-active');
                         }
@@ -450,11 +585,13 @@ document.addEventListener('DOMContentLoaded', function () {
                     thumbnailsContainer.style.display = 'none';
                 }
 
+                updateEnlargeButton(parseInt(mainImageContainer.dataset.currentIndex, 10) || 0);
+
                 if (enlargeBtn) {
                     enlargeBtn.addEventListener('click', (e) => {
                         e.preventDefault();
                         const startIndex = parseInt(mainImageContainer.dataset.currentIndex, 10) || 0;
-                        openLightbox(imageUrls, startIndex);
+                        openLightbox(mediaItems, startIndex);
                     });
                 }
             });

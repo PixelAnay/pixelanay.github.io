@@ -123,10 +123,10 @@
       "category": "Hardware / Embedded Systems · 2024",
       "description": "Designed and assembled a fixed-wing RC aircraft from scratch — FlySky TX/RX system, 2200KV brushless motor, ESC, LiPo battery, self-fabricated cardboard airframe. It flew. Then it didn't. Electronics are stored safely; the frame is the only casualty.",
       "tech": ["Embedded C", "Arduino", "Electronics", "FlySky"],
-      "galleryImages": [],
+     "galleryImages": ["assets/bg1.webp", "assets/bg2.webp"],
       "links": [
         { "type": "code", "url": "https://youtu.be/wskhJvXOQ88?si=ihqviYkbE9cK-fAf", "text": "Controls Test", "iconClass": "fab fa-youtube" }
-      ]
+ ]
     }
   ],
 
