@@ -178,15 +178,11 @@ document.addEventListener('DOMContentLoaded', function () {
             const iframe = createYouTubeEmbed(mediaItem.videoId, mediaItem.title || `${projectTitle} video`);
             mainImageContainer.prepend(iframe);
             mainImg.style.display = 'none';
-            mainImageContainer.style.removeProperty('max-height');
-            mainImageContainer.style.removeProperty('aspect-ratio');
             mainImageContainer.classList.add('is-embed');
             return;
         }
 
         mainImageContainer.classList.remove('is-embed');
-        mainImageContainer.style.maxHeight = '460px';
-        mainImageContainer.style.aspectRatio = 'auto';
         mainImg.style.display = 'block';
         mainImg.src = mediaItem.src;
         mainImg.alt = mediaItem.alt || `Main view of ${projectTitle} project.`;
@@ -505,7 +501,13 @@ document.addEventListener('DOMContentLoaded', function () {
             closeBtn.addEventListener('click', closeLightbox);
             nextBtn.addEventListener('click', showNextMedia);
             prevBtn.addEventListener('click', showPrevMedia);
-            lightbox.addEventListener('click', (e) => { if (e.target === lightbox) closeLightbox(); });
+            lightbox.addEventListener('click', (e) => {
+                const clickedOnControl = e.target.closest('.lightbox__nav, .lightbox__close');
+                const clickedOnMedia = e.target.closest('.lightbox__image, .lightbox__video');
+                if (!clickedOnControl && !clickedOnMedia) {
+                    closeLightbox();
+                }
+            });
             document.addEventListener('keydown', (e) => {
                 if (!lightbox.classList.contains('is-open')) return;
                 if (e.key === 'Escape') closeLightbox();
@@ -540,20 +542,6 @@ document.addEventListener('DOMContentLoaded', function () {
                     }
                     enlargeBtn.style.display = hasAnyImage ? 'flex' : 'none';
                 };
-
-                // Let image define its own height after load — removes fixed aspect ratio constraint
-                if (mainImage) {
-                    mainImage.addEventListener('load', () => {
-                        const natural = mainImage.naturalWidth / mainImage.naturalHeight;
-                        // Wide images: cap height. Portrait/square: let them breathe up to a limit
-                        if (natural < 1) {
-                            mainImageContainer.style.maxHeight = '520px';
-                        } else {
-                            mainImageContainer.style.aspectRatio = 'auto';
-                            mainImageContainer.style.maxHeight = '460px';
-                        }
-                    });
-                }
 
                 if (mediaItems.length > 1 && thumbnailsContainer) {
                     thumbnailsContainer.innerHTML = '';

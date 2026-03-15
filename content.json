@@ -79,9 +79,10 @@
       "category": "Cross-platform Mobile & Web Application",
       "description": "A cross-platform nutrition and health tracker for Android, iOS, and Web — built as a free, ad-free alternative to paid apps like Cronometer and HealthifyMe. Includes Firebase auth and database, and a crowdsourced food database. Long-term goal: open-source, donation-based.",
       "tech": ["Flutter", "Firebase", "Node.js", "Dart"],
-      "galleryImages": ["assets/bg1.webp", "assets/bg2.webp", "assets/bg4.webp"],
+      "galleryImages": ["assets/projectfuel/img1.png", "assets/projectfuel/img2.png", "assets/projectfuel/img3.png", "assets/projectfuel/img4.png"],
       "links": [
-        { "type": "code", "url": "https://purefuel.web.app", "text": "Live Site", "iconClass": "fas fa-arrow-up-right-from-square" }
+        { "type": "code", "url": "https://purefuel.web.app", "text": "Live Site", "iconClass": "fas fa-arrow-up-right-from-square" },
+        { "type": "code", "url": "https://youtu.be/Q5xTFIiOXwE", "text": "Video Demo", "iconClass": "fab fa-youtube" }
       ]
     },
     {
@@ -90,7 +91,7 @@
       "category": "Android & Web Application",
       "description": "A smart travel companion for logging trips, memories, and getting AI-powered insights. Built for a university hackathon — placed in the top 100 teams out of 900+ in Smart India Hackathon.",
       "tech": ["Flutter", "Firebase", "Google Maps API", "REST API", "AI API"],
-      "galleryImages": ["assets/journease1.webp", "assets/journease2.webp", "assets/journease3.webp"],
+      "galleryImages": ["assets/journease/journease1.webp", "assets/journease/journease2.webp", "assets/journease/journease3.webp"],
       "links": [
         { "type": "code", "url": "https://journeasesih.vercel.app", "text": "Live Site", "iconClass": "fas fa-arrow-up-right-from-square" }
       ]
@@ -101,7 +102,7 @@
       "category": "Cross-platform Application · In Development",
       "description": "Building a full-featured cross-platform school management application in Flutter for a private school. Covers attendance, fee management, staff and student records, and parent communication.",
       "tech": ["Flutter", "Firebase"],
-      "galleryImages": ["assets/bg2.webp", "assets/bg3.webp", "assets/bg4.webp"],
+      "galleryImages": ["assets/bg2.webp"],
       "links": [
     { "type": "code", "url": "https://github.com/pixelanay", "text": "GitHub", "iconClass": "fab fa-github" }
 ]
@@ -112,7 +113,7 @@
       "category": "Android Application · 2021",
       "description": "My first published Android app — built at 15, entirely self-taught, pre-AI. A prank lie detector app that crossed 10,000+ organic downloads on the Play Store and is still live. Not sophisticated, but it was real: coded, signed, published, and found by users on its own.",
       "tech": ["Java", "Kotlin", "Android Studio"],
-      "galleryImages": ["assets/bg1.webp"],
+      "galleryImages": ["assets/liedetector/1.png", "assets/liedetector/2.png", "assets/liedetector/3.png"],
       "links": [
         { "type": "playstore", "url": "https://play.google.com/store/apps/details?id=com.devanayx.liedetector", "text": "Google Play", "iconClass": "fab fa-google-play" }
       ]
@@ -123,7 +124,7 @@
       "category": "Hardware / Embedded Systems · 2024",
       "description": "Designed and assembled a fixed-wing RC aircraft from scratch — FlySky TX/RX system, 2200KV brushless motor, ESC, LiPo battery, self-fabricated cardboard airframe. It flew. Then it didn't. Electronics are stored safely; the frame is the only casualty.",
       "tech": ["Embedded C", "Arduino", "Electronics", "FlySky"],
-     "galleryImages": ["assets/bg1.webp", "assets/bg2.webp"],
+     "galleryImages": [],
       "links": [
         { "type": "code", "url": "https://youtu.be/wskhJvXOQ88?si=ihqviYkbE9cK-fAf", "text": "Controls Test", "iconClass": "fab fa-youtube" }
  ]
