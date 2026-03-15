@@ -59,7 +59,13 @@ document.addEventListener('DOMContentLoaded', function() {
 
         const featuredProjects = allProjects.filter(p => p.featured);
         renderProjects(featuredProjects, 'projects-container');
-        if (featuredLinks) populateFeaturedLinks(featuredLinks, 'featured-links-container');
+
+        // Only populate featured links if the container exists
+        const featuredLinksContainer = document.getElementById('featured-links-container');
+        if (featuredLinks && featuredLinksContainer) {
+            populateFeaturedLinks(featuredLinks, 'featured-links-container');
+        }
+
         populateSkills(home.featuredSkills, 'skills-list-container');
         populateExperience(home.experience, 'experience-container');
         populateEducation(home.education, 'education-container');
@@ -248,18 +254,30 @@ document.addEventListener('DOMContentLoaded', function() {
             });
         }
 
+        // Fixed accordion — uses actual content height instead of hardcoded 1200px
         const accordionItems = document.querySelectorAll('.accordion-item');
         accordionItems.forEach(item => {
             const title = item.querySelector('.accordion-item__title');
+            const content = item.querySelector('.accordion-item__content');
+
             title.addEventListener('click', () => {
                 const wasActive = item.classList.contains('is-active');
+
+                // Close all
                 accordionItems.forEach(otherItem => {
+                    const otherContent = otherItem.querySelector('.accordion-item__content');
                     otherItem.classList.remove('is-active');
                     otherItem.querySelector('.accordion-item__title').setAttribute('aria-expanded', 'false');
+                    otherContent.style.maxHeight = '0';
+                    otherContent.style.paddingBottom = '0';
                 });
+
+                // Open clicked one if it was closed
                 if (!wasActive) {
                     item.classList.add('is-active');
                     title.setAttribute('aria-expanded', 'true');
+                    content.style.maxHeight = content.scrollHeight + 'px';
+                    content.style.paddingBottom = 'var(--spacing-md)';
                 }
             });
         });
@@ -285,7 +303,7 @@ document.addEventListener('DOMContentLoaded', function() {
             textToSplit.innerHTML = '';
             text.split('').forEach((char, index) => {
                 const span = document.createElement('span');
-                span.innerHTML = char === ' ' ? ' ' : char;
+                span.innerHTML = char === ' ' ? ' ' : char;
                 span.style.animationDelay = `${index * 0.04}s`;
                 textToSplit.appendChild(span);
             });

@@ -4,7 +4,7 @@
     "pronouns": "He/Him",
     "headline": "CSE Student | Building apps that should exist | Flutter · Embedded · Self-taught since 14",
     "contactEmail": "pixel.anay@gmail.com",
-    "organization": "ProjectFuel",
+    "organization": "Independent Developer",
     "location": "Pune District, Maharashtra, India",
     "connections": "30+",
     "openTo": ["Technical Internships"],
@@ -20,7 +20,7 @@
         "url": "https://github.com/pixelanay",
         "iconClass": "fab fa-github"
       },
-            {
+      {
         "name": "LeetCode",
         "url": "https://leetcode.com/pixelanay",
         "iconClass": "fa-solid fa-code",
@@ -32,11 +32,11 @@
   "//": "--- CONTENT FOR INDEX.HTML ---",
   "homePage": {
     "greeting": "Hello, I'm Anay",
-    "tagline": "I build fast, beautiful web apps. I am dedicated to crafting innovative solutions and continuously learning in the evolving tech landscape. Here’s my work!",
+    "tagline": "I build things that should exist — apps, systems, and occasionally RC planes. Most of what I know came from just doing it.",
     "linkedinTagline": "CSE Student | Building apps that should exist | Flutter · Embedded · Self-taught since 14",
     "resumeUrl": "/assets/Resume.pdf",
     "profileImageUrl": "assets/profile.webp",
-    "bio": "I am currently pursuing a B.Tech in Computer Science. I thrive on building real stuff that works, from full-stack web apps to AI Interfaces. Whether it's solving technical puzzles, designing for humans, or digging through data, I'm all in. I’m here to contribute to teams that build great products.",
+    "bio": "I've been building things on the internet since I was 14 — starting with Android apps in Java/Kotlin, crashing RC planes, and figuring out how computers actually work. Currently a CS student working across mobile, web, and embedded systems. Open to technical internships where I can actually build something.",
     "aboutExtended": [
       "I've been building things on the internet since I was 14 — starting with Android apps in Java/Kotlin, crashing RC planes, and figuring out how computers actually work.",
       "Currently a CS student, but most of what I know came from just doing things. I built a full cross-platform nutrition tracker in Flutter because the good ones cost money and I didn't think they should.",
@@ -46,14 +46,14 @@
       "Open to technical internships where I can actually build something."
     ],
     "featuredSkills": [
-      "Flutter", "Firebase", "Node.js", "Android Development", "Cross-platform Development", "Kotlin", "Java", "Dart", "JavaScript", "Python (Programming Language)", "C++", "Embedded C"
+      "Flutter", "Firebase", "Node.js", "Android Development", "Cross-platform Development", "Kotlin", "Java", "Dart", "JavaScript", "Python", "C++", "Embedded C"
     ],
     "experience": [
       {
-        "title": "Android Developer",
-        "company": "ProjectFuel · Self-employed",
+        "title": "Independent Developer",
+        "company": "Self-employed",
         "date": "2021 - Present",
-        "description": "Independently developed and published Android applications from age 15. First app reached 10K+ organic downloads on the Google Play Store. Continued shipping across Android, iOS, and Web, including a Flutter-based nutrition and health tracker backed by Firebase.",
+        "description": "Independently developed and published Android applications from age 15, prior to AI-assisted development tools. First app reached 10K+ organic downloads on the Google Play Store. Continued shipping across Android, iOS, and Web, including a Flutter-based nutrition and health tracker backed by Firebase.",
         "skills": ["Flutter", "Java", "Kotlin", "Android Development", "Firebase"]
       }
     ],
@@ -70,18 +70,17 @@
   "//": "--- CONTENT FOR PROJECTS.HTML ---",
   "projectsPage": {
     "title": "My Projects",
-    "subtitle": "A collection of my work, from full-stack web applications and robust desktop tools to interactive front-end experiments. Each project reflects my commitment to clean code, thoughtful design, and practical problem-solving."
+    "subtitle": "A collection of things I've built — some polished, some still in progress, all real."
   },
   "allProjects": [
     {
       "featured": true,
       "title": "PureFuel",
       "category": "Cross-platform Mobile & Web Application",
-      "description": "A cross-platform nutrition and health tracker for Android, iOS, and Web built as a free, ad-free alternative to paid apps. Includes Firebase auth/database and a crowdsourced food database.",
-      "tech": ["Flutter", "Firebase", "Node.js"],
+      "description": "A cross-platform nutrition and health tracker for Android, iOS, and Web — built as a free, ad-free alternative to paid apps like Cronometer and HealthifyMe. Includes Firebase auth and database, and a crowdsourced food database. Long-term goal: open-source, donation-based.",
+      "tech": ["Flutter", "Firebase", "Node.js", "Dart"],
       "galleryImages": ["assets/bg1.webp", "assets/bg2.webp", "assets/bg4.webp"],
       "links": [
-        { "type": "playstore", "url": "https://play.google.com/store", "text": "Google Play", "iconClass": "fab fa-google-play" },
         { "type": "code", "url": "https://purefuel.web.app", "text": "Live Site", "iconClass": "fas fa-arrow-up-right-from-square" }
       ]
     },
@@ -89,8 +88,8 @@
       "featured": true,
       "title": "Journease - Travel Planner",
       "category": "Android & Web Application",
-      "description": "A full-featured app for all your travel needs, with a focus on a clean UI and efficient backend processing.",
-      "tech": ["Flutter", "Frontend", "Backend"],
+      "description": "A smart travel companion for logging trips, memories, and getting AI-powered insights. Built for a university hackathon — placed in the top 100 teams out of 900+ in Smart India Hackathon.",
+      "tech": ["Flutter", "Firebase", "Google Maps API", "REST API", "AI API"],
       "galleryImages": ["assets/journease1.webp", "assets/journease2.webp", "assets/journease3.webp"],
       "links": [
         { "type": "code", "url": "https://journeasesih.vercel.app", "text": "Live Site", "iconClass": "fas fa-arrow-up-right-from-square" }
@@ -98,45 +97,67 @@
     },
     {
       "featured": true,
-      "title": "School Management System (In Development)",
-      "category": "Cross-platform Application",
-      "description": "Building a full-featured cross-platform school management application in Flutter for a private school, with broad operational and data management features.",
+      "title": "School Management System",
+      "category": "Cross-platform Application · In Development",
+      "description": "Building a full-featured cross-platform school management application in Flutter for a private school. Covers attendance, fee management, staff and student records, and parent communication.",
       "tech": ["Flutter", "Firebase"],
       "galleryImages": ["assets/bg2.webp", "assets/bg3.webp", "assets/bg4.webp"],
       "links": []
+    },
+    {
+      "featured": false,
+      "title": "Lie Detector Prank App",
+      "category": "Android Application · 2021",
+      "description": "My first published Android app — built at 15, entirely self-taught, pre-AI. A prank lie detector app that crossed 10,000+ organic downloads on the Play Store and is still live. Not sophisticated, but it was real: coded, signed, published, and found by users on its own.",
+      "tech": ["Java", "Kotlin", "Android Studio"],
+      "galleryImages": ["assets/bg1.webp"],
+      "links": [
+        { "type": "playstore", "url": "https://play.google.com/store/apps/details?id=com.devanayx.liedetector", "text": "Google Play", "iconClass": "fab fa-google-play" }
+      ]
+    },
+    {
+      "featured": false,
+      "title": "Fixed-Wing RC Aircraft",
+      "category": "Hardware / Embedded Systems · 2024",
+      "description": "Designed and assembled a fixed-wing RC aircraft from scratch — FlySky TX/RX system, 2200KV brushless motor, ESC, LiPo battery, self-fabricated cardboard airframe. It flew. Then it didn't. Electronics are stored safely; the frame is the only casualty.",
+      "tech": ["Embedded C", "Arduino", "Electronics", "FlySky"],
+      "galleryImages": ["assets/bg3.webp"],
+      "links": [
+        { "type": "code", "url": "https://youtu.be/wskhJvXOQ88?si=ihqviYkbE9cK-fAf", "text": "Controls Test", "iconClass": "fab fa-youtube" }
+      ]
     }
   ],
 
   "//": "--- CONTENT FOR SKILLS.HTML ---",
   "skillsPage": {
     "title": "My Toolkit",
-    "subtitle": "I believe in using the right tool for the job. Here's a look at the languages, frameworks, and technologies I work with to build efficient, scalable, and beautiful applications."
+    "subtitle": "Languages, frameworks, and tools I actually use — not a buzzword list."
   },
   "allSkills": [
     {
       "categoryTitle": "Languages",
       "iconClass": "fas fa-code",
-      "items": ["JavaScript", "Python", "Java", "Dart", "C++", "Embedded C", "C (Programming Language)"]
+      "items": ["JavaScript", "Python", "Java", "Dart", "C++", "Embedded C", "C"]
     },
     {
       "categoryTitle": "Frontend Development",
       "iconClass": "fas fa-desktop",
-      "items": ["Flutter", "HTML", "Cascading Style Sheets (CSS)"]
+      "items": ["Flutter", "HTML", "CSS"]
     },
     {
       "categoryTitle": "Backend & Databases",
       "iconClass": "fas fa-server",
-      "items": ["Node.js", "Firebase"]
+      "items": ["Node.js", "Firebase", "REST APIs"]
     },
     {
       "categoryTitle": "Tools & Platforms",
       "iconClass": "fas fa-tools",
-      "items": ["Git", "GitHub", "Cloudflare", "Bash", "Linux", "Local LLMs", "Arduino"]
+      "items": ["Git", "GitHub", "Cloudflare", "Vercel", "Netlify", "Bash", "Linux", "Arduino", "Local LLMs (Ollama, LM Studio)"]
     },
     {
       "categoryTitle": "CS Fundamentals",
       "iconClass": "fas fa-brain",
-      "items": ["Cross-platform Development", "Android Development", "REST APIs"]
+      "items": ["Cross-platform Development", "Android Development", "Embedded Systems"]
     },
     {
       "categoryTitle": "Design",
@@ -151,12 +172,12 @@
       "type": "portfolio"
     },
     {
-      "title": "PixelAnay - Overview",
+      "title": "PixelAnay - GitHub",
       "url": "https://github.com/pixelanay",
       "type": "github"
     },
     {
-      "title": "Volt & Vision",
+      "title": "Volt & Vision - YouTube",
       "url": "https://www.youtube.com/@voltandvision",
       "type": "youtube"
     }
@@ -174,7 +195,7 @@
       "title": "Smart India Hackathon - Top 100 Teams",
       "date": "Sep 2025",
       "associatedWith": "MIT ADT University",
-      "description": "Journease, a smart travel companion for logging trips, memories, analysis, and insights, was recognized among the top 100 teams."
+      "description": "Journease, a smart travel companion for logging trips, memories, analysis, and insights, was recognized among the top 100 teams out of 900+."
     }
   ]
 }
