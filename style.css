@@ -312,15 +312,40 @@ input, textarea {
     overflow: hidden;
     position: relative;
     transition: box-shadow var(--transition-med);
-    aspect-ratio: 16 / 9; 
-    background-color: #000; 
+    /* Removed fixed aspect-ratio — image/embed defines its own height */
+    min-height: 200px;
+    max-height: 460px;
+    background-color: var(--card-bg);
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
+ 
 .project-main-image img {
     width: 100%;
     height: 100%;
+    max-height: 460px;
+    object-fit: contain;  /* keeps full image visible regardless of ratio */
+    object-position: center;
     transition: transform var(--transition-med);
-    object-fit: contain; 
 }
+
+.project-main-image.is-embed {
+    aspect-ratio: 16 / 9;
+    max-height: none;     /* let 16:9 ratio control height naturally */
+    min-height: unset;
+    background-color: #000;
+}
+ 
+.project-embed {
+    width: 100%;
+    height: 100%;
+    min-height: 250px;
+    border: none;
+    display: block;
+    border-radius: 8px;
+}
+ 
 
 .project-thumbnails {
     display: grid;
@@ -349,8 +374,24 @@ input, textarea {
 
 .dual-section-container { display: grid; grid-template-columns: 1fr 1fr; gap: var(--spacing-xl); }
 .timeline {
-    position: relative; padding-left: 45px;
-    border-left: 2px solid var(--border-color);
+    position: relative;
+    padding-left: 45px;
+}
+
+.timeline::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 12px; /* aligns start with center of first icon */
+    bottom: 12px; /* stops before end of last icon */
+    width: 2px;
+    background: linear-gradient(
+        to bottom,
+        transparent,
+        var(--border-color) 8%,
+        var(--border-color) 92%,
+        transparent
+    );
 }
 .timeline-item { position: relative; margin-bottom: var(--spacing-md); }
 .timeline-icon {
@@ -730,4 +771,7 @@ input, textarea {
 
 * {
   -webkit-tap-highlight-color: transparent;
+}
+.accordion-item__details {
+    padding-bottom: var(--spacing-md);
 }

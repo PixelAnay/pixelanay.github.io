@@ -102,7 +102,9 @@
       "description": "Building a full-featured cross-platform school management application in Flutter for a private school. Covers attendance, fee management, staff and student records, and parent communication.",
       "tech": ["Flutter", "Firebase"],
       "galleryImages": ["assets/bg2.webp", "assets/bg3.webp", "assets/bg4.webp"],
-      "links": []
+      "links": [
+    { "type": "code", "url": "https://github.com/pixelanay", "text": "GitHub", "iconClass": "fab fa-github" }
+]
     },
     {
       "featured": false,
@@ -121,7 +123,7 @@
       "category": "Hardware / Embedded Systems · 2024",
       "description": "Designed and assembled a fixed-wing RC aircraft from scratch — FlySky TX/RX system, 2200KV brushless motor, ESC, LiPo battery, self-fabricated cardboard airframe. It flew. Then it didn't. Electronics are stored safely; the frame is the only casualty.",
       "tech": ["Embedded C", "Arduino", "Electronics", "FlySky"],
-      "galleryImages": ["assets/bg3.webp"],
+      "galleryImages": [],
       "links": [
         { "type": "code", "url": "https://youtu.be/wskhJvXOQ88?si=ihqviYkbE9cK-fAf", "text": "Controls Test", "iconClass": "fab fa-youtube" }
       ]

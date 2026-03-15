@@ -1,4 +1,4 @@
-document.addEventListener('DOMContentLoaded', function() {
+document.addEventListener('DOMContentLoaded', function () {
     const body = document.body;
 
     async function loadContent() {
@@ -9,8 +9,8 @@ document.addEventListener('DOMContentLoaded', function() {
 
             populateGlobalContent(data.global);
 
-            if (document.getElementById('home')) { 
-                populateHomePage(data.homePage, data.allProjects, data.global, data.honorsAndAwards, data.featuredLinks); 
+            if (document.getElementById('home')) {
+                populateHomePage(data.homePage, data.allProjects, data.global, data.honorsAndAwards, data.featuredLinks);
             }
             if (document.getElementById('all-projects-container')) {
                 populateProjectsPage(data.projectsPage, data.allProjects);
@@ -35,11 +35,11 @@ document.addEventListener('DOMContentLoaded', function() {
             renderSocialLinks(footerSocialsContainer, global.socials);
         }
 
-        if(document.getElementById('emailToCopy')) document.getElementById('emailToCopy').textContent = global.contactEmail;
-        if(document.getElementById('footer-name')) document.getElementById('footer-name').textContent = global.name;
+        if (document.getElementById('emailToCopy')) document.getElementById('emailToCopy').textContent = global.contactEmail;
+        if (document.getElementById('footer-name')) document.getElementById('footer-name').textContent = global.name;
     }
 
-    function populateHomePage(home, allProjects, global, honorsAndAwards, featuredLinks) { 
+    function populateHomePage(home, allProjects, global, honorsAndAwards, featuredLinks) {
 
         document.getElementById('hero-title').textContent = home.greeting;
         document.getElementById('hero-subtitle').textContent = home.tagline;
@@ -111,11 +111,19 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }
 
+    // Extracts a YouTube video ID from any common YouTube URL format
+    function getYouTubeId(url) {
+        const match = url.match(
+            /(?:youtube\.com\/(?:watch\?v=|shorts\/|embed\/)|youtu\.be\/)([a-zA-Z0-9_-]{11})/
+        );
+        return match ? match[1] : null;
+    }
+
     function renderProjects(projects, containerId) {
         const container = document.getElementById(containerId);
         const template = document.getElementById('project-template');
         if (!container || !template) return;
-        container.innerHTML = ''; 
+        container.innerHTML = '';
 
         projects.forEach((project, index) => {
             const clone = template.content.cloneNode(true);
@@ -127,9 +135,32 @@ document.addEventListener('DOMContentLoaded', function() {
             clone.querySelector('.project-title').textContent = project.title;
             clone.querySelector('.project-category').textContent = project.category;
             clone.querySelector('.project-description p').textContent = project.description;
-            clone.querySelector('.project-main-image img').src = project.galleryImages[0];
-            clone.querySelector('.project-main-image img').alt = `Main view of ${project.title} project.`;
-            clone.querySelector('.accordion-item').dataset.galleryImages = project.galleryImages.join(', ');
+
+            // Check if any link is a YouTube link — if so, render embed as primary media
+            const youtubeLink = project.links.find(l => getYouTubeId(l.url));
+            const mainImageContainer = clone.querySelector('.project-main-image');
+            const mainImg = mainImageContainer.querySelector('img');
+            const enlargeBtn = mainImageContainer.querySelector('.enlarge-btn');
+
+            if (youtubeLink) {
+                const videoId = getYouTubeId(youtubeLink.url);
+                const iframe = document.createElement('iframe');
+                iframe.src = `https://www.youtube.com/embed/${videoId}`;
+                iframe.style.minHeight = '100%';
+                iframe.title = `${project.title} video`;
+                iframe.setAttribute('frameborder', '0');
+                iframe.setAttribute('allow', 'accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture');
+                iframe.setAttribute('allowfullscreen', '');
+                iframe.className = 'project-embed';
+                mainImg.replaceWith(iframe);
+                if (enlargeBtn) enlargeBtn.remove();
+                mainImageContainer.classList.add('is-embed');
+                clone.querySelector('.accordion-item').dataset.galleryImages = '';
+            } else {
+                mainImg.src = project.galleryImages[0];
+                mainImg.alt = `Main view of ${project.title} project.`;
+                clone.querySelector('.accordion-item').dataset.galleryImages = project.galleryImages.join(', ');
+            }
 
             const techList = clone.querySelector('.project-tech-list');
             project.tech.forEach(tech => {
@@ -211,7 +242,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 entries.forEach((entry, index) => {
                     if (entry.isIntersecting) {
                         if (!entry.target.style.transitionDelay) {
-                             entry.target.style.transitionDelay = `${index * 50}ms`;
+                            entry.target.style.transitionDelay = `${index * 50}ms`;
                         }
                         entry.target.classList.add('is-visible');
                         observer.unobserve(entry.target);
@@ -242,7 +273,7 @@ document.addEventListener('DOMContentLoaded', function() {
         }
 
         const header = document.querySelector('.header');
-        if(header) {
+        if (header) {
             let lastScrollY = window.scrollY;
             window.addEventListener('scroll', () => {
                 if (lastScrollY < window.scrollY && window.scrollY > 100) {
@@ -270,6 +301,14 @@ document.addEventListener('DOMContentLoaded', function() {
                     otherItem.querySelector('.accordion-item__title').setAttribute('aria-expanded', 'false');
                     otherContent.style.maxHeight = '0';
                     otherContent.style.paddingBottom = '0';
+
+                    // Pause any embed by resetting the iframe src
+                    const embed = otherContent.querySelector('.project-embed');
+                    if (embed) {
+                        const currentSrc = embed.src;
+                        embed.src = '';
+                        embed.src = currentSrc;
+                    }
                 });
 
                 // Open clicked one if it was closed
@@ -284,8 +323,8 @@ document.addEventListener('DOMContentLoaded', function() {
 
         const educationNavLink = document.getElementById('education-nav-link');
         if (educationNavLink) {
-            educationNavLink.addEventListener('click', function(event) {
-                if(window.location.pathname.includes('index.html') || window.location.pathname === '/') {
+            educationNavLink.addEventListener('click', function (event) {
+                if (window.location.pathname.includes('index.html') || window.location.pathname === '/') {
                     if (window.innerWidth > 768) {
                         event.preventDefault();
                         const experienceSection = document.getElementById('experience');
@@ -361,13 +400,32 @@ document.addEventListener('DOMContentLoaded', function() {
             projectGalleries.forEach(gallery => {
                 const mainImageContainer = gallery.querySelector('.project-main-image');
                 if (!mainImageContainer) return;
+
+                // Skip gallery init for embed projects
+                if (mainImageContainer.classList.contains('is-embed')) return;
+
                 const mainImage = mainImageContainer.querySelector('img');
                 const thumbnailsContainer = gallery.querySelector('.project-thumbnails');
                 const enlargeBtn = gallery.querySelector('.enlarge-btn');
                 const imageUrls = gallery.dataset.galleryImages.split(',').map(s => s.trim()).filter(Boolean);
+                if (!imageUrls.length) return;
+
+                // Let image define its own height after load — removes fixed aspect ratio constraint
+                if (mainImage) {
+                    mainImage.addEventListener('load', () => {
+                        const natural = mainImage.naturalWidth / mainImage.naturalHeight;
+                        // Wide images: cap height. Portrait/square: let them breathe up to a limit
+                        if (natural < 1) {
+                            mainImageContainer.style.maxHeight = '520px';
+                        } else {
+                            mainImageContainer.style.aspectRatio = 'auto';
+                            mainImageContainer.style.maxHeight = '460px';
+                        }
+                    });
+                }
 
                 if (imageUrls.length > 1 && thumbnailsContainer) {
-                    thumbnailsContainer.innerHTML = ''; 
+                    thumbnailsContainer.innerHTML = '';
                     imageUrls.forEach((url, index) => {
                         const thumb = document.createElement('img');
                         thumb.src = url;
@@ -380,17 +438,19 @@ document.addEventListener('DOMContentLoaded', function() {
                     thumbnailsContainer.addEventListener('click', e => {
                         if (e.target.tagName === 'IMG') {
                             const newIndex = parseInt(e.target.dataset.index, 10);
-                            mainImage.src = imageUrls[newIndex];
-                            mainImageContainer.dataset.currentIndex = newIndex;
+                            if (mainImage) {
+                                mainImage.src = imageUrls[newIndex];
+                                mainImageContainer.dataset.currentIndex = newIndex;
+                            }
                             thumbnailsContainer.querySelectorAll('img').forEach(t => t.classList.remove('is-active'));
                             e.target.classList.add('is-active');
                         }
                     });
                 } else if (thumbnailsContainer) {
-                     thumbnailsContainer.style.display = 'none';
+                    thumbnailsContainer.style.display = 'none';
                 }
 
-                if(enlargeBtn) {
+                if (enlargeBtn) {
                     enlargeBtn.addEventListener('click', (e) => {
                         e.preventDefault();
                         const startIndex = parseInt(mainImageContainer.dataset.currentIndex, 10) || 0;
