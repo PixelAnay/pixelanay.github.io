@@ -431,7 +431,7 @@ document.addEventListener('DOMContentLoaded', function () {
             textToSplit.innerHTML = '';
             text.split('').forEach((char, index) => {
                 const span = document.createElement('span');
-                span.innerHTML = char === ' ' ? ' ' : char;
+                span.textContent = char === ' ' ? '\u00A0' : char;
                 span.style.animationDelay = `${index * 0.04}s`;
                 textToSplit.appendChild(span);
             });
