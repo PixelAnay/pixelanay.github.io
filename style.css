@@ -76,12 +76,11 @@ input, textarea {
     background: rgba(11, 11, 15, 0.6);
     backdrop-filter: blur(10px);
     -webkit-backdrop-filter: blur(10px);
-    border-bottom: 1px solid var(--border-color);
     transition: top var(--transition-med);
 }
 .header.hidden { top: -100px; }
 .header-container {
-    display: flex; justify-content: space-between; align-items: center;
+    display: flex; justify-content: flex-end; align-items: center;
     padding: var(--spacing-sm) var(--spacing-md);
 }
 .logo {
@@ -704,14 +703,37 @@ input, textarea {
 
 @media (max-width: 1024px) {
     .navbar { display: none; }
-    .hamburger { display: block; background: none; border: none; z-index: 1001; width: 30px; height: 22px; position: relative; cursor: pointer; }
-    .hamburger .bar { width: 100%; height: 2px; background-color: var(--text-primary); border-radius: 2px; position: absolute; left: 0; transition: all 0.4s ease-in-out; }
-    .hamburger .bar:nth-child(1) { top: 0; }
-    .hamburger .bar:nth-child(2) { top: 50%; transform: translateY(-50%); }
-    .hamburger .bar:nth-child(3) { bottom: 0; }
-    .nav-open .hamburger .bar:nth-child(1) { top: 50%; transform: translateY(-50%) rotate(45deg); }
-    .nav-open .hamburger .bar:nth-child(2) { opacity: 0; }
-    .nav-open .hamburger .bar:nth-child(3) { top: 50%; transform: translateY(-50%) rotate(-45deg); }
+    .hamburger {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin-left: auto;
+        margin-right: -4px;
+        width: 32px;
+        height: 24px;
+        padding: 0;
+        line-height: 0;
+        background: none;
+        border: none;
+        appearance: none;
+        -webkit-appearance: none;
+        z-index: 1001;
+        position: relative;
+        cursor: pointer;
+    }
+    .hamburger i {
+        font-size: 1.35rem;
+        color: var(--text-primary);
+        line-height: 1;
+        transition: transform 0.3s ease, color 0.25s ease;
+    }
+    .nav-open .hamburger i {
+        transform: rotate(90deg) scale(1.03);
+    }
+    .hamburger:hover i,
+    .hamburger:focus-visible i {
+        color: var(--accent-color);
+    }
 
 .navbar {
     position: fixed;

@@ -345,17 +345,30 @@ document.addEventListener('DOMContentLoaded', function () {
         const navMenu = document.querySelector('.navbar');
         if (hamburger && navMenu) {
             const navLinks = navMenu.querySelectorAll('.nav-link');
+            const hamburgerIcon = hamburger.querySelector('i');
+
+            const setHamburgerIcon = (isOpen) => {
+                if (!hamburgerIcon) return;
+                hamburgerIcon.classList.toggle('fa-bars', !isOpen);
+                hamburgerIcon.classList.toggle('fa-xmark', isOpen);
+            };
+
+            setHamburgerIcon(false);
+
             hamburger.addEventListener('click', () => {
                 body.classList.toggle('nav-open');
                 body.classList.toggle('body-no-scroll');
                 const isExpanded = hamburger.getAttribute('aria-expanded') === 'true';
-                hamburger.setAttribute('aria-expanded', !isExpanded);
+                const isNowOpen = !isExpanded;
+                hamburger.setAttribute('aria-expanded', isNowOpen);
+                setHamburgerIcon(isNowOpen);
             });
             navLinks.forEach(link => {
                 link.addEventListener('click', () => {
                     if (body.classList.contains('nav-open')) {
                         body.classList.remove('nav-open', 'body-no-scroll');
                         hamburger.setAttribute('aria-expanded', 'false');
+                        setHamburgerIcon(false);
                     }
                 });
             });
@@ -376,29 +389,45 @@ document.addEventListener('DOMContentLoaded', function () {
 
         // Fixed accordion — uses actual content height instead of hardcoded 1200px
         const accordionItems = document.querySelectorAll('.accordion-item');
+        const isMobilePhone = () => window.matchMedia('(max-width: 767px) and (pointer: coarse)').matches;
+
+        const closeAccordionItem = (accordionItem) => {
+            const accordionTitle = accordionItem.querySelector('.accordion-item__title');
+            const accordionContent = accordionItem.querySelector('.accordion-item__content');
+
+            accordionItem.classList.remove('is-active');
+            accordionTitle.setAttribute('aria-expanded', 'false');
+            accordionContent.style.maxHeight = '0';
+            accordionContent.style.paddingBottom = '0';
+
+            // Pause any embed by resetting the iframe src
+            const embed = accordionContent.querySelector('.project-embed');
+            if (embed) {
+                const currentSrc = embed.src;
+                embed.src = '';
+                embed.src = currentSrc;
+            }
+        };
+
         accordionItems.forEach(item => {
             const title = item.querySelector('.accordion-item__title');
             const content = item.querySelector('.accordion-item__content');
 
             title.addEventListener('click', () => {
                 const wasActive = item.classList.contains('is-active');
+                const isProjectsSectionItem = Boolean(
+                    item.closest('#all-projects-container') || item.closest('#projects-container')
+                );
+                const shouldUseSingleOpenBehavior = !isMobilePhone() || !isProjectsSectionItem;
 
-                // Close all
-                accordionItems.forEach(otherItem => {
-                    const otherContent = otherItem.querySelector('.accordion-item__content');
-                    otherItem.classList.remove('is-active');
-                    otherItem.querySelector('.accordion-item__title').setAttribute('aria-expanded', 'false');
-                    otherContent.style.maxHeight = '0';
-                    otherContent.style.paddingBottom = '0';
-
-                    // Pause any embed by resetting the iframe src
-                    const embed = otherContent.querySelector('.project-embed');
-                    if (embed) {
-                        const currentSrc = embed.src;
-                        embed.src = '';
-                        embed.src = currentSrc;
-                    }
-                });
+                if (shouldUseSingleOpenBehavior) {
+                    // Original behavior (desktop/laptop and non-My Projects accordions): open one at a time
+                    accordionItems.forEach(otherItem => closeAccordionItem(otherItem));
+                } else if (wasActive) {
+                    // Mobile phones in My Projects: allow independent toggle per item
+                    closeAccordionItem(item);
+                    return;
+                }
 
                 // Open clicked one if it was closed
                 if (!wasActive) {
