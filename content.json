@@ -98,14 +98,25 @@
     },
     {
       "featured": true,
-      "title": "School Management System",
-      "category": "Cross-platform Application · In Development",
-      "description": "Building a full-featured cross-platform school management application in Flutter for a private school. Covers attendance, fee management, staff and student records, and parent communication.",
-      "tech": ["Flutter", "Firebase"],
+      "title": "Engram for Obsidian",
+      "category": "Obsidian Plugin · Personal AI Assistant",
+      "description": "A persistent personal intelligence for Obsidian with evolving memory, multi-provider support, interactive slash commands, granular vault scoping, and local offline PDF parsing.",
+      "tech": ["TypeScript", "Obsidian API", "Ollama", "APIs"],
+      "galleryImages": [],
+      "links": [
+        { "type": "code", "url": "https://github.com/PixelAnay/Engram", "text": "GitHub", "iconClass": "fab fa-github" }
+      ]
+    },
+    {
+      "featured": true,
+      "title": "Shala",
+      "category": "Cross-platform Mobile Application",
+      "description": "A mobile-first application that digitizes school administration — fees, attendance, marks, and notices. Built for low-connectivity regions with offline-first resilience.",
+      "tech": ["Flutter", "Firebase", "Riverpod", "GoRouter", "Hive"],
       "galleryImages": ["assets/bg2.webp"],
       "links": [
-    { "type": "code", "url": "https://github.com/pixelanay", "text": "GitHub", "iconClass": "fab fa-github" }
-]
+        { "type": "code", "url": "https://github.com/pixelanay", "text": "GitHub", "iconClass": "fab fa-github" }
+      ]
     },
     {
       "featured": false,
@@ -140,7 +151,7 @@
     {
       "categoryTitle": "Languages",
       "iconClass": "fas fa-code",
-      "items": ["JavaScript", "Python", "Java", "Dart", "C++", "Embedded C", "C"]
+      "items": ["JavaScript", "TypeScript", "Python", "Java", "Dart", "C++", "Embedded C", "C"]
     },
     {
       "categoryTitle": "Frontend Development",
