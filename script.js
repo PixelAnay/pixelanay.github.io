@@ -433,8 +433,8 @@ document.addEventListener('DOMContentLoaded', function () {
                 if (!wasActive) {
                     item.classList.add('is-active');
                     title.setAttribute('aria-expanded', 'true');
-                    content.style.paddingBottom = 'var(--spacing-md)';
                     content.style.maxHeight = content.scrollHeight + 'px';
+                    content.style.paddingBottom = 'var(--spacing-md)';
                 }
             });
         });

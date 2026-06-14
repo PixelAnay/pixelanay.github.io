@@ -795,3 +795,6 @@ input, textarea {
 * {
   -webkit-tap-highlight-color: transparent;
 }
+.accordion-item__details {
+    padding-bottom: var(--spacing-md);
+}
