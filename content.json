@@ -87,6 +87,28 @@
     },
     {
       "featured": true,
+      "title": "Shala",
+      "category": "Cross-platform Mobile Application",
+      "description": "A mobile-first application that digitizes school administration — fees, attendance, marks, and notices. Built for low-connectivity regions with offline-first resilience.",
+      "tech": ["Flutter", "Firebase", "Riverpod", "GoRouter", "Hive"],
+      "galleryImages": ["assets/shala/Slice 1.png", "assets/shala/Slice 2.png", "assets/shala/Slice 3.png", "assets/shala/Slice 4.png","assets/shala/Slice 5.png", "assets/shala/Slice 6.png"],
+      "links": [
+        { "type": "playstore", "url": "https://play.google.com/store/apps/details?id=com.shala.shala", "text": "Google Play", "iconClass": "fab fa-google-play" }
+        ]
+      },
+      {
+      "featured": true,
+      "title": "Engram for Obsidian",
+      "category": "Obsidian Plugin · Personal AI Assistant",
+      "description": "A persistent personal intelligence for Obsidian with evolving memory, multi-provider support, interactive slash commands, granular vault scoping, and local offline PDF parsing.",
+      "tech": ["TypeScript", "Obsidian API", "llama.cpp", "APIs"],
+      "galleryImages": ["assets/engram/img 1.png","assets/engram/img 2.png"],
+      "links": [
+        { "type": "code", "url": "https://github.com/PixelAnay/Engram", "text": "GitHub", "iconClass": "fab fa-github" }
+      ]
+    },
+    {
+      "featured": false,
       "title": "Journease - Travel Planner",
       "category": "Android & Web Application",
       "description": "A smart travel companion for logging trips, memories, and getting AI-powered insights. Built for a university hackathon — placed in the top 100 teams out of 900+ in Smart India Hackathon.",
@@ -96,35 +118,15 @@
         { "type": "code", "url": "https://journeasesih.vercel.app", "text": "Live Site", "iconClass": "fas fa-arrow-up-right-from-square" }
       ]
     },
-    {
-      "featured": true,
-      "title": "Engram for Obsidian",
-      "category": "Obsidian Plugin · Personal AI Assistant",
-      "description": "A persistent personal intelligence for Obsidian with evolving memory, multi-provider support, interactive slash commands, granular vault scoping, and local offline PDF parsing.",
-      "tech": ["TypeScript", "Obsidian API", "Ollama", "APIs"],
-      "galleryImages": [],
-      "links": [
-        { "type": "code", "url": "https://github.com/PixelAnay/Engram", "text": "GitHub", "iconClass": "fab fa-github" }
-      ]
-    },
-    {
-      "featured": true,
-      "title": "Shala",
-      "category": "Cross-platform Mobile Application",
-      "description": "A mobile-first application that digitizes school administration — fees, attendance, marks, and notices. Built for low-connectivity regions with offline-first resilience.",
-      "tech": ["Flutter", "Firebase", "Riverpod", "GoRouter", "Hive"],
-      "galleryImages": ["assets/bg2.webp"],
-      "links": [
-        { "type": "code", "url": "https://github.com/pixelanay", "text": "GitHub", "iconClass": "fab fa-github" }
-      ]
-    },
+    
+    
     {
       "featured": false,
       "title": "Lie Detector Prank App",
       "category": "Android Application · 2021",
-      "description": "My first published Android app — built at 15, entirely self-taught, pre-AI. A prank lie detector app that crossed 10,000+ organic downloads on the Play Store and is still live. Not sophisticated, but it was real: coded, signed, published, and found by users on its own.",
+      "description": "My first published Android app — built at 15, entirely self-taught, pre-AI. A prank lie detector app that crossed 17.5K organic downloads on the Play Store and is still live. Not sophisticated, but it was real: coded, signed, published, and found by users on its own.",
       "tech": ["Java", "Kotlin", "Android Studio"],
-      "galleryImages": ["assets/liedetector/1.png", "assets/liedetector/2.png", "assets/liedetector/3.png"],
+      "galleryImages": ["assets/liedetector/stats.png","assets/liedetector/1.png", "assets/liedetector/2.png", "assets/liedetector/3.png"],
       "links": [
         { "type": "playstore", "url": "https://play.google.com/store/apps/details?id=com.devanayx.liedetector", "text": "Google Play", "iconClass": "fab fa-google-play" }
       ]
