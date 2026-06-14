@@ -168,7 +168,7 @@
     {
       "categoryTitle": "Tools & Platforms",
       "iconClass": "fas fa-tools",
-      "items": ["Git", "GitHub", "Google Cloud Platform (GCP)", "Cloudflare", "Vercel", "Netlify", "Bash", "Linux", "Arduino", "Local LLMs (Ollama, LM Studio)"]
+      "items": ["Git", "GitHub", "Google Cloud Platform (GCP)", "Cloudflare", "Vercel", "Netlify", "Bash", "Linux", "Arduino", "Local LLMs (llama.cpp, Ollama, LM Studio)"]
     },
     {
       "categoryTitle": "CS Fundamentals",
