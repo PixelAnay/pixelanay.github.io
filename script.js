@@ -395,6 +395,13 @@ document.addEventListener('DOMContentLoaded', function () {
             const accordionTitle = accordionItem.querySelector('.accordion-item__title');
             const accordionContent = accordionItem.querySelector('.accordion-item__content');
 
+            // If maxHeight is 'none', set it to explicit pixel height for the closing animation
+            if (accordionContent.style.maxHeight === 'none') {
+                accordionContent.style.maxHeight = accordionContent.scrollHeight + 'px';
+                // Force a reflow
+                void accordionContent.offsetHeight;
+            }
+
             accordionItem.classList.remove('is-active');
             accordionTitle.setAttribute('aria-expanded', 'false');
             accordionContent.style.maxHeight = '0';
@@ -422,7 +429,11 @@ document.addEventListener('DOMContentLoaded', function () {
 
                 if (shouldUseSingleOpenBehavior) {
                     // Original behavior (desktop/laptop and non-My Projects accordions): open one at a time
-                    accordionItems.forEach(otherItem => closeAccordionItem(otherItem));
+                    accordionItems.forEach(otherItem => {
+                        if (otherItem !== item && otherItem.classList.contains('is-active')) {
+                            closeAccordionItem(otherItem);
+                        }
+                    });
                 } else if (wasActive) {
                     // Mobile phones in My Projects: allow independent toggle per item
                     closeAccordionItem(item);
@@ -433,8 +444,16 @@ document.addEventListener('DOMContentLoaded', function () {
                 if (!wasActive) {
                     item.classList.add('is-active');
                     title.setAttribute('aria-expanded', 'true');
-                    content.style.maxHeight = content.scrollHeight + 'px';
+                    // Add a buffer to scrollHeight to account for the padding that will be added
+                    content.style.maxHeight = (content.scrollHeight + 150) + 'px';
                     content.style.paddingBottom = 'var(--spacing-md)';
+                    
+                    // Clear maxHeight after transition completes to allow responsive resizing
+                    setTimeout(() => {
+                        if (item.classList.contains('is-active')) {
+                            content.style.maxHeight = 'none';
+                        }
+                    }, 600); // 0.6s CSS transition
                 }
             });
         });
