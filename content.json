@@ -24,7 +24,7 @@
         "name": "LeetCode",
         "url": "https://leetcode.com/pixelanay",
         "iconClass": "fa-solid fa-code",
-        "iconUrl": "https://cdn.simpleicons.org/leetcode"
+        "iconUrl": "assets/leetcode.svg"
       }
     ]
   },
