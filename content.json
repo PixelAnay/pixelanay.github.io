@@ -163,12 +163,12 @@
     {
       "categoryTitle": "Backend & Databases",
       "iconClass": "fas fa-server",
-      "items": ["Node.js", "Firebase", "REST APIs"]
+      "items": ["Node.js", "Firebase", "REST APIs", "S3-compatible Object Storage (AWS S3, Cloudflare R2)"]
     },
     {
       "categoryTitle": "Tools & Platforms",
       "iconClass": "fas fa-tools",
-      "items": ["Git", "GitHub", "Cloudflare", "Vercel", "Netlify", "Bash", "Linux", "Arduino", "Local LLMs (Ollama, LM Studio)"]
+      "items": ["Git", "GitHub", "Google Cloud Platform (GCP)", "Cloudflare", "Vercel", "Netlify", "Bash", "Linux", "Arduino", "Local LLMs (Ollama, LM Studio)"]
     },
     {
       "categoryTitle": "CS Fundamentals",
