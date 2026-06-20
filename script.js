@@ -1,3 +1,12 @@
+// Theme init — runs immediately to prevent flash of wrong theme
+(function initTheme() {
+    const stored = localStorage.getItem('theme');
+    if (stored) {
+        document.documentElement.setAttribute('data-theme', stored);
+    }
+    // Default is dark — no attribute needed, CSS :root is dark
+})();
+
 document.addEventListener('DOMContentLoaded', function () {
     const body = document.body;
 
@@ -20,6 +29,7 @@ document.addEventListener('DOMContentLoaded', function () {
             }
 
             initializeInteractivity();
+            initThemeToggle();
             initFooterAnimation();
 
             // Handle hash routing on page load after dynamic content is populated
@@ -707,6 +717,25 @@ document.addEventListener('DOMContentLoaded', function () {
         }
     }
 
+    function initThemeToggle() {
+        const toggle = document.querySelector('.theme-toggle');
+        if (!toggle) return;
+
+        toggle.addEventListener('click', () => {
+            const isLight = document.documentElement.getAttribute('data-theme') === 'light';
+            const next = isLight ? 'dark' : 'light';
+
+            // Smooth transition
+            document.documentElement.classList.add('theme-transitioning');
+            document.documentElement.setAttribute('data-theme', next);
+            localStorage.setItem('theme', next);
+            toggle.setAttribute('aria-label',
+                next === 'light' ? 'Switch to dark mode' : 'Switch to light mode'
+            );
+            setTimeout(() => document.documentElement.classList.remove('theme-transitioning'), 300);
+        });
+    }
+
     function populateAwards(awardsItems, containerId) {
         const container = document.getElementById(containerId);
         const template = document.getElementById('experience-template');
@@ -730,6 +759,33 @@ document.addEventListener('DOMContentLoaded', function () {
         let width = 0;
         let height = 0;
         let animationFrameId;
+
+        // Theme-aware color helpers
+        function getCanvasColors() {
+            const isLight = document.documentElement.getAttribute('data-theme') === 'light';
+            if (isLight) {
+                return {
+                    body: '#475569',
+                    visor: '#0ea5e9',
+                    cactus: '#65a30d',
+                    starBase: [71, 85, 105],
+                    mountainBg: 'rgba(71, 85, 105, 0.06)',
+                    mountainMid: 'rgba(71, 85, 105, 0.1)',
+                    ground: 'rgba(71, 85, 105, 0.2)',
+                    obstacle: 'rgba(71, 85, 105, 0.3)',
+                };
+            }
+            return {
+                body: '#94A3B8',
+                visor: '#38bdf8',
+                cactus: '#64748B',
+                starBase: [148, 163, 184],
+                mountainBg: 'rgba(148, 163, 184, 0.03)',
+                mountainMid: 'rgba(148, 163, 184, 0.06)',
+                ground: 'rgba(148, 163, 184, 0.15)',
+                obstacle: 'rgba(148, 163, 184, 0.25)',
+            };
+        }
 
         // Sprites definition ('.' is transparent, other characters map to colors)
         const PIXEL_SIZE = 2;
@@ -785,13 +841,13 @@ document.addEventListener('DOMContentLoaded', function () {
         ];
 
         const colorMap = {
-            '#': '#94A3B8', // Slate grey body
+            '#': '#94A3B8', // Slate grey body (updated per-frame by theme)
             'o': '#38bdf8', // Cyber cyan visor
             '.': 'transparent'
         };
 
         const cactusColorMap = {
-            '#': '#64748B', // Darker slate for obstacle
+            '#': '#64748B', // Darker slate for obstacle (updated per-frame by theme)
             '.': 'transparent'
         };
 
@@ -889,23 +945,29 @@ document.addEventListener('DOMContentLoaded', function () {
             if (!isAnimating) return;
             ctx.clearRect(0, 0, width, height);
 
+            // Update color maps from current theme
+            const colors = getCanvasColors();
+            colorMap['#'] = colors.body;
+            colorMap['o'] = colors.visor;
+            cactusColorMap['#'] = colors.cactus;
+
             // 1. Draw twinkling stars
             for (let i = 0; i < stars.length; i++) {
                 const s = stars[i];
                 s.phase += s.twinkleSpeed;
                 const alpha = 0.2 + Math.abs(Math.sin(s.phase)) * 0.6;
-                ctx.fillStyle = `rgba(148, 163, 184, ${alpha})`;
+                ctx.fillStyle = `rgba(${colors.starBase[0]}, ${colors.starBase[1]}, ${colors.starBase[2]}, ${alpha})`;
                 ctx.fillRect(Math.floor(s.x), Math.floor(s.y), s.size, s.size);
             }
 
             // 2. Draw background parallax mountains (very slow)
-            drawMountains(ctx, width, groundY, bgOffset, 'rgba(148, 163, 184, 0.03)', 24, 0.003);
+            drawMountains(ctx, width, groundY, bgOffset, colors.mountainBg, 24, 0.003);
 
             // 3. Draw midground hills (medium speed)
-            drawMountains(ctx, width, groundY, midOffset, 'rgba(148, 163, 184, 0.06)', 14, 0.007);
+            drawMountains(ctx, width, groundY, midOffset, colors.mountainMid, 14, 0.007);
 
             // 4. Draw ground line
-            ctx.fillStyle = 'rgba(148, 163, 184, 0.15)';
+            ctx.fillStyle = colors.ground;
             ctx.fillRect(0, groundY, width, 2);
 
             // 5. Spawn and update obstacles
@@ -932,7 +994,7 @@ document.addEventListener('DOMContentLoaded', function () {
                 }
 
                 // Draw obstacle
-                drawPixelSprite(ctx, cactusSprite, obs.x, obs.y, PIXEL_SIZE, { '#': 'rgba(148, 163, 184, 0.25)', '.': 'transparent' });
+                drawPixelSprite(ctx, cactusSprite, obs.x, obs.y, PIXEL_SIZE, { '#': colors.obstacle, '.': 'transparent' });
             }
 
             // Remove off-screen obstacles
