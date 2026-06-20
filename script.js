@@ -875,15 +875,17 @@ document.addEventListener('DOMContentLoaded', function () {
         }
 
         function animate() {
+            if (!isAnimating) return;
             ctx.clearRect(0, 0, width, height);
 
             // 1. Draw twinkling stars
-            stars.forEach(s => {
+            for (let i = 0; i < stars.length; i++) {
+                const s = stars[i];
                 s.phase += s.twinkleSpeed;
                 const alpha = 0.2 + Math.abs(Math.sin(s.phase)) * 0.6;
                 ctx.fillStyle = `rgba(148, 163, 184, ${alpha})`;
                 ctx.fillRect(Math.floor(s.x), Math.floor(s.y), s.size, s.size);
-            });
+            }
 
             // 2. Draw background parallax mountains (very slow)
             drawMountains(ctx, width, groundY, bgOffset, 'rgba(148, 163, 184, 0.03)', 24, 0.003);
@@ -942,7 +944,7 @@ document.addEventListener('DOMContentLoaded', function () {
                 }
             }
 
-            // 7. Draw running character (alternate frames every 12 frames)
+            // 7. Draw running character (alternate frames every 8 frames)
             const currentFrame = (isJumping) 
                 ? heroFrame1 
                 : (Math.floor(frameCount / 8) % 2 === 0 ? heroFrame1 : heroFrame2);
@@ -954,10 +956,29 @@ document.addEventListener('DOMContentLoaded', function () {
             midOffset += gameSpeed * 0.4;
             frameCount++;
 
-            animationFrameId = requestAnimationFrame(animate);
+            if (isAnimating) {
+                animationFrameId = requestAnimationFrame(animate);
+            }
         }
 
-        animate();
+        let isAnimating = false;
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    if (!isAnimating) {
+                        isAnimating = true;
+                        animate();
+                    }
+                } else {
+                    if (isAnimating) {
+                        isAnimating = false;
+                        cancelAnimationFrame(animationFrameId);
+                    }
+                }
+            });
+        }, { threshold: 0.01 });
+
+        observer.observe(canvas);
     }
 
     loadContent();
