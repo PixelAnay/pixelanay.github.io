@@ -73,7 +73,6 @@
     --preview-link-border: var(--accent-color);
 }
 
-/* Smooth theme transition */
 html.theme-transitioning,
 html.theme-transitioning *,
 html.theme-transitioning *::before,
@@ -160,7 +159,6 @@ input, textarea {
 .nav-link:hover::after, .nav-link.active::after { width: 100%; }
 .hamburger { display: none; }
 
-/* Theme Toggle Pill */
 .theme-toggle {
     position: relative;
     width: 52px;
@@ -404,7 +402,6 @@ input, textarea {
     padding: 0 0 var(--spacing-sm) 0;
     cursor: pointer;
 }
-/* Tech tags inside preview */
 .project-preview .project-tech-list {
     list-style: none;
     display: flex;
@@ -607,8 +604,8 @@ input, textarea {
     content: '';
     position: absolute;
     left: 0;
-    top: 12px; /* aligns start with center of first icon */
-    bottom: 12px; /* stops before end of last icon */
+    top: 12px;
+    bottom: 12px;
     width: 2px;
     background: linear-gradient(
         to bottom,

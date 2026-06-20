@@ -1,10 +1,8 @@
-// Theme init — runs immediately to prevent flash of wrong theme
 (function initTheme() {
     const stored = localStorage.getItem('theme');
     if (stored) {
         document.documentElement.setAttribute('data-theme', stored);
     }
-    // Default is dark — no attribute needed, CSS :root is dark
 })();
 
 document.addEventListener('DOMContentLoaded', function () {
@@ -32,7 +30,6 @@ document.addEventListener('DOMContentLoaded', function () {
             initThemeToggle();
             initFooterAnimation();
 
-            // Handle hash routing on page load after dynamic content is populated
             if (window.location.hash) {
                 const targetId = decodeURIComponent(window.location.hash.substring(1));
                 const targetElement = document.getElementById(targetId);
@@ -106,7 +103,6 @@ document.addEventListener('DOMContentLoaded', function () {
                     messageTextarea.style.height = messageTextarea.scrollHeight + 'px';
                 };
                 messageTextarea.addEventListener('input', autoResize);
-                // Trigger initial resize in case of browser autofill
                 setTimeout(autoResize, 100);
             }
         }
@@ -160,7 +156,6 @@ document.addEventListener('DOMContentLoaded', function () {
         });
     }
 
-    // Extracts a YouTube video ID from any common YouTube URL format
     function getYouTubeId(url) {
         if (!url || typeof url !== 'string') return null;
 
@@ -185,7 +180,6 @@ document.addEventListener('DOMContentLoaded', function () {
                 }
             }
         } catch {
-            // Fall back to regex parsing below for malformed URLs
         }
 
         const fallbackMatch = url.match(/(?:youtube\.com\/(?:watch\?v=|shorts\/|embed\/|live\/)|youtu\.be\/)([a-zA-Z0-9_-]{11})/i);
@@ -300,7 +294,6 @@ document.addEventListener('DOMContentLoaded', function () {
                 enlargeBtn.remove();
             }
 
-            // Always-visible: tech tags in .project-preview
             const techList = clone.querySelector('.project-tech-list');
             project.tech.forEach(tech => {
                 const li = document.createElement('li');
@@ -308,7 +301,6 @@ document.addEventListener('DOMContentLoaded', function () {
                 techList.appendChild(li);
             });
 
-            // Always-visible: all non-disabled links in .project-primary-link
             const primaryLinkContainer = clone.querySelector('.project-primary-link');
             if (primaryLinkContainer) {
                 project.links.forEach(link => {
@@ -452,7 +444,6 @@ document.addEventListener('DOMContentLoaded', function () {
             });
         }
 
-        // Fixed accordion — uses actual content height instead of hardcoded 1200px
         const accordionItems = document.querySelectorAll('.accordion-item');
         const isMobilePhone = () => window.matchMedia('(max-width: 767px) and (pointer: coarse)').matches;
 
@@ -460,10 +451,8 @@ document.addEventListener('DOMContentLoaded', function () {
             const accordionTitle = accordionItem.querySelector('.accordion-item__title');
             const accordionContent = accordionItem.querySelector('.accordion-item__content');
 
-            // If maxHeight is 'none', set it to explicit pixel height for the closing animation
             if (accordionContent.style.maxHeight === 'none') {
                 accordionContent.style.maxHeight = accordionContent.scrollHeight + 'px';
-                // Force a reflow
                 void accordionContent.offsetHeight;
             }
 
@@ -472,7 +461,6 @@ document.addEventListener('DOMContentLoaded', function () {
             accordionContent.style.maxHeight = '0';
             accordionContent.style.paddingBottom = '0';
 
-            // Pause any embed by resetting the iframe src
             const embed = accordionContent.querySelector('.project-embed');
             if (embed) {
                 const currentSrc = embed.src;
@@ -493,37 +481,31 @@ document.addEventListener('DOMContentLoaded', function () {
                 const shouldUseSingleOpenBehavior = !isMobilePhone() || !isProjectsSectionItem;
 
                 if (shouldUseSingleOpenBehavior) {
-                    // Close all others first
                     accordionItems.forEach(otherItem => {
                         if (otherItem !== item && otherItem.classList.contains('is-active')) {
                             closeAccordionItem(otherItem);
                         }
                     });
-                    // Toggle current: if it was open, close it and stop
                     if (wasActive) {
                         closeAccordionItem(item);
                         return;
                     }
                 } else if (wasActive) {
-                    // Mobile phones in My Projects: allow independent toggle per item
                     closeAccordionItem(item);
                     return;
                 }
 
-                // Open clicked one if it was closed
                 if (!wasActive) {
                     item.classList.add('is-active');
                     title.setAttribute('aria-expanded', 'true');
-                    // Add a buffer to scrollHeight to account for the padding that will be added
                     content.style.maxHeight = (content.scrollHeight + 150) + 'px';
                     content.style.paddingBottom = 'var(--spacing-md)';
                     
-                    // Clear maxHeight after transition completes to allow responsive resizing
                     setTimeout(() => {
                         if (item.classList.contains('is-active')) {
                             content.style.maxHeight = 'none';
                         }
-                    }, 600); // 0.6s CSS transition
+                    }, 600);
                 }
             });
 
@@ -537,8 +519,6 @@ document.addEventListener('DOMContentLoaded', function () {
                 });
             }
         });
-
-        // Redundant educationNavLink scroll handler removed as it is now covered by the general handler.
 
         const textToSplit = document.querySelector('[data-text-split]');
         if (textToSplit && textToSplit.textContent.length > 0) {
@@ -725,7 +705,6 @@ document.addEventListener('DOMContentLoaded', function () {
             const isLight = document.documentElement.getAttribute('data-theme') === 'light';
             const next = isLight ? 'dark' : 'light';
 
-            // Smooth transition
             document.documentElement.classList.add('theme-transitioning');
             document.documentElement.setAttribute('data-theme', next);
             localStorage.setItem('theme', next);
@@ -760,7 +739,6 @@ document.addEventListener('DOMContentLoaded', function () {
         let height = 0;
         let animationFrameId;
 
-        // Theme-aware color helpers
         function getCanvasColors() {
             const isLight = document.documentElement.getAttribute('data-theme') === 'light';
             if (isLight) {
@@ -787,7 +765,6 @@ document.addEventListener('DOMContentLoaded', function () {
             };
         }
 
-        // Sprites definition ('.' is transparent, other characters map to colors)
         const PIXEL_SIZE = 2;
 
         const heroFrame1 = [
@@ -841,17 +818,16 @@ document.addEventListener('DOMContentLoaded', function () {
         ];
 
         const colorMap = {
-            '#': '#94A3B8', // Slate grey body (updated per-frame by theme)
-            'o': '#38bdf8', // Cyber cyan visor
+            '#': '#94A3B8',
+            'o': '#38bdf8',
             '.': 'transparent'
         };
 
         const cactusColorMap = {
-            '#': '#64748B', // Darker slate for obstacle (updated per-frame by theme)
+            '#': '#64748B',
             '.': 'transparent'
         };
 
-        // Game state variables
         let runnerX = 60;
         let runnerY = 0;
         let runnerVy = 0;
@@ -880,7 +856,6 @@ document.addEventListener('DOMContentLoaded', function () {
             groundY = height - 2;
             runnerY = groundY - (heroFrame1.length * PIXEL_SIZE);
 
-            // Init stars if empty
             if (stars.length === 0) {
                 for (let i = 0; i < 20; i++) {
                     stars.push({
@@ -903,7 +878,6 @@ document.addEventListener('DOMContentLoaded', function () {
                     const char = sprite[r][c];
                     if (char !== '.') {
                         ctx.fillStyle = colors[char] || '#94A3B8';
-                        // Draw block pixel
                         ctx.fillRect(
                             Math.floor(startX + c * pixelSize),
                             Math.floor(startY + r * pixelSize),
@@ -926,8 +900,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
             while (x <= width + step) {
                 const adjustedX = x + scrollOffset;
-                // Blocky quantizing
-                const y = centerY - (
+                    const y = centerY - (
                     Math.sin(adjustedX * frequency) * amplitude +
                     Math.cos(adjustedX * frequency * 2.5) * (amplitude * 0.4)
                 );
@@ -945,13 +918,11 @@ document.addEventListener('DOMContentLoaded', function () {
             if (!isAnimating) return;
             ctx.clearRect(0, 0, width, height);
 
-            // Update color maps from current theme
             const colors = getCanvasColors();
             colorMap['#'] = colors.body;
             colorMap['o'] = colors.visor;
             cactusColorMap['#'] = colors.cactus;
 
-            // 1. Draw twinkling stars
             for (let i = 0; i < stars.length; i++) {
                 const s = stars[i];
                 s.phase += s.twinkleSpeed;
@@ -960,17 +931,11 @@ document.addEventListener('DOMContentLoaded', function () {
                 ctx.fillRect(Math.floor(s.x), Math.floor(s.y), s.size, s.size);
             }
 
-            // 2. Draw background parallax mountains (very slow)
             drawMountains(ctx, width, groundY, bgOffset, colors.mountainBg, 24, 0.003);
-
-            // 3. Draw midground hills (medium speed)
             drawMountains(ctx, width, groundY, midOffset, colors.mountainMid, 14, 0.007);
-
-            // 4. Draw ground line
             ctx.fillStyle = colors.ground;
             ctx.fillRect(0, groundY, width, 2);
 
-            // 5. Spawn and update obstacles
             if (obstacles.length === 0 || (width - obstacles[obstacles.length - 1].x > 220)) {
                 if (Math.random() < 0.008) {
                     obstacles.push({
@@ -982,22 +947,18 @@ document.addEventListener('DOMContentLoaded', function () {
                 }
             }
 
-            // 6. Physics and jumping AI
             let nextObstacle = null;
             for (let i = 0; i < obstacles.length; i++) {
                 const obs = obstacles[i];
                 obs.x -= gameSpeed;
 
-                // Simple AI: trigger jump if obstacle is approaching and we are grounded
                 if (obs.x > runnerX && obs.x - runnerX < 65) {
                     nextObstacle = obs;
                 }
 
-                // Draw obstacle
                 drawPixelSprite(ctx, cactusSprite, obs.x, obs.y, PIXEL_SIZE, { '#': colors.obstacle, '.': 'transparent' });
             }
 
-            // Remove off-screen obstacles
             if (obstacles.length > 0 && obstacles[0].x < -30) {
                 obstacles.shift();
             }
@@ -1017,14 +978,12 @@ document.addEventListener('DOMContentLoaded', function () {
                 }
             }
 
-            // 7. Draw running character (alternate frames every 8 frames)
             const currentFrame = (isJumping) 
                 ? heroFrame1 
                 : (Math.floor(frameCount / 8) % 2 === 0 ? heroFrame1 : heroFrame2);
 
             drawPixelSprite(ctx, currentFrame, runnerX, runnerY, PIXEL_SIZE, colorMap);
 
-            // Scroll offsets
             bgOffset += gameSpeed * 0.15;
             midOffset += gameSpeed * 0.4;
             frameCount++;
