@@ -22,6 +22,17 @@ document.addEventListener('DOMContentLoaded', function () {
             initializeInteractivity();
             initFooterAnimation();
 
+            // Handle hash routing on page load after dynamic content is populated
+            if (window.location.hash) {
+                const targetId = decodeURIComponent(window.location.hash.substring(1));
+                const targetElement = document.getElementById(targetId);
+                if (targetElement) {
+                    setTimeout(() => {
+                        targetElement.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                    }, 100);
+                }
+            }
+
         } catch (error) {
             console.error("Could not load website content:", error);
             document.querySelector('main').innerHTML = `<div style="text-align: center; padding: 5rem; color: #ff00ff;"><h2>Error</h2><p>Could not load website content. Please try again later.</p></div>`;
