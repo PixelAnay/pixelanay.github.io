@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Projects | Anay Gawate</title>
-    <meta name="description" content="A detailed showcase of web and software development projects by Anay Gawate, including full-stack applications, desktop tools, and interactive web experiences.">
+    <meta name="description" content="Real, shipped projects — a free nutrition tracker, a school management app built for low-connectivity regions, and a few things that broke along the way.">
     <link rel="icon" href="assets/svgfav.svg" type="image/svg+xml">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -13,6 +13,9 @@
     <link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" as="style" onload="this.rel='stylesheet'">
     <noscript><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css"></noscript>
     <link rel="preload" href="assets/leetcode.svg" as="image" type="image/svg+xml">
+    <link rel="preload" href="assets/github.svg" as="image" type="image/svg+xml">
+    <link rel="preload" href="assets/linkedin.svg" as="image" type="image/svg+xml">
+    <link rel="preload" href="assets/email.svg" as="image" type="image/svg+xml">
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
@@ -21,7 +24,7 @@
     <header class="header">
         <div class="header-container">
             <nav class="navbar" id="navbar">
-                <a href="index.html#about" class="nav-link">About</a>
+                <a href="index.html#home" class="nav-link">About</a>
                 <a href="projects.html" class="nav-link active" aria-current="page">Projects</a>
                 <a href="skills.html" class="nav-link">Skills</a>
                 <a href="index.html#experience" class="nav-link">Experience</a>
@@ -62,15 +65,15 @@
 
     
     <footer class="footer">
+        <canvas id="footer-canvas" class="footer-canvas"></canvas>
         <div class="container">
             <div class="footer-content">
-                <div id="footer-socials-container" class="footer-socials"></div>
                  <div class="email-copy-container">
                     <span id="emailToCopy" class="footer-link"></span>
                     <button id="copyEmailButton" class="copy-button" aria-label="Copy email address" title="Copy email"><i class="far fa-copy"></i></button>
                     <span id="copyFeedback" class="copy-feedback">Copied!</span>
                 </div>
-                <p>© <span id="currentYear"></span> <span id="footer-name"></span>. All Rights Reserved.</p>
+
             </div>
         </div>
     </footer>
@@ -96,11 +99,13 @@
                 </div>
                 <span class="toggle-icon" aria-hidden="true"></span>
             </div>
+            <div class="project-preview">
+                <ul class="project-tech-list"></ul>
+                <div class="project-primary-link"></div>
+            </div>
             <div class="accordion-item__content" id="project-content" role="region">
                 <div class="accordion-item__details">
                     <div class="project-description"><p></p></div>
-                    <ul class="project-tech-list"></ul>
-                    <div class="project-links"></div>
                 </div>
                 <div class="accordion-item__gallery">
                      <div class="project-main-image interactive">

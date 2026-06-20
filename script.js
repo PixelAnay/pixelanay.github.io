@@ -10,7 +10,7 @@ document.addEventListener('DOMContentLoaded', function () {
             populateGlobalContent(data.global);
 
             if (document.getElementById('home')) {
-                populateHomePage(data.homePage, data.allProjects, data.global, data.honorsAndAwards, data.featuredLinks);
+                populateHomePage(data.homePage, data.allProjects, data.global, data.honorsAndAwards);
             }
             if (document.getElementById('all-projects-container')) {
                 populateProjectsPage(data.projectsPage, data.allProjects);
@@ -20,6 +20,7 @@ document.addEventListener('DOMContentLoaded', function () {
             }
 
             initializeInteractivity();
+            initFooterAnimation();
 
         } catch (error) {
             console.error("Could not load website content:", error);
@@ -39,10 +40,11 @@ document.addEventListener('DOMContentLoaded', function () {
         if (document.getElementById('footer-name')) document.getElementById('footer-name').textContent = global.name;
     }
 
-    function populateHomePage(home, allProjects, global, honorsAndAwards, featuredLinks) {
+    function populateHomePage(home, allProjects, global, honorsAndAwards) {
 
         document.getElementById('hero-title').textContent = home.greeting;
-        document.getElementById('hero-subtitle').textContent = home.tagline;
+        const subtitleEl = document.getElementById('hero-subtitle');
+        if (subtitleEl) subtitleEl.textContent = home.tagline;
         document.getElementById('resume-button').href = home.resumeUrl;
 
         const heroSocialsContainer = document.getElementById('hero-socials-container');
@@ -50,21 +52,46 @@ document.addEventListener('DOMContentLoaded', function () {
             renderSocialLinks(heroSocialsContainer, global.socials);
         }
 
-        document.getElementById('about-bio').textContent = home.bio;
+        const openToContainer = document.getElementById('hero-open-to-container');
+        if (openToContainer && global.openTo && global.openTo.length > 0) {
+            openToContainer.innerHTML = global.openTo.map(label =>
+                `<span class="open-to-badge">${label}</span>`
+            ).join('');
+        }
+
+        const bioShortEl = document.getElementById('about-bio-short');
+        const bioExtendedEl = document.getElementById('about-bio-extended');
+        if (bioShortEl && bioExtendedEl) {
+            const bioParts = home.bio.split('\n\n');
+            bioShortEl.textContent = bioParts[0] || '';
+            bioExtendedEl.textContent = bioParts.slice(1).join('\n\n') || '';
+        } else {
+            const bioEl = document.getElementById('about-bio');
+            if (bioEl) bioEl.textContent = home.bio;
+        }
         document.getElementById('about-image').src = home.profileImageUrl;
 
-        document.getElementById('contact-email-link').href = `mailto:${global.contactEmail}`;
-        document.getElementById('contact-email-text').textContent = global.contactEmail;
-        document.getElementById('contact-form').action = global.formspreeEndpoint;
+        const contactEmailLink = document.getElementById('contact-email-link');
+        const contactEmailText = document.getElementById('contact-email-text');
+        if (contactEmailLink) contactEmailLink.href = `mailto:${global.contactEmail}`;
+        if (contactEmailText) contactEmailText.textContent = global.contactEmail;
+        const contactForm = document.getElementById('contact-form');
+        if (contactForm) {
+            contactForm.action = global.formspreeEndpoint;
+            const messageTextarea = contactForm.querySelector('textarea');
+            if (messageTextarea) {
+                const autoResize = () => {
+                    messageTextarea.style.height = 'auto';
+                    messageTextarea.style.height = messageTextarea.scrollHeight + 'px';
+                };
+                messageTextarea.addEventListener('input', autoResize);
+                // Trigger initial resize in case of browser autofill
+                setTimeout(autoResize, 100);
+            }
+        }
 
         const featuredProjects = allProjects.filter(p => p.featured);
         renderProjects(featuredProjects, 'projects-container');
-
-        // Only populate featured links if the container exists
-        const featuredLinksContainer = document.getElementById('featured-links-container');
-        if (featuredLinks && featuredLinksContainer) {
-            populateFeaturedLinks(featuredLinks, 'featured-links-container');
-        }
 
         populateSkills(home.featuredSkills, 'skills-list-container');
         populateExperience(home.experience, 'experience-container');
@@ -102,7 +129,8 @@ document.addEventListener('DOMContentLoaded', function () {
             clone.querySelector('.category-icon').className = `category-icon ${category.iconClass}`;
             clone.querySelector('.category-title').textContent = category.categoryTitle;
             const list = clone.querySelector('.skill-items-list');
-            category.items.forEach(item => {
+            const sortedItems = [...category.items].sort((a, b) => a.length - b.length);
+            sortedItems.forEach(item => {
                 const li = document.createElement('li');
                 li.textContent = item;
                 list.appendChild(li);
@@ -251,6 +279,7 @@ document.addEventListener('DOMContentLoaded', function () {
                 enlargeBtn.remove();
             }
 
+            // Always-visible: tech tags in .project-preview
             const techList = clone.querySelector('.project-tech-list');
             project.tech.forEach(tech => {
                 const li = document.createElement('li');
@@ -258,22 +287,20 @@ document.addEventListener('DOMContentLoaded', function () {
                 techList.appendChild(li);
             });
 
-            const linksContainer = clone.querySelector('.project-links');
-            project.links.forEach(link => {
-                const a = document.createElement('a');
-                a.target = '_blank';
-                a.rel = 'noopener noreferrer';
-                if (link.type === 'disabled') {
-                    a.className = 'btn btn-secondary interactive disabled';
-                    a.href = '#';
-                    a.setAttribute('aria-disabled', 'true');
-                } else {
+            // Always-visible: all non-disabled links in .project-primary-link
+            const primaryLinkContainer = clone.querySelector('.project-primary-link');
+            if (primaryLinkContainer) {
+                project.links.forEach(link => {
+                    if (link.type === 'disabled') return;
+                    const a = document.createElement('a');
                     a.href = link.url;
-                    a.className = link.type === 'live' ? 'btn btn-primary interactive' : 'btn btn-secondary interactive';
-                }
-                a.innerHTML = `${link.text} <i class="${link.iconClass}"></i>`;
-                linksContainer.appendChild(a);
-            });
+                    a.target = '_blank';
+                    a.rel = 'noopener noreferrer';
+                    a.className = 'btn-preview-link interactive';
+                    a.innerHTML = `${link.text} <i class="${link.iconClass}"></i>`;
+                    primaryLinkContainer.appendChild(a);
+                });
+            }
 
             container.appendChild(clone);
         });
@@ -283,7 +310,8 @@ document.addEventListener('DOMContentLoaded', function () {
         const container = document.getElementById(containerId);
         if (!container) return;
         container.innerHTML = '';
-        skills.forEach(skill => {
+        const sortedSkills = [...skills].sort((a, b) => a.length - b.length);
+        sortedSkills.forEach(skill => {
             const li = document.createElement('li');
             li.className = 'interactive';
             li.textContent = skill;
@@ -364,7 +392,23 @@ document.addEventListener('DOMContentLoaded', function () {
                 setHamburgerIcon(isNowOpen);
             });
             navLinks.forEach(link => {
-                link.addEventListener('click', () => {
+                link.addEventListener('click', (event) => {
+                    const href = link.getAttribute('href');
+                    if (href) {
+                        try {
+                            const url = new URL(link.href, window.location.href);
+                            if (url.pathname === window.location.pathname && url.hash) {
+                                const targetId = decodeURIComponent(url.hash.substring(1));
+                                const targetElement = document.getElementById(targetId);
+                                if (targetElement) {
+                                    event.preventDefault();
+                                    targetElement.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                                }
+                            }
+                        } catch (e) {
+                            console.error("Invalid URL in nav link", e);
+                        }
+                    }
                     if (body.classList.contains('nav-open')) {
                         body.classList.remove('nav-open', 'body-no-scroll');
                         hamburger.setAttribute('aria-expanded', 'false');
@@ -428,12 +472,17 @@ document.addEventListener('DOMContentLoaded', function () {
                 const shouldUseSingleOpenBehavior = !isMobilePhone() || !isProjectsSectionItem;
 
                 if (shouldUseSingleOpenBehavior) {
-                    // Original behavior (desktop/laptop and non-My Projects accordions): open one at a time
+                    // Close all others first
                     accordionItems.forEach(otherItem => {
                         if (otherItem !== item && otherItem.classList.contains('is-active')) {
                             closeAccordionItem(otherItem);
                         }
                     });
+                    // Toggle current: if it was open, close it and stop
+                    if (wasActive) {
+                        closeAccordionItem(item);
+                        return;
+                    }
                 } else if (wasActive) {
                     // Mobile phones in My Projects: allow independent toggle per item
                     closeAccordionItem(item);
@@ -456,22 +505,19 @@ document.addEventListener('DOMContentLoaded', function () {
                     }, 600); // 0.6s CSS transition
                 }
             });
+
+            const preview = item.querySelector('.project-preview');
+            if (preview) {
+                preview.addEventListener('click', (e) => {
+                    if (e.target.closest('.btn-preview-link')) {
+                        return;
+                    }
+                    title.click();
+                });
+            }
         });
 
-        const educationNavLink = document.getElementById('education-nav-link');
-        if (educationNavLink) {
-            educationNavLink.addEventListener('click', function (event) {
-                if (window.location.pathname.includes('index.html') || window.location.pathname === '/') {
-                    if (window.innerWidth > 768) {
-                        event.preventDefault();
-                        const experienceSection = document.getElementById('experience');
-                        if (experienceSection) {
-                            experienceSection.scrollIntoView({ behavior: 'smooth' });
-                        }
-                    }
-                }
-            });
-        }
+        // Redundant educationNavLink scroll handler removed as it is now covered by the general handler.
 
         const textToSplit = document.querySelector('[data-text-split]');
         if (textToSplit && textToSplit.textContent.length > 0) {
@@ -666,22 +712,252 @@ document.addEventListener('DOMContentLoaded', function () {
         });
     }
 
-    function populateFeaturedLinks(links, containerId) {
-        const container = document.getElementById(containerId);
-        if (!container) return;
-        container.innerHTML = '';
+    function initFooterAnimation() {
+        const canvas = document.getElementById('footer-canvas');
+        if (!canvas) return;
+        const ctx = canvas.getContext('2d');
+        let width = 0;
+        let height = 0;
+        let animationFrameId;
 
-        links.forEach(link => {
-            const div = document.createElement('div');
-            div.className = 'featured-link-card interactive';
-            div.innerHTML = `
-                <a href="${link.url}" target="_blank" rel="noopener noreferrer" class="featured-link-content">
-                    <h3>${link.title}</h3>
-                    <i class="fas fa-arrow-up-right-from-square featured-link-icon"></i>
-                </a>
-            `;
-            container.appendChild(div);
-        });
+        // Sprites definition ('.' is transparent, other characters map to colors)
+        const PIXEL_SIZE = 2;
+
+        const heroFrame1 = [
+            "....####....",
+            "...######...",
+            "..##o##o##..",
+            "..########..",
+            "...######...",
+            "....####....",
+            "...######...",
+            "..########..",
+            "..########..",
+            "..########..",
+            "...######...",
+            "....####....",
+            "...##..##...",
+            "..###..###..",
+            "..##....##.."
+        ];
+
+        const heroFrame2 = [
+            "....####....",
+            "...######...",
+            "..##o##o##..",
+            "..########..",
+            "...######...",
+            "....####....",
+            "...######...",
+            "..########..",
+            "..########..",
+            "..########..",
+            "...######...",
+            "....####....",
+            "....######..",
+            "....##..##..",
+            "....###..##."
+        ];
+
+        const cactusSprite = [
+            "....##....",
+            "....##....",
+            "..####....",
+            "..##.##...",
+            "..##..##..",
+            "..######..",
+            "....##....",
+            "....##....",
+            "....##....",
+            "....##....",
+            "....##...."
+        ];
+
+        const colorMap = {
+            '#': '#94A3B8', // Slate grey body
+            'o': '#38bdf8', // Cyber cyan visor
+            '.': 'transparent'
+        };
+
+        const cactusColorMap = {
+            '#': '#64748B', // Darker slate for obstacle
+            '.': 'transparent'
+        };
+
+        // Game state variables
+        let runnerX = 60;
+        let runnerY = 0;
+        let runnerVy = 0;
+        let isJumping = false;
+        const gravity = 0.35;
+        const jumpForce = -7.0;
+
+        let groundY = 0;
+        let frameCount = 0;
+        let bgOffset = 0;
+        let midOffset = 0;
+        let fgOffset = 0;
+        const gameSpeed = 2.0;
+
+        const stars = [];
+        const obstacles = [];
+
+        function resize() {
+            const rect = canvas.getBoundingClientRect();
+            width = rect.width;
+            height = rect.height;
+            canvas.width = width * (window.devicePixelRatio || 1);
+            canvas.height = height * (window.devicePixelRatio || 1);
+            ctx.scale(window.devicePixelRatio || 1, window.devicePixelRatio || 1);
+
+            groundY = height - 2;
+            runnerY = groundY - (heroFrame1.length * PIXEL_SIZE);
+
+            // Init stars if empty
+            if (stars.length === 0) {
+                for (let i = 0; i < 20; i++) {
+                    stars.push({
+                        x: Math.random() * width,
+                        y: Math.random() * (height * 0.6),
+                        size: Math.random() > 0.5 ? 2 : 1,
+                        twinkleSpeed: 0.02 + Math.random() * 0.05,
+                        phase: Math.random() * Math.PI
+                    });
+                }
+            }
+        }
+
+        window.addEventListener('resize', resize);
+        resize();
+
+        function drawPixelSprite(ctx, sprite, startX, startY, pixelSize, colors) {
+            for (let r = 0; r < sprite.length; r++) {
+                for (let c = 0; c < sprite[r].length; c++) {
+                    const char = sprite[r][c];
+                    if (char !== '.') {
+                        ctx.fillStyle = colors[char] || '#94A3B8';
+                        // Draw block pixel
+                        ctx.fillRect(
+                            Math.floor(startX + c * pixelSize),
+                            Math.floor(startY + r * pixelSize),
+                            pixelSize,
+                            pixelSize
+                        );
+                    }
+                }
+            }
+        }
+
+        function drawMountains(ctx, width, height, scrollOffset, color, amplitude, frequency) {
+            ctx.fillStyle = color;
+            ctx.beginPath();
+            ctx.moveTo(0, height);
+
+            const step = 8;
+            const centerY = height * 0.65;
+            let x = 0;
+
+            while (x <= width + step) {
+                const adjustedX = x + scrollOffset;
+                // Blocky quantizing
+                const y = centerY - (
+                    Math.sin(adjustedX * frequency) * amplitude +
+                    Math.cos(adjustedX * frequency * 2.5) * (amplitude * 0.4)
+                );
+                const quantizedY = Math.floor(y / 4) * 4;
+
+                ctx.lineTo(x, quantizedY);
+                x += step;
+            }
+            ctx.lineTo(width, height);
+            ctx.closePath();
+            ctx.fill();
+        }
+
+        function animate() {
+            ctx.clearRect(0, 0, width, height);
+
+            // 1. Draw twinkling stars
+            stars.forEach(s => {
+                s.phase += s.twinkleSpeed;
+                const alpha = 0.2 + Math.abs(Math.sin(s.phase)) * 0.6;
+                ctx.fillStyle = `rgba(148, 163, 184, ${alpha})`;
+                ctx.fillRect(Math.floor(s.x), Math.floor(s.y), s.size, s.size);
+            });
+
+            // 2. Draw background parallax mountains (very slow)
+            drawMountains(ctx, width, groundY, bgOffset, 'rgba(148, 163, 184, 0.03)', 24, 0.003);
+
+            // 3. Draw midground hills (medium speed)
+            drawMountains(ctx, width, groundY, midOffset, 'rgba(148, 163, 184, 0.06)', 14, 0.007);
+
+            // 4. Draw ground line
+            ctx.fillStyle = 'rgba(148, 163, 184, 0.15)';
+            ctx.fillRect(0, groundY, width, 2);
+
+            // 5. Spawn and update obstacles
+            if (obstacles.length === 0 || (width - obstacles[obstacles.length - 1].x > 220)) {
+                if (Math.random() < 0.008) {
+                    obstacles.push({
+                        x: width,
+                        y: groundY - (cactusSprite.length * PIXEL_SIZE),
+                        width: cactusSprite[0].length * PIXEL_SIZE,
+                        height: cactusSprite.length * PIXEL_SIZE
+                    });
+                }
+            }
+
+            // 6. Physics and jumping AI
+            let nextObstacle = null;
+            for (let i = 0; i < obstacles.length; i++) {
+                const obs = obstacles[i];
+                obs.x -= gameSpeed;
+
+                // Simple AI: trigger jump if obstacle is approaching and we are grounded
+                if (obs.x > runnerX && obs.x - runnerX < 65) {
+                    nextObstacle = obs;
+                }
+
+                // Draw obstacle
+                drawPixelSprite(ctx, cactusSprite, obs.x, obs.y, PIXEL_SIZE, { '#': 'rgba(148, 163, 184, 0.25)', '.': 'transparent' });
+            }
+
+            // Remove off-screen obstacles
+            if (obstacles.length > 0 && obstacles[0].x < -30) {
+                obstacles.shift();
+            }
+
+            if (nextObstacle && !isJumping) {
+                runnerVy = jumpForce;
+                isJumping = true;
+            }
+
+            if (isJumping) {
+                runnerY += runnerVy;
+                runnerVy += gravity;
+                if (runnerY >= groundY - (heroFrame1.length * PIXEL_SIZE)) {
+                    runnerY = groundY - (heroFrame1.length * PIXEL_SIZE);
+                    isJumping = false;
+                    runnerVy = 0;
+                }
+            }
+
+            // 7. Draw running character (alternate frames every 12 frames)
+            const currentFrame = (isJumping) 
+                ? heroFrame1 
+                : (Math.floor(frameCount / 8) % 2 === 0 ? heroFrame1 : heroFrame2);
+
+            drawPixelSprite(ctx, currentFrame, runnerX, runnerY, PIXEL_SIZE, colorMap);
+
+            // Scroll offsets
+            bgOffset += gameSpeed * 0.15;
+            midOffset += gameSpeed * 0.4;
+            frameCount++;
+
+            animationFrameId = requestAnimationFrame(animate);
+        }
+
+        animate();
     }
 
     loadContent();

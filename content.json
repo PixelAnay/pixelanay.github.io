@@ -7,24 +7,32 @@
     "organization": "Independent Developer",
     "location": "Pune District, Maharashtra, India",
     "connections": "30+",
-    "openTo": ["Technical Internships"],
+    "openTo": ["Open to: Technical Internships"],
     "formspreeEndpoint": "https://formspree.io/f/mgvkgypw",
     "socials": [
       {
         "name": "LinkedIn",
         "url": "https://www.linkedin.com/in/anaygawate/",
-        "iconClass": "fab fa-linkedin-in"
+        "iconClass": "fab fa-linkedin-in",
+        "iconUrl": "assets/linkedin.svg"
       },
       {
         "name": "GitHub",
         "url": "https://github.com/pixelanay",
-        "iconClass": "fab fa-github"
+        "iconClass": "fab fa-github",
+        "iconUrl": "assets/github.svg"
       },
       {
         "name": "LeetCode",
         "url": "https://leetcode.com/pixelanay",
         "iconClass": "fa-solid fa-code",
         "iconUrl": "assets/leetcode.svg"
+      },
+      {
+        "name": "Email",
+        "url": "mailto:pixel.anay@gmail.com",
+        "iconClass": "fa-solid fa-envelope",
+        "iconUrl": "assets/email.svg"
       }
     ]
   },
@@ -32,11 +40,11 @@
   "//": "--- CONTENT FOR INDEX.HTML ---",
   "homePage": {
     "greeting": "Hello, I'm Anay",
-    "tagline": "I build things that should exist — apps, systems, and occasionally RC planes. Most of what I know came from just doing it.",
+    "tagline": "",
     "linkedinTagline": "CSE Student | Building apps that should exist | Flutter · Embedded · Self-taught since 14",
     "resumeUrl": "/assets/Resume.pdf",
     "profileImageUrl": "assets/profile.webp",
-    "bio": "I've been building things on the internet since I was 14 — starting with Android apps in Java/Kotlin, crashing RC planes, and figuring out how computers actually work. Currently a CS student working across mobile, web, and embedded systems. Open to technical internships where I can actually build something.",
+    "bio": "I build things that should exist — apps, systems, and occasionally RC planes. Most of what I know came from just doing it.\n\nI've been building things on the internet since I was 14 — starting with Android apps in Java/Kotlin, crashing RC planes, and figuring out how computers actually work. Currently a CS student working across mobile, web, and embedded systems. Open to technical internships where I can actually build something.",
     "aboutExtended": [
       "I've been building things on the internet since I was 14 — starting with Android apps in Java/Kotlin, crashing RC planes, and figuring out how computers actually work.",
       "Currently a CS student, but most of what I know came from just doing things. I built a full cross-platform nutrition tracker in Flutter because the good ones cost money and I didn't think they should.",
@@ -46,7 +54,7 @@
       "Open to technical internships where I can actually build something."
     ],
     "featuredSkills": [
-      "Flutter", "Firebase", "Node.js", "Android Development", "Cross-platform Development", "Kotlin", "Java", "Dart", "JavaScript", "Python", "C++", "Embedded C", "S3-compatible Object Storage (AWS S3, Cloudflare R2)"
+      "Flutter", "Firebase", "Node.js", "Android Development", "Cross-platform Development", "Kotlin", "Java", "Dart", "JavaScript", "Python", "C++", "Embedded C"
     ],
     "experience": [
       {
@@ -168,42 +176,12 @@
     {
       "categoryTitle": "Tools & Platforms",
       "iconClass": "fas fa-tools",
-      "items": ["Git", "GitHub", "Google Cloud Platform (GCP)", "Cloudflare", "Vercel", "Netlify", "Bash", "Linux", "Arduino", "Local LLMs (llama.cpp, Ollama, LM Studio)"]
+      "items": ["Git", "GitHub", "Google Cloud Platform (GCP)", "Cloudflare", "Vercel", "Netlify", "Figma", "Bash", "Linux", "Arduino", "Local LLMs (llama.cpp, Ollama, LM Studio)"]
     },
     {
       "categoryTitle": "CS Fundamentals",
       "iconClass": "fas fa-brain",
       "items": ["Cross-platform Development", "Android Development", "Embedded Systems"]
-    },
-    {
-      "categoryTitle": "Design",
-      "iconClass": "fas fa-palette",
-      "items": ["Figma"]
-    }
-  ],
-  "featuredLinks": [
-    {
-      "title": "Anay Gawate | Portfolio",
-      "url": "https://anaygawate.vercel.app",
-      "type": "portfolio"
-    },
-    {
-      "title": "PixelAnay - GitHub",
-      "url": "https://github.com/pixelanay",
-      "type": "github"
-    },
-    {
-      "title": "Volt & Vision - YouTube",
-      "url": "https://www.youtube.com/@voltandvision",
-      "type": "youtube"
-    }
-  ],
-  "volunteering": [
-    {
-      "role": "Class Representative",
-      "organization": "School of Computing, MIT ADT University",
-      "date": "Aug 2025 - Present",
-      "description": "Primary point of contact between 70+ students and faculty for 2 semesters in FY."
     }
   ],
   "honorsAndAwards": [

@@ -3,8 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Anay Gawate | Web & Software Developer</title>
-    <meta name="description" content="Explore the portfolio of Anay Gawate, a passionate Computer Science student specializing in web development, software engineering, and innovative tech solutions.">
+    <title>Anay Gawate</title>
+    <meta name="description" content="Anay Gawate — self-taught developer since 14. Flutter, embedded systems, and apps that should exist. Open to technical internships.">
     <link rel="icon" href="assets/svgfav.svg" type="image/svg+xml">
 
     
@@ -19,6 +19,9 @@
 
     
     <link rel="preload" href="assets/leetcode.svg" as="image" type="image/svg+xml">
+    <link rel="preload" href="assets/github.svg" as="image" type="image/svg+xml">
+    <link rel="preload" href="assets/linkedin.svg" as="image" type="image/svg+xml">
+    <link rel="preload" href="assets/email.svg" as="image" type="image/svg+xml">
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
@@ -30,7 +33,7 @@
     <header class="header">
         <div class="header-container">
             <nav class="navbar">
-                <a href="#about" class="nav-link">About</a>
+                <a href="#home" class="nav-link">About</a>
                 <a href="projects.html" class="nav-link">Projects</a>
                 <a href="skills.html" class="nav-link">Skills</a>
                 <a href="#experience" class="nav-link">Experience</a>
@@ -46,37 +49,24 @@
     <main>
         
         <section class="hero" id="home">
-            <div class="starfield">
-                <div class="stars1"></div>
-                <div class="stars2"></div>
-                <div class="stars3"></div>
-            </div>
-            <div class="hero-content">
-                <h1 id="hero-title" class="hero-title" data-text-split></h1>
-                <p id="hero-subtitle" class="hero-subtitle"></p>
+            <div class="container hero-container animate-on-scroll">
+                <div class="hero-image-container">
+                    <div class="about-image interactive">
+                        <img id="about-image" src="" alt="A photo of Anay Gawate" loading="lazy" width="240" height="240">
+                    </div>
+                </div>
+                <div id="hero-socials-container" class="hero-socials"></div>
+                <div class="hero-text-content">
+                    <div id="hero-open-to-container" class="hero-open-to"></div>
+                    <h1 id="hero-title" class="hero-title" data-text-split></h1>
+                    <p id="about-bio-short" class="hero-bio"></p>
+                    <p id="about-bio-extended" class="hero-bio hero-bio-extended"></p>
+                </div>
                 <div class="hero-actions">
                     <a href="#work" class="btn btn-primary interactive">View My Work</a>
                     <a id="resume-button" href="#" class="btn btn-secondary interactive" download="AnayGawate-Resume.pdf">
                         Download Resume <i class="fas fa-download"></i>
                     </a>
-                </div>
-                 <div id="hero-socials-container" class="hero-socials">
-                    
-                </div>
-            </div>
-        </section>
-
-        
-        <section class="content-section" id="about">
-            <div class="container">
-                <h2 class="section-title animate-on-scroll">01 <span>//</span> About Me</h2>
-                <div class="about-content animate-on-scroll">
-                    <div class="about-text">
-                        <p id="about-bio"></p>
-                    </div>
-                    <div class="about-image interactive">
-                        <img id="about-image" src="" alt="A photo of Anay Gawate" loading="lazy" width="400" height="400">
-                    </div>
                 </div>
             </div>
         </section>
@@ -84,7 +74,7 @@
         
         <section class="content-section" id="work">
             <div class="container">
-                <h2 class="section-title animate-on-scroll">02 <span>//</span> Featured Projects</h2>
+                <h2 class="section-title animate-on-scroll">01 <span>//</span> Featured Projects</h2>
                 
                 <div id="projects-container" class="work-accordion">
                     
@@ -99,24 +89,33 @@
         
         <section class="content-section" id="skills">
             <div class="container">
-                <h2 class="section-title animate-on-scroll">03 <span>//</span> Technical Skills</h2>
-                <ul id="skills-list-container" class="skills-list animate-on-scroll">
-                    
-                </ul>
-                <div class="see-all-container animate-on-scroll">
-                    <a href="skills.html" class="btn btn-secondary interactive">View All Skills</a>
+                <div class="dual-section-container">
+                    <div class="timeline-column animate-on-scroll">
+                        <h2 class="section-title">02 <span>//</span> Technical Skills</h2>
+                        <ul id="skills-list-container" class="skills-list">
+                            
+                        </ul>
+                        <div class="see-all-container">
+                            <a href="skills.html" class="btn btn-secondary interactive">View All Skills</a>
+                        </div>
+                    </div>
+                    <div class="timeline-column animate-on-scroll" id="experience">
+                        <h2 class="section-title">03 <span>//</span> Experience</h2>
+                        <div id="experience-container" class="timeline">
+                           
+                        </div>
+                    </div>
                 </div>
             </div>
         </section>
 
-        
-        <section class="content-section" id="experience">
+        <section class="content-section" id="achievements-education">
             <div class="container">
                 <div class="dual-section-container">
-                    <div class="timeline-column animate-on-scroll">
-                        <h2 class="section-title">04 <span>//</span> Experience</h2>
-                        <div id="experience-container" class="timeline">
-                           
+                    <div class="timeline-column animate-on-scroll" id="achievements">
+                        <h2 class="section-title">04 <span>//</span> Achievements</h2>
+                        <div id="awards-container" class="timeline">
+                            
                         </div>
                     </div>
                     <div class="timeline-column animate-on-scroll">
@@ -130,39 +129,26 @@
         </section>
 
         
-        <section class="content-section" id="achievements">
-            <div class="container">
-                <h2 class="section-title animate-on-scroll">06 <span>//</span> Achievements</h2>
-                <div id="awards-container" class="timeline animate-on-scroll">
-                    
-                </div>
-            </div>
-        </section>
-
-        
         <section class="content-section" id="contact">
             <div class="container">
-                <h2 class="section-title animate-on-scroll">07 <span>//</span> Get In Touch</h2>
-                <div class="animate-on-scroll">
-                    <p class="contact-intro">I'm always excited to connect and discuss potential projects or opportunities. Whether you have a question or just want to say hi, feel free to reach out!</p>
-                    <div class="contact-form-container">
-                        <a id="contact-email-link" href="#" class="contact-email-link interactive">
-                            <i class="far fa-envelope"></i>
-                            <span id="contact-email-text"></span>
-                        </a>
-                       <div class="form-divider"><span>OR</span></div>
+                <div class="dual-section-container">
+                    <div class="animate-on-scroll">
+                        <h2 class="section-title">06 <span>//</span> Get In Touch</h2>
+                        <p class="contact-intro">I'm always excited to connect and discuss potential projects or opportunities. Whether you have a question or just want to say hi, feel free to reach out!</p>
+                    </div>
+                    <div class="contact-form-container animate-on-scroll">
                         <form id="contact-form" action="#" method="POST" class="contact-form">
                             <div class="form-group">
-                                 <label for="name">Your Name</label>
-                                <input type="text" name="name" id="name" required placeholder="e.g. Jane">
+                                 <label for="name">Name</label>
+                                <input type="text" name="name" id="name" required>
                             </div>
                             <div class="form-group">
-                                <label for="email">Your Email</label>
-                                <input type="email" name="email" id="email" required placeholder="your.email@example.com">
+                                <label for="email">Email</label>
+                                <input type="email" name="email" id="email" required>
                             </div>
                             <div class="form-group">
-                                 <label for="message">Your Message</label>
-                                <textarea name="message" id="message" rows="5" required placeholder="Project details or hello..."></textarea>
+                                 <label for="message">Message</label>
+                                <textarea name="message" id="message" rows="5" required></textarea>
                             </div>
                             <button type="submit" class="btn btn-primary interactive">Send</button>
                         </form>
@@ -174,11 +160,9 @@
 
     
     <footer class="footer">
+        <canvas id="footer-canvas" class="footer-canvas"></canvas>
         <div class="container">
             <div class="footer-content">
-                <div id="footer-socials-container" class="footer-socials">
-                    
-                </div>
                  <div class="email-copy-container">
                     <span id="emailToCopy" class="footer-link"></span>
                     <button id="copyEmailButton" class="copy-button" aria-label="Copy email address" title="Copy email">
@@ -186,7 +170,7 @@
                     </button>
                     <span id="copyFeedback" class="copy-feedback">Copied!</span>
                 </div>
-                <p>© <span id="currentYear"></span> <span id="footer-name"></span>. All Rights Reserved.</p>
+
             </div>
         </div>
     </footer>
@@ -212,13 +196,15 @@
                 </div>
                 <span class="toggle-icon" aria-hidden="true"></span>
             </div>
+            <div class="project-preview">
+                <ul class="project-tech-list"></ul>
+                <div class="project-primary-link"></div>
+            </div>
             <div class="accordion-item__content" id="project-content" role="region">
                 <div class="accordion-item__details">
                     <div class="project-description">
                         <p></p>
                     </div>
-                    <ul class="project-tech-list"></ul>
-                    <div class="project-links"></div>
                 </div>
                 <div class="accordion-item__gallery">
                      <div class="project-main-image interactive">
