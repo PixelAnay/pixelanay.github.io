@@ -267,7 +267,7 @@ input, textarea {
     margin: 0 0 var(--spacing-xs); color: var(--accent-color); font-weight: 600;
 }
 .hero-bio {
-    font-size: 1rem;
+    font-size: 0.95rem;
     line-height: 1.7;
     color: var(--text-secondary);
     margin-bottom: var(--spacing-xs);
@@ -338,7 +338,7 @@ input, textarea {
     padding-bottom: 0;
 }
 .section-title {
-    font-size: clamp(2rem, 5vw, 3rem); margin-bottom: 2.25rem; text-align: center;
+    font-size: clamp(1.5rem, 4vw, 2.5rem); margin-bottom: 2.25rem; text-align: center;
 }
 .section-title span { color: var(--accent-color); }
 
@@ -388,7 +388,7 @@ input, textarea {
 }
 .accordion-item__title:hover { color: var(--accent-color); }
 .accordion-item__title h3 {
-    font-size: clamp(1.25rem, 4vw, 2.5rem); color: var(--text-primary);
+    font-size: clamp(1rem, 1.7vw, 1.7rem); color: var(--text-primary);
     transition: color var(--transition-fast);
 }
 .accordion-item__title:hover h3 { color: var(--accent-color); }
