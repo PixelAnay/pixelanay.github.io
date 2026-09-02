@@ -46,11 +46,9 @@
     "profileImageUrl": "assets/profile.webp",
     "bio": "I build things that should exist — apps, systems, and occasionally RC planes. Most of what I know came from just doing it.\n\nI've been building things on the internet since I was 14 — starting with Android apps in Java/Kotlin, crashing RC planes, and figuring out how computers actually work. Currently a CS student working across mobile, web, and embedded systems. Open to technical internships where I can actually build something.",
     "aboutExtended": [
-      "I've been building things on the internet since I was 14 — starting with Android apps in Java/Kotlin, crashing RC planes, and figuring out how computers actually work.",
-      "Currently a CS student, but most of what I know came from just doing things. I built a full cross-platform nutrition tracker in Flutter because the good ones cost money and I didn't think they should.",
-      "It runs on Android, iOS and web, uses Firebase for auth and database, and has a crowdsourced food database I've been building myself.",
-      "I work across the stack — Flutter, C/C++, Python, Java, web frontend, embedded systems, Linux, local LLMs.",
-      "I've deployed on Vercel, Netlify and Cloudflare, run models locally with Ollama and LM Studio, and I know my way around hardware as well as software.",
+      "I've been building things on the internet. Starting with Android apps in Java/Kotlin, crashing RC planes, and figuring out how computers actually work.",
+      "Currently a CS student, but most of what I know came from just doing things.",
+      "I work across the stack : Flutter, C/C++, Python, Java, web frontend, embedded systems, Linux, local LLMs.",
       "Open to technical internships where I can actually build something."
     ],
     "featuredSkills": [
