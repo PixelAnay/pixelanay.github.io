@@ -2,7 +2,7 @@
   "global": {
     "name": "Anay Gawate",
     "pronouns": "He/Him",
-    "headline": "CSE Student | Building apps that should exist | Flutter · Embedded · Self-taught since 14",
+    "headline": "CSE Student | Building systems that should exist | Flutter · Embedded",
     "contactEmail": "pixel.anay@gmail.com",
     "organization": "Independent Developer",
     "location": "Pune District, Maharashtra, India",
@@ -41,10 +41,10 @@
   "homePage": {
     "greeting": "Hello, I'm Anay",
     "tagline": "",
-    "linkedinTagline": "CSE Student | Building apps that should exist | Flutter · Embedded · Self-taught since 14",
+    "linkedinTagline": "CSE Student | Building systems that should exist | Flutter · Embedded",
     "resumeUrl": "/assets/Resume.pdf",
     "profileImageUrl": "assets/profile.webp",
-    "bio": "I build things that should exist — apps, systems, and occasionally RC planes. Most of what I know came from just doing it.\n\nI've been building things on the internet since I was 14 — starting with Android apps in Java/Kotlin, crashing RC planes, and figuring out how computers actually work. Currently a CS student working across mobile, web, and embedded systems. Open to technical internships where I can actually build something.",
+    "bio": "I build things that should exist — apps, systems, and occasionally RC planes. Most of what I know came from just doing it.\n\nI've been building things on the internet. Starting with Android apps in Java/Kotlin, crashing RC planes, and figuring out how computers actually work. Currently a CS student working on software development, embedded systems, and cross-platform applications.",
     "aboutExtended": [
       "I've been building things on the internet. Starting with Android apps in Java/Kotlin, crashing RC planes, and figuring out how computers actually work.",
       "Currently a CS student, but most of what I know came from just doing things.",
@@ -59,7 +59,7 @@
         "title": "Independent Developer",
         "company": "Self-employed",
         "date": "2021 - Present",
-        "description": "Independently developed and published Android applications from age 15, prior to AI-assisted development tools. First app reached 10K+ organic downloads on the Google Play Store. Continued shipping across Android, iOS, and Web, including a Flutter-based nutrition and health tracker backed by Firebase.",
+        "description": "Independently developed and published Android applications prior to AI-assisted development tools. First app reached 10K+ organic downloads on the Google Play Store. Continued shipping across Android, iOS, and Web.",
         "skills": ["Flutter", "Java", "Kotlin", "Android Development", "Firebase"]
       }
     ],
@@ -68,7 +68,7 @@
         "degree": "Bachelor of Technology - BTech, Computer Science",
         "school": "MIT ADT University",
         "date": "Jul 2025 - Jul 2029",
-        "description": "Currently pursuing undergraduate studies in Computer Science while building cross-platform apps and systems projects."
+        "description": "Currently pursuing undergraduate studies in Computer Science."
       }
     ]
   },
@@ -76,14 +76,14 @@
   "//": "--- CONTENT FOR PROJECTS.HTML ---",
   "projectsPage": {
     "title": "My Projects",
-    "subtitle": "A collection of things I've built — some polished, some still in progress, all real."
+    "subtitle": "A collection of things I've built — some polished, some still in progress."
   },
   "allProjects": [
     {
       "featured": true,
       "title": "PureFuel",
       "category": "Cross-platform Mobile & Web Application",
-      "description": "A cross-platform nutrition and health tracker for Android, iOS, and Web — built as a free, ad-free alternative to paid apps like Cronometer and HealthifyMe. Includes Firebase auth and database, and a crowdsourced food database. Long-term goal: open-source, donation-based.",
+      "description": "A cross-platform nutrition and health tracker for Android, iOS, and Web — built as a free, ad-free alternative to paid apps like Cronometer and HealthifyMe. Long-term goal: open-source, donation-based.",
       "tech": ["Flutter", "Firebase", "Node.js", "Dart"],
       "galleryImages": ["assets/projectfuel/img1.png", "assets/projectfuel/img2.png", "assets/projectfuel/img3.png", "assets/projectfuel/img4.png"],
       "links": [
@@ -130,7 +130,7 @@
       "featured": false,
       "title": "Lie Detector Prank App",
       "category": "Android Application · 2021",
-      "description": "My first published Android app — built at 15, entirely self-taught, pre-AI. A prank lie detector app that crossed 17.5K organic downloads on the Play Store and is still live. Not sophisticated, but it was real: coded, signed, published, and found by users on its own.",
+      "description": "My first published Android app — built at 15, entirely self-taught, pre-AI. A prank lie detector app that crossed 17.5K organic downloads on the Play Store and is still live.",
       "tech": ["Java", "Kotlin", "Android Studio"],
       "galleryImages": ["assets/liedetector/stats.png","assets/liedetector/1.png", "assets/liedetector/2.png", "assets/liedetector/3.png"],
       "links": [
@@ -141,7 +141,7 @@
       "featured": false,
       "title": "Fixed-Wing RC Aircraft",
       "category": "Hardware / Embedded Systems · 2024",
-      "description": "Designed and assembled a fixed-wing RC aircraft from scratch — FlySky TX/RX system, 2200KV brushless motor, ESC, LiPo battery, self-fabricated cardboard airframe. It flew. Then it didn't. Electronics are stored safely; the frame is the only casualty.",
+      "description": "Designed and assembled a fixed-wing RC aircraft from scratch — FlySky TX/RX system, 2200KV brushless motor, ESC, LiPo battery, self-fabricated cardboard airframe. It flew. Then it didn't.",
       "tech": ["Embedded C", "Arduino", "Electronics", "FlySky"],
      "galleryImages": [],
       "links": [
@@ -153,7 +153,7 @@
   "//": "--- CONTENT FOR SKILLS.HTML ---",
   "skillsPage": {
     "title": "My Toolkit",
-    "subtitle": "Languages, frameworks, and tools I actually use — not a buzzword list."
+    "subtitle": "Languages, frameworks, and tools I actually use."
   },
   "allSkills": [
     {
