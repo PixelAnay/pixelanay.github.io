@@ -328,6 +328,10 @@ document.addEventListener('DOMContentLoaded', function () {
             li.textContent = skill;
             container.appendChild(li);
         });
+        const allLink = document.createElement('li');
+        allLink.className = 'skills-all-link';
+        allLink.innerHTML = '<a href="/skills">+ View All Skills</a>';
+        container.appendChild(allLink);
     }
 
     function populateExperience(experienceItems, containerId) {
