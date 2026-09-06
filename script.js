@@ -198,11 +198,11 @@ document.addEventListener('DOMContentLoaded', function () {
         return iframe;
     }
 
-    function renderProjectMainMedia(mainImageContainer, mediaItem, projectTitle) {
-        if (!mainImageContainer || !mediaItem) return;
+    function renderProjectMainMedia(container, mediaItem, projectTitle) {
+        if (!container || !mediaItem) return;
 
-        let mainImg = mainImageContainer.querySelector('img');
-        let existingEmbed = mainImageContainer.querySelector('.project-embed');
+        let mainImg = container.querySelector('img');
+        let existingEmbed = container.querySelector('.project-embed');
 
         if (existingEmbed) {
             existingEmbed.src = '';
@@ -214,18 +214,18 @@ document.addEventListener('DOMContentLoaded', function () {
             mainImg.loading = 'lazy';
             mainImg.width = 1280;
             mainImg.height = 720;
-            mainImageContainer.prepend(mainImg);
+            container.prepend(mainImg);
         }
 
         if (mediaItem.type === 'youtube') {
             const iframe = createYouTubeEmbed(mediaItem.videoId, mediaItem.title || `${projectTitle} video`);
-            mainImageContainer.prepend(iframe);
+            container.prepend(iframe);
             mainImg.style.display = 'none';
-            mainImageContainer.classList.add('is-embed');
+            container.classList.add('is-embed');
             return;
         }
 
-        mainImageContainer.classList.remove('is-embed');
+        container.classList.remove('is-embed');
         mainImg.style.display = 'block';
         mainImg.src = mediaItem.src;
         mainImg.alt = mediaItem.alt || `Main view of ${projectTitle} project.`;
@@ -268,23 +268,21 @@ document.addEventListener('DOMContentLoaded', function () {
 
         projects.forEach((project, index) => {
             const clone = template.content.cloneNode(true);
-            const contentDiv = clone.querySelector('.accordion-item__content');
-            const uniqueId = `${containerId}-item-${index + 1}`;
-            clone.querySelector('.accordion-item__title').setAttribute('aria-controls', uniqueId);
-            contentDiv.id = uniqueId;
+            const card = clone.querySelector('.project-card');
 
-            clone.querySelector('.project-title').textContent = project.title;
-            clone.querySelector('.project-category').textContent = project.category;
-            clone.querySelector('.project-description p').textContent = project.description;
+            clone.querySelector('.project-card__number').textContent = project.numberLabel || `0${index + 1}`;
+            clone.querySelector('.project-card__status').textContent = project.status || 'Project';
+            clone.querySelector('.project-card__title').textContent = project.title;
+            clone.querySelector('.project-card__description').textContent = project.description;
 
-            const mainImageContainer = clone.querySelector('.project-main-image');
-            const enlargeBtn = mainImageContainer.querySelector('.enlarge-btn');
+            const viewport = clone.querySelector('.project-card__gallery-viewport');
+            const enlargeBtn = viewport.querySelector('.enlarge-btn');
             const mediaItems = getProjectMediaItems(project);
-            clone.querySelector('.accordion-item').dataset.galleryMedia = JSON.stringify(mediaItems);
+            card.dataset.galleryMedia = JSON.stringify(mediaItems);
 
             if (mediaItems.length > 0) {
-                renderProjectMainMedia(mainImageContainer, mediaItems[0], project.title);
-                mainImageContainer.dataset.currentIndex = '0';
+                renderProjectMainMedia(viewport, mediaItems[0], project.title);
+                viewport.dataset.currentIndex = '0';
 
                 const hasAnyImage = mediaItems.some(item => item.type === 'image');
                 if (enlargeBtn && !hasAnyImage) {
@@ -294,15 +292,15 @@ document.addEventListener('DOMContentLoaded', function () {
                 enlargeBtn.remove();
             }
 
-            const techList = clone.querySelector('.project-tech-list');
+            const techList = clone.querySelector('.project-card__tech-list');
             project.tech.forEach(tech => {
                 const li = document.createElement('li');
                 li.textContent = tech;
                 techList.appendChild(li);
             });
 
-            const primaryLinkContainer = clone.querySelector('.project-primary-link');
-            if (primaryLinkContainer) {
+            const linksContainer = clone.querySelector('.project-card__links');
+            if (linksContainer) {
                 project.links.forEach(link => {
                     if (link.type === 'disabled') return;
                     const a = document.createElement('a');
@@ -311,7 +309,7 @@ document.addEventListener('DOMContentLoaded', function () {
                     a.rel = 'noopener noreferrer';
                     a.className = 'btn-preview-link interactive';
                     a.innerHTML = `${link.text} <i class="${link.iconClass}"></i>`;
-                    primaryLinkContainer.appendChild(a);
+                    linksContainer.appendChild(a);
                 });
             }
 
@@ -610,15 +608,18 @@ document.addEventListener('DOMContentLoaded', function () {
                 if (e.key === 'ArrowLeft') showPrevMedia();
             });
 
-            const projectGalleries = document.querySelectorAll('.accordion-item[data-gallery-media]');
+            const projectGalleries = document.querySelectorAll('.project-card[data-gallery-media]');
             projectGalleries.forEach(gallery => {
-                const mainImageContainer = gallery.querySelector('.project-main-image');
-                if (!mainImageContainer) return;
+                const viewport = gallery.querySelector('.project-card__gallery-viewport');
+                if (!viewport) return;
 
-                const mainImage = mainImageContainer.querySelector('img');
-                const thumbnailsContainer = gallery.querySelector('.project-thumbnails');
-                const enlargeBtn = gallery.querySelector('.enlarge-btn');
+                const mainImage = viewport.querySelector('img');
+                const dotsContainer = gallery.querySelector('.project-card__gallery-dots');
+                const prevBtn = gallery.querySelector('.gallery-nav-prev');
+                const nextBtn = gallery.querySelector('.gallery-nav-next');
+                const enlargeBtn = viewport.querySelector('.enlarge-btn');
                 let mediaItems = [];
+                let currentIndex = 0;
 
                 try {
                     mediaItems = JSON.parse(gallery.dataset.galleryMedia || '[]');
@@ -638,43 +639,69 @@ document.addEventListener('DOMContentLoaded', function () {
                     enlargeBtn.style.display = hasAnyImage ? 'flex' : 'none';
                 };
 
-                if (mediaItems.length > 1 && thumbnailsContainer) {
-                    thumbnailsContainer.innerHTML = '';
+                const updateNavButtons = () => {
+                    if (prevBtn) {
+                        prevBtn.disabled = currentIndex <= 0;
+                        prevBtn.classList.toggle('is-disabled', currentIndex <= 0);
+                    }
+                    if (nextBtn) {
+                        nextBtn.disabled = currentIndex >= mediaItems.length - 1;
+                        nextBtn.classList.toggle('is-disabled', currentIndex >= mediaItems.length - 1);
+                    }
+                };
+
+                const updateDots = () => {
+                    if (!dotsContainer) return;
+                    dotsContainer.querySelectorAll('.gallery-dot').forEach((dot, i) => {
+                        dot.classList.toggle('is-active', i === currentIndex);
+                    });
+                };
+
+                const goToMedia = (newIndex) => {
+                    if (newIndex < 0 || newIndex >= mediaItems.length) return;
+                    currentIndex = newIndex;
+                    renderProjectMainMedia(viewport, mediaItems[currentIndex], gallery.querySelector('.project-card__title')?.textContent || 'project');
+                    viewport.dataset.currentIndex = String(currentIndex);
+                    updateEnlargeButton(currentIndex);
+                    updateNavButtons();
+                    updateDots();
+                };
+
+                if (mediaItems.length > 1) {
+                    dotsContainer.innerHTML = '';
                     mediaItems.forEach((item, index) => {
-                        const thumb = document.createElement('img');
-                        if (item.type === 'youtube') {
-                            thumb.src = `https://img.youtube.com/vi/${item.videoId}/hqdefault.jpg`;
-                            thumb.alt = `Project video thumbnail ${index + 1}`;
-                        } else {
-                            thumb.src = item.src;
-                            thumb.alt = `Project image thumbnail ${index + 1}`;
-                        }
-                        thumb.dataset.index = index;
-                        thumb.loading = 'lazy';
-                        if (index === 0) thumb.classList.add('is-active');
-                        thumbnailsContainer.appendChild(thumb);
+                        const dot = document.createElement('button');
+                        dot.className = 'gallery-dot' + (index === 0 ? ' is-active' : '');
+                        dot.setAttribute('aria-label', `Go to media ${index + 1}`);
+                        dot.dataset.index = index;
+                        dotsContainer.appendChild(dot);
                     });
-                    thumbnailsContainer.addEventListener('click', e => {
-                        if (e.target.tagName === 'IMG') {
-                            const newIndex = parseInt(e.target.dataset.index, 10);
-                            renderProjectMainMedia(mainImageContainer, mediaItems[newIndex], gallery.querySelector('.project-title')?.textContent || 'project');
-                            mainImageContainer.dataset.currentIndex = String(newIndex);
-                            updateEnlargeButton(newIndex);
-                            thumbnailsContainer.querySelectorAll('img').forEach(t => t.classList.remove('is-active'));
-                            e.target.classList.add('is-active');
+
+                    dotsContainer.addEventListener('click', e => {
+                        const dot = e.target.closest('.gallery-dot');
+                        if (dot) {
+                            goToMedia(parseInt(dot.dataset.index, 10));
                         }
                     });
-                } else if (thumbnailsContainer) {
-                    thumbnailsContainer.style.display = 'none';
+
+                    if (prevBtn) {
+                        prevBtn.addEventListener('click', () => goToMedia(currentIndex - 1));
+                    }
+                    if (nextBtn) {
+                        nextBtn.addEventListener('click', () => goToMedia(currentIndex + 1));
+                    }
+                } else {
+                    const navContainer = gallery.querySelector('.project-card__gallery-nav');
+                    if (navContainer) navContainer.style.display = 'none';
                 }
 
-                updateEnlargeButton(parseInt(mainImageContainer.dataset.currentIndex, 10) || 0);
+                updateEnlargeButton(0);
+                updateNavButtons();
 
                 if (enlargeBtn) {
                     enlargeBtn.addEventListener('click', (e) => {
                         e.preventDefault();
-                        const startIndex = parseInt(mainImageContainer.dataset.currentIndex, 10) || 0;
-                        openLightbox(mediaItems, startIndex);
+                        openLightbox(mediaItems, currentIndex);
                     });
                 }
             });

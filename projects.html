@@ -54,8 +54,8 @@
         
         <section class="content-section" id="projects">
             <div class="container">
-                <div id="all-projects-container" class="work-accordion">
-                    
+                <div id="all-projects-container" class="project-cards-grid">
+
                 </div>
             </div>
         </section>
@@ -96,30 +96,28 @@
     
     
     <template id="project-template">
-        <div class="accordion-item animate-on-scroll" data-gallery-images="">
-            <div class="accordion-item__title" role="button" aria-expanded="false" aria-controls="project-content">
-                <div>
-                    <h3 class="project-title"></h3>
-                    <p class="project-category"></p>
-                </div>
-                <span class="toggle-icon" aria-hidden="true"></span>
+        <div class="project-card animate-on-scroll" data-gallery-media="">
+            <div class="project-card__header">
+                <span class="project-card__number"></span>
+                <span class="project-card__status"></span>
             </div>
-            <div class="project-preview">
-                <ul class="project-tech-list"></ul>
-                <div class="project-primary-link"></div>
+            <div class="project-card__title-row">
+                <h3 class="project-card__title"></h3>
+                <div class="project-card__links"></div>
             </div>
-            <div class="accordion-item__content" id="project-content" role="region">
-                <div class="accordion-item__details">
-                    <div class="project-description"><p></p></div>
+            <div class="project-card__gallery">
+                <div class="project-card__gallery-viewport interactive">
+                    <img src="" alt="" loading="lazy" width="1280" height="720">
+                    <button class="enlarge-btn" aria-label="Enlarge image"><i class="fas fa-expand"></i></button>
                 </div>
-                <div class="accordion-item__gallery">
-                     <div class="project-main-image interactive">
-                        <img src="" alt="" loading="lazy" width="1280" height="720">
-                        <button class="enlarge-btn" aria-label="Enlarge image"><i class="fas fa-expand"></i></button>
-                     </div>
-                     <div class="project-thumbnails"></div>
+                <div class="project-card__gallery-nav">
+                    <button class="gallery-nav-btn gallery-nav-prev" aria-label="Previous media">❮</button>
+                    <div class="project-card__gallery-dots"></div>
+                    <button class="gallery-nav-btn gallery-nav-next" aria-label="Next media">❯</button>
                 </div>
             </div>
+            <p class="project-card__description"></p>
+            <ul class="project-card__tech-list"></ul>
         </div>
     </template>
 
