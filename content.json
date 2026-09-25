@@ -52,7 +52,7 @@
       "Open to technical internships where I can actually build something."
     ],
     "featuredSkills": [
-      "Flutter", "Firebase", "Node.js", "Android Development", "Cross-platform Development", "Kotlin", "Java", "Dart", "JavaScript", "Python", "C++", "Embedded C"
+      "Python", "Dart", "TypeScript/JavaScript", "C/C++", "Flutter", "Firebase", "Node.js", "Computer Vision", "YOLOv8", "Raspberry Pi", "Jetson Nano", "Arduino"
     ],
     "experience": [
       {
@@ -87,7 +87,7 @@
       "status": "In Progress",
       "description": "Decentralized coordination and collision avoidance for 3+ warehouse robots running on Raspberry Pi/Jetson Nano with no central cloud planner. Robot-to-robot location sharing, route planning, and dynamic rerouting recorded zero collisions and 20%+ faster task completion across simulated fleet runs.",
       "tech": ["Raspberry Pi", "Jetson Nano", "Python", "Robotics"],
-      "galleryImages": [],
+      "galleryImages": ["assets/project-placeholder.svg"],
       "links": [
         { "type": "code", "url": "https://github.com/PixelAnay/AMRs", "text": "GitHub", "iconClass": "fab fa-github" }
       ]
@@ -100,20 +100,20 @@
       "status": "In Progress",
       "description": "Protects AI knowledge systems from malicious instructions hidden in retrieved documents, emails, and web content. Compares a vulnerable baseline, fine-tuned classifier, and small language model across detection accuracy, response time, and usability.",
       "tech": ["Python", "RAG", "AI Guardrails"],
-      "galleryImages": [],
+      "galleryImages": ["assets/project-placeholder.svg"],
       "links": [
         { "type": "code", "url": "https://github.com/PixelAnay/SentinelRAG", "text": "GitHub", "iconClass": "fab fa-github" }
       ]
     },
     {
       "featured": true,
-      "title": "AEGIS — Autonomous Drone Emergency Response",
+      "title": "Autonomous Drone Emergency Response",
       "category": "Computer Vision · Drone Simulation",
       "numberLabel": "03 Robotics",
       "status": "In Progress",
       "description": "A simulated multi-drone platform to detect incidents and coordinate emergency response across a city, integrating drone control, live telemetry, AI-based object detection, flight simulation, geofencing, and a real-time map dashboard.",
       "tech": ["YOLOv8", "MAVSDK", "PX4", "Gazebo"],
-      "galleryImages": [],
+      "galleryImages": ["assets/project-placeholder.svg"],
       "links": [
         { "type": "code", "url": "https://github.com/PixelAnay/AEGIS", "text": "GitHub", "iconClass": "fab fa-github" }
       ]
@@ -139,7 +139,7 @@
       "status": "Production",
       "description": "A closed-loop traffic controller on ESP8266 hardware with 3-lane ultrasonic vehicle sensing and OLED output, computing adaptive green-light cycles via a local LLM endpoint with a deterministic optimization fallback for uninterrupted operation.",
       "tech": ["ESP8266", "Node.js", "Local LLMs"],
-      "galleryImages": [],
+      "galleryImages": ["assets/project-placeholder.svg"],
       "links": [
         { "type": "code", "url": "https://github.com/PixelAnay/CEW-AI_Traffic", "text": "GitHub", "iconClass": "fab fa-github" }
       ]
@@ -205,7 +205,7 @@
       "status": "Prototype",
       "description": "Designed and assembled a fixed-wing RC aircraft from scratch — FlySky TX/RX system, 2200KV brushless motor, ESC, LiPo battery, self-fabricated cardboard airframe. It flew. Then it didn't.",
       "tech": ["Embedded C", "Arduino", "Electronics", "FlySky"],
-     "galleryImages": [],
+     "galleryImages": ["assets/project-placeholder.svg"],
       "links": [
         { "type": "code", "url": "https://youtu.be/wskhJvXOQ88?si=ihqviYkbE9cK-fAf", "text": "Controls Test", "iconClass": "fab fa-youtube" }
  ]
@@ -221,27 +221,27 @@
     {
       "categoryTitle": "Languages",
       "iconClass": "fas fa-code",
-      "items": ["JavaScript", "TypeScript", "Python", "Java", "Dart", "C++", "Embedded C", "C"]
+      "items": ["Python", "Dart", "TypeScript/JavaScript", "C/C++", "Kotlin", "Bash"]
     },
     {
-      "categoryTitle": "Frontend Development",
+      "categoryTitle": "AI & Robotics",
+      "iconClass": "fas fa-robot",
+      "items": ["Retrieval-Augmented Generation (RAG)", "AI Guardrails", "Computer Vision", "YOLOv8", "MAVSDK", "PX4", "Gazebo"]
+    },
+    {
+      "categoryTitle": "App & Web",
       "iconClass": "fas fa-desktop",
-      "items": ["Flutter", "HTML", "CSS"]
+      "items": ["Flutter", "Firebase", "Node.js"]
     },
     {
-      "categoryTitle": "Backend & Databases",
-      "iconClass": "fas fa-server",
-      "items": ["Node.js", "Firebase", "REST APIs", "S3-compatible Object Storage (AWS S3, Cloudflare R2)"]
+      "categoryTitle": "Hardware & Platforms",
+      "iconClass": "fas fa-microchip",
+      "items": ["Arduino", "Raspberry Pi", "Jetson Nano", "Linux", "Ollama", "llama.cpp"]
     },
     {
-      "categoryTitle": "Tools & Platforms",
+      "categoryTitle": "Developer Tools",
       "iconClass": "fas fa-tools",
-      "items": ["Git", "GitHub", "Google Cloud Platform (GCP)", "Cloudflare", "Vercel", "Netlify", "Figma", "Bash", "Linux", "Arduino", "Local LLMs (llama.cpp, Ollama, LM Studio)"]
-    },
-    {
-      "categoryTitle": "CS Fundamentals",
-      "iconClass": "fas fa-brain",
-      "items": ["Cross-platform Development", "Android Development", "Embedded Systems"]
+      "items": ["Git/GitHub", "Android Studio", "VS Code"]
     }
   ],
   "honorsAndAwards": [
