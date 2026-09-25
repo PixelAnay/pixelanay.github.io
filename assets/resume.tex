@@ -1,0 +1,188 @@
+%-------------------------
+% Resume in Latex
+% Author : Jake Gutierrez
+% Based off of: https://github.com/sb2nov/resume
+% License : MIT
+%------------------------
+
+\documentclass[letterpaper,11pt]{article}
+
+\usepackage{latexsym}
+\usepackage[empty]{fullpage}
+\usepackage{titlesec}
+\usepackage{marvosym}
+\usepackage[usenames,dvipsnames]{color}
+\usepackage{verbatim}
+\usepackage{enumitem}
+\usepackage[hidelinks]{hyperref}
+\usepackage{fancyhdr}
+\usepackage[english]{babel}
+\usepackage{tabularx}
+\input{glyphtounicode}
+
+\pagestyle{fancy}
+\fancyhf{}
+\fancyfoot{}
+\renewcommand{\headrulewidth}{0pt}
+\renewcommand{\footrulewidth}{0pt}
+
+\addtolength{\oddsidemargin}{-0.5in}
+\addtolength{\evensidemargin}{-0.5in}
+\addtolength{\textwidth}{1in}
+\addtolength{\topmargin}{-.5in}
+\addtolength{\textheight}{1.0in}
+
+\urlstyle{same}
+\raggedbottom
+\raggedright
+\setlength{\tabcolsep}{0in}
+
+\titleformat{\section}{
+  \vspace{-4pt}\scshape\raggedright\large
+}{}{0em}{}[\color{black}\titlerule \vspace{-5pt}]
+
+\pdfgentounicode=1
+
+%-------------------------
+% Custom commands
+\newcommand{\resumeItem}[1]{
+  \item\small{
+    {#1 \vspace{-2pt}}
+  }
+}
+
+\newcommand{\resumeSubheading}[4]{
+  \vspace{-2pt}\item
+    \begin{tabular*}{0.97\textwidth}[t]{l@{\extracolsep{\fill}}r}
+      \textbf{#1} & #2 \\
+      \textit{\small#3} & \textit{\small #4} \\
+    \end{tabular*}\vspace{-7pt}
+}
+
+\newcommand{\resumeSubSubheading}[2]{
+    \item
+    \begin{tabular*}{0.97\textwidth}{l@{\extracolsep{\fill}}r}
+      \textit{\small#1} & \textit{\small #2} \\
+    \end{tabular*}\vspace{-7pt}
+}
+
+\newcommand{\resumeProjectHeading}[2]{
+    \item
+    \begin{tabular*}{0.97\textwidth}{l@{\extracolsep{\fill}}r}
+      \small#1 & #2 \\
+    \end{tabular*}\vspace{-7pt}
+}
+
+\newcommand{\resumeSubItem}[1]{\resumeItem{#1}\vspace{-4pt}}
+
+\renewcommand\labelitemii{$\vcenter{\hbox{\tiny$\bullet$}}$}
+
+\newcommand{\resumeSubHeadingListStart}{\begin{itemize}[leftmargin=0.15in, label={}]}
+\newcommand{\resumeSubHeadingListEnd}{\end{itemize}}
+\newcommand{\resumeItemListStart}{\begin{itemize}}
+\newcommand{\resumeItemListEnd}{\end{itemize}\vspace{-5pt}}
+
+%-------------------------------------------
+%%%%%%  RESUME STARTS HERE  %%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{document}
+
+%----------HEADING----------
+\begin{center}
+    \textbf{\Huge \scshape Anay Gawate} \\ \vspace{1pt}
+    \small +91 8975873668 $|$
+    \href{mailto:pixelanay@gmail.com}{\underline{pixelanay@gmail.com}} $|$
+    \href{https://linkedin.com/in/anaygawate}{\underline{linkedin.com/in/anaygawate}} $|$
+    \href{https://github.com/PixelAnay}{\underline{github.com/PixelAnay}}
+\end{center}
+
+%-----------PROFILE-----------
+\section{Profile}
+\small
+Computer Science and Engineering undergraduate and independent developer with hands-on experience in mobile apps, web systems, embedded hardware, local AI models, and autonomous drones. Shipped an Android app to 20,000+ organic downloads on the Google Play Store, and continues to build across AI, robotics, and full-stack projects.
+
+%-----------EDUCATION-----------
+\section{Education}
+  \resumeSubHeadingListStart
+    \resumeSubheading
+      {MIT Art, Design and Technology University}{Pune, Maharashtra}
+      {Bachelor of Technology in Computer Science and Engineering $|$ CGPA: 8.3 (1st year)}{Aug. 2025 -- May 2029}
+      \resumeItemListStart
+        \resumeItem{Class Representative, both semesters of First Year --- coordinated schedules, academic queries, and student feedback between faculty and classmates.}
+      \resumeItemListEnd
+  \resumeSubHeadingListEnd
+
+%-----------LEADERSHIP & EXPERIENCE-----------
+\section{Experience}
+  \resumeSubHeadingListStart
+
+    \resumeSubheading
+      {Independent Developer}{Aug. 2021 -- Present}
+      {Self-Employed}{Pune, India}
+      \resumeItemListStart
+        \resumeItem{Published Android applications on the Google Play Store, reaching 20,000+ downloads with no paid promotion or marketing spend. Continued building and shipping across Android, iOS, and Web platforms.}
+  
+      \resumeItemListEnd
+
+    
+
+  \resumeSubHeadingListEnd
+
+%-----------PROJECTS-----------
+\section{Projects}
+  \resumeSubHeadingListStart
+
+  
+
+  \resumeProjectHeading
+      {\href{https://github.com/PixelAnay/AMRs}{\textbf{\underline{Edge-AI Autonomous Warehouse Robot Fleet}}} $|$ \emph{SIH Internal --- Top 100 of 500+ Teams}}{Sep. 2026}
+      \resumeItemListStart
+        \resumeItem{Designed decentralized coordination and collision avoidance for 3+ warehouse robots running on Raspberry Pi/Jetson Nano without a central cloud planner.}
+        \resumeItem{Built robot-to-robot location sharing, route planning, dynamic rerouting, and fleet monitoring; recorded zero collisions and 20\%+ faster task completion across simulated fleet runs.}
+      \resumeItemListEnd
+      
+    \resumeProjectHeading
+      {\href{https://github.com/PixelAnay/SentinelRAG}{\textbf{\underline{SentinelRAG --- Secure Knowledge Assistant}}} $|$ \emph{Python, AI Security}}{2026}
+      \resumeItemListStart
+        \resumeItem{Protected AI knowledge systems from malicious instructions hidden in retrieved documents, emails, and web content.}
+        \resumeItem{Compared a vulnerable baseline, fine-tuned classifier, and small language model across detection accuracy, response time, and usability.}
+      \resumeItemListEnd
+
+  
+
+    \resumeProjectHeading
+      {\href{https://github.com/PixelAnay/AEGIS}{\textbf{\underline{AEGIS --- Autonomous Drone Emergency Response}}} $|$ \emph{Computer Vision, Drone Simulation}}{Sep. 2026}
+      \resumeItemListStart
+        \resumeItem{Built a simulated multi-drone platform to detect incidents and coordinate emergency response across a city.}
+        \resumeItem{Integrated drone control, live telemetry, AI-based object detection, flight simulation, geofencing, and a real-time map dashboard.}
+      \resumeItemListEnd
+
+        \resumeProjectHeading
+      {\href{https://github.com/PixelAnay/Engram}{\textbf{\underline{Engram --- Persistent Memory Plugin for Obsidian}}} $|$ \emph{TypeScript, Vector Embeddings, LLM Integration}}{2026}
+      \resumeItemListStart
+        \resumeItem{Built an open-source Obsidian plugin giving an AI chat assistant persistent, auto-summarizing memory and semantic vector search over a user's notes, with support for 10+ local and cloud LLMs (OpenAI, Anthropic, etc).}
+        \resumeItem{Designed vault-scoping permissions, prompt-injection-safe context handling, and an undo history panel for safe file modification.}
+      \resumeItemListEnd
+
+    \resumeProjectHeading
+      {\href{https://github.com/PixelAnay/CEW-AI_Traffic}{\textbf{\underline{SmartFlow --- Adaptive Traffic Signal Control}}} $|$ \emph{ESP8266, Node.js, Local LLMs}}{2025}
+      \resumeItemListStart
+        \resumeItem{Built a closed-loop traffic controller on ESP8266 hardware with 3-lane ultrasonic vehicle sensing and OLED output, computing adaptive green-light cycles via a local LLM endpoint with a deterministic optimization fallback for uninterrupted operation.}
+      \resumeItemListEnd
+
+  \resumeSubHeadingListEnd
+
+%-----------TECHNICAL SKILLS-----------
+\section{Technical Skills}
+  \begin{itemize}[leftmargin=0.15in, label={}]
+    \small{\item{
+      \textbf{Languages}{: Python, Dart, TypeScript/JavaScript, C/C++, Kotlin, Bash} \\
+      \textbf{AI \& Robotics}{: Retrieval-Augmented Generation (RAG), AI Guardrails, Computer Vision, YOLOv8, MAVSDK, PX4, Gazebo} \\
+      \textbf{App \& Web}{: Flutter, Firebase, Node.js} \\
+      \textbf{Hardware \& Platforms}{: Arduino, Raspberry Pi, Jetson Nano, Linux, Ollama, llama.cpp} \\
+      \textbf{Developer Tools}{: Git/GitHub, Android Studio, VS Code}
+    }}
+  \end{itemize}
+
+%-------------------------------------------
+\end{document}

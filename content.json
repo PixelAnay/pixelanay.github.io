@@ -81,9 +81,74 @@
   "allProjects": [
     {
       "featured": true,
+      "title": "Edge-AI Autonomous Warehouse Robot Fleet",
+      "category": "Robotics · Edge AI · SIH Internal — Top 100 of 500+ Teams",
+      "numberLabel": "01 Robotics",
+      "status": "In Progress",
+      "description": "Decentralized coordination and collision avoidance for 3+ warehouse robots running on Raspberry Pi/Jetson Nano with no central cloud planner. Robot-to-robot location sharing, route planning, and dynamic rerouting recorded zero collisions and 20%+ faster task completion across simulated fleet runs.",
+      "tech": ["Raspberry Pi", "Jetson Nano", "Python", "Robotics"],
+      "galleryImages": [],
+      "links": [
+        { "type": "code", "url": "https://github.com/PixelAnay/AMRs", "text": "GitHub", "iconClass": "fab fa-github" }
+      ]
+    },
+    {
+      "featured": true,
+      "title": "SentinelRAG",
+      "category": "AI Security · Secure Knowledge Assistant",
+      "numberLabel": "02 AI Security",
+      "status": "In Progress",
+      "description": "Protects AI knowledge systems from malicious instructions hidden in retrieved documents, emails, and web content. Compares a vulnerable baseline, fine-tuned classifier, and small language model across detection accuracy, response time, and usability.",
+      "tech": ["Python", "RAG", "AI Guardrails"],
+      "galleryImages": [],
+      "links": [
+        { "type": "code", "url": "https://github.com/PixelAnay/SentinelRAG", "text": "GitHub", "iconClass": "fab fa-github" }
+      ]
+    },
+    {
+      "featured": true,
+      "title": "AEGIS — Autonomous Drone Emergency Response",
+      "category": "Computer Vision · Drone Simulation",
+      "numberLabel": "03 Robotics",
+      "status": "In Progress",
+      "description": "A simulated multi-drone platform to detect incidents and coordinate emergency response across a city, integrating drone control, live telemetry, AI-based object detection, flight simulation, geofencing, and a real-time map dashboard.",
+      "tech": ["YOLOv8", "MAVSDK", "PX4", "Gazebo"],
+      "galleryImages": [],
+      "links": [
+        { "type": "code", "url": "https://github.com/PixelAnay/AEGIS", "text": "GitHub", "iconClass": "fab fa-github" }
+      ]
+    },
+    {
+      "featured": true,
+      "title": "Engram for Obsidian",
+      "category": "Obsidian Plugin · Personal AI Assistant",
+      "numberLabel": "04 AI Assistant",
+      "status": "Open Source",
+      "description": "An open-source Obsidian plugin giving an AI chat assistant persistent, auto-summarizing memory and semantic vector search over a user's notes, with support for 10+ local and cloud LLMs. Includes vault-scoping permissions, prompt-injection-safe context handling, and an undo history panel.",
+      "tech": ["TypeScript", "Vector Embeddings", "LLM Integration"],
+      "galleryImages": ["assets/engram/img 1.png","assets/engram/img 2.png"],
+      "links": [
+        { "type": "code", "url": "https://github.com/PixelAnay/Engram", "text": "GitHub", "iconClass": "fab fa-github" }
+      ]
+    },
+    {
+      "featured": true,
+      "title": "SmartFlow — Adaptive Traffic Signal Control",
+      "category": "Embedded Systems · IoT",
+      "numberLabel": "05 Hardware",
+      "status": "Production",
+      "description": "A closed-loop traffic controller on ESP8266 hardware with 3-lane ultrasonic vehicle sensing and OLED output, computing adaptive green-light cycles via a local LLM endpoint with a deterministic optimization fallback for uninterrupted operation.",
+      "tech": ["ESP8266", "Node.js", "Local LLMs"],
+      "galleryImages": [],
+      "links": [
+        { "type": "code", "url": "https://github.com/PixelAnay/CEW-AI_Traffic", "text": "GitHub", "iconClass": "fab fa-github" }
+      ]
+    },
+    {
+      "featured": false,
       "title": "PureFuel",
       "category": "Cross-platform Mobile & Web Application",
-      "numberLabel": "01 Nutrition",
+      "numberLabel": "06 Nutrition",
       "status": "Production",
       "description": "A cross-platform nutrition and health tracker for Android and Web — built as a free, ad-free alternative to paid apps like Cronometer and HealthifyMe.",
       "tech": ["Flutter", "Firebase", "Node.js", "Dart"],
@@ -94,10 +159,10 @@
       ]
     },
     {
-      "featured": true,
+      "featured": false,
       "title": "Shala",
       "category": "Cross-platform Mobile Application",
-      "numberLabel": "02 Education",
+      "numberLabel": "07 Education",
       "status": "Production",
       "description": "A mobile-first application that digitizes school administration — fees, attendance, marks, and notices. Built for low-connectivity regions with offline-first resilience.",
       "tech": ["Flutter", "Firebase", "Riverpod", "GoRouter"],
@@ -106,24 +171,11 @@
         { "type": "playstore", "url": "https://play.google.com/store/apps/details?id=com.shala.shala", "text": "Google Play", "iconClass": "fab fa-google-play" }
         ]
       },
-      {
-      "featured": true,
-      "title": "Engram for Obsidian",
-      "category": "Obsidian Plugin · Personal AI Assistant",
-      "numberLabel": "03 AI Assistant",
-      "status": "Open Source",
-      "description": "A persistent personal intelligence for Obsidian with evolving memory, multi-provider support, interactive slash commands, granular vault scoping, and local offline PDF parsing.",
-      "tech": ["TypeScript", "Obsidian API", "llama.cpp", "APIs"],
-      "galleryImages": ["assets/engram/img 1.png","assets/engram/img 2.png"],
-      "links": [
-        { "type": "code", "url": "https://github.com/PixelAnay/Engram", "text": "GitHub", "iconClass": "fab fa-github" }
-      ]
-    },
     {
       "featured": false,
       "title": "Journease - Travel Planner",
       "category": "Android & Web Application",
-      "numberLabel": "04 Travel",
+      "numberLabel": "08 Travel",
       "status": "Live",
       "description": "A smart travel companion for logging trips, memories, and getting AI-powered insights. Built for a university hackathon — placed in the top 100 teams out of 900+ in Smart India Hackathon.",
       "tech": ["Flutter", "Firebase", "Google Maps API", "REST API", "AI API"],
@@ -132,13 +184,11 @@
         { "type": "code", "url": "https://journeasesih.vercel.app", "text": "Live Site", "iconClass": "fas fa-arrow-up-right-from-square" }
       ]
     },
-    
-    
     {
       "featured": false,
       "title": "Lie Detector Prank App",
       "category": "Android Application · 2021",
-      "numberLabel": "05 Entertainment",
+      "numberLabel": "09 Entertainment",
       "status": "Production",
       "description": "My first published Android app — built at 15, entirely self-taught, pre-AI. A prank lie detector app that crossed 17.5K organic downloads on the Play Store and is still live.",
       "tech": ["Java", "Kotlin", "Android Studio"],
@@ -151,7 +201,7 @@
       "featured": false,
       "title": "Fixed-Wing RC Aircraft",
       "category": "Hardware / Embedded Systems · 2024",
-      "numberLabel": "06 Hardware",
+      "numberLabel": "10 Hardware",
       "status": "Prototype",
       "description": "Designed and assembled a fixed-wing RC aircraft from scratch — FlySky TX/RX system, 2200KV brushless motor, ESC, LiPo battery, self-fabricated cardboard airframe. It flew. Then it didn't.",
       "tech": ["Embedded C", "Arduino", "Electronics", "FlySky"],
